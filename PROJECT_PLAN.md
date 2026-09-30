@@ -8,13 +8,13 @@ Stand: 30.09.2026
 Phase 6 – Inhaltserweiterung
 
 ### Zuletzt bearbeiteter Task
-CONTENT-001b – Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen.
+LOOP-005 – Nachtmoos am Trockengestell trocknen und getrennt zählen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE.
 
 ### Fortschritt
-Die erste Herstellungskette, Fenjas und Martens Aufträge sowie drei sammelbare Pflanzen sind spielbar. Nachtmoos wächst als seltener Fund am schattigen Torfsteg; Trocknung und Weiterverarbeitung kommen als nächste Schritte.
+Die erste Herstellungskette, Fenjas und Martens Aufträge sowie drei sammelbare Pflanzen sind spielbar. Nachtmoos wächst als seltener Fund am schattigen Torfsteg und kann nun am Trockengestell verarbeitet werden; als Nächstes folgt der Nachttrank.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -30,9 +30,10 @@ Die erste Herstellungskette, Fenjas und Martens Aufträge sowie drei sammelbare 
 - **LOOP-004:** Beruhigungstee und stärkender Aufguss sind datengetriebene Rezepte; der Aufguss wird nach Fenjas Auftrag freigeschaltet und verbraucht beide Zutaten gemeinsam.
 - **QUEST-002:** Marten bietet nach Fenjas Abschluss den Folgeauftrag an, nimmt genau einen stärkenden Aufguss an und zeigt den Fortschritt im Quest-HUD.
 - **CONTENT-001b:** Einmalig sammelbares Nachtmoos am schattigen Torfsteg mit eigenem Inventarbestand und HUD-Zähler ergänzt.
+- **LOOP-005:** Das Trockengestell verarbeitet Nachtmoos nach Sumpfminze und Schilfwurzel; frischer und getrockneter Bestand werden getrennt angezeigt.
 
 ### Als Nächstes
-LOOP-005 – Nachtmoos am Trockengestell verarbeiten.
+LOOP-006 – Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -130,7 +131,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | LOOP-004 | Stärkenden Aufguss aus getrockneter Schilfwurzel und Sumpfminze brauen; nach Fenjas Auftrag freischalten | P2 | LOOP-003, QUEST-001 | DONE |
 | QUEST-002 | Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen | P2 | LOOP-004 | DONE |
 | CONTENT-001b | Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen | P2 | QUEST-002 | DONE |
-| LOOP-005 | Nachtmoos am Trockengestell verarbeiten | P2 | CONTENT-001b | PLANNED |
+| LOOP-005 | Nachtmoos am Trockengestell verarbeiten | P2 | CONTENT-001b | DONE |
 | LOOP-006 | Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen; nach Martens Auftrag freischalten | P2 | LOOP-005, QUEST-002 | PLANNED |
 | QUEST-003 | Lenes Bitte um einen Nachttrank annehmen und erfüllen | P2 | LOOP-006 | PLANNED |
 | BOARD-001 | Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen | P2 | QUEST-002, QUEST-003 | PLANNED |
@@ -231,6 +232,14 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Das HUD führt während Martens Bitte anhand der Bestände zum nächsten benötigten Schritt.
 - Ein eigener Headless-Test prüft die Freischaltung nach Fenja, Annahme, fehlenden Gegenstand, Abgabe und Wiederholungsinteraktion; frühere Schleifen bleiben Regressionen.
 
+### LOOP-005 Abnahmekriterien
+- Das Trockengestell verarbeitet pro E-Druck genau eine frische Nachtmoos-Einheit zu einer getrockneten Einheit.
+- Die Priorität des Gestells bleibt Sumpfminze vor Schilfwurzel vor Nachtmoos; nicht ausgewählte Zutaten bleiben unberührt.
+- Frisches und getrocknetes Nachtmoos erhalten getrennte Inventarbestände und HUD-Zähler.
+- Ohne frische Zutat bleiben alle Bestände unverändert und die Rückmeldung nennt Sumpfminze, Schilfwurzel und Nachtmoos.
+- Ein eigener Headless-Test deckt Reihenfolge, 1:1-Verarbeitung, getrennte Zähler, Feedback und Regressionen ab.
+- Sichtprüfung im Godot-Fenster bleibt separat dokumentiert.
+
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -282,3 +291,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | LOOP-004: zweites Rezept als Resource ergänzt, Freischaltung an Fenjas Abschluss gebunden und atomare Mehrzutatenverarbeitung samt HUD umgesetzt; Headless-Test rot/grün. |
 | 30.09.2026 | QUEST-002: Martens Folgeauftrag, genau-ein-Aufguss-Abgabe und HUD-Führung ergänzt; Headless-Test rot/grün, Regressionen, Editorimport und Startcheck bestanden. |
 | 30.09.2026 | CONTENT-001b: Nachtmoos am schattigen Torfsteg als eigenes Pickup mit Inventar-ID und HUD-Zähler ergänzt; Headless-Test rot/grün und Regressionen bestanden. |
+| 30.09.2026 | LOOP-005: Nachtmoos als dritte Zutat am Trockengestell verarbeitet, eigener HUD-Zähler ergänzt; Featuretest rot/grün, alle zwölf Headless-Tests, Editorimport und Startcheck bestanden. |

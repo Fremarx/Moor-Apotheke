@@ -24,7 +24,11 @@ func interact() -> String:
 	if reed_root_processed:
 		return "Die Schilfwurzel ist getrocknet."
 
-	return "Du brauchst frische Sumpfminze oder eine frische Schilfwurzel zum Trocknen."
+	var night_moss_processed := bool(_inventory.call("transfer_item", "night_moss", "dried_night_moss", 1))
+	if night_moss_processed:
+		return "Das Nachtmoos ist getrocknet."
+
+	return "Du brauchst frische Sumpfminze, eine frische Schilfwurzel oder frisches Nachtmoos zum Trocknen."
 
 
 func _draw() -> void:

@@ -11,6 +11,7 @@ extends Node2D
 @onready var _tea_count: Label = $HUD/TeaCount
 @onready var _infusion_count: Label = $HUD/InfusionCount
 @onready var _night_moss_count: Label = $HUD/NightMossCount
+@onready var _dried_night_moss_count: Label = $HUD/DriedNightMossCount
 @onready var _quest_status: Label = $HUD/QuestStatus
 @onready var _interaction_prompt: Label = $HUD/InteractionPrompt
 @onready var _interaction_feedback: Label = $HUD/InteractionFeedback
@@ -77,6 +78,8 @@ func _on_item_count_changed(item_id: String, amount: int) -> void:
 		_infusion_count.text = "Stärkender Aufguss: %d" % amount
 	elif item_id == "night_moss":
 		_night_moss_count.text = "Nachtmoos: %d" % amount
+	elif item_id == "dried_night_moss":
+		_dried_night_moss_count.text = "Getrocknetes Nachtmoos: %d" % amount
 
 	_update_quest_status()
 

@@ -112,6 +112,14 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: alle elf Headless-Tests (CONTENT-001b und zehn Regressionen), Godot-4.7.2-Editorimport und 60-Frame-Startlauf.
 - Offen: Sichtprüfung der Nachtmoos-Grafik, des Torfstegs und der zusätzlichen Inventarzeile im Godot-Fenster.
 
+## LOOP-005 – Nachtmoos trocknen
+- tests/loop_005_night_moss_drying_test.gd prüft getrennte Frisch-/Trockenbestände, die Priorität Sumpfminze → Schilfwurzel → Nachtmoos, 1:1-Verarbeitung, HUD-Aktualisierung und Rückmeldungen mit sowie ohne Vorrat.
+- RED: Vor der Umsetzung fehlte der DriedNightMossCount-Knoten.
+- GREEN: „LOOP-005 night-moss drying checks passed.“ nach Ergänzung von Verarbeitung und HUD.
+- Prüfbefehl: godot --headless --path . --script res://tests/loop_005_night_moss_drying_test.gd.
+- Erledigt: LOOP-005 und alle elf vorherigen Headless-Tests (insgesamt zwölf), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check.
+- Offen: Sichtprüfung des aktualisierten Inventar-HUDs und des Trockengestells im Godot-Fenster.
+
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.

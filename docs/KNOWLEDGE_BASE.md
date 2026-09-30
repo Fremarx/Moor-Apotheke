@@ -49,6 +49,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 - **30.09.2026 – LOOP-004:** Die offizielle Resource-Dokumentation beschreibt `Resource` als Datencontainer für von Nodes verwendete Daten und den externen `.tres`-Speicher. Zwei `RecipeDefinition`-Resources halten Zutaten, Produkt, Rückmeldung und Questfreischaltung getrennt vom Kesselverhalten. Main übergibt den aktuellen Fenja-Queststatus an Verarbeitungsstationen. Quellen: [Resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html), [Scene Organization](https://docs.godotengine.org/en/4.7/tutorials/best_practices/scene_organization.html) und [Signal class reference](https://docs.godotengine.org/en/4.7/classes/class_signal.html).
 - **30.09.2026 – QUEST-002:** Die Szenenorganisation aus QUEST-001 wird für einen zweiten Bewohner-Questzustand wiederverwendet: Main injiziert Inventar und Vorgängerquest; `state_changed` hält Quest-HUD und Interaktionshinweis aktuell. Die Signal- und Szenenorganisation-Quellen oben decken diese lose Kopplung weiterhin ab; für QUEST-002 kam keine neue Engine-API hinzu.
 
+- **30.09.2026 – LOOP-005:** Die dritte Trockengestell-Zutat nutzt die bereits dokumentierte `Inventory.transfer_item`-Methode und `item_count_changed`-Signale; ein eigener `Label` zeigt den getrockneten Bestand. Es kam keine neue Engine-API hinzu; Signal- und Label-Quellen aus LOOP-003 decken die Änderung ab.
+
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.
 - API-Details vor der Implementierung gegen die passende 4.7-Seite prüfen.
