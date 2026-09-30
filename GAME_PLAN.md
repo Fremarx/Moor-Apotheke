@@ -211,7 +211,8 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - **Schwerpunkt:** Für den Anfang ist eine Mischung aus Erkunden, Aufträgen und einfacher Verarbeitung vorgesehen; Automatisierung kommt später.
 - **Spieltempo:** Der erste Ausschnitt bleibt ohne Zeitdruck. Jahreszeiten können später die Fundorte und Rezepte verändern.
 - **Geschichte und Ton:** Noch offen; Vorschlag ist märchenhaft und gemütlich, mit etwas geheimnisvoller Moorstimmung.
+- **Nächster Ausbau:** Erst ein Stück der bestehenden Karte in einer zusammenhängenden, farbigen Pixelart-Richtung umsetzen und sichtbar prüfen. Jahreszeiten, neue Gebiete und Automatisierung folgen erst nach dieser Sichtprüfung.
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-SAVE-001 speichert Spielerposition, Inventar, Auftragsfortschritt und abgeerntete Pflanzen; F5 speichert, F9 lädt, und ein gültiger Spielstand wird beim Start automatisch geladen. Als Nächstes folgt EXP-001: Nach einem Spieltest entscheiden, welche Jahreszeiten, Moorbereiche oder Automatisierung die Kernschleife sinnvoll erweitern.
+SAVE-001 speichert Spielerposition, Inventar, Auftragsfortschritt und abgeerntete Pflanzen; F5 speichert, F9 lädt, und ein gültiger Spielstand wird beim Start automatisch geladen. EXP-001 priorisiert VIS-001: Zuerst wird die bestehende Moor-Testkarte mit Boden, Ufer, Weg und Pflanzen im gewählten Stil ausgestaltet und im Spiel geprüft. Zusätzliche Gebiete, Jahreszeiten und Automatisierung werden anschließend neu bewertet.

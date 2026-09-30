@@ -8,13 +8,13 @@ Stand: 01.10.2026
 Phase 7 – Persistenz und Ausbau
 
 ### Zuletzt bearbeiteter Task
-SAVE-001 – Position, Inventar, Aufträge und gesammelte Pflanzen zwischen Spielsitzungen speichern.
+EXP-001 – Ausbau nach Projektstand und bisherigem Nutzerfeedback priorisieren.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE.
 
 ### Fortschritt
-Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen.
+Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. EXP-001 priorisiert als nächsten Ausbau eine visuelle Spielszene, bevor neue Gebiete, Jahreszeiten oder Automatisierung hinzukommen.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -36,9 +36,10 @@ Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanze
 - **BOARD-001:** Das Auftragsbrett zeigt Fenjas, Martens und Lenes Bitte; verfügbare Aufträge lassen sich am Brett annehmen und die Abgabe bleibt bei den Bewohnern.
 - **ECON-001:** Erfolgreiche Abgaben zahlen einmalig 5/10/15 Münzen; Inventar und HUD zeigen den aktuellen Bestand.
 - **SAVE-001:** Versionierte JSON-Spielstände in `user://` speichern und laden Position, Inventar, Queststatus und abgeerntete Pflanzen.
+- **EXP-001:** Nach Funktions- und Nutzerfeedback den visuellen Ausbau vor neuen Gebieten, Jahreszeiten und Automatisierung einordnen.
 
 ### Als Nächstes
-EXP-001 – Nach Spieltest Jahreszeiten, weitere Gebiete und Automatisierung neu priorisieren.
+VIS-001 – Das Moor-Testgebiet in einer zusammenhängenden, farbigen Pixelart-Richtung spielbar ausgestalten.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -46,7 +47,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 ### Offene Entscheidungen
 - Zielplattformen über Windows-Entwicklung hinaus werden nach dem ersten spielbaren Prototyp festgelegt.
 - Umfang späterer Jahreszeiten und Automatisierung wird nach einem Test des Kernablaufs entschieden.
-- Finale Pixelart wird erst nach Sichtung eines Spielbild-Mockups produziert.
+- Der erste visuelle Ausschnitt orientiert sich am warmen Abendmoor; Dämmerungs- und Frühlingsstimmung bleiben Optionen für spätere Gebiete.
 
 ### Technische Schulden
 - Bewegung und Testkarte sind provisorisch gezeichnet; finaler Grafikstil sowie weitere Pflanzen, Rezepte und Aufträge fehlen noch.
@@ -147,7 +148,8 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | BOARD-001 | Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen | P2 | QUEST-002, QUEST-003 | DONE |
 | ECON-001 | Einfache Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen | P2 | BOARD-001 | DONE |
 | SAVE-001 | Position, Inventar, Questfortschritt und abgeerntete Pflanzen speichern und laden | P2 | CORE-001, ITEM-001, QUEST-003, ECON-001 | DONE |
-| EXP-001 | Jahreszeiten, weitere Gebiete und Automatisierung nach Spieltest neu priorisieren | P3 | CONTENT-001, SAVE-001 | PLANNED |
+| EXP-001 | Ausbau nach Teststand und Nutzerfeedback neu priorisieren | P3 | CONTENT-001, SAVE-001 | DONE |
+| VIS-001 | Die Moor-Testkarte in einer zusammenhängenden Pixelart-Richtung gestalten und integrieren | P1 | EXP-001, SAVE-001 | PLANNED |
 | REL-001 | Exportziel wählen, Exportvorlagen einrichten, Release-Checkliste ergänzen | P3 | stabile Kernschleife | PLANNED |
 
 ### CORE-002 Abnahmekriterien
@@ -292,6 +294,20 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Der SAVE-001-Headless-Test besteht rot/grün; alle 17 Headless-Tests, Editorimport und 60-Frame-Laufzeit-Smoke-Check bestehen.
 - Sichtprüfung der F5-/F9-Hinweise im Godot-Fenster bleibt Teil der noch offenen manuellen Sichtprüfung.
 
+### EXP-001 Ergebnis – erledigt
+Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten weder die Bildwirkung im Spielmaßstab noch den Spielspaß. Aus dem bisherigen direkten Feedback ist die aktuell einfarbige Graybox-Grafik der stärkste bekannte Mangel. Die drei zuvor besprochenen Moorstimmungen geben eine konkrete visuelle Richtung.
+
+| Ausbauoption | Wirkung (1–5) | Sicherheit (1–5) | Aufwand (1–5) | ICE: Wirkung × Sicherheit ÷ Aufwand |
+| --- | ---: | ---: | ---: | ---: |
+| Visueller Ausschnitt der bestehenden Moor-Testkarte | 5 | 5 | 3 | 8,3 |
+| Neues Moorgebiet | 4 | 3 | 5 | 2,4 |
+| Jahreszeiten und Wetter | 3 | 2 | 4 | 1,5 |
+| Erste Automatisierung | 3 | 2 | 5 | 1,2 |
+
+- Nächster Punkt ist VIS-001: zuerst die bestehende Karte mit Boden, Ufer, Wegen und Vegetation lesbar und farbig gestalten; die Spiellogik und Kollisionen bleiben dabei erhalten.
+- Für den ersten Abschnitt dient das warme Abendmoor als Ausgangspunkt. Dämmerungs- und Frühlingsstimmungen werden als spätere Gebietsrichtungen vorgemerkt.
+- Jahreszeiten, zusätzliche Gebiete und Automatisierung werden nach Sichtprüfung des integrierten Grafikabschnitts erneut bewertet. Der manuelle Test im Godot-Fenster ist weiterhin offen; die Priorisierung behauptet nicht, dass die Graybox bereits als unterhaltsam bestätigt wurde.
+
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -349,3 +365,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | BOARD-001: Auftragsbrett mit Statusanzeige und Verfügbarkeitsregeln ergänzt; Annahme dorthin verlegt, direkte NPC-Abgabe erhalten; 15 Headless-Tests, Editorimport und Startcheck bestanden. |
 | 30.09.2026 | ECON-001: einmalige Questbelohnungen von 5/10/15 Münzen und HUD-Zähler ergänzt; neuer Headless-Test rot/grün, alle 16 Tests, Editorimport und 60-Frame-Startlauf bestanden. |
 | 01.10.2026 | SAVE-001: versionierter JSON-Spielstand mit F5/F9, automatischem Laden, Positions-, Inventar-, Quest- und Pickup-Persistenz ergänzt; ungültige Spielstände werden vor Anwendung verworfen. Featuretest rot/grün; alle 17 Headless-Tests, Editorimport und 60-Frame-Startlauf bestanden. |
+| 01.10.2026 | EXP-001: visuellen Ausbau vor neuen Gebieten, Jahreszeiten und Automatisierung priorisiert; VIS-001 gestaltet zuerst ein spielbares Moorsegment und beinhaltet die noch offene sichtbare Spielprüfung. |

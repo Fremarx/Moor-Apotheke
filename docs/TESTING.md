@@ -159,6 +159,11 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: alle 17 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
 - Offen: F5/F9, HUD-Hinweise, Lesbarkeit und tatsächliche Tastatureingabe noch im sichtbaren Godot-Fenster prüfen.
 
+## EXP-001 – Ausbau priorisieren
+- Die 17 Headless-Tests bestätigen Mechanik und Zustandsübergänge; sie messen nicht, ob die Graybox im Spielmaßstab gut lesbar oder unterhaltsam wirkt.
+- Bisheriges direktes Nutzerfeedback benennt die einfarbige Grafik als Mangel und bevorzugt die zuvor erstellten Moorstimmungen.
+- Entscheidung: VIS-001 gestaltet zuerst ein farbiges, zusammenhängendes Segment der vorhandenen Moor-Testkarte. Die Sichtprüfung der integrierten Grafik ist Teil von VIS-001; erst danach werden Jahreszeiten, neue Gebiete und Automatisierung erneut eingeordnet.
+
 ## Automatisierung und CI
 
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
