@@ -8,13 +8,13 @@ Stand: 01.10.2026
 Phase 7 – Persistenz und Ausbau
 
 ### Zuletzt bearbeiteter Task
-EXP-001 – Ausbau nach Projektstand und bisherigem Nutzerfeedback priorisieren.
+VIS-001 – Die Moor-Testkarte in einer warmen Pixelart-Richtung gestalten und integrieren.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE.
 
 ### Fortschritt
-Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. EXP-001 priorisiert als nächsten Ausbau eine visuelle Spielszene, bevor neue Gebiete, Jahreszeiten oder Automatisierung hinzukommen.
+Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. Spiellogik und Kollisionsflächen blieben erhalten.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -37,9 +37,10 @@ Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanze
 - **ECON-001:** Erfolgreiche Abgaben zahlen einmalig 5/10/15 Münzen; Inventar und HUD zeigen den aktuellen Bestand.
 - **SAVE-001:** Versionierte JSON-Spielstände in `user://` speichern und laden Position, Inventar, Queststatus und abgeerntete Pflanzen.
 - **EXP-001:** Nach Funktions- und Nutzerfeedback den visuellen Ausbau vor neuen Gebieten, Jahreszeiten und Automatisierung einordnen.
+- **VIS-001:** Die bestehende Testkarte mit warmen Bodenfarben, Teichufer, Torfweg und pixeligen Moorpflanzen sichtbar ausgestalten.
 
 ### Als Nächstes
-VIS-001 – Das Moor-Testgebiet in einer zusammenhängenden, farbigen Pixelart-Richtung spielbar ausgestalten.
+VIS-002 – Den abgestimmten Spielerentwurf mit Tasche und Minze als 4-Wege-Spielfigur integrieren.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -149,7 +150,8 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | ECON-001 | Einfache Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen | P2 | BOARD-001 | DONE |
 | SAVE-001 | Position, Inventar, Questfortschritt und abgeerntete Pflanzen speichern und laden | P2 | CORE-001, ITEM-001, QUEST-003, ECON-001 | DONE |
 | EXP-001 | Ausbau nach Teststand und Nutzerfeedback neu priorisieren | P3 | CONTENT-001, SAVE-001 | DONE |
-| VIS-001 | Die Moor-Testkarte in einer zusammenhängenden Pixelart-Richtung gestalten und integrieren | P1 | EXP-001, SAVE-001 | PLANNED |
+| VIS-001 | Die Moor-Testkarte in einer zusammenhängenden Pixelart-Richtung gestalten und integrieren | P1 | EXP-001, SAVE-001 | DONE |
+| VIS-002 | Den abgestimmten Spielerentwurf mit Tasche und Minze als 4-Wege-Spielfigur integrieren | P1 | VIS-001 | PLANNED |
 | REL-001 | Exportziel wählen, Exportvorlagen einrichten, Release-Checkliste ergänzen | P3 | stabile Kernschleife | PLANNED |
 
 ### CORE-002 Abnahmekriterien
@@ -304,10 +306,17 @@ Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten wede
 | Jahreszeiten und Wetter | 3 | 2 | 4 | 1,5 |
 | Erste Automatisierung | 3 | 2 | 5 | 1,2 |
 
-- Nächster Punkt ist VIS-001: zuerst die bestehende Karte mit Boden, Ufer, Wegen und Vegetation lesbar und farbig gestalten; die Spiellogik und Kollisionen bleiben dabei erhalten.
+- VIS-001 setzt diese Entscheidung um: Die Testkarte erhält Boden-, Ufer-, Weg- und Pflanzendetails, während Spiellogik und Kollisionsflächen gleich bleiben.
 - Für den ersten Abschnitt dient das warme Abendmoor als Ausgangspunkt. Dämmerungs- und Frühlingsstimmungen werden als spätere Gebietsrichtungen vorgemerkt.
 - Jahreszeiten, zusätzliche Gebiete und Automatisierung werden nach Sichtprüfung des integrierten Grafikabschnitts erneut bewertet. Der manuelle Test im Godot-Fenster ist weiterhin offen; die Priorisierung behauptet nicht, dass die Graybox bereits als unterhaltsam bestätigt wurde.
 
+### VIS-001 Abnahmekriterien – erledigt
+- Die 640 × 360-Testkarte zeigt bei 480 × 270 eine abgestimmte warme Moorpalette mit abwechslungsreichem Boden, lesbarem Teichufer und Torfweg.
+- Ein transparenter 4 × 4-Dekorationsatlas ergänzt Schilf, Farne, Blüten, Steine und Wasserlilien; die genaue Herkunft und die finalen Prompts stehen in docs/ART_ASSETS.md.
+- Bewegungslogik, Interaktionen, Pickup-Positionen und vorhandene Kollisionsrechtecke bleiben unverändert.
+- Die tatsächliche Hauptszene wurde in Godot 4.7.2 bei 480 × 270 sichtbar gerendert und geprüft.
+- Godot-Editorimport, alle 17 vorhandenen Spiellogiktests und der 60-Frame-Startlauf bestehen.
+- Noch offen bleibt der Tastaturtest mit Bewegung und Kollision im laufenden Fenster sowie die subjektive Stilrückmeldung.
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -366,3 +375,4 @@ Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten wede
 | 30.09.2026 | ECON-001: einmalige Questbelohnungen von 5/10/15 Münzen und HUD-Zähler ergänzt; neuer Headless-Test rot/grün, alle 16 Tests, Editorimport und 60-Frame-Startlauf bestanden. |
 | 01.10.2026 | SAVE-001: versionierter JSON-Spielstand mit F5/F9, automatischem Laden, Positions-, Inventar-, Quest- und Pickup-Persistenz ergänzt; ungültige Spielstände werden vor Anwendung verworfen. Featuretest rot/grün; alle 17 Headless-Tests, Editorimport und 60-Frame-Startlauf bestanden. |
 | 01.10.2026 | EXP-001: visuellen Ausbau vor neuen Gebieten, Jahreszeiten und Automatisierung priorisiert; VIS-001 gestaltet zuerst ein spielbares Moorsegment und beinhaltet die noch offene sichtbare Spielprüfung. |
+| 01.10.2026 | VIS-001: warmes Moorsegment mit strukturierterem Boden, Torfweg, Teichufer und transparentem 4 × 4-Dekorationsatlas integriert; alle 17 vorhandenen Tests, Editorimport, 60-Frame-Start und gerenderte Hauptszene geprüft. |

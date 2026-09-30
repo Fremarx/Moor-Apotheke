@@ -32,9 +32,9 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - BOARD-001 ist abgeschlossen: Das Brett zeigt alle drei Aufträge, nimmt nur freigeschaltete Bitten an und lässt die Abgabe bei den Bewohnern.
 - ECON-001 ist abgeschlossen: Erfolgreiche Abgaben zahlen einmalig 5/10/15 Münzen; das HUD zeigt den Bestand.
 - SAVE-001 ist abgeschlossen: Versioniertes Speichern in `user://`; F5 speichert, F9 lädt und beim Start wird automatisch geladen. Position, Inventar, Queststatus und abgeerntete Pflanzen werden vor dem Wiederherstellen validiert.
-- EXP-001 ist abgeschlossen: Aus den 17 erfolgreichen Funktionstests und dem bisherigen Feedback wird VIS-001 priorisiert. Zuerst soll die vorhandene Graybox-Moorfläche einen kohärenten, farbigen Pixelart-Ausschnitt erhalten; danach wird sie sichtbar geprüft.
+- EXP-001 und VIS-001 sind abgeschlossen: Die 640 × 360-Testkarte zeigt warmere, abwechslungsreiche Moorflächen, einen Torfweg, ein detaillierteres Teichufer und Vegetation aus assets/tilesets/moor_vegetation_atlas_ai_20261001.png. Spiellogik und Kollisionsflächen blieben unverändert; die Hauptszene wurde bei 480 × 270 gerendert und sichtbar geprüft.
 - Erster Kernablauf: Sumpfminze → trocknen → Beruhigungstee → Fenja.
-- Nächster Backlogpunkt: VIS-001 – das Moor-Testgebiet in einer zusammenhängenden Pixelart-Richtung gestalten und integrieren.
+- Nächster Backlogpunkt: VIS-002 – den abgestimmten Spielerentwurf mit Tasche und Minze als 4-Wege-Spielfigur integrieren.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
 ## Wissens- und Skillhinweise

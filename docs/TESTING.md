@@ -164,6 +164,14 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Bisheriges direktes Nutzerfeedback benennt die einfarbige Grafik als Mangel und bevorzugt die zuvor erstellten Moorstimmungen.
 - Entscheidung: VIS-001 gestaltet zuerst ein farbiges, zusammenhängendes Segment der vorhandenen Moor-Testkarte. Die Sichtprüfung der integrierten Grafik ist Teil von VIS-001; erst danach werden Jahreszeiten, neue Gebiete und Automatisierung erneut eingeordnet.
 
+## VIS-001 – Moor-Kartengrafik
+
+- Erledigt: Godot-4.7.2-Editorimport inklusive PNG-Atlasimport.
+- Erledigt: alle 17 vorhandenen Spiellogiktests bestanden; der 60-Frame-Startlauf meldete keine Parser- oder Laufzeitfehler.
+- Erledigt: Hauptszene in Godot gerendert und bei 480 × 270 geprüft; Boden, Teich, Torfweg und Atlasdekorationen sind im tatsächlichen Spielmaßstab sichtbar.
+- Codeprüfung: Die vorhandenen Kartengrenzen- und Hindernis-Kollisionsrechtecke sowie Interaktionskoordinaten wurden nicht verändert.
+- Noch offen: WASD-/Pfeiltastenbewegung und Kollisionen im laufenden Fenster manuell durchspielen. Der gerenderte Standbild-Check bestätigt keine Eingabe oder subjektiven Spielspaß.
+
 ## Automatisierung und CI
 
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
