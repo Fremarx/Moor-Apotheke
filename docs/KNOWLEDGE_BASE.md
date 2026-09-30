@@ -30,7 +30,7 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 | [Node class reference](https://docs.godotengine.org/en/4.7/classes/class_node.html) | 4.7, 30.09.2026 | Weitergabe von Gameplay-Eingaben über _unhandled_input() | Offizielle Engine-Doku; CORE-002 |
 | [Signal class reference](https://docs.godotengine.org/en/4.7/classes/class_signal.html) | 4.7, 30.09.2026 | Lose gekoppelte Benachrichtigung von Inventory über gesammelte Gegenstände | Offizielle Engine-Doku; ITEM-001 |
 | [GDScript reference](https://docs.godotengine.org/en/4.7/tutorials/scripting/gdscript/gdscript_basics.html) | 4.7, 30.09.2026 | Ableitung spezialisierter Spielobjekte aus dem Interaktionsskript | Offizielle Engine-Doku; ITEM-001 |
-| [Resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html) | 4.7, 30.09.2026 | Datencontainer und Rezeptdaten | Offizielle Engine-Doku; LOOP-002/CONTENT-001 |
+| [Resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html) | 4.7, 30.09.2026 | Datencontainer und Rezeptdaten | Offizielle Engine-Doku; bei mehreren Rezepten oder komplexeren Definitionen prüfen |
 | [Saving Games](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html) | 4.7, 30.09.2026 | Persistenz und user:// | Offizielle Engine-Doku; SAVE-001 |
 
 ## Abrufnotizen
@@ -38,6 +38,7 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 - **30.09.2026 – CORE-002:** Area2D definiert einen Überlappungsbereich; der Player fragt darin interaktive Ziele ab und wählt das nächste. Die benannte Aktion interact wird in _unhandled_input() verarbeitet, damit GUI-Elemente Eingaben zuerst behandeln können.
 - **30.09.2026 – ITEM-001:** Area2D wird als nicht blockierender Sammelbereich verwendet und nach Aufnahme deaktiviert. Das Pickup-Skript leitet sich über `extends` vom Interaktionsskript ab und meldet `item_id` sowie Anzahl per Signal an Inventory.
 - **30.09.2026 – LOOP-001:** Die Trocknungsstation nutzt dieselbe Area2D-Interaktionsbasis und liefert das Ergebnis über den bestehenden Interaktionsrückgabewert. Inventory führt eine atomare Mengenübertragung aus und sendet `item_count_changed` für Quell- und Zielgegenstand. Dafür waren die bereits gelisteten Godot-4.7-Quellen zu Area2D, Signalen und GDScript-Vererbung ausreichend; keine neue Engine-API eingeführt.
+- **30.09.2026 – LOOP-002:** Der Braukessel verwendet dieselbe Interaktions- und Inventarübertragung für das feste Rezept getrocknete Sumpfminze → Beruhigungstee. Die offizielle Area2D-Doku bestätigt Area2D als Raum-/Überlappungsobjekt; die Signal-Doku beschreibt lose gekoppelte Reaktionen auf Zähleränderungen. Unbegrenztes Wasser am Kessel stammt aus GAME_PLAN.md. Für dieses einzelne Rezept wird noch keine Datenressource benötigt.
 
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.

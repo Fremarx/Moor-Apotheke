@@ -5,26 +5,27 @@ Stand: 30.09.2026
 ## Project Status
 
 ### Aktuelle Phase
-Phase 3 – Erste Herstellung
+Phase 4 – Erster Auftrag
 
 ### Zuletzt bearbeiteter Task
-LOOP-001 – Sumpfminze am Trockengestell zu getrockneter Minze verarbeiten.
+LOOP-002 – Getrocknete Minze am Braukessel zu Beruhigungstee verarbeiten.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 PLANNED.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 PLANNED.
 
 ### Fortschritt
-Projektgrundlage, Graybox-Karte, Spielerbewegung, E-Interaktion, Sumpfminzen-Sammeln und die erste 1:1-Verarbeitung am Trockengestell mit getrennten Inventarzählern sind umgesetzt.
+Projektgrundlage, Graybox-Karte, Spielerbewegung, E-Interaktion und die vollständige erste Herstellungskette bis zum Beruhigungstee sind umgesetzt.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
 - **CORE-001:** Graybox-Testkarte, Platzhalterfigur, Kamera und Bewegung.
 - **CORE-002:** Interaktionsbereich, E-Taste, nächstes Ziel, HUD-Rückmeldung und graue Kräuterprobe.
 - **ITEM-001:** Sumpfminze einmalig sammeln, Inventarbestand führen und im HUD anzeigen.
-- **LOOP-001:** Trockengestell wandelt genau eine frische Sumpfminze pro E in getrocknete Minze um; beide Mengen stehen getrennt im HUD.
+- **LOOP-001:** Trockengestell wandelt genau eine frische Sumpfminze pro E in getrocknete Minze um.
+- **LOOP-002:** Braukessel verbraucht eine getrocknete Minze und stellt mit unbegrenzt verfügbarem Wasser einen Beruhigungstee her.
 
 ### Als Nächstes
-LOOP-002 – Getrocknete Minze und Wasser zu Beruhigungstee verarbeiten. Featureplan vor Umsetzung erstellen.
+QUEST-001 – Fenjas Bitte um Beruhigungstee annehmen, Tee abgeben und den Abschluss anzeigen. Featureplan vor Umsetzung erstellen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -48,6 +49,8 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - ITEM-001-Headless-Test prüft Startbestand, E-Aufnahme in Reichweite, Sammelhinweis, HUD-Bestätigung, Ausblenden, Einmaligkeit und Ablehnung ungültiger Bestandserhöhungen.
 - LOOP-001-Headless-Test prüft fehlende Zutat, 1:1-Verarbeitung, zwei aufeinanderfolgende Umwandlungen, getrennte HUD-Zähler und Ablehnung ohne Vorrat; außerdem bestanden ITEM-001- und CORE-002-Regressionen.
 - LOOP-001-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden; Sichtprüfung von Station und HUD steht noch aus.
+- LOOP-002-Headless-Test prüft Sammeln, Trocknen, Brauen, Mengenverbrauch, Tee-HUD und Ablehnung ohne Zutat; LOOP-001-, ITEM-001- und CORE-002-Regressionsläufe bestanden.
+- LOOP-002-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden; Sichtprüfung des Braukessels und HUD steht noch aus.
 - Sichtbare Tastatur- und Bewegungskontrolle ist noch offen.
 
 ### Sicherheitsstatus
@@ -102,7 +105,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | CORE-002 | Interaktionsbereich, Taste E und Hinweis für das nächste Objekt | P1 | CORE-001 | DONE |
 | ITEM-001 | Sumpfminze aufnehmen und Inventarbestand anzeigen | P1 | CORE-002 | DONE |
 | LOOP-001 | Minze am Trockengestell verarbeiten | P1 | ITEM-001 | DONE |
-| LOOP-002 | Getrocknete Minze und Wasser zu Beruhigungstee verarbeiten | P1 | LOOP-001 | PLANNED |
+| LOOP-002 | Getrocknete Minze und Wasser zu Beruhigungstee verarbeiten | P1 | LOOP-001 | DONE |
 | QUEST-001 | Fenjas Bitte annehmen, Tee abgeben und Abschluss anzeigen | P1 | LOOP-002 | PLANNED |
 | UX-001 | Kernablauf auf Lesbarkeit prüfen und Rückmeldungen ergänzen | P2 | QUEST-001 | PLANNED |
 | CONTENT-001 | Schilfwurzel, Nachtmoos, zwei weitere Rezepte, Marten, Lene und Auftragsbrett | P2 | UX-001 | PLANNED |
@@ -135,6 +138,15 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Die erste Umsetzung verarbeitet unmittelbar bei E; ein Trocknungs-Timer und Produktionsanimation bleiben außerhalb des Scopes.
 - Ein Headless-Test deckt fehlende Zutat, erfolgreiche 1:1-Umwandlung, HUD-Änderung, Wiederholung ohne Bestand und Interaktionsregressionen ab.
 - Editorimport und 60-Frame-Laufzeittest laufen erfolgreich; sichtbare Stations-/HUD-Prüfung bleibt separat dokumentiert.
+
+### LOOP-002 Abnahmekriterien – erledigt
+- Der Braukessel bietet die Aktion „Beruhigungstee brauen“ über die vorhandene E-Interaktion.
+- Ein erfolgreicher E-Druck verbraucht genau eine getrocknete Sumpfminze und erzeugt genau einen Beruhigungstee.
+- Wasser ist unbegrenzt am Braukessel verfügbar und wird gemäß GAME_PLAN.md nicht als Inventargegenstand geführt.
+- Ohne getrocknete Minze bleiben alle Bestände unverändert; das HUD zeigt eine verständliche Rückmeldung.
+- Ein Headless-Test prüft die Kette Sammeln → Trocknen → Brauen, den HUD-Zähler und den Versuch ohne Zutat.
+- LOOP-001-, ITEM-001- und CORE-002-Regressionstests, Editorimport und 60-Frame-Laufzeittest bestehen.
+- Sichtprüfung von Braukessel, Interaktionshinweis und Inventarzählern wird durchgeführt oder als offen dokumentiert.
 
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
@@ -179,3 +191,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | CORE-002: generische Interaktion, E-Taste, nächstes Ziel und HUD-Rückmeldung ergänzt; Headless-Prüfungen bestanden. |
 | 30.09.2026 | ITEM-001: Sumpfminze-Sammelstelle, einmalige Aufnahme, Inventar und HUD-Zähler ergänzt; Headless-Prüfungen bestanden. |
 | 30.09.2026 | LOOP-001: Trockengestell, atomare 1:1-Inventarverarbeitung und zweiter HUD-Zähler ergänzt; Headless-, Import- und Laufzeitprüfungen bestanden. |
+| 30.09.2026 | LOOP-002: Braukessel, Beruhigungstee und vollständige Sumpfminze-zu-Tee-Schleife ergänzt; Headless-, Import- und Laufzeitprüfungen bestanden. |

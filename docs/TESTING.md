@@ -44,6 +44,14 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: Godot-4.7.2-Headless-Editorimport und 60-Frame-Startlauf ohne Parser- oder Laufzeitfehler.
 - Offen: Sichtprüfung von Station, Interaktionshinweis und beiden Inventarzählern im Godot-Fenster.
 
+## LOOP-002 – Beruhigungstee brauen
+- Erledigt: `tests/loop_002_brewing_test.gd` prüft den Ablauf Sumpfminze sammeln → trocknen → brauen, den Rezept-Hinweis, den Verbrauch genau einer getrockneten Minze, den Tee-Zähler sowie den Versuch ohne Zutat.
+- Prüfbefehl: `godot --headless --path . --script res://tests/loop_002_brewing_test.gd`
+- RED: Vor der Umsetzung fehlten Braukessel und Beruhigungstee-Zähler; der neue Test schlug erwartungsgemäß an diesen beiden Prüfungen fehl.
+- GREEN: LOOP-002-Test sowie LOOP-001-, ITEM-001- und CORE-002-Regressionstests bestanden.
+- Erledigt: Godot-4.7.2-Headless-Editorimport und 60-Frame-Startlauf ohne Parser- oder Laufzeitfehler.
+- Offen: Sichtprüfung von Braukessel, Interaktionshinweis und Inventarzählern im Godot-Fenster.
+
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.

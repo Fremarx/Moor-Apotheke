@@ -4,6 +4,7 @@ extends Node2D
 @onready var _inventory: Node = $Inventory
 @onready var _inventory_count: Label = $HUD/InventoryCount
 @onready var _dried_mint_count: Label = $HUD/DriedMintCount
+@onready var _tea_count: Label = $HUD/TeaCount
 @onready var _interaction_prompt: Label = $HUD/InteractionPrompt
 @onready var _interaction_feedback: Label = $HUD/InteractionFeedback
 @onready var _feedback_timer: Timer = $HUD/FeedbackTimer
@@ -43,6 +44,8 @@ func _on_item_count_changed(item_id: String, amount: int) -> void:
 		_inventory_count.text = "Sumpfminze: %d" % amount
 	elif item_id == "dried_sump_mint":
 		_dried_mint_count.text = "Getrocknete Minze: %d" % amount
+	elif item_id == "calming_tea":
+		_tea_count.text = "Beruhigungstee: %d" % amount
 
 
 func _on_feedback_timer_timeout() -> void:
