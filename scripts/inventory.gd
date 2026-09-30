@@ -14,6 +14,19 @@ func add_item(item_id: String, amount: int = 1) -> void:
 	item_count_changed.emit(item_id, next_count)
 
 
+func remove_item(item_id: String, amount: int = 1) -> bool:
+	if item_id.is_empty() or amount <= 0:
+		return false
+
+	var current_count := get_count(item_id)
+	if current_count < amount:
+		return false
+
+	var next_count := current_count - amount
+	_store_count(item_id, next_count)
+	item_count_changed.emit(item_id, next_count)
+	return true
+
 
 func transfer_item(source_id: String, destination_id: String, amount: int = 1) -> bool:
 	if source_id.is_empty() or destination_id.is_empty() or source_id == destination_id or amount <= 0:

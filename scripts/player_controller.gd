@@ -38,6 +38,11 @@ func get_current_interactable() -> Area2D:
 	return null
 
 
+func refresh_interactable_prompt() -> void:
+	if is_instance_valid(_current_interactable):
+		interaction_hint_changed.emit(str(_current_interactable.call("get_prompt_text")))
+
+
 func _refresh_interactable_target() -> void:
 	var nearest: Area2D
 	var nearest_distance_squared := INF

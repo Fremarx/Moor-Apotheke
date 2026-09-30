@@ -116,7 +116,7 @@ Die Rezeptmengen sind Startwerte und werden beim Spielen angepasst. Eine Sumpfmi
 | Marten, der Torfstecher | 1 stärkender Aufguss | Nutzt zwei Pflanzenarten und schaltet das zweite Rezept frei |
 | Lene, die Dorfheilerin | 1 Nachttrank | Führt zum seltenen Fund am alten Steg und schließt den Ausschnitt ab |
 
-Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Die Erfüllung wird zunächst durch eine kurze Bestätigung angezeigt. Münzen und Vertrauensfortschritt gehören zu einer späteren Ausbaustufe.
+Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt die HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss bis zum Ende der laufenden Partie sichtbar. Der Queststatus wird in diesem ersten Slice noch nicht gespeichert. Münzen und Vertrauensfortschritt gehören zu einer späteren Ausbaustufe.
 
 ### Eingaben und Anzeigen
 
@@ -176,7 +176,7 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Die Erfüllung wird zun�
 - Fenja den Tee direkt geben und den Abschluss verständlich bestätigen.
 - Den Spielablauf vom Auftrag bis zur Bestätigung verbinden.
 
-**Fertig, wenn:** Fenjas Auftrag vom Annehmen bis zur sichtbaren Abschlussmeldung ohne Neustart der Anwendung abgeschlossen werden kann. Spielstandpersistenz ist ein späterer eigener Task.
+**Erledigt in QUEST-001:** Fenja nimmt den Auftrag an, die HUD zeigt das Ziel, ein Tee wird abgegeben und der Abschluss bleibt für die laufende Partie sichtbar. Spielstandpersistenz ist ein späterer eigener Task.
 
 ### Phase 5 – Lesbarkeit und Atmosphäre
 
@@ -212,4 +212,4 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Die Erfüllung wird zun�
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-Die erste Godot-Szene mit Spielfigur, kleiner Testkarte, Bewegung und Interaktion umsetzen. Danach eine einzige Sammelpflanze und das Inventar ergänzen, bevor weitere Inhalte dazukommen.
+UX-001: Den vollständigen Ablauf vom Sammeln bis zu Fenjas erfüllter Bitte im Spielmaßstab durchgehen, unklare Hinweise identifizieren und die wichtigsten Rückmeldungen gezielt verbessern.

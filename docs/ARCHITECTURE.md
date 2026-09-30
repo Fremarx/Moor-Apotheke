@@ -14,15 +14,18 @@ Die Startszene stellt Graybox-Karte und Platzhalterfigur zusammen:
 ~~~text
 Main (Node2D, main.gd)
 ├── World (Node2D)
-│   ├── TestMap (Node2D, Interaktionsprobe, Sumpfminze, Trockengestell und Braukessel)
+│   ├── TestMap (Node2D, Interaktionsprobe, Sumpfminze, Trockengestell, Braukessel und Fenja)
 │   └── Player (CharacterBody2D)
 │       ├── InteractionArea (Area2D)
 │       └── Camera2D
 ├── Inventory (Node)
+├── Quest (Node)
+│   └── FenjaQuest (Node)
 └── HUD (CanvasLayer)
     ├── InventoryCount
     ├── DriedMintCount
     ├── TeaCount
+    ├── QuestStatus
     ├── InteractionPrompt
     ├── InteractionFeedback
     └── FeedbackTimer
@@ -38,12 +41,14 @@ LOOP-001 ergänzt das `Trockengestell` als spezialisierte Interaktions-Area2D. M
 
 LOOP-002 ergänzt den `Braukessel` als weitere Interaktions-Area2D der Gruppe `processing_stations`. Main übergibt ihm dieselbe lokale Inventarkomponente. E ruft `Inventory.transfer_item("dried_sump_mint", "calming_tea", 1)` auf. So werden Zutat und Ergebnis vor der HUD-Aktualisierung gemeinsam verbucht. Wasser ist unbegrenzt am Kessel verfügbar und wird entsprechend `GAME_PLAN.md` nicht als Inventargegenstand geführt. Das feste Startrezept bleibt explizit im Stationsskript; Rezeptressourcen werden erst geprüft, wenn mehrere Rezepte hinzukommen. `TeaCount` zeigt die fertige Menge.
 
+QUEST-001 ergänzt eine kleine `FenjaQuest`-Komponente neben Inventar und Welt. Main übergibt ihr das lokale Inventar und verbindet `state_changed` mit `QuestStatus`. Fenja erhält die Quest über Dependency Injection und delegiert ihre Interaktion an sie. Die Quest schaltet zwischen `not_accepted`, `active` und `completed`; für die Abgabe ruft sie `Inventory.remove_item("calming_tea", 1)` auf und wechselt nur bei Erfolg in den Abschlusszustand. Main fordert den Player anschließend auf, den aktuellen Fenja-Prompt neu zu senden. Wiederholtes Ansprechen nach Abschluss ändert den Bestand nicht. Der Status lebt nur in der laufenden Partie und wird nicht gespeichert.
+
 Spätere eigenständige Szenen:
 - player/player.tscn: Bewegung, Kollision, Sprite/Animation und Kamera.
 - world/test_map.tscn: Kachelboden, Hindernisse und Spielobjekte.
 - items/herb_pickup.tscn: Pflanze und Sammelinteraktion.
 - stations/drying_rack.tscn und stations/brewing_cauldron.tscn: Verarbeitung.
-- npcs/fenja.tscn: erste Auftraggeberin.
+- npcs/fenja.tscn: mögliche spätere Extraktion; QUEST-001 verwendet Fenja noch als Platzhalter direkt in der Testkarte.
 - HUD-Komponenten bleiben von der Karte getrennt.
 
 Szenen sollen möglichst wenig über feste Pfade auf Geschwister zugreifen. Eltern verbinden Abhängigkeiten; Ereignisse wie item_collected melden Ergebnisse über Signale. Ein Autoload kommt erst hinzu, wenn ein konkret global benötigter Zustand mehrere Szenen überlebt und die lokale Elternstruktur nicht ausreicht.
@@ -68,8 +73,12 @@ flowchart LR
   Inventory --> HUD[Inventaranzeige]
   Inventory --> Rack[Trockengestell]
   Rack --> Cauldron[Braukessel]
-  Cauldron --> Quest[Fenjas Auftrag]
-  Quest --> HUD[Auftrags- und Belohnungsanzeige]
+  Cauldron --> Inventory
+  Player --> Fenja[Fenja ansprechen]
+  Fenja --> Quest[Fenjas Auftrag]
+  Quest -->|einen Tee abgeben| Inventory
+  Inventory --> HUD[Inventaranzeige]
+  Quest -->|state_changed| HUDQuest[Auftragsstatus]
 ~~~
 
 Im ersten Slice wird der Auftrag direkt bei Fenja angenommen und abgegeben. Das Brett kommt erst mit CONTENT-001.
@@ -94,10 +103,10 @@ Im ersten Slice wird der Auftrag direkt bei Fenja angenommen und abgegeben. Das 
 - Keine Konten oder Secrets; fremde Add-ons und Assets prüfen.
 
 ## Bekannte Einschränkungen
-- Trockengestell und Braukessel sind vorläufig direkt in der Testkarte gezeichnet; eigenständige Stationsszenen, Produktionszeiten und Animationen, Auftragslogik, Save-/Load-Logik, finale Pixelgrafik und Exportprofile fehlen noch.
+- Trockengestell, Braukessel und Fenja sind vorläufig direkt in der Testkarte gezeichnet; eigenständige Szenen, Produktionszeiten und Animationen, zusätzliche Aufträge, Save-/Load-Logik, finale Pixelgrafik und Exportprofile fehlen noch.
 - Das Spiel liegt eigenständig in `Fremarx/Moor-Apotheke`. Eine spätere Zusammenführung mit dem früher verwendeten 2DGame-Repo wäre eine eigene Migrationsentscheidung.
 
 ## Engine-Dokumentation
 Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Für CORE-001 wurden [2D-Bewegung](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html), [CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) und [Input-Beispiele](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) verwendet. Weitere Quellen betreffen Szenenorganisation, TileSets und Resources.
 
-Für CORE-002 wurden zusätzlich die versionierte [Area2D-Dokumentation](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) und die [Node-Klassenreferenz](https://docs.godotengine.org/en/4.7/classes/class_node.html) zur Overlap-Erkennung und Eingabeweitergabe herangezogen. ITEM-001 verwendet zudem die dokumentierte [Signal-API](https://docs.godotengine.org/en/4.7/classes/class_signal.html) und [GDScript-Vererbung](https://docs.godotengine.org/en/4.7/tutorials/scripting/gdscript/gdscript_basics.html).
+Für CORE-002 wurden zusätzlich die versionierte [Area2D-Dokumentation](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) und die [Node-Klassenreferenz](https://docs.godotengine.org/en/4.7/classes/class_node.html) zur Overlap-Erkennung und Eingabeweitergabe herangezogen. ITEM-001 verwendet zudem die dokumentierte [Signal-API](https://docs.godotengine.org/en/4.7/classes/class_signal.html) und [GDScript-Vererbung](https://docs.godotengine.org/en/4.7/tutorials/scripting/gdscript/gdscript_basics.html). QUEST-001 verwendet außerdem die offizielle [Godot-4.7-Szenenorganisation](https://docs.godotengine.org/en/4.7/tutorials/best_practices/scene_organization.html) für die Übergabe von Abhängigkeiten über Main sowie die bestehende Signal-API für Statusänderungen.

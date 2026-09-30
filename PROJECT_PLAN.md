@@ -5,16 +5,16 @@ Stand: 30.09.2026
 ## Project Status
 
 ### Aktuelle Phase
-Phase 4 – Erster Auftrag
+Phase 5 – Lesbarkeit und Stil
 
 ### Zuletzt bearbeiteter Task
-LOOP-002 – Getrocknete Minze am Braukessel zu Beruhigungstee verarbeiten.
+QUEST-001 – Fenjas Bitte annehmen, Beruhigungstee abgeben und Abschluss anzeigen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 PLANNED.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE.
 
 ### Fortschritt
-Projektgrundlage, Graybox-Karte, Spielerbewegung, E-Interaktion und die vollständige erste Herstellungskette bis zum Beruhigungstee sind umgesetzt.
+Projektgrundlage, Graybox-Karte, Spielerbewegung, E-Interaktion, die Herstellungskette bis zum Beruhigungstee und Fenjas erster Auftrag sind umgesetzt.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -23,9 +23,10 @@ Projektgrundlage, Graybox-Karte, Spielerbewegung, E-Interaktion und die vollstä
 - **ITEM-001:** Sumpfminze einmalig sammeln, Inventarbestand führen und im HUD anzeigen.
 - **LOOP-001:** Trockengestell wandelt genau eine frische Sumpfminze pro E in getrocknete Minze um.
 - **LOOP-002:** Braukessel verbraucht eine getrocknete Minze und stellt mit unbegrenzt verfügbarem Wasser einen Beruhigungstee her.
+- **QUEST-001:** Fenja nimmt den Auftrag an, verbraucht bei der Abgabe genau einen Beruhigungstee und zeigt den Abschluss dauerhaft in der laufenden Partie.
 
 ### Als Nächstes
-QUEST-001 – Fenjas Bitte um Beruhigungstee annehmen, Tee abgeben und den Abschluss anzeigen. Featureplan vor Umsetzung erstellen.
+UX-001 – Kernablauf auf Verständlichkeit und hilfreiche Rückmeldungen prüfen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -36,7 +37,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - Finale Pixelart wird erst nach Sichtung eines Spielbild-Mockups produziert.
 
 ### Technische Schulden
-- Bewegung und Testkarte sind provisorisch gezeichnet; finaler Grafikstil, Sammel- und Auftragslogik fehlen noch.
+- Bewegung und Testkarte sind provisorisch gezeichnet; finaler Grafikstil sowie weitere Pflanzen, Rezepte und Aufträge fehlen noch.
 - Echte Tastatureingabe und Kameragefühl wurden noch nicht im sichtbaren Godot-Fenster geprüft.
 - Exportvorlagen und Exportprofile werden erst für einen konkreten Build-Zielpunkt ergänzt.
 
@@ -51,7 +52,9 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - LOOP-001-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden; Sichtprüfung von Station und HUD steht noch aus.
 - LOOP-002-Headless-Test prüft Sammeln, Trocknen, Brauen, Mengenverbrauch, Tee-HUD und Ablehnung ohne Zutat; LOOP-001-, ITEM-001- und CORE-002-Regressionsläufe bestanden.
 - LOOP-002-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden; Sichtprüfung des Braukessels und HUD steht noch aus.
-- Sichtbare Tastatur- und Bewegungskontrolle ist noch offen.
+- QUEST-001-Headless-Test prüft Fenjas Bitte, HUD-Status, fehlenden Tee, Abgabe von genau einem Beruhigungstee, wiederholte Interaktion sowie gültige und ungültige `remove_item`-Aufrufe.
+- QUEST-001-Headless-Test, alle bisherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- Sichtprüfung von Fenja, Quest-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen.
 
 ### Sicherheitsstatus
 Kleines lokales Einzelspielerprojekt ohne Konto, Netzwerkdienst oder personenbezogene Nutzerdaten. Für spätere Spielstände gilt: nur benötigte Daten in user:// speichern und geladene Werte validieren. Fremde Add-ons und Assets vor Übernahme prüfen; Zugangsdaten gehören nicht ins Repository.
@@ -90,7 +93,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 1. Bewegung und Welt | Graue Testkarte, Figur, Kamera und Kollisionen | Figur bewegt sich sicher durch die Testkarte |
 | 2. Sammeln und Inventar | Eine Pflanze, Interaktion und Mengenanzeige | Sumpfminze wird aufgenommen und sichtbar gezählt |
 | 3. Erste Herstellung | Trockengestell und ein Rezept im Braukessel | Tee entsteht aus korrekt verbrauchten Zutaten |
-| 4. Erster Auftrag | Fenjas Bitte, Annahme, Abgabe und Belohnung | Auftrag ohne Neustart der Anwendung abschließbar |
+| 4. Erster Auftrag | Fenjas Bitte, Annahme, Abgabe und Abschluss | Auftrag ohne Neustart der Anwendung abschließbar |
 | 5. Lesbarkeit und Stil | Rückmeldungen und erste zusammenhängende Pixelgrafiken | Neue Spielende verstehen den Ablauf ohne externe Erklärung |
 | 6. Inhaltserweiterung | Weitere Pflanzen, Rezepte, Bewohner und Auftragsbrett | Erweiterte Inhalte nutzen getestete Systeme |
 | 7. Persistenz und Ausbau | Spielstand, weitere Bereiche; Jahreszeiten/Automatisierung erneut prüfen | Spielstand zuverlässig schreiben und laden |
@@ -106,7 +109,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | ITEM-001 | Sumpfminze aufnehmen und Inventarbestand anzeigen | P1 | CORE-002 | DONE |
 | LOOP-001 | Minze am Trockengestell verarbeiten | P1 | ITEM-001 | DONE |
 | LOOP-002 | Getrocknete Minze und Wasser zu Beruhigungstee verarbeiten | P1 | LOOP-001 | DONE |
-| QUEST-001 | Fenjas Bitte annehmen, Tee abgeben und Abschluss anzeigen | P1 | LOOP-002 | PLANNED |
+| QUEST-001 | Fenjas Bitte annehmen, Tee abgeben und Abschluss anzeigen | P1 | LOOP-002 | DONE |
 | UX-001 | Kernablauf auf Lesbarkeit prüfen und Rückmeldungen ergänzen | P2 | QUEST-001 | PLANNED |
 | CONTENT-001 | Schilfwurzel, Nachtmoos, zwei weitere Rezepte, Marten, Lene und Auftragsbrett | P2 | UX-001 | PLANNED |
 | SAVE-001 | Position, Inventar und Questfortschritt speichern und laden | P2 | QUEST-001 | PLANNED |
@@ -147,6 +150,16 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Ein Headless-Test prüft die Kette Sammeln → Trocknen → Brauen, den HUD-Zähler und den Versuch ohne Zutat.
 - LOOP-001-, ITEM-001- und CORE-002-Regressionstests, Editorimport und 60-Frame-Laufzeittest bestehen.
 - Sichtprüfung von Braukessel, Interaktionshinweis und Inventarzählern wird durchgeführt oder als offen dokumentiert.
+
+### QUEST-001 Abnahmekriterien – erledigt
+- Fenja nimmt per E die Bitte um einen Beruhigungstee an und die HUD zeigt das aktive Ziel.
+- Ohne Tee bleibt die Bitte aktiv und Fenja erklärt freundlich, was noch fehlt.
+- Die Abgabe verbraucht genau einen Tee, markiert die Bitte als erfüllt und zeigt den Abschluss dauerhaft in dieser Partie.
+- Wiederholtes Ansprechen nach Abschluss verändert weder Queststatus noch Inventar.
+- Inventarentnahmen lehnen leere IDs, ungültige Mengen und unzureichenden Bestand ab, ohne den Bestand zu verändern.
+- Headless-Test deckt den gesamten Questablauf und `remove_item`-Grenzfälle ab; frühere Schleifen bestehen als Regressionen.
+- Queststatus wird in diesem Backlogpunkt nicht gespeichert; Belohnungen, weitere Bewohner und finale Fenja-Grafik bleiben späteren Punkten vorbehalten.
+- Godot-Editorimport und 60-Frame-Laufzeittest bestehen; manuelle Sichtprüfung im Godot-Fenster ist separat als offen dokumentiert.
 
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
@@ -192,3 +205,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | ITEM-001: Sumpfminze-Sammelstelle, einmalige Aufnahme, Inventar und HUD-Zähler ergänzt; Headless-Prüfungen bestanden. |
 | 30.09.2026 | LOOP-001: Trockengestell, atomare 1:1-Inventarverarbeitung und zweiter HUD-Zähler ergänzt; Headless-, Import- und Laufzeitprüfungen bestanden. |
 | 30.09.2026 | LOOP-002: Braukessel, Beruhigungstee und vollständige Sumpfminze-zu-Tee-Schleife ergänzt; Headless-, Import- und Laufzeitprüfungen bestanden. |
+| 30.09.2026 | QUEST-001: Fenjas Auftrag, Laufzeitstatus, Teeabgabe und Abschluss-HUD ergänzt; Feature- und Regressionstests bestanden. |

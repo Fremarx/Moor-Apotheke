@@ -52,6 +52,16 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: Godot-4.7.2-Headless-Editorimport und 60-Frame-Startlauf ohne Parser- oder Laufzeitfehler.
 - Offen: Sichtprüfung von Braukessel, Interaktionshinweis und Inventarzählern im Godot-Fenster.
 
+## QUEST-001 – Fenjas Beruhigungstee-Auftrag
+- `tests/quest_001_fenja_quest_test.gd` prüft Annahme, aktive HUD-Aufgabe, Reaktion ohne Tee, Abgabe genau eines Tees aus einem Bestand von zwei, dauerhafte Abschlussanzeige, aktualisierte NPC-Hinweise und wiederholte Interaktion ohne weiteren Verbrauch.
+- Derselbe Test prüft `Inventory.remove_item` bei fehlendem Gegenstand, unzureichendem Bestand, leerer ID und ungültiger Menge sowie erfolgreiche Entnahme und aktualisierten HUD-Bestand.
+- Prüfbefehl: `godot --headless --path . --script tests/quest_001_fenja_quest_test.gd`
+- RED: Vor der Implementierung fehlten Fenja, FenjaQuest und QuestStatus; der ausgeführte Test meldete diese drei erwarteten fehlenden Knoten.
+- GREEN: `QUEST-001 Fenja quest checks passed.` nach Ergänzung von Quest, Inventarentnahme und HUD.
+- Erledigt: QUEST-001-, LOOP-002-, LOOP-001-, ITEM-001- und CORE-002-Headless-Tests, Godot-4.7.2-Headless-Editorimport und 60-Frame-Startszene ohne Parser- oder Laufzeitfehler.
+- Offen: Sichtprüfung von Fenjas Platzhalterfigur, Queststatus-HUD und realer Tastaturinteraktion im Godot-Fenster.
+- Kein GDScript-Coverage-Werkzeug ist im Projekt eingerichtet; daher wird keine Coverage-Prozentzahl ausgewiesen.
+
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.
