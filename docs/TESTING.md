@@ -80,6 +80,15 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: alle sieben Headless-Tests, darunter CONTENT-001a und die sechs bisherigen Regressionstests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf.
 - Offen: Sichtprüfung der neuen Pixelzeichnung und zusätzlichen Inventarzeile im Godot-Fenster.
 
+## LOOP-003 – Schilfwurzel trocknen
+- `tests/loop_003_reed_root_drying_test.gd` prüft den Startbestand, fehlende Zutaten, den Weg vom Pickup zur Station, Verarbeitung genau einer Wurzel pro E-Druck, getrennte Frisch-/Trockenbestände und Rückmeldungen für beide Pflanzen.
+- Der Test prüft außerdem die bestehende Sumpfminze-Priorität, unabhängige HUD-Zähler, Wiederholungsverarbeitung und Ablehnung ohne Vorrat.
+- RED: Vor der Implementierung fehlte der HUD-Zähler `DriedReedRootCount`.
+- GREEN: `LOOP-003 reed-root drying checks passed.` nach der Implementierung.
+- Prüfbefehl: `godot --headless --path . --script res://tests/loop_003_reed_root_drying_test.gd`.
+- Erledigt: alle acht Headless-Tests (LOOP-003 und sieben Regressionen), Godot-4.7.2-Editorimport und 60-Frame-Startlauf.
+- Offen: Sichtprüfung der erweiterten HUD-Zeilen im Godot-Fenster.
+
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.

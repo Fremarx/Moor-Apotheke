@@ -16,11 +16,15 @@ func interact() -> String:
 	if not is_instance_valid(_inventory):
 		return "Das Trockengestell ist gerade nicht erreichbar."
 
-	var processed := bool(_inventory.call("transfer_item", "sump_mint", "dried_sump_mint", 1))
-	if not processed:
-		return "Du brauchst eine frische Sumpfminze zum Trocknen."
+	var mint_processed := bool(_inventory.call("transfer_item", "sump_mint", "dried_sump_mint", 1))
+	if mint_processed:
+		return "Die Sumpfminze ist getrocknet."
 
-	return "Die Sumpfminze ist getrocknet."
+	var reed_root_processed := bool(_inventory.call("transfer_item", "reed_root", "dried_reed_root", 1))
+	if reed_root_processed:
+		return "Die Schilfwurzel ist getrocknet."
+
+	return "Du brauchst frische Sumpfminze oder eine frische Schilfwurzel zum Trocknen."
 
 
 func _draw() -> void:

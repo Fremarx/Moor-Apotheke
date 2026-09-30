@@ -6,6 +6,7 @@ extends Node2D
 @onready var _inventory_count: Label = $HUD/InventoryCount
 @onready var _reed_root_count: Label = $HUD/ReedRootCount
 @onready var _dried_mint_count: Label = $HUD/DriedMintCount
+@onready var _dried_reed_root_count: Label = $HUD/DriedReedRootCount
 @onready var _tea_count: Label = $HUD/TeaCount
 @onready var _quest_status: Label = $HUD/QuestStatus
 @onready var _interaction_prompt: Label = $HUD/InteractionPrompt
@@ -57,6 +58,8 @@ func _on_item_count_changed(item_id: String, amount: int) -> void:
 		_reed_root_count.text = "Schilfwurzel: %d" % amount
 	elif item_id == "dried_sump_mint":
 		_dried_mint_count.text = "Getrocknete Minze: %d" % amount
+	elif item_id == "dried_reed_root":
+		_dried_reed_root_count.text = "Getrocknete Schilfwurzel: %d" % amount
 	elif item_id == "calming_tea":
 		_tea_count.text = "Beruhigungstee: %d" % amount
 
