@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_controller"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player_directions_ai_20261001.png" id="2_directions"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
 size = Vector2(10, 8)
@@ -13,6 +14,12 @@ motion_mode = 1
 collision_layer = 1
 collision_mask = 1
 script = ExtResource("1_controller")
+
+[node name="Visual" type="Sprite2D" parent="."]
+texture = ExtResource("2_directions")
+hframes = 2
+vframes = 2
+scale = Vector2(0.07, 0.07)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

@@ -40,6 +40,7 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 | [Saving Games](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html) | 4.7, 30.09.2026 | Persistenz und user:// | Offizielle Engine-Doku; SAVE-001 |
 | [JSON class reference](https://docs.godotengine.org/en/4.7/classes/class_json.html) | 4.7, 01.10.2026 | JSON.parse(), Fehlerbehandlung und validiertes Variant-Ergebnis | Offizielle Engine-Doku; SAVE-001 |
 | [InputEventKey class reference](https://docs.godotengine.org/en/4.7/classes/class_inputeventkey.html) | 4.7, 01.10.2026 | Physische Tastaturbelegungen für F5 und F9 in der Input Map | Offizielle Engine-Doku; SAVE-001 |
+| [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html) | 4.7, 01.10.2026 | 2 × 2-Spieleratlas mit hframes, vframes und frame_coords darstellen | Offizielle Engine-Doku; VIS-002 |
 
 
 ## Abrufnotizen
@@ -66,6 +67,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 - 01.10.2026 – SAVE-001: Die Saving-Games-Anleitung empfiehlt für kleine Spielstände ein einfaches serialisierbares Format und `user://`; Vector2 wird als x/y gespeichert. `JSON.parse()` liefert einen prüfbaren Fehlercode und Variant-Daten, daher werden Typen und erlaubte Werte vollständig geprüft, bevor Laufzeitobjekte geändert werden. Eingaben bleiben benannte Aktionen; F5/F9 sind in der Input Map physisch gebunden. Quellen: [Saving Games](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html), [JSON class reference](https://docs.godotengine.org/en/4.7/classes/class_json.html), [Input Examples](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) und [InputEventKey class reference](https://docs.godotengine.org/en/4.7/classes/class_inputeventkey.html).
 
 - **01.10.2026 – VIS-001:** Die Godot-4.7-CanvasItem-Referenz bestätigt, dass draw_texture_rect_region ein Quellrechteck einer Textur in ein Zielrechteck im lokalen Raum zeichnet. Das bestehende Node2D-Kartenskript nutzt es für transparente Atlaszellen; Quellrechtecke teilen die tatsächliche Texturgröße durch vier, damit auch der 1261 × 1247 Pixel große Atlas korrekt zugeschnitten wird. Die Pixelgrafik erbt die im Projekt gesetzte Nearest-Filterung. Quelle: [CanvasItem class reference](https://docs.godotengine.org/en/4.7/classes/class_canvasitem.html).
+
+- **01.10.2026 – VIS-002:** Die Godot-4.7-Sprite2D-Referenz beschreibt hframes und vframes als Spalten- und Zeilenanzahl eines Sprite-Sheets; frame_coords wählt eine Zelle, sobald mindestens eine Frame-Achse größer als eins ist. Der Spieler verwendet diese eingebaute Zellauswahl für vier getrennte Ansichten und behält im Skript die letzte Richtung im Leerlauf. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).
 
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.

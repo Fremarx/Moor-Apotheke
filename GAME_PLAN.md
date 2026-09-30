@@ -211,8 +211,8 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - **Schwerpunkt:** Für den Anfang ist eine Mischung aus Erkunden, Aufträgen und einfacher Verarbeitung vorgesehen; Automatisierung kommt später.
 - **Spieltempo:** Der erste Ausschnitt bleibt ohne Zeitdruck. Jahreszeiten können später die Fundorte und Rezepte verändern.
 - **Geschichte und Ton:** Noch offen; Vorschlag ist märchenhaft und gemütlich, mit etwas geheimnisvoller Moorstimmung.
-- **Nächster Ausbau:** VIS-001 hat den ersten Kartenausschnitt im warmen Abendmoor-Stil gestaltet. Als Nächstes wird der abgestimmte Spielerentwurf mit Tasche und Minze in die vier Laufrichtungen integriert; weitere Moorgebiete, Jahreszeiten und Automatisierung werden später bewertet.
+- **Nächster Ausbau:** VIS-001 hat den ersten Kartenausschnitt im warmen Abendmoor-Stil gestaltet. VIS-002 integriert den abgestimmten Spielerentwurf als vier Richtungsansichten. Als Nächstes werden Arbeitsstationen, Bewohner und Sammelstellen visuell an die neue Moor-Pixelart angepasst; weitere Moorgebiete, Jahreszeiten und Automatisierung folgen später.
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-VIS-001 gestaltet die bestehende 640 × 360-Testkarte mit warmen Moosflächen, Teichufer, Torfweg und einem transparenten 4 × 4-Dekorationsatlas. Die Hauptszene wurde bei 480 × 270 sichtbar geprüft; Spiellogik und Kollisionsflächen blieben unverändert. Als Nächstes folgt VIS-002 und übernimmt den abgestimmten Spielerentwurf mit Tasche und Minze als Vier-Wege-Spielfigur.
+VIS-001 gestaltet die bestehende 640 × 360-Testkarte mit warmen Moosflächen, Teichufer, Torfweg und einem transparenten 4 × 4-Dekorationsatlas. VIS-002 integriert den Spielerentwurf mit vier Richtungsansichten; Tasche und Minze bleiben perspektivisch an derselben anatomischen Seite. Die Hauptszene wurde bei 480 × 270 geprüft, die Spiellogik und Kollisionsflächen blieben unverändert.

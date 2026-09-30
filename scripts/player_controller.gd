@@ -3,18 +3,37 @@ extends CharacterBody2D
 signal interaction_hint_changed(prompt_text: String)
 signal interaction_completed(feedback_text: String)
 
+const FACING_FRONT := Vector2i(0, 0)
+const FACING_LEFT := Vector2i(1, 0)
+const FACING_BACK := Vector2i(0, 1)
+const FACING_RIGHT := Vector2i(1, 1)
+
 @export var move_speed: float = 82.0
 
 @onready var _interaction_area: Area2D = $InteractionArea
+@onready var _visual_sprite: Sprite2D = $Visual
 
 var _current_interactable: Area2D
 
 
 func _physics_process(_delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	_update_facing(direction)
 	velocity = direction * move_speed
 	move_and_slide()
 	_refresh_interactable_target()
+
+
+func _update_facing(direction: Vector2) -> void:
+	if direction.is_zero_approx():
+		return
+
+	if absf(direction.x) > absf(direction.y):
+		_visual_sprite.frame_coords = FACING_RIGHT if direction.x > 0.0 else FACING_LEFT
+	elif direction.y > 0.0:
+		_visual_sprite.frame_coords = FACING_FRONT
+	else:
+		_visual_sprite.frame_coords = FACING_BACK
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -72,15 +91,3 @@ func _is_interactable(area: Area2D) -> bool:
 		and area.has_method("get_prompt_text")
 		and area.has_method("interact")
 	)
-
-
-func _draw() -> void:
-	# Simple block shapes keep the graybox readable before sprite art exists.
-	draw_rect(Rect2(Vector2(-6, 7), Vector2(12, 3)), Color("26382d"))
-	draw_rect(Rect2(Vector2(-7, -4), Vector2(14, 12)), Color("49382f"))
-	draw_rect(Rect2(Vector2(-6, -5), Vector2(12, 11)), Color("c47742"))
-	draw_rect(Rect2(Vector2(-5, -11), Vector2(10, 8)), Color("d8b58b"))
-	draw_rect(Rect2(Vector2(-6, -13), Vector2(12, 4)), Color("334638"))
-	draw_rect(Rect2(Vector2(-4, -15), Vector2(8, 3)), Color("455c40"))
-	draw_rect(Rect2(Vector2(-3, -8), Vector2(2, 2)), Color("352f2a"))
-	draw_rect(Rect2(Vector2(1, -8), Vector2(2, 2)), Color("352f2a"))

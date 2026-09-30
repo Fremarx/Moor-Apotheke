@@ -172,6 +172,12 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Codeprüfung: Die vorhandenen Kartengrenzen- und Hindernis-Kollisionsrechtecke sowie Interaktionskoordinaten wurden nicht verändert.
 - Noch offen: WASD-/Pfeiltastenbewegung und Kollisionen im laufenden Fenster manuell durchspielen. Der gerenderte Standbild-Check bestätigt keine Eingabe oder subjektiven Spielspaß.
 
+## VIS-002 – Spieler-Richtungen
+
+- Erledigt: tests/vis_002_player_facing_test.gd prüft das geladene 2 × 2-Atlas, Front-, Rücken-, linkes und rechtes Profil, die Richtung nach Eingabe, das Beibehalten im Leerlauf sowie die vertikale Priorität bei Diagonalgleichstand.
+- Erledigt: alle 18 Tests, Godot-4.7.2-Editorimport, 60-Frame-Startlauf und ein gerenderter Hauptszenen-Check bei 480 × 270 bestanden.
+- Codeprüfung: Spieler-Kollisionsform, Interaktionsbereich, Bewegungsgeschwindigkeit und Zielauswahl blieben unverändert.
+- Noch offen: WASD/Pfeiltasten im laufenden Fenster mit echter Eingabe manuell prüfen.
 ## Automatisierung und CI
 
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.

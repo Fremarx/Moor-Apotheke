@@ -8,13 +8,13 @@ Stand: 01.10.2026
 Phase 7 – Persistenz und Ausbau
 
 ### Zuletzt bearbeiteter Task
-VIS-001 – Die Moor-Testkarte in einer warmen Pixelart-Richtung gestalten und integrieren.
+VIS-002 – Den abgestimmten Spielerentwurf als vier Richtungsansichten integrieren.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE.
 
 ### Fortschritt
-Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. Spiellogik und Kollisionsflächen blieben erhalten.
+Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -38,9 +38,10 @@ Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanze
 - **SAVE-001:** Versionierte JSON-Spielstände in `user://` speichern und laden Position, Inventar, Queststatus und abgeerntete Pflanzen.
 - **EXP-001:** Nach Funktions- und Nutzerfeedback den visuellen Ausbau vor neuen Gebieten, Jahreszeiten und Automatisierung einordnen.
 - **VIS-001:** Die bestehende Testkarte mit warmen Bodenfarben, Teichufer, Torfweg und pixeligen Moorpflanzen sichtbar ausgestalten.
+- **VIS-002:** Den abgestimmten Spielerentwurf als vier Richtungsansichten integrieren und die anatomisch feste Taschen- und Minzplatzierung bewahren.
 
 ### Als Nächstes
-VIS-002 – Den abgestimmten Spielerentwurf mit Tasche und Minze als 4-Wege-Spielfigur integrieren.
+VIS-002 – Den abgestimmten Spielerentwurf als vier Richtungsansichten integrieren.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -151,7 +152,8 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | SAVE-001 | Position, Inventar, Questfortschritt und abgeerntete Pflanzen speichern und laden | P2 | CORE-001, ITEM-001, QUEST-003, ECON-001 | DONE |
 | EXP-001 | Ausbau nach Teststand und Nutzerfeedback neu priorisieren | P3 | CONTENT-001, SAVE-001 | DONE |
 | VIS-001 | Die Moor-Testkarte in einer zusammenhängenden Pixelart-Richtung gestalten und integrieren | P1 | EXP-001, SAVE-001 | DONE |
-| VIS-002 | Den abgestimmten Spielerentwurf mit Tasche und Minze als 4-Wege-Spielfigur integrieren | P1 | VIS-001 | PLANNED |
+| VIS-002 | Den abgestimmten Spielerentwurf mit Tasche und Minze als 4-Wege-Spielfigur integrieren | P1 | VIS-001 | DONE |
+| VIS-003 | Arbeitsstationen, Bewohner und Sammelstellen visuell an die neue Moor-Pixelart anpassen | P1 | VIS-002 | PLANNED |
 | REL-001 | Exportziel wählen, Exportvorlagen einrichten, Release-Checkliste ergänzen | P3 | stabile Kernschleife | PLANNED |
 
 ### CORE-002 Abnahmekriterien
@@ -317,6 +319,15 @@ Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten wede
 - Die tatsächliche Hauptszene wurde in Godot 4.7.2 bei 480 × 270 sichtbar gerendert und geprüft.
 - Godot-Editorimport, alle 17 vorhandenen Spiellogiktests und der 60-Frame-Startlauf bestehen.
 - Noch offen bleibt der Tastaturtest mit Bewegung und Kollision im laufenden Fenster sowie die subjektive Stilrückmeldung.
+### VIS-002 Abnahmekriterien – erledigt
+- Der Spieler verwendet vier getrennte, freigegebene Ansichten: vorne, hinten, Profil nach links und Profil nach rechts.
+- Die Richtung folgt der letzten Bewegungsrichtung; bei diagonaler Eingabe gewinnt die stärkere Achse, bei Gleichstand die vertikale. Im Leerlauf bleibt die letzte Ansicht stehen.
+- Die Tasche bleibt anatomisch links befestigt: im Frontbild auf der Betrachter-rechten Seite, in der Rückenansicht auf der Betrachter-linken Seite. In Profilen verdeckt der Körper die Tasche, wenn dieselbe Seite nicht sichtbar ist.
+- Das Minzblatt wächst aus der Taschenöffnung, erscheint vorne und in der linken Profilansicht und bleibt in der Rücken- und rechten Profilansicht verdeckt.
+- Bewegungs-, Kollisions- und Interaktionsflächen bleiben unverändert.
+- Die transparente 2 × 2-Grafik und der vollständige Prompt stehen in docs/ART_ASSETS.md; die Figur wurde in der Hauptszene bei 480 × 270 geprüft.
+- Godot-Import, alle 18 Spiellogik- und Richtungsprüfungen und der 60-Frame-Startlauf bestehen.
+- Noch offen bleibt die manuelle Steuerung mit echter Tastatur im laufenden Fenster.
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -376,3 +387,4 @@ Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten wede
 | 01.10.2026 | SAVE-001: versionierter JSON-Spielstand mit F5/F9, automatischem Laden, Positions-, Inventar-, Quest- und Pickup-Persistenz ergänzt; ungültige Spielstände werden vor Anwendung verworfen. Featuretest rot/grün; alle 17 Headless-Tests, Editorimport und 60-Frame-Startlauf bestanden. |
 | 01.10.2026 | EXP-001: visuellen Ausbau vor neuen Gebieten, Jahreszeiten und Automatisierung priorisiert; VIS-001 gestaltet zuerst ein spielbares Moorsegment und beinhaltet die noch offene sichtbare Spielprüfung. |
 | 01.10.2026 | VIS-001: warmes Moorsegment mit strukturierterem Boden, Torfweg, Teichufer und transparentem 4 × 4-Dekorationsatlas integriert; alle 17 vorhandenen Tests, Editorimport, 60-Frame-Start und gerenderte Hauptszene geprüft. |
+| 01.10.2026 | VIS-002: Spielerentwurf als transparenten 2 × 2-Richtungsatlas integriert; Tasche und Minzblatt perspektivisch konsistent; 18 Tests, Editorimport, 60-Frame-Start und Spielbild geprüft. |
