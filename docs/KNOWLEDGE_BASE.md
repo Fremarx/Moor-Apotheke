@@ -28,12 +28,15 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 | [Input Examples](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) | 4.7, 30.09.2026 | Input Map und Aktionen | Offizielle Engine-Doku; CORE-001/CORE-002 |
 | [Using Area2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) | 4.7, 30.09.2026 | Überlappung und Reichweitenerkennung mit Area2D | Offizielle Engine-Doku; CORE-002 |
 | [Node class reference](https://docs.godotengine.org/en/4.7/classes/class_node.html) | 4.7, 30.09.2026 | Weitergabe von Gameplay-Eingaben über _unhandled_input() | Offizielle Engine-Doku; CORE-002 |
+| [Signal class reference](https://docs.godotengine.org/en/4.7/classes/class_signal.html) | 4.7, 30.09.2026 | Lose gekoppelte Benachrichtigung von Inventory über gesammelte Gegenstände | Offizielle Engine-Doku; ITEM-001 |
+| [GDScript reference](https://docs.godotengine.org/en/4.7/tutorials/scripting/gdscript/gdscript_basics.html) | 4.7, 30.09.2026 | Ableitung spezialisierter Spielobjekte aus dem Interaktionsskript | Offizielle Engine-Doku; ITEM-001 |
 | [Resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html) | 4.7, 30.09.2026 | Datencontainer und Rezeptdaten | Offizielle Engine-Doku; LOOP-002/CONTENT-001 |
 | [Saving Games](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html) | 4.7, 30.09.2026 | Persistenz und user:// | Offizielle Engine-Doku; SAVE-001 |
 
 ## Abrufnotizen
 - **30.09.2026 – CORE-001:** 2D-Bewegung: `CharacterBody2D` mit `Input.get_vector()` für normalisierte Richtungssteuerung; CharacterBody2D: Bewegung in `_physics_process()` mit `move_and_slide()`, für Top-down-Bewegung `MOTION_MODE_FLOATING`; Input-Beispiele: benannte Aktionen in der Project Input Map statt Tastencodes im Bewegungs-Skript.
 - **30.09.2026 – CORE-002:** Area2D definiert einen Überlappungsbereich; der Player fragt darin interaktive Ziele ab und wählt das nächste. Die benannte Aktion interact wird in _unhandled_input() verarbeitet, damit GUI-Elemente Eingaben zuerst behandeln können.
+- **30.09.2026 – ITEM-001:** Area2D wird als nicht blockierender Sammelbereich verwendet und nach Aufnahme deaktiviert. Das Pickup-Skript leitet sich über `extends` vom Interaktionsskript ab und meldet `item_id` sowie Anzahl per Signal an Inventory.
 
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.

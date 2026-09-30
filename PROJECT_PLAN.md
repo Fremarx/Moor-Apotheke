@@ -5,24 +5,25 @@ Stand: 30.09.2026
 ## Project Status
 
 ### Aktuelle Phase
-Phase 2 – Sammeln und Inventar
+Phase 3 – Erste Herstellung
 
 ### Zuletzt bearbeiteter Task
-CORE-002 – Interaktionsbereich, E-Taste und Hinweis für das nächste Objekt.
+ITEM-001 – Sumpfminze aufnehmen und Inventarbestand anzeigen.
 
 ### Status
-CORE-002 DONE; ITEM-001 PLANNED.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 PLANNED.
 
 ### Fortschritt
-Projektgrundlage, Graybox-Karte, Spielerbewegung und generische E-Interaktion mit HUD-Hinweis sind umgesetzt. Als Nächstes folgen Sammeln und Inventar.
+Projektgrundlage, Graybox-Karte, Spielerbewegung, E-Interaktion sowie einmaliges Sammeln der Sumpfminze mit sichtbarem Inventarbestand sind umgesetzt.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
 - **CORE-001:** Graybox-Testkarte, Platzhalterfigur, Kamera und Bewegung.
 - **CORE-002:** Interaktionsbereich, E-Taste, nächstes Ziel, HUD-Rückmeldung und graue Kräuterprobe.
+- **ITEM-001:** Sumpfminze einmalig sammeln, Inventarbestand führen und im HUD anzeigen.
 
 ### Als Nächstes
-ITEM-001 beginnen: Sumpfminze aufnehmen und den Bestand sichtbar anzeigen.
+LOOP-001 beginnen: Sumpfminze am Trockengestell verarbeiten.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -43,6 +44,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - Die Graybox-Startszene hat den Headless-Editorimport und einen 60-Frame-Laufzeit-Smoke-Check bestanden.
 - Ein temporärer Headless-Check hat aktive Kamera, vier Richtungen, Hindernis und Kartenbegrenzung geprüft.
 - CORE-002-Headless-Test prüft E-Aktion, Reichweite, nächste Auswahl, Rückmeldung, Verlassen der Reichweite und fortbestehende Bewegung.
+- ITEM-001-Headless-Test prüft Startbestand, E-Aufnahme in Reichweite, Sammelhinweis, HUD-Bestätigung, Ausblenden, Einmaligkeit und Ablehnung ungültiger Bestandserhöhungen.
 - Sichtbare Tastatur- und Bewegungskontrolle ist noch offen.
 
 ### Sicherheitsstatus
@@ -95,7 +97,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | BOOT-001 | Projekt und Prozess analysieren; Roadmap, Architekturrahmen und Wissensquellen dokumentieren | P0 | – | DONE |
 | CORE-001 | Graybox-Testkarte, Platzhalterfigur, Kamera und Bewegung in vier Richtungen | P1 | BOOT-001 | DONE |
 | CORE-002 | Interaktionsbereich, Taste E und Hinweis für das nächste Objekt | P1 | CORE-001 | DONE |
-| ITEM-001 | Sumpfminze aufnehmen und Inventarbestand anzeigen | P1 | CORE-002 | PLANNED |
+| ITEM-001 | Sumpfminze aufnehmen und Inventarbestand anzeigen | P1 | CORE-002 | DONE |
 | LOOP-001 | Minze am Trockengestell verarbeiten | P1 | ITEM-001 | PLANNED |
 | LOOP-002 | Getrocknete Minze und Wasser zu Beruhigungstee verarbeiten | P1 | LOOP-001 | PLANNED |
 | QUEST-001 | Fenjas Bitte annehmen, Tee abgeben und Abschluss anzeigen | P1 | LOOP-002 | PLANNED |
@@ -112,6 +114,16 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - E löst nur das ausgewählte Ziel aus; ohne Ziel bleibt die Eingabe wirkungslos.
 - Die graue Kräuterprobe liefert Bestätigungsfeedback; Sammeln und Inventar bleiben Teil von ITEM-001.
 - Der Headless-Test sowie Editorimport und 60-Frame-Smoke-Check laufen erfolgreich.
+
+### ITEM-001 Abnahmekriterien
+- Im Moor steht eine klar erkennbare, einmalig sammelbare Sumpfminze mit dem bestehenden Interaktionsbereich.
+- In Reichweite zeigt der Hinweis „[E] Sammeln: Sumpfminze“; außerhalb ist er verborgen.
+- Das HUD startet mit „Sumpfminze: 0“ und zeigt nach dem Sammeln „Sumpfminze: 1“.
+- Ein E-Knopfkontakt sammelt genau ein Exemplar; die Pflanze verschwindet und kann nicht erneut gesammelt werden.
+- Der Bestand wird in einer kleinen Inventarkomponente gehalten; die Pflanze meldet das Sammeln über ein Signal.
+- Ein Headless-Test deckt Startbestand, Aufnahme, HUD-Aktualisierung, Einmaligkeit und bestehende Interaktionsregressionen ab.
+- Editorimport und 60-Frame-Laufzeittest laufen erfolgreich; sichtbare HUD-/Grafikprüfung bleibt separat dokumentiert.
+
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -153,3 +165,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | GitHub-Ziel auf das eigenständige Repo Fremarx/Moor-Apotheke umgestellt. |
 | 30.09.2026 | Repository auf GitHub veröffentlicht; lokale Maschinenpfade aus der Entwicklungsdoku entfernt. |
 | 30.09.2026 | CORE-002: generische Interaktion, E-Taste, nächstes Ziel und HUD-Rückmeldung ergänzt; Headless-Prüfungen bestanden. |
+| 30.09.2026 | ITEM-001: Sumpfminze-Sammelstelle, einmalige Aufnahme, Inventar und HUD-Zähler ergänzt; Headless-Prüfungen bestanden. |

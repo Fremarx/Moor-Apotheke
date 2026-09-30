@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/world/test_map.tscn" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="3_main"]
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="4_inventory"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("3_main")
@@ -14,6 +15,9 @@ script = ExtResource("3_main")
 [node name="Player" parent="World" instance=ExtResource("2_player")]
 position = Vector2(320, 180)
 z_index = 10
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("4_inventory")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -28,6 +32,18 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 9
 text = "WASD/PFEILE: LAUFEN    E: INTERAGIEREN"
+
+[node name="InventoryCount" type="Label" parent="HUD"]
+offset_left = 10.0
+offset_top = 25.0
+offset_right = 180.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0.78, 0.87, 0.57, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.16, 0.13, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 9
+text = "Sumpfminze: 0"
 
 [node name="InteractionFeedback" type="Label" parent="HUD"]
 visible = false

@@ -14,11 +14,13 @@ Die Startszene stellt Graybox-Karte und Platzhalterfigur zusammen:
 ~~~text
 Main (Node2D, main.gd)
 ├── World (Node2D)
-│   ├── TestMap (Node2D, mit Interaktionsprobe)
+│   ├── TestMap (Node2D, Interaktionsprobe und Sumpfminze)
 │   └── Player (CharacterBody2D)
 │       ├── InteractionArea (Area2D)
 │       └── Camera2D
+├── Inventory (Node)
 └── HUD (CanvasLayer)
+    ├── InventoryCount
     ├── InteractionPrompt
     ├── InteractionFeedback
     └── FeedbackTimer
@@ -27,6 +29,8 @@ Main (Node2D, main.gd)
 `TestMap` zeichnet die provisorische Moorfläche und stellt Begrenzungen sowie einige blockierte Stellen bereit. `Player` liest die benannten Richtungsaktionen aus der Input Map, bewegt sich als `CharacterBody2D` und führt die Kamera mit Kartengrenzen. Die Figuren- und Kartengrafik besteht bis zur Grafikphase aus einfachen gezeichneten Farbblöcken.
 
 CORE-002 ergänzt eine wiederverwendbare Area2D-Interaktionsfläche am Player. Interaktive Ziele tragen die Gruppe `interactables` und stellen Hinweistext sowie `interact()` bereit. Der Player wählt das räumlich nächste Ziel und meldet Hinweis bzw. Ergebnis über Signale. Main verbindet diese Signale mit dem HUD; das Objekt führt seine eigene Aktion aus. Ein Autoload ist dafür nicht erforderlich.
+
+ITEM-001 ergänzt eine Sumpfminze-Area2D, die von `interactable.gd` erbt. Beim Einsammeln sendet sie `item_collected(item_id, amount)` und deaktiviert sich. Main verbindet die Sammelsignale mit dem lokalen `Inventory`-Node. Dieser verwaltet Mengen und sendet `item_count_changed`; Main aktualisiert damit `InventoryCount` im HUD. Das Inventar ist in diesem Slice flüchtiger Spielzustand und wird noch nicht gespeichert.
 
 Spätere eigenständige Szenen:
 - player/player.tscn: Bewegung, Kollision, Sprite/Animation und Kamera.
@@ -55,6 +59,7 @@ flowchart LR
   Player --> Interact[Interaktion in Reichweite]
   Interact --> Herb[Sumpfminze]
   Herb --> Inventory[Inventar]
+  Inventory --> HUD[Inventaranzeige]
   Inventory --> Rack[Trockengestell]
   Rack --> Cauldron[Braukessel]
   Cauldron --> Quest[Fenjas Auftrag]
@@ -83,10 +88,10 @@ Im ersten Slice wird der Auftrag direkt bei Fenja angenommen und abgegeben. Das 
 - Keine Konten oder Secrets; fremde Add-ons und Assets prüfen.
 
 ## Bekannte Einschränkungen
-- Noch keine Sammel-, Stations- oder Auftragslogik, Save-/Load-Logik, finale Pixelgrafik oder Exportprofile.
+- Noch keine Stations- oder Auftragslogik, Save-/Load-Logik, finale Pixelgrafik oder Exportprofile.
 - Das Spiel liegt eigenständig in `Fremarx/Moor-Apotheke`. Eine spätere Zusammenführung mit dem früher verwendeten 2DGame-Repo wäre eine eigene Migrationsentscheidung.
 
 ## Engine-Dokumentation
 Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Für CORE-001 wurden [2D-Bewegung](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html), [CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) und [Input-Beispiele](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) verwendet. Weitere Quellen betreffen Szenenorganisation, TileSets und Resources.
 
-Für CORE-002 wurden zusätzlich die versionierte [Area2D-Dokumentation](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) und die [Node-Klassenreferenz](https://docs.godotengine.org/en/4.7/classes/class_node.html) zur Overlap-Erkennung und Eingabeweitergabe herangezogen.
+Für CORE-002 wurden zusätzlich die versionierte [Area2D-Dokumentation](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) und die [Node-Klassenreferenz](https://docs.godotengine.org/en/4.7/classes/class_node.html) zur Overlap-Erkennung und Eingabeweitergabe herangezogen. ITEM-001 verwendet zudem die dokumentierte [Signal-API](https://docs.godotengine.org/en/4.7/classes/class_signal.html) und [GDScript-Vererbung](https://docs.godotengine.org/en/4.7/tutorials/scripting/gdscript/gdscript_basics.html).
