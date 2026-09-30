@@ -1,23 +1,23 @@
 # Entwicklung
 
 ## Voraussetzungen
-- Godot 4.7.2 Standard (GDScript), portable Anwendung unter C:\Desktop\Tools\Godot\4.7.2.
+- Godot 4.7.2 Standard (GDScript), lokal installiert.
 - Git ist bereits vorhanden.
 - Für den Start sind keine weiteren Laufzeitwerkzeuge nötig.
 
 ## Projekt öffnen
-Projektdatei: C:\Desktop\git\Moor-Apotheke\project.godot.
+Projektdatei: `project.godot` im Repository-Stammverzeichnis.
 
 Godot-Editor starten:
 
 ~~~powershell
-& 'C:\Desktop\Tools\Godot\4.7.2\Godot_v4.7.2-stable_win64.exe' --editor --path 'C:\Desktop\git\Moor-Apotheke'
+godot --editor --path .
 ~~~
 
 Projekt headless laden (Editor-/Importprüfung):
 
 ~~~powershell
-& 'C:\Desktop\Tools\Godot\4.7.2\Godot_v4.7.2-stable_win64.exe' --headless --editor --path 'C:\Desktop\git\Moor-Apotheke' --quit
+godot --headless --editor --path . --quit
 ~~~
 
 Der headless Editor-Aufruf wurde beim Einrichten der Projektgrundlage erfolgreich ausgeführt. Er ersetzt keinen visuellen Spieltest.
@@ -25,7 +25,7 @@ Der headless Editor-Aufruf wurde beim Einrichten der Projektgrundlage erfolgreic
 ## Repository und Arbeitseinheiten
 - Lokaler Entwicklungsbranch: codex/moor-apotheke.
 - GitHub-Remote `origin`: https://github.com/Fremarx/Moor-Apotheke.git.
-- Die Repository-Sichtbarkeit ist derzeit privat.
+- Das Repository ist öffentlich unter https://github.com/Fremarx/Moor-Apotheke erreichbar.
 - Ein Backlogpunkt enthält einen begrenzten Scope, passende Prüfungen und aktualisierte Dokumentation.
 - Nach Abschluss: Diff und Status prüfen, genau einen passenden Conventional Commit erstellen und denselben Branch pushen.
 - Keine Force-Pushes und keine Commits von .godot/, Export-Caches, privaten Einstellungen oder fremden Änderungen.

@@ -4,20 +4,20 @@ Ein gemütliches 2D-Pixelart-Spiel über eine Apotheke am Rand eines geheimnisvo
 
 ## Entwicklungsumgebung
 - Godot 4.7.2 Standard mit GDScript
-- Godot-Editor separat unter C:\Desktop\Tools\Godot\4.7.2
+- Godot 4.7.2 Editor lokal installiert
 - Projektdatei: project.godot
-- GitHub-Repo: [Fremarx/Moor-Apotheke](https://github.com/Fremarx/Moor-Apotheke) (privat)
+- GitHub-Repo: [Fremarx/Moor-Apotheke](https://github.com/Fremarx/Moor-Apotheke) (öffentlich)
 - Entwicklungsbranch: codex/moor-apotheke
 
 ## Öffnen
-Starte Godot_v4.7.2-stable_win64.exe und importiere C:\Desktop\git\Moor-Apotheke\project.godot.
+Öffne Godot 4.7.2 und importiere die Datei `project.godot` aus dem geklonten Repository.
 
 Der aktuelle Graybox-Prototyp startet in einer kleinen Moor-Testkarte. Die Figur bewegt sich mit **WASD** oder den **Pfeiltasten**; Grafik und Umgebung sind Platzhalter.
 
-Headless-Projektprüfung in PowerShell:
+Headless-Projektprüfung im Repository-Ordner (Passe den Godot-Aufruf an deine Installation an):
 
 ~~~powershell
-& 'C:\Desktop\Tools\Godot\4.7.2\Godot_v4.7.2-stable_win64.exe' --headless --editor --path 'C:\Desktop\git\Moor-Apotheke' --quit
+godot --headless --editor --path . --quit
 ~~~
 
 ## Projektunterlagen

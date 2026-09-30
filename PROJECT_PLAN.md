@@ -24,7 +24,7 @@ Projektgrundlage, Graybox-Karte, steuerbare Platzhalterfigur, Kamera und vier Ri
 CORE-002 beginnen: Interaktionsbereich, Taste E und Hinweis für das nächste Objekt.
 
 ### Blocker
-Keine technischen Blocker. Das Spiel liegt als eigenes privates Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung der Bewegung im Godot-Fenster steht noch aus.
+Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung der Bewegung im Godot-Fenster steht noch aus.
 
 ### Offene Entscheidungen
 - Zielplattformen über Windows-Entwicklung hinaus werden nach dem ersten spielbaren Prototyp festgelegt.
@@ -141,4 +141,5 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | --- | --- |
 | 30.09.2026 | Projektgrundlage und Roadmap angelegt; erster Slice auf eine Kräuter-zu-Auftrag-Schleife fokussiert. |
 | 30.09.2026 | CORE-001: Graybox-Moorfläche, Hindernisse, Spielerbewegung und Kamera ergänzt; Headless-Prüfung bestanden. |
-| 30.09.2026 | GitHub-Ziel auf das private, eigenständige Repo Fremarx/Moor-Apotheke umgestellt. |
+| 30.09.2026 | GitHub-Ziel auf das eigenständige Repo Fremarx/Moor-Apotheke umgestellt. |
+| 30.09.2026 | Repository auf GitHub veröffentlicht; lokale Maschinenpfade aus der Entwicklungsdoku entfernt. |
