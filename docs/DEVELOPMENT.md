@@ -24,8 +24,8 @@ Der headless Editor-Aufruf wurde beim Einrichten der Projektgrundlage erfolgreic
 
 ## Repository und Arbeitseinheiten
 - Lokaler Entwicklungsbranch: codex/moor-apotheke.
-- Remote: das vom Nutzer freigegebene Remote aus 2DGame.
-- main wird nicht direkt verändert.
+- GitHub-Remote `origin`: https://github.com/Fremarx/Moor-Apotheke.git.
+- Die Repository-Sichtbarkeit ist derzeit privat.
 - Ein Backlogpunkt enthält einen begrenzten Scope, passende Prüfungen und aktualisierte Dokumentation.
 - Nach Abschluss: Diff und Status prüfen, genau einen passenden Conventional Commit erstellen und denselben Branch pushen.
 - Keine Force-Pushes und keine Commits von .godot/, Export-Caches, privaten Einstellungen oder fremden Änderungen.

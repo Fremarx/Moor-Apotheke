@@ -6,7 +6,8 @@ Ein gemütliches 2D-Pixelart-Spiel über eine Apotheke am Rand eines geheimnisvo
 - Godot 4.7.2 Standard mit GDScript
 - Godot-Editor separat unter C:\Desktop\Tools\Godot\4.7.2
 - Projektdatei: project.godot
-- Git-Branch: codex/moor-apotheke auf dem vom Nutzer freigegebenen Remote
+- GitHub-Repo: [Fremarx/Moor-Apotheke](https://github.com/Fremarx/Moor-Apotheke) (privat)
+- Entwicklungsbranch: codex/moor-apotheke
 
 ## Öffnen
 Starte Godot_v4.7.2-stable_win64.exe und importiere C:\Desktop\git\Moor-Apotheke\project.godot.

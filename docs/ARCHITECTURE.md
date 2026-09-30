@@ -77,7 +77,7 @@ Im ersten Slice wird der Auftrag direkt bei Fenja angenommen und abgegeben. Das 
 
 ## Bekannte Einschränkungen
 - Noch keine Sammel-, Stations- oder Auftragslogik, Save-/Load-Logik, finale Pixelgrafik oder Exportprofile.
-- Das Projekt verwendet das vom Nutzer freigegebene 2DGame-Remote auf codex/moor-apotheke. Die Historie ist separat; PR-/Merge-Eignung ist vor einer späteren Zusammenführung zu prüfen.
+- Das Spiel liegt eigenständig in `Fremarx/Moor-Apotheke`. Eine spätere Zusammenführung mit dem früher verwendeten 2DGame-Repo wäre eine eigene Migrationsentscheidung.
 
 ## Engine-Dokumentation
 Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Für CORE-001 wurden [2D-Bewegung](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html), [CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) und [Input-Beispiele](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) verwendet. Weitere Quellen betreffen Szenenorganisation, TileSets und Resources.

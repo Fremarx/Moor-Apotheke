@@ -24,7 +24,7 @@ Projektgrundlage, Graybox-Karte, steuerbare Platzhalterfigur, Kamera und vier Ri
 CORE-002 beginnen: Interaktionsbereich, Taste E und Hinweis für das nächste Objekt.
 
 ### Blocker
-Keine technischen Blocker. Das Remote ist das vom Nutzer freigegebene 2DGame-Remote; gearbeitet und gepusht wird auf codex/moor-apotheke, getrennt von main. Die manuelle Sichtprüfung der Bewegung im Godot-Fenster steht noch aus.
+Keine technischen Blocker. Das Spiel liegt als eigenes privates Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung der Bewegung im Godot-Fenster steht noch aus.
 
 ### Offene Entscheidungen
 - Zielplattformen über Windows-Entwicklung hinaus werden nach dem ersten spielbaren Prototyp festgelegt.
@@ -127,7 +127,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | Uneinheitliche KI-Bilder | Kachel- und Figurenstil passt nicht zusammen | Stilreferenz fixieren; Assets im echten Spielmaßstab prüfen |
 | Zu frühe Automatisierung | Komplexität ohne validierten Spielspaß | Nach UX-001 neu bewerten |
 | Veraltete Godot-Hinweise | API-/Editoranweisungen passen nicht zur Version | Versionierte /en/4.7/-Dokumentation verwenden |
-| Gemeinsames 2DGame-Remote | Branch könnte mit main verwechselt werden | Separater Branch codex/moor-apotheke; nie direkt nach main pushen |
+| Eigenständiges Spielrepo | Spätere Zusammenführung mit anderen Repos braucht eine Migration | Moor-Apotheke als eigenes Projekt weiterentwickeln |
 | Ungenaue generierte Pixelgrafik | Raster, Transparenz oder Kachelanschluss passen nicht | PNGs im Spiel prüfen und gezielt nacharbeiten |
 
 ## Skills, Agents und Wissensquellen
@@ -141,3 +141,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | --- | --- |
 | 30.09.2026 | Projektgrundlage und Roadmap angelegt; erster Slice auf eine Kräuter-zu-Auftrag-Schleife fokussiert. |
 | 30.09.2026 | CORE-001: Graybox-Moorfläche, Hindernisse, Spielerbewegung und Kamera ergänzt; Headless-Prüfung bestanden. |
+| 30.09.2026 | GitHub-Ziel auf das private, eigenständige Repo Fremarx/Moor-Apotheke umgestellt. |
