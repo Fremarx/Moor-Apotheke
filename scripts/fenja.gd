@@ -1,5 +1,6 @@
 extends "res://scripts/interactable.gd"
 
+var quest_id: String = "fenja"
 var _quest: Node
 
 

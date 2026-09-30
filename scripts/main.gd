@@ -3,6 +3,7 @@ extends Node2D
 @onready var _player: Node = $World/Player
 @onready var _inventory: Node = $Inventory
 @onready var _fenja_quest: Node = $Quest/FenjaQuest
+@onready var _marten_quest: Node = $Quest/MartenQuest
 @onready var _inventory_count: Label = $HUD/InventoryCount
 @onready var _reed_root_count: Label = $HUD/ReedRootCount
 @onready var _dried_mint_count: Label = $HUD/DriedMintCount
@@ -20,8 +21,11 @@ func _ready() -> void:
 	_player.connect("interaction_completed", _on_interaction_completed)
 	_inventory.item_count_changed.connect(_on_item_count_changed)
 	_fenja_quest.state_changed.connect(_on_quest_state_changed)
+	_marten_quest.state_changed.connect(_on_marten_quest_state_changed)
 	_feedback_timer.timeout.connect(_on_feedback_timer_timeout)
 	_fenja_quest.set_inventory(_inventory)
+	_marten_quest.set_inventory(_inventory)
+	_marten_quest.set_fenja_quest(_fenja_quest)
 
 	for pickup in get_tree().get_nodes_in_group("item_pickups"):
 		if pickup.has_signal("item_collected"):
@@ -33,9 +37,12 @@ func _ready() -> void:
 		if station.has_method("set_quest_state"):
 			station.set_quest_state("fenja", str(_fenja_quest.get("state")))
 
+	var quests_by_id := {"fenja": _fenja_quest, "marten": _marten_quest}
 	for quest_npc in get_tree().get_nodes_in_group("quest_npcs"):
 		if quest_npc.has_method("set_quest"):
-			quest_npc.set_quest(_fenja_quest)
+			var quest_id := str(quest_npc.get("quest_id"))
+			if quests_by_id.has(quest_id):
+				quest_npc.set_quest(quests_by_id[quest_id])
 
 	_update_quest_status()
 
@@ -79,9 +86,34 @@ func _on_quest_state_changed(state: String) -> void:
 	_player.call("refresh_interactable_prompt")
 
 
+func _on_marten_quest_state_changed(_state: String) -> void:
+	_update_quest_status()
+	_player.call("refresh_interactable_prompt")
+
+
 func _update_quest_status() -> void:
 	var quest_state := str(_fenja_quest.get("state"))
-	if quest_state == "active":
+	var marten_state := str(_marten_quest.get("state"))
+	if marten_state == "active":
+		if int(_inventory.call("get_count", "strengthening_infusion")) > 0:
+			_quest_status.text = "Bringe Marten den Stärkenden Aufguss."
+		elif int(_inventory.call("get_count", "dried_sump_mint")) == 0:
+			if int(_inventory.call("get_count", "sump_mint")) > 0:
+				_quest_status.text = "Trockne die Sumpfminze für Marten."
+			else:
+				_quest_status.text = "Sammle eine Sumpfminze für Marten."
+		elif int(_inventory.call("get_count", "dried_reed_root")) == 0:
+			if int(_inventory.call("get_count", "reed_root")) > 0:
+				_quest_status.text = "Trockne die Schilfwurzel für Marten."
+			else:
+				_quest_status.text = "Sammle eine Schilfwurzel für Marten."
+		else:
+			_quest_status.text = "Braue den Stärkenden Aufguss für Marten."
+		_quest_status.show()
+	elif marten_state == "completed":
+		_quest_status.text = "Aufgabe erfüllt: Martens Bitte."
+		_quest_status.show()
+	elif quest_state == "active":
 		if int(_inventory.call("get_count", "calming_tea")) > 0:
 			_quest_status.text = "Bringe Fenja den Beruhigungstee."
 		elif int(_inventory.call("get_count", "dried_sump_mint")) > 0:

@@ -1,0 +1,51 @@
+extends Node
+
+signal state_changed(state: String)
+
+const STATE_NOT_ACCEPTED := "not_accepted"
+const STATE_ACTIVE := "active"
+const STATE_COMPLETED := "completed"
+
+var state: String = STATE_NOT_ACCEPTED
+var _inventory: Node
+var _fenja_quest: Node
+
+
+func set_inventory(inventory: Node) -> void:
+	_inventory = inventory
+
+
+func set_fenja_quest(fenja_quest: Node) -> void:
+	_fenja_quest = fenja_quest
+
+
+func is_available() -> bool:
+	return is_instance_valid(_fenja_quest) and str(_fenja_quest.get("state")) == "completed"
+
+
+func interact() -> String:
+	if not is_available():
+		return "Bitte hilf zuerst Fenja mit ihrer Bitte."
+
+	if state == STATE_NOT_ACCEPTED:
+		_set_state(STATE_ACTIVE)
+		return "Marten bittet dich um einen stärkenden Aufguss."
+
+	if state == STATE_ACTIVE:
+		if not is_instance_valid(_inventory):
+			return "Marten braucht noch einen stärkenden Aufguss."
+		if not bool(_inventory.call("remove_item", "strengthening_infusion", 1)):
+			return "Marten braucht noch einen stärkenden Aufguss."
+
+		_set_state(STATE_COMPLETED)
+		return "Danke für den stärkenden Aufguss. Martens Bitte ist erfüllt."
+
+	return "Marten dankt dir noch einmal."
+
+
+func _set_state(next_state: String) -> void:
+	if state == next_state:
+		return
+
+	state = next_state
+	state_changed.emit(state)

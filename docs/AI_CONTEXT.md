@@ -24,7 +24,8 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - CONTENT-001a ist abgeschlossen: Schilfwurzel als eigenständiges Pickup mit Inventarbestand und HUD-Zähler.
 - LOOP-003 ist abgeschlossen: Das Trockengestell verarbeitet Schilfwurzel und zählt die getrocknete Zutat separat.
 - LOOP-004 ist abgeschlossen: Der Stärkende Aufguss nutzt beide getrockneten Zutaten und wird nach Fenjas Auftrag freigeschaltet.
-- Nächster Backlogpunkt: QUEST-002 – Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen.
+- QUEST-002 ist abgeschlossen: Marten nimmt nach Fenjas Abschluss einen Stärkenden Aufguss an; die Quest-HUD führt zu den Zutaten und bleibt nach Abgabe abgeschlossen.
+- Nächster Backlogpunkt: CONTENT-001b – Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen.
 - Erster Kernablauf: Sumpfminze → trocknen → Beruhigungstee → Fenja.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 

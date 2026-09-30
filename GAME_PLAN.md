@@ -113,7 +113,7 @@ Die Rezeptmengen sind Startwerte und werden beim Spielen angepasst. Eine Sumpfmi
 | Person | Bitte | Spielziel |
 | --- | --- | --- |
 | Fenja, die Fährfrau | 1 Beruhigungstee | Führt in Sammeln, Trocknen, Brauen und Abgeben ein |
-| Marten, der Torfstecher | 1 stärkender Aufguss | Nutzt zwei Pflanzenarten und schaltet das zweite Rezept frei |
+| Marten, der Torfstecher | 1 stärkender Aufguss | Nutzt zwei Pflanzenarten und führt die Bewohner-Auftragskette fort |
 | Lene, die Dorfheilerin | 1 Nachttrank | Führt zum seltenen Fund am alten Steg und schließt den Ausschnitt ab |
 
 Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt die HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss bis zum Ende der laufenden Partie sichtbar. Der Queststatus wird in diesem ersten Slice noch nicht gespeichert. Münzen und Vertrauensfortschritt gehören zu einer späteren Ausbaustufe.
@@ -213,4 +213,4 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt d
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-Der erweiterte Vertical Slice wird in getrennten Backlogpunkten umgesetzt: Schilfwurzel sammeln und trocknen, den stärkenden Aufguss sowie Martens Auftrag ergänzen, anschließend Nachtmoos und Nachttrank samt Lenes Auftrag einführen. Auftragsbrett und Münzbelohnung folgen als eigene Schritte. So wird jede neue Zutat, Verarbeitung oder Aufgabe gegen die bestehende Kernschleife geprüft.
+Der erweiterte Vertical Slice wird in getrennten Backlogpunkten umgesetzt. Schilfwurzel sammeln und trocknen, der stärkende Aufguss sowie Martens Auftrag sind ergänzt. Als Nächstes folgen Nachtmoos und Nachttrank samt Lenes Auftrag; Auftragsbrett und Münzbelohnung bleiben eigene Schritte. So wird jede neue Zutat, Verarbeitung oder Aufgabe gegen die bestehende Kernschleife geprüft.

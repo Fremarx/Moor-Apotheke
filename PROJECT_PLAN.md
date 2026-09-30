@@ -8,13 +8,13 @@ Stand: 30.09.2026
 Phase 6 – Inhaltserweiterung
 
 ### Zuletzt bearbeiteter Task
-LOOP-004 – Stärkenden Aufguss aus getrockneter Schilfwurzel und Sumpfminze brauen.
+QUEST-002 – Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE.
 
 ### Fortschritt
-Die erste Herstellungskette und Fenjas Auftrag sind spielbar. Nach Fenjas Auftrag wird der stärkende Aufguss aus getrockneter Sumpfminze und Schilfwurzel braubar; die weiteren Inhalte werden als kleine, einzeln prüfbare Schritte ergänzt.
+Die erste Herstellungskette, Fenjas Auftrag und Martens Folgeauftrag sind spielbar. Nach Fenjas Auftrag wird der stärkende Aufguss aus getrockneter Sumpfminze und Schilfwurzel braubar; Marten nimmt ihn als nächsten Auftrag entgegen.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -28,9 +28,10 @@ Die erste Herstellungskette und Fenjas Auftrag sind spielbar. Nach Fenjas Auftra
 - **CONTENT-001a:** Schilfwurzel als eigene Sammelpflanze, Inventar-ID und HUD-Zähler ergänzt.
 - **LOOP-003:** Trockengestell verarbeitet frische Sumpfminze zuerst und danach frische Schilfwurzel; beide erhalten getrennte getrocknete Bestände.
 - **LOOP-004:** Beruhigungstee und stärkender Aufguss sind datengetriebene Rezepte; der Aufguss wird nach Fenjas Auftrag freigeschaltet und verbraucht beide Zutaten gemeinsam.
+- **QUEST-002:** Marten bietet nach Fenjas Abschluss den Folgeauftrag an, nimmt genau einen stärkenden Aufguss an und zeigt den Fortschritt im Quest-HUD.
 
 ### Als Nächstes
-QUEST-002 – Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen.
+CONTENT-001b – Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -63,7 +64,8 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - CONTENT-001a-Headless-Test sowie alle sechs vorherigen Tests, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - LOOP-003-Headless-Test, sämtliche vorherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - LOOP-004-Headless-Test, sämtliche vorherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
-- Sichtprüfung von Fenja, Quest-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen; die Tests bestätigen Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
+- QUEST-002-Headless-Test sowie alle bisherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- Sichtprüfung von Fenja, Marten, Quest-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen; die Tests bestätigen Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
 
 ### Sicherheitsstatus
 Kleines lokales Einzelspielerprojekt ohne Konto, Netzwerkdienst oder personenbezogene Nutzerdaten. Für spätere Spielstände gilt: nur benötigte Daten in user:// speichern und geladene Werte validieren. Fremde Add-ons und Assets vor Übernahme prüfen; Zugangsdaten gehören nicht ins Repository.
@@ -124,7 +126,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | CONTENT-001a | Schilfwurzel sammeln, als eigene Pflanze darstellen und im HUD zählen | P2 | UX-001 | DONE |
 | LOOP-003 | Schilfwurzel am Trockengestell verarbeiten und als getrocknete Zutat anzeigen | P2 | CONTENT-001a | DONE |
 | LOOP-004 | Stärkenden Aufguss aus getrockneter Schilfwurzel und Sumpfminze brauen; nach Fenjas Auftrag freischalten | P2 | LOOP-003, QUEST-001 | DONE |
-| QUEST-002 | Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen | P2 | LOOP-004 | PLANNED |
+| QUEST-002 | Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen | P2 | LOOP-004 | DONE |
 | CONTENT-001b | Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen | P2 | QUEST-002 | PLANNED |
 | LOOP-005 | Nachtmoos am Trockengestell verarbeiten | P2 | CONTENT-001b | PLANNED |
 | LOOP-006 | Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen; nach Martens Auftrag freischalten | P2 | LOOP-005, QUEST-002 | PLANNED |
@@ -210,6 +212,15 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Beide Rezepte sind als Godot-Resources definiert; Inventar, Freischaltung, Feedback und Ergebnisanzeige bleiben getrennte Zuständigkeiten.
 - Ein eigener Headless-Test prüft Rezeptfreischaltung, Zutatenverbrauch, Ergebnis-HUD und atomare Mehrzutatenverarbeitung.
 
+### QUEST-002 Abnahmekriterien
+- Marten ist als interaktiver Bewohner in der Testkarte vorhanden und verweist vor Fenjas Abschluss auf Fenjas Bitte.
+- Nach Fenjas Abschluss kann Martens Bitte angenommen werden; der Queststatus bleibt davor unverändert.
+- Ohne stärkenden Aufguss bleibt Martens Bitte aktiv und weder Inventar noch Queststatus ändern sich.
+- Eine erfolgreiche Abgabe verbraucht genau einen stärkenden Aufguss, schließt die Bitte ab und aktualisiert Inventar-, Interaktions- und Quest-HUD.
+- Wiederholtes Ansprechen nach Abschluss verbraucht keinen weiteren Aufguss.
+- Das HUD führt während Martens Bitte anhand der Bestände zum nächsten benötigten Schritt.
+- Ein eigener Headless-Test prüft die Freischaltung nach Fenja, Annahme, fehlenden Gegenstand, Abgabe und Wiederholungsinteraktion; frühere Schleifen bleiben Regressionen.
+
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -259,3 +270,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | CONTENT-001a: Schilfwurzel als eigene Sammelpflanze samt Inventar-/HUD-Zähler ergänzt; Headless-Test zuerst rot und nach Implementierung grün. |
 | 30.09.2026 | LOOP-003: Schilfwurzel im Trockengestell verarbeitet, frischen und getrockneten HUD-Zähler ergänzt; Headless-Test zuerst rot und danach grün. |
 | 30.09.2026 | LOOP-004: zweites Rezept als Resource ergänzt, Freischaltung an Fenjas Abschluss gebunden und atomare Mehrzutatenverarbeitung samt HUD umgesetzt; Headless-Test rot/grün. |
+| 30.09.2026 | QUEST-002: Martens Folgeauftrag, genau-ein-Aufguss-Abgabe und HUD-Führung ergänzt; Headless-Test rot/grün, Regressionen, Editorimport und Startcheck bestanden. |

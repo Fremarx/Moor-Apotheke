@@ -62,6 +62,13 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Offen: Sichtprüfung von Fenjas Platzhalterfigur, Queststatus-HUD und realer Tastaturinteraktion im Godot-Fenster.
 - Kein GDScript-Coverage-Werkzeug ist im Projekt eingerichtet; daher wird keine Coverage-Prozentzahl ausgewiesen.
 
+## QUEST-002 – Martens Stärkender-Aufguss-Auftrag
+- `tests/quest_002_marten_quest_test.gd` prüft Martens Freischaltung nach Fenjas Abschluss, Questannahme, HUD-Zielwechsel für Sammeln, Trocknen, Brauen und Abgabe, Rückmeldung ohne Aufguss, Abgabe von genau einem Aufguss aus einem Bestand von zwei sowie erneute Interaktion ohne weiteren Verbrauch.
+- RED: Vor der Implementierung fehlten Marten und Martens Quest; der neue Headless-Test schlug an diesen erwarteten Prüfungen fehl.
+- GREEN: QUEST-002-Headless-Test sowie alle neun früheren Regressionstests bestanden.
+- Erledigt: Godot-4.7.2-Editorimport und 60-Frame-Startlauf ohne Parser- oder Laufzeitfehler.
+- Offen: Sichtprüfung von Martens Platzhaltergrafik und Quest-HUD im Godot-Fenster.
+
 ## UX-001 – Nächstes Ziel entlang der Herstellungskette
 - `tests/ux_001_core_loop_guidance_test.gd` spielt den gesamten Ablauf: Fenja ansprechen, Sumpfminze sammeln, trocknen, brauen und den Tee abgeben.
 - Der Test prüft die ausgeblendete Zielzeile vor Annahme und danach exakt jeden Zielwechsel: „Sammle eine Sumpfminze.“, „Trockne die Sumpfminze.“, „Braue Beruhigungstee.“, „Bringe Fenja den Beruhigungstee.“ und die bleibende Abschlussmeldung.
