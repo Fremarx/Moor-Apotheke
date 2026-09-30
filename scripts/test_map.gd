@@ -35,6 +35,7 @@ func _draw() -> void:
 	_draw_path()
 	_draw_obstacles()
 	_draw_reeds()
+	_draw_interaction_probe()
 
 
 func _draw_ground() -> void:
@@ -116,3 +117,12 @@ func _draw_reeds() -> void:
 		draw_line(reed, reed + Vector2(-3, -13), Color("82905a"), 2.0)
 		draw_rect(Rect2(reed + Vector2(-7, -16), Vector2(5, 4)), Color("756241"))
 		draw_line(reed + Vector2(3, 1), reed + Vector2(8, -11), Color("a1a169"), 2.0)
+
+
+func _draw_interaction_probe() -> void:
+	var center := Vector2(270, 198)
+	draw_rect(Rect2(center + Vector2(-7, 5), Vector2(14, 3)), Color("46543b"))
+	draw_line(center + Vector2(0, 5), center + Vector2(0, -4), Color("768850"), 2.0)
+	draw_rect(Rect2(center + Vector2(-6, -8), Vector2(5, 4)), Color("9cac6e"))
+	draw_rect(Rect2(center + Vector2(1, -10), Vector2(5, 4)), Color("b0ba7a"))
+	draw_rect(Rect2(center + Vector2(-2, -3), Vector2(5, 4)), Color("85925e"))

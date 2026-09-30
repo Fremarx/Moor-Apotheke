@@ -22,6 +22,11 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: Kurzlebiger Headless-Eingabecheck bestätigt aktive Kamera, Bewegung in alle vier Richtungen sowie Kollision an einem Hindernis und der Westgrenze.
 - Noch offen: Bewegung mit echter Tastatureingabe, Kameraeindruck und Kollisionen im sichtbaren Godot-Fenster prüfen.
 
+## CORE-002 – Interaktionsbereich und E-Taste
+- Erledigt: tests/core_002_interaction_test.gd prüft die benannte E-Aktion, den Hinweis innerhalb der Reichweite, die Auswahl des nächsten Ziels, das sichtbare HUD-Feedback samt Timer, dessen Fortbestand beim Zielwechsel, das Ausblenden nach Timerablauf und außerhalb der Reichweite sowie die erhaltene Bewegung.
+- Prüfbefehl: godot --headless --path . --script tests/core_002_interaction_test.gd
+- Erledigt: Godot-4.7.2-Headless-Editorimport und 60-Frame-Startszene ohne Parser- oder Laufzeitfehler.
+- Offen: Sichtprüfung von Hinweis, Rückmeldung, Bewegung und Kamera im Godot-Fenster.
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.

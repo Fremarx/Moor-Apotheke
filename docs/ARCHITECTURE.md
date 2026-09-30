@@ -12,14 +12,21 @@ Stand: 30.09.2026 · Godot 4.7.2 Standard · GDScript
 Die Startszene stellt Graybox-Karte und Platzhalterfigur zusammen:
 
 ~~~text
-Main (Node2D)
+Main (Node2D, main.gd)
 ├── World (Node2D)
-│   ├── TestMap (Node2D)
+│   ├── TestMap (Node2D, mit Interaktionsprobe)
 │   └── Player (CharacterBody2D)
-└── HUD (CanvasLayer, einfache Steuerungshilfe)
+│       ├── InteractionArea (Area2D)
+│       └── Camera2D
+└── HUD (CanvasLayer)
+    ├── InteractionPrompt
+    ├── InteractionFeedback
+    └── FeedbackTimer
 ~~~
 
 `TestMap` zeichnet die provisorische Moorfläche und stellt Begrenzungen sowie einige blockierte Stellen bereit. `Player` liest die benannten Richtungsaktionen aus der Input Map, bewegt sich als `CharacterBody2D` und führt die Kamera mit Kartengrenzen. Die Figuren- und Kartengrafik besteht bis zur Grafikphase aus einfachen gezeichneten Farbblöcken.
+
+CORE-002 ergänzt eine wiederverwendbare Area2D-Interaktionsfläche am Player. Interaktive Ziele tragen die Gruppe `interactables` und stellen Hinweistext sowie `interact()` bereit. Der Player wählt das räumlich nächste Ziel und meldet Hinweis bzw. Ergebnis über Signale. Main verbindet diese Signale mit dem HUD; das Objekt führt seine eigene Aktion aus. Ein Autoload ist dafür nicht erforderlich.
 
 Spätere eigenständige Szenen:
 - player/player.tscn: Bewegung, Kollision, Sprite/Animation und Kamera.
@@ -81,3 +88,5 @@ Im ersten Slice wird der Auftrag direkt bei Fenja angenommen und abgegeben. Das 
 
 ## Engine-Dokumentation
 Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Für CORE-001 wurden [2D-Bewegung](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html), [CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) und [Input-Beispiele](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) verwendet. Weitere Quellen betreffen Szenenorganisation, TileSets und Resources.
+
+Für CORE-002 wurden zusätzlich die versionierte [Area2D-Dokumentation](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) und die [Node-Klassenreferenz](https://docs.godotengine.org/en/4.7/classes/class_node.html) zur Overlap-Erkennung und Eingabeweitergabe herangezogen.

@@ -5,26 +5,27 @@ Stand: 30.09.2026
 ## Project Status
 
 ### Aktuelle Phase
-Phase 1 – Bewegung und Welt
+Phase 2 – Sammeln und Inventar
 
 ### Zuletzt bearbeiteter Task
-CORE-001 – Graybox-Szene und Spielerbewegung.
+CORE-002 – Interaktionsbereich, E-Taste und Hinweis für das nächste Objekt.
 
 ### Status
-CORE-001 DONE; CORE-002 PLANNED.
+CORE-002 DONE; ITEM-001 PLANNED.
 
 ### Fortschritt
-Projektgrundlage, Graybox-Karte, steuerbare Platzhalterfigur, Kamera und vier Richtungsaktionen sind angelegt. Sammel-, Verarbeitungs- und Auftragslogik folgen in späteren Backlogpunkten.
+Projektgrundlage, Graybox-Karte, Spielerbewegung und generische E-Interaktion mit HUD-Hinweis sind umgesetzt. Als Nächstes folgen Sammeln und Inventar.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
 - **CORE-001:** Graybox-Testkarte, Platzhalterfigur, Kamera und Bewegung.
+- **CORE-002:** Interaktionsbereich, E-Taste, nächstes Ziel, HUD-Rückmeldung und graue Kräuterprobe.
 
 ### Als Nächstes
-CORE-002 beginnen: Interaktionsbereich, Taste E und Hinweis für das nächste Objekt.
+ITEM-001 beginnen: Sumpfminze aufnehmen und den Bestand sichtbar anzeigen.
 
 ### Blocker
-Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung der Bewegung im Godot-Fenster steht noch aus.
+Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
 
 ### Offene Entscheidungen
 - Zielplattformen über Windows-Entwicklung hinaus werden nach dem ersten spielbaren Prototyp festgelegt.
@@ -41,6 +42,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - Der Editor hat das neue Projekt headless geladen.
 - Die Graybox-Startszene hat den Headless-Editorimport und einen 60-Frame-Laufzeit-Smoke-Check bestanden.
 - Ein temporärer Headless-Check hat aktive Kamera, vier Richtungen, Hindernis und Kartenbegrenzung geprüft.
+- CORE-002-Headless-Test prüft E-Aktion, Reichweite, nächste Auswahl, Rückmeldung, Verlassen der Reichweite und fortbestehende Bewegung.
 - Sichtbare Tastatur- und Bewegungskontrolle ist noch offen.
 
 ### Sicherheitsstatus
@@ -92,7 +94,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | --- | --- | --- | --- | --- |
 | BOOT-001 | Projekt und Prozess analysieren; Roadmap, Architekturrahmen und Wissensquellen dokumentieren | P0 | – | DONE |
 | CORE-001 | Graybox-Testkarte, Platzhalterfigur, Kamera und Bewegung in vier Richtungen | P1 | BOOT-001 | DONE |
-| CORE-002 | Interaktionsbereich, Taste E und Hinweis für das nächste Objekt | P1 | CORE-001 | PLANNED |
+| CORE-002 | Interaktionsbereich, Taste E und Hinweis für das nächste Objekt | P1 | CORE-001 | DONE |
 | ITEM-001 | Sumpfminze aufnehmen und Inventarbestand anzeigen | P1 | CORE-002 | PLANNED |
 | LOOP-001 | Minze am Trockengestell verarbeiten | P1 | ITEM-001 | PLANNED |
 | LOOP-002 | Getrocknete Minze und Wasser zu Beruhigungstee verarbeiten | P1 | LOOP-001 | PLANNED |
@@ -103,6 +105,13 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | EXP-001 | Jahreszeiten, weitere Gebiete und Automatisierung nach Spieltest neu priorisieren | P3 | CONTENT-001, SAVE-001 | PLANNED |
 | REL-001 | Exportziel wählen, Exportvorlagen einrichten, Release-Checkliste ergänzen | P3 | stabile Kernschleife | PLANNED |
 
+### CORE-002 Abnahmekriterien
+- Die Interaktion nutzt die benannte Aktion interact auf E.
+- Innerhalb der Reichweite erscheint ein Hinweis mit Aktion und Objektname; außerhalb ist der Hinweis verborgen.
+- Bei mehreren erreichbaren Zielen wird das räumlich nächste ausgewählt. Ein Interaktionsfeedback bleibt beim Zielwechsel sichtbar und wird durch den HUD-Timer ausgeblendet.
+- E löst nur das ausgewählte Ziel aus; ohne Ziel bleibt die Eingabe wirkungslos.
+- Die graue Kräuterprobe liefert Bestätigungsfeedback; Sammeln und Inventar bleiben Teil von ITEM-001.
+- Der Headless-Test sowie Editorimport und 60-Frame-Smoke-Check laufen erfolgreich.
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -143,3 +152,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | CORE-001: Graybox-Moorfläche, Hindernisse, Spielerbewegung und Kamera ergänzt; Headless-Prüfung bestanden. |
 | 30.09.2026 | GitHub-Ziel auf das eigenständige Repo Fremarx/Moor-Apotheke umgestellt. |
 | 30.09.2026 | Repository auf GitHub veröffentlicht; lokale Maschinenpfade aus der Entwicklungsdoku entfernt. |
+| 30.09.2026 | CORE-002: generische Interaktion, E-Taste, nächstes Ziel und HUD-Rückmeldung ergänzt; Headless-Prüfungen bestanden. |
