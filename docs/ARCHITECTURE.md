@@ -9,15 +9,17 @@ Stand: 30.09.2026 · Godot 4.7.2 Standard · GDScript
 - Pixelgrafik und Spielregeln so trennen, dass Platzhalter leicht ersetzt werden.
 
 ## Einstiegspunkt und Szenenstruktur
-Die vorhandene scenes/main.tscn ist aktuell ein leerer Einstiegspunkt. Zielstruktur nach CORE-001:
+Die Startszene stellt Graybox-Karte und Platzhalterfigur zusammen:
 
 ~~~text
 Main (Node2D)
 ├── World (Node2D)
 │   ├── TestMap (Node2D)
 │   └── Player (CharacterBody2D)
-└── HUD (CanvasLayer)
+└── HUD (CanvasLayer, einfache Steuerungshilfe)
 ~~~
+
+`TestMap` zeichnet die provisorische Moorfläche und stellt Begrenzungen sowie einige blockierte Stellen bereit. `Player` liest die benannten Richtungsaktionen aus der Input Map, bewegt sich als `CharacterBody2D` und führt die Kamera mit Kartengrenzen. Die Figuren- und Kartengrafik besteht bis zur Grafikphase aus einfachen gezeichneten Farbblöcken.
 
 Spätere eigenständige Szenen:
 - player/player.tscn: Bewegung, Kollision, Sprite/Animation und Kamera.
@@ -74,9 +76,8 @@ Im ersten Slice wird der Auftrag direkt bei Fenja angenommen und abgegeben. Das 
 - Keine Konten oder Secrets; fremde Add-ons und Assets prüfen.
 
 ## Bekannte Einschränkungen
-- Die vorhandene Main-Szene ist leer; die oben gezeigte Struktur beschreibt das Ziel für CORE-001.
-- Noch keine Save-/Load-Logik, Eingaben, Testsuite, finale Pixelgrafik oder Exportprofile.
+- Noch keine Sammel-, Stations- oder Auftragslogik, Save-/Load-Logik, finale Pixelgrafik oder Exportprofile.
 - Das Projekt verwendet das vom Nutzer freigegebene 2DGame-Remote auf codex/moor-apotheke. Die Historie ist separat; PR-/Merge-Eignung ist vor einer späteren Zusammenführung zu prüfen.
 
 ## Engine-Dokumentation
-Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Relevant sind [Szenenorganisation](https://docs.godotengine.org/en/4.7/tutorials/best_practices/scene_organization.html), [TileSets](https://docs.godotengine.org/en/4.7/tutorials/2d/using_tilesets.html) und [Resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html).
+Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Für CORE-001 wurden [2D-Bewegung](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html), [CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) und [Input-Beispiele](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) verwendet. Weitere Quellen betreffen Szenenorganisation, TileSets und Resources.

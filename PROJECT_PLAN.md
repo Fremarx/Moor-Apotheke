@@ -5,25 +5,26 @@ Stand: 30.09.2026
 ## Project Status
 
 ### Aktuelle Phase
-Phase 1 – Spielbarer Kernablauf
+Phase 1 – Bewegung und Welt
 
-### Aktueller Task
+### Zuletzt bearbeiteter Task
 CORE-001 – Graybox-Szene und Spielerbewegung.
 
 ### Status
-IN_PROGRESS
+CORE-001 DONE; CORE-002 PLANNED.
 
 ### Fortschritt
-Projektgrundlage und Planungsdokumentation sind angelegt. Die Spielinhalte selbst sind noch nicht implementiert.
+Projektgrundlage, Graybox-Karte, steuerbare Platzhalterfigur, Kamera und vier Richtungsaktionen sind angelegt. Sammel-, Verarbeitungs- und Auftragslogik folgen in späteren Backlogpunkten.
 
 ### Zuletzt abgeschlossen
-BOOT-001 – Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
+- **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
+- **CORE-001:** Graybox-Testkarte, Platzhalterfigur, Kamera und Bewegung.
 
 ### Als Nächstes
-CORE-001 abschließen: eine Testkarte und eine steuerbare Platzhalterfigur in der Startszene sichtbar machen.
+CORE-002 beginnen: Interaktionsbereich, Taste E und Hinweis für das nächste Objekt.
 
 ### Blocker
-Keine technischen Blocker. Das Remote ist das vom Nutzer freigegebene 2DGame-Remote; gearbeitet und gepusht wird auf codex/moor-apotheke, getrennt von main.
+Keine technischen Blocker. Das Remote ist das vom Nutzer freigegebene 2DGame-Remote; gearbeitet und gepusht wird auf codex/moor-apotheke, getrennt von main. Die manuelle Sichtprüfung der Bewegung im Godot-Fenster steht noch aus.
 
 ### Offene Entscheidungen
 - Zielplattformen über Windows-Entwicklung hinaus werden nach dem ersten spielbaren Prototyp festgelegt.
@@ -31,15 +32,16 @@ Keine technischen Blocker. Das Remote ist das vom Nutzer freigegebene 2DGame-Rem
 - Finale Pixelart wird erst nach Sichtung eines Spielbild-Mockups produziert.
 
 ### Technische Schulden
-- Die Startszene ist derzeit nur ein leerer Node2D.
-- Es gibt noch keine Gameplay-Skripte, finalen Assets oder automatisierte Spieltests.
+- Bewegung und Testkarte sind provisorisch gezeichnet; finaler Grafikstil, Sammel- und Auftragslogik fehlen noch.
+- Echte Tastatureingabe und Kameragefühl wurden noch nicht im sichtbaren Godot-Fenster geprüft.
 - Exportvorlagen und Exportprofile werden erst für einen konkreten Build-Zielpunkt ergänzt.
 
 ### Teststatus
 - Godot 4.7.2 wurde mit gültiger Windows-Signatur installiert.
 - Der Editor hat das neue Projekt headless geladen.
-- Der leere Einstieg wurde noch nicht als spielbarer Build geprüft.
-- Für Gameplay gibt es noch keine Testfälle.
+- Die Graybox-Startszene hat den Headless-Editorimport und einen 60-Frame-Laufzeit-Smoke-Check bestanden.
+- Ein temporärer Headless-Check hat aktive Kamera, vier Richtungen, Hindernis und Kartenbegrenzung geprüft.
+- Sichtbare Tastatur- und Bewegungskontrolle ist noch offen.
 
 ### Sicherheitsstatus
 Kleines lokales Einzelspielerprojekt ohne Konto, Netzwerkdienst oder personenbezogene Nutzerdaten. Für spätere Spielstände gilt: nur benötigte Daten in user:// speichern und geladene Werte validieren. Fremde Add-ons und Assets vor Übernahme prüfen; Zugangsdaten gehören nicht ins Repository.
@@ -89,7 +91,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | ID | Titel / Ziel | Priorität | Abhängigkeiten | Status |
 | --- | --- | --- | --- | --- |
 | BOOT-001 | Projekt und Prozess analysieren; Roadmap, Architekturrahmen und Wissensquellen dokumentieren | P0 | – | DONE |
-| CORE-001 | Graybox-Testkarte, Platzhalterfigur, Kamera und Bewegung in vier Richtungen | P1 | BOOT-001 | IN_PROGRESS |
+| CORE-001 | Graybox-Testkarte, Platzhalterfigur, Kamera und Bewegung in vier Richtungen | P1 | BOOT-001 | DONE |
 | CORE-002 | Interaktionsbereich, Taste E und Hinweis für das nächste Objekt | P1 | CORE-001 | PLANNED |
 | ITEM-001 | Sumpfminze aufnehmen und Inventarbestand anzeigen | P1 | CORE-002 | PLANNED |
 | LOOP-001 | Minze am Trockengestell verarbeiten | P1 | ITEM-001 | PLANNED |
@@ -138,3 +140,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | Datum | Änderung |
 | --- | --- |
 | 30.09.2026 | Projektgrundlage und Roadmap angelegt; erster Slice auf eine Kräuter-zu-Auftrag-Schleife fokussiert. |
+| 30.09.2026 | CORE-001: Graybox-Moorfläche, Hindernisse, Spielerbewegung und Kamera ergänzt; Headless-Prüfung bestanden. |

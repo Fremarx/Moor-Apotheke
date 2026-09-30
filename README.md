@@ -11,6 +11,8 @@ Ein gemütliches 2D-Pixelart-Spiel über eine Apotheke am Rand eines geheimnisvo
 ## Öffnen
 Starte Godot_v4.7.2-stable_win64.exe und importiere C:\Desktop\git\Moor-Apotheke\project.godot.
 
+Der aktuelle Graybox-Prototyp startet in einer kleinen Moor-Testkarte. Die Figur bewegt sich mit **WASD** oder den **Pfeiltasten**; Grafik und Umgebung sind Platzhalter.
+
 Headless-Projektprüfung in PowerShell:
 
 ~~~powershell

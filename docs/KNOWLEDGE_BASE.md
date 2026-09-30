@@ -29,6 +29,9 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 | [Resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html) | 4.7, 30.09.2026 | Datencontainer und Rezeptdaten | Offizielle Engine-Doku; LOOP-002/CONTENT-001 |
 | [Saving Games](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html) | 4.7, 30.09.2026 | Persistenz und user:// | Offizielle Engine-Doku; SAVE-001 |
 
+## Abrufnotizen
+- **30.09.2026 – CORE-001:** 2D-Bewegung: `CharacterBody2D` mit `Input.get_vector()` für normalisierte Richtungssteuerung; CharacterBody2D: Bewegung in `_physics_process()` mit `move_and_slide()`, für Top-down-Bewegung `MOTION_MODE_FLOATING`; Input-Beispiele: benannte Aktionen in der Project Input Map statt Tastencodes im Bewegungs-Skript.
+
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.
 - API-Details vor der Implementierung gegen die passende 4.7-Seite prüfen.

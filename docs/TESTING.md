@@ -1,7 +1,7 @@
 # Teststrategie
 
 ## Aktueller Stand
-Es gibt noch keine Gameplaylogik und kein Testframework. Godot 4.7.2 hat das Projekt im Headless-Editor geladen; die Startszene wurde noch nicht als Gameplay-Loop manuell geprüft.
+Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Startszene im Headless-Editor importiert und 60 Laufzeitframes ohne Fehler ausgeführt. Ein sichtbarer Godot-Fenstertest mit echter Tastatur steht noch aus.
 
 ## Pro Backlogpunkt
 1. Godot-Editor-/Parserfehlerstand prüfen.
@@ -15,6 +15,12 @@ Es gibt noch keine Gameplaylogik und kein Testframework. Godot 4.7.2 hat das Pro
 - Reichweite und Eingabe jeder Interaktion prüfen.
 - Bestand, Zutatenverbrauch, Rezeptresultat und Abgabe beobachten.
 - Fenjas Auftrag von Annahme bis Abschlussmeldung ohne Neustart der Anwendung durchspielen.
+
+## CORE-001 – Graybox, Spieler und Kamera
+- Erledigt: Headless-Editorimport der Startszene mit Godot 4.7.2.
+- Erledigt: 60-Frame-Laufzeit-Smoke-Check ohne Parser- oder Laufzeitfehler.
+- Erledigt: Kurzlebiger Headless-Eingabecheck bestätigt aktive Kamera, Bewegung in alle vier Richtungen sowie Kollision an einem Hindernis und der Westgrenze.
+- Noch offen: Bewegung mit echter Tastatureingabe, Kameraeindruck und Kollisionen im sichtbaren Godot-Fenster prüfen.
 
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.

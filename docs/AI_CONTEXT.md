@@ -16,8 +16,8 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - Eigenständiges Repository unter C:\\Desktop\\git\\Moor-Apotheke.
 - Remote ist das vom Nutzer freigegebene 2DGame-Remote; Branch codex/moor-apotheke, main bleibt unangetastet.
 - Godot liegt separat unter C:\\Desktop\\Tools\\Godot\\4.7.2.
-- Die leere scenes/main.tscn existiert; keine Gameplayskripte oder finalen Assets.
-- Aktiver Backlogpunkt: CORE-001 – Graybox-Testkarte, Platzhalterfigur und Bewegung.
+- CORE-001 ist umgesetzt: Graybox-Moorfläche, Platzhalterfigur, Kamera, WASD-/Pfeiltastensteuerung und einfache Hindernisse.
+- Nächster Backlogpunkt: CORE-002 – Interaktionsbereich, Taste E und Hinweis für das nächste Objekt.
 - Erster Kernablauf: Sumpfminze → trocknen → Beruhigungstee → Fenja.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
