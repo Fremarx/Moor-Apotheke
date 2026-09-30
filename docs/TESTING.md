@@ -120,6 +120,14 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: LOOP-005 und alle elf vorherigen Headless-Tests (insgesamt zwölf), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check.
 - Offen: Sichtprüfung des aktualisierten Inventar-HUDs und des Trockengestells im Godot-Fenster.
 
+## LOOP-006 – Nachttrank brauen
+- tests/loop_006_night_potion_brewing_test.gd prüft den Startbestand, Martens Rezeptfreischaltung, fehlende Zutaten ohne Teilverbrauch, 1:1-Verarbeitung, Rückmeldungen und HUD.
+- RED: Vor der Umsetzung fehlte der Nachttrank-Zähler.
+- GREEN: „LOOP-006 night-potion brewing checks passed.“ nach Rezept-, Quest- und HUD-Anbindung.
+- Prüfbefehl: godot --headless --path . --script res://tests/loop_006_night_potion_brewing_test.gd.
+- Erledigt: LOOP-006 und alle zwölf vorherigen Headless-Tests (insgesamt dreizehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check.
+- Offen: Sichtprüfung des Nachttrank-Zählers und der Rezeptfreischaltung im Godot-Fenster.
+
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.

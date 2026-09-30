@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/recipe_definition.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+recipe_id = "night_potion"
+ingredients = {"dried_reed_root": 1, "dried_night_moss": 1}
+result_item_id = "night_potion"
+success_feedback = "Der Nachttrank ist fertig."
+missing_feedback = "Für den Nachttrank brauchst du getrocknete Schilfwurzel und getrocknetes Nachtmoos."
+required_quest_id = "marten"
+required_quest_state = "completed"
+locked_feedback = "Der Nachttrank wird nach Martens Auftrag freigeschaltet."

@@ -31,6 +31,7 @@ Main (Node2D, main.gd)
     ├── InfusionCount
     ├── NightMossCount
     ├── DriedNightMossCount
+    ├── NightPotionCount
     ├── QuestStatus
     ├── InteractionPrompt
     ├── InteractionFeedback
@@ -56,6 +57,8 @@ QUEST-001 ergänzt eine kleine `FenjaQuest`-Komponente neben Inventar und Welt. 
 QUEST-002 ergänzt `MartenQuest` und Marten als zweiten interaktiven Bewohner. Main übergibt Martens Quest das Inventar und Fenjas Quest; `MartenQuest.is_available()` lässt den Folgeauftrag erst nach Fenjas Abschluss zu. Beide NPCs melden ihre Quest-ID, sodass Main ihnen die passende Questkomponente übergibt. Marten gibt mit `Inventory.remove_item("strengthening_infusion", 1)` genau einen Aufguss ab. Das vorhandene Quest-HUD zeigt nach Annahme Martens den nächsten Zutaten- oder Abgabeschritt und nach Abschluss dauerhaft Martens Erledigung an. Beide Questzustände bleiben laufzeitgebunden.
 
 LOOP-005 ergänzt als dritte Stufe `night_moss` → `dried_night_moss`. Das Trockengestell versucht weiterhin Sumpfminze zuerst, danach Schilfwurzel und zuletzt Nachtmoos. Die vorhandene atomare `Inventory.transfer_item`-Übertragung aktualisiert beide Bestände samt Signal; Main zeigt den getrockneten Bestand in `DriedNightMossCount`. Bei leerem Vorrat nennt das Feedback alle drei zulässigen Pflanzen.
+
+LOOP-006 ergänzt night_potion als RecipeDefinition mit je einer getrockneten Schilfwurzel und einem getrockneten Nachtmoos. Der Braukessel schaltet das Rezept erst nach Abschluss von Martens Auftrag frei. Main übergibt beim Start beide Queststatus an die Verarbeitungsstationen und leitet spätere Marten-Änderungen weiter. craft_items verbraucht beide Zutaten atomar; NightPotionCount zeigt das Ergebnis.
 
 UX-001 lässt Main die dauerhafte `QuestStatus`-Zeile nach Annahme und bei jedem `item_count_changed` aus dem lokalen Inventar ableiten. Die Reihenfolge der Ziele lautet: Sumpfminze sammeln, frische Minze trocknen, getrocknete Minze brauen, Tee Fenja bringen. Ist bereits ein späteres Produkt vorhanden, zeigt die HUD den dazu passenden nächsten Schritt. Bei `completed` bleibt die Abschlusszeile stehen; vor Annahme bleibt sie verborgen. Bestehende zeitlich begrenzte Interaktionsrückmeldungen und Inventarzähler laufen unverändert weiter.
 

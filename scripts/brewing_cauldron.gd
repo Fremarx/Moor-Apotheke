@@ -1,9 +1,10 @@
 extends "res://scripts/interactable.gd"
 
+const NIGHT_POTION_RECIPE: Resource = preload("res://resources/recipes/night_potion.tres")
 const STRENGTHENING_RECIPE: Resource = preload("res://resources/recipes/strengthening_infusion.tres")
 const CALMING_TEA_RECIPE: Resource = preload("res://resources/recipes/calming_tea.tres")
 
-var _recipes: Array[Resource] = [STRENGTHENING_RECIPE, CALMING_TEA_RECIPE]
+var _recipes: Array[Resource] = [NIGHT_POTION_RECIPE, STRENGTHENING_RECIPE, CALMING_TEA_RECIPE]
 var _inventory: Node
 var _quest_states: Dictionary = {}
 
@@ -38,6 +39,15 @@ func interact() -> String:
 		))
 		if brewed:
 			return str(recipe.get("success_feedback"))
+
+	var night_potion_unlocked := _is_recipe_unlocked(NIGHT_POTION_RECIPE)
+	var has_night_potion_ingredient := int(_inventory.call("get_count", "dried_night_moss")) > 0 or (
+		night_potion_unlocked and int(_inventory.call("get_count", "dried_reed_root")) > 0
+	)
+	if has_night_potion_ingredient:
+		if night_potion_unlocked:
+			return str(NIGHT_POTION_RECIPE.get("missing_feedback"))
+		return str(NIGHT_POTION_RECIPE.get("locked_feedback"))
 
 	if int(_inventory.call("get_count", "dried_reed_root")) > 0:
 		if _is_recipe_unlocked(STRENGTHENING_RECIPE):

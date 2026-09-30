@@ -213,4 +213,4 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt d
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-Der erweiterte Vertical Slice wird in getrennten Backlogpunkten umgesetzt. Schilfwurzel sammeln und trocknen, der stärkende Aufguss, Martens Auftrag, Nachtmoos sammeln und dessen Trocknung sind ergänzt. Als Nächstes folgen der Nachttrank und Lenes Auftrag; Auftragsbrett und Münzbelohnung bleiben eigene Schritte. So wird jede neue Zutat, Verarbeitung oder Aufgabe gegen die bestehende Kernschleife geprüft.
+Der erweiterte Vertical Slice wird in getrennten Backlogpunkten umgesetzt. Schilfwurzel sammeln und trocknen, der stärkende Aufguss, Martens Auftrag, Nachtmoos sammeln und trocknen sowie der nach Martens Auftrag freigeschaltete Nachttrank sind ergänzt. Als Nächstes folgt Lenes Auftrag; Auftragsbrett und Münzbelohnung bleiben eigene Schritte. So wird jede neue Zutat, Verarbeitung oder Aufgabe gegen die bestehende Kernschleife geprüft.

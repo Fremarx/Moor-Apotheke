@@ -12,6 +12,7 @@ extends Node2D
 @onready var _infusion_count: Label = $HUD/InfusionCount
 @onready var _night_moss_count: Label = $HUD/NightMossCount
 @onready var _dried_night_moss_count: Label = $HUD/DriedNightMossCount
+@onready var _night_potion_count: Label = $HUD/NightPotionCount
 @onready var _quest_status: Label = $HUD/QuestStatus
 @onready var _interaction_prompt: Label = $HUD/InteractionPrompt
 @onready var _interaction_feedback: Label = $HUD/InteractionFeedback
@@ -38,6 +39,7 @@ func _ready() -> void:
 			station.set_inventory(_inventory)
 		if station.has_method("set_quest_state"):
 			station.set_quest_state("fenja", str(_fenja_quest.get("state")))
+			station.set_quest_state("marten", str(_marten_quest.get("state")))
 
 	var quests_by_id := {"fenja": _fenja_quest, "marten": _marten_quest}
 	for quest_npc in get_tree().get_nodes_in_group("quest_npcs"):
@@ -80,6 +82,8 @@ func _on_item_count_changed(item_id: String, amount: int) -> void:
 		_night_moss_count.text = "Nachtmoos: %d" % amount
 	elif item_id == "dried_night_moss":
 		_dried_night_moss_count.text = "Getrocknetes Nachtmoos: %d" % amount
+	elif item_id == "night_potion":
+		_night_potion_count.text = "Nachttrank: %d" % amount
 
 	_update_quest_status()
 
@@ -92,10 +96,12 @@ func _on_quest_state_changed(state: String) -> void:
 	_player.call("refresh_interactable_prompt")
 
 
-func _on_marten_quest_state_changed(_state: String) -> void:
+func _on_marten_quest_state_changed(state: String) -> void:
+	for station in get_tree().get_nodes_in_group("processing_stations"):
+		if station.has_method("set_quest_state"):
+			station.set_quest_state("marten", state)
 	_update_quest_status()
 	_player.call("refresh_interactable_prompt")
-
 
 func _update_quest_status() -> void:
 	var quest_state := str(_fenja_quest.get("state"))

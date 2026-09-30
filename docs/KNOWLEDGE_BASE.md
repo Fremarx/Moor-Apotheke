@@ -51,6 +51,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 
 - **30.09.2026 – LOOP-005:** Die dritte Trockengestell-Zutat nutzt die bereits dokumentierte `Inventory.transfer_item`-Methode und `item_count_changed`-Signale; ein eigener `Label` zeigt den getrockneten Bestand. Es kam keine neue Engine-API hinzu; Signal- und Label-Quellen aus LOOP-003 decken die Änderung ab.
 
+- **30.09.2026 – LOOP-006:** Der Nachttrank nutzt die bestehende RecipeDefinition-Resource für Zutaten, Ergebnis und Questfreischaltung. Main leitet Martens Status über die vorhandene Szenen- und Signalstruktur an den Braukessel weiter; ein Label zeigt das Produkt. Es kam keine neue Engine-API hinzu.
+
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.
 - API-Details vor der Implementierung gegen die passende 4.7-Seite prüfen.

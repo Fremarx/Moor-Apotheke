@@ -27,7 +27,8 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - QUEST-002 ist abgeschlossen: Marten nimmt nach Fenjas Abschluss einen Stärkenden Aufguss an; die Quest-HUD führt zu den Zutaten und bleibt nach Abgabe abgeschlossen.
 - CONTENT-001b ist abgeschlossen: Nachtmoos ist als seltenes, einmalig sammelbares Pickup am schattigen Torfsteg ergänzt und wird separat im HUD gezählt.
 - LOOP-005 ist abgeschlossen: Das Trockengestell verarbeitet Nachtmoos nach Sumpfminze und Schilfwurzel; frischer und getrockneter Bestand haben getrennte HUD-Zähler.
-- Nächster Backlogpunkt: LOOP-006 – Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen.
+- LOOP-006 ist abgeschlossen: Der Braukessel braut aus getrockneter Schilfwurzel und Nachtmoos einen Nachttrank, sobald Martens Auftrag abgeschlossen ist.
+- Nächster Backlogpunkt: QUEST-003 – Lenes Bitte um einen Nachttrank annehmen und erfüllen.
 - Erster Kernablauf: Sumpfminze → trocknen → Beruhigungstee → Fenja.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
