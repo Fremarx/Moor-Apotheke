@@ -72,6 +72,14 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: UX-001- und QUEST-001-Tests sowie LOOP-002-, LOOP-001-, ITEM-001- und CORE-002-Regressionsläufe, Godot-4.7.2-Editorimport und 60-Frame-Startlauf.
 - Offen: Sichtprüfung im Godot-Fenster und Beobachtung durch neue Spielende. Die automatisierten Tests belegen Zieltexte und Übergänge, nicht subjektive Verständlichkeit.
 
+## CONTENT-001a – Schilfwurzel sammeln
+- `tests/content_001a_reed_root_collection_test.gd` prüft den Startbestand, die neue eigene Item-ID, keinen Sammelerfolg außerhalb der Reichweite, Objektname und Aktion im Hinweis, einmalige Aufnahme, eigene HUD-Aktualisierung sowie den unveränderten Sumpfminze-Bestand.
+- RED: Der erste Lauf vor dem Szenen- und HUD-Eintrag meldete das erwartete fehlende Pickup und den fehlenden Zähler.
+- GREEN: `CONTENT-001a reed-root collection checks passed.` nach der Implementierung.
+- Prüfbefehl: `godot --headless --path . --script res://tests/content_001a_reed_root_collection_test.gd`.
+- Erledigt: alle sieben Headless-Tests, darunter CONTENT-001a und die sechs bisherigen Regressionstests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf.
+- Offen: Sichtprüfung der neuen Pixelzeichnung und zusätzlichen Inventarzeile im Godot-Fenster.
+
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.

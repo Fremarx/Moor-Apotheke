@@ -213,4 +213,4 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt d
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-CONTENT-001 vorbereiten: Schilfwurzel und Nachtmoos, zwei passende Rezepte und Marten/Lene in kleinen, testbaren Inhaltsschnitten planen.
+Der erweiterte Vertical Slice wird in getrennten Backlogpunkten umgesetzt: Schilfwurzel sammeln und trocknen, den stärkenden Aufguss sowie Martens Auftrag ergänzen, anschließend Nachtmoos und Nachttrank samt Lenes Auftrag einführen. Auftragsbrett und Münzbelohnung folgen als eigene Schritte. So wird jede neue Zutat, Verarbeitung oder Aufgabe gegen die bestehende Kernschleife geprüft.

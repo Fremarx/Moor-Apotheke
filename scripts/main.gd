@@ -4,6 +4,7 @@ extends Node2D
 @onready var _inventory: Node = $Inventory
 @onready var _fenja_quest: Node = $Quest/FenjaQuest
 @onready var _inventory_count: Label = $HUD/InventoryCount
+@onready var _reed_root_count: Label = $HUD/ReedRootCount
 @onready var _dried_mint_count: Label = $HUD/DriedMintCount
 @onready var _tea_count: Label = $HUD/TeaCount
 @onready var _quest_status: Label = $HUD/QuestStatus
@@ -52,6 +53,8 @@ func _on_interaction_completed(feedback_text: String) -> void:
 func _on_item_count_changed(item_id: String, amount: int) -> void:
 	if item_id == "sump_mint":
 		_inventory_count.text = "Sumpfminze: %d" % amount
+	elif item_id == "reed_root":
+		_reed_root_count.text = "Schilfwurzel: %d" % amount
 	elif item_id == "dried_sump_mint":
 		_dried_mint_count.text = "Getrocknete Minze: %d" % amount
 	elif item_id == "calming_tea":

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/test_map.gd" id="1_map"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="2_interactable"]
@@ -11,6 +11,9 @@
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sumpfminze"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_schilfwurzel"]
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_drying_rack"]
@@ -71,6 +74,19 @@ item_id = "sump_mint"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sumpfminze"]
 shape = SubResource("CircleShape2D_sumpfminze")
+
+[node name="Schilfwurzel" type="Area2D" parent="."]
+position = Vector2(450, 119)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_herb_pickup")
+display_name = "Schilfwurzel"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst eine Schilfwurzel."
+item_id = "reed_root"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Schilfwurzel"]
+shape = SubResource("CircleShape2D_schilfwurzel")
 
 [node name="Trockengestell" type="Area2D" parent="."]
 position = Vector2(160, 198)

@@ -5,16 +5,16 @@ Stand: 30.09.2026
 ## Project Status
 
 ### Aktuelle Phase
-Phase 5 – Lesbarkeit und Stil
+Phase 6 – Inhaltserweiterung
 
 ### Zuletzt bearbeiteter Task
-UX-001 – Nächstes Ziel entlang der Sumpfminze-zu-Tee-Schleife anzeigen.
+CONTENT-001a – Schilfwurzel sammeln und eigenen HUD-Bestand anzeigen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE.
 
 ### Fortschritt
-Die erste Herstellungskette und Fenjas Auftrag sind spielbar; während der Aufgabe zeigt das HUD nach jedem Herstellungsschritt das nächste Ziel.
+Die erste Herstellungskette und Fenjas Auftrag sind spielbar. Sumpfminze und Schilfwurzel lassen sich getrennt sammeln und zählen; die weiteren Inhalte werden als kleine, einzeln prüfbare Schritte ergänzt.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -25,9 +25,10 @@ Die erste Herstellungskette und Fenjas Auftrag sind spielbar; während der Aufga
 - **LOOP-002:** Braukessel verbraucht eine getrocknete Minze und stellt mit unbegrenzt verfügbarem Wasser einen Beruhigungstee her.
 - **QUEST-001:** Fenja nimmt den Auftrag an, verbraucht bei der Abgabe genau einen Beruhigungstee und zeigt den Abschluss dauerhaft in der laufenden Partie.
 - **UX-001:** Das dauerhafte HUD-Ziel führt vom Sammeln über Trocknen und Brauen bis zur Abgabe.
+- **CONTENT-001a:** Schilfwurzel als eigene Sammelpflanze, Inventar-ID und HUD-Zähler ergänzt.
 
 ### Als Nächstes
-CONTENT-001 – weitere Kräuter, Rezepte und Bewohner planen.
+LOOP-003 – Schilfwurzel am Trockengestell verarbeiten und als getrocknete Zutat anzeigen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -57,6 +58,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - QUEST-001-Headless-Test, alle bisherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - UX-001-Headless-Test prüft das Ziel vor Annahme, nach jedem Inventar-/Verarbeitungsschritt und nach dem Abschluss; QUEST-001 sowie frühere Schleifen bestehen als Regressionen.
 - UX-001-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- CONTENT-001a-Headless-Test sowie alle sechs vorherigen Tests, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - Sichtprüfung von Fenja, Quest-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen; die Tests bestätigen Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
 
 ### Sicherheitsstatus
@@ -114,7 +116,17 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | LOOP-002 | Getrocknete Minze und Wasser zu Beruhigungstee verarbeiten | P1 | LOOP-001 | DONE |
 | QUEST-001 | Fenjas Bitte annehmen, Tee abgeben und Abschluss anzeigen | P1 | LOOP-002 | DONE |
 | UX-001 | Kernablauf auf Lesbarkeit prüfen und Rückmeldungen ergänzen | P2 | QUEST-001 | DONE |
-| CONTENT-001 | Schilfwurzel, Nachtmoos, zwei weitere Rezepte, Marten, Lene und Auftragsbrett | P2 | UX-001 | PLANNED |
+| CONTENT-001 | Erweiterter Vertical Slice als kleine, unabhängig prüfbare Inhalte | P2 | UX-001 | IN PROGRESS |
+| CONTENT-001a | Schilfwurzel sammeln, als eigene Pflanze darstellen und im HUD zählen | P2 | UX-001 | DONE |
+| LOOP-003 | Schilfwurzel am Trockengestell verarbeiten | P2 | CONTENT-001a | PLANNED |
+| LOOP-004 | Stärkenden Aufguss aus getrockneter Schilfwurzel und Sumpfminze brauen; nach Fenjas Auftrag freischalten | P2 | LOOP-003, QUEST-001 | PLANNED |
+| QUEST-002 | Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen | P2 | LOOP-004 | PLANNED |
+| CONTENT-001b | Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen | P2 | QUEST-002 | PLANNED |
+| LOOP-005 | Nachtmoos am Trockengestell verarbeiten | P2 | CONTENT-001b | PLANNED |
+| LOOP-006 | Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen; nach Martens Auftrag freischalten | P2 | LOOP-005, QUEST-002 | PLANNED |
+| QUEST-003 | Lenes Bitte um einen Nachttrank annehmen und erfüllen | P2 | LOOP-006 | PLANNED |
+| BOARD-001 | Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen | P2 | QUEST-002, QUEST-003 | PLANNED |
+| ECON-001 | Einfache Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen | P2 | BOARD-001 | PLANNED |
 | SAVE-001 | Position, Inventar und Questfortschritt speichern und laden | P2 | QUEST-001 | PLANNED |
 | EXP-001 | Jahreszeiten, weitere Gebiete und Automatisierung nach Spieltest neu priorisieren | P3 | CONTENT-001, SAVE-001 | PLANNED |
 | REL-001 | Exportziel wählen, Exportvorlagen einrichten, Release-Checkliste ergänzen | P3 | stabile Kernschleife | PLANNED |
@@ -172,6 +184,14 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Quest-/UX-Headless-Tests und Regressionen, Editorimport sowie 60-Frame-Laufzeittest bestehen.
 - Sichtprüfung im Godot-Fenster und Test mit neuen Spielenden bleiben als spätere manuelle Validierung offen.
 
+### CONTENT-001a Abnahmekriterien
+- Am Schilfufer gibt es eine interaktive Schilfwurzel mit unterscheidbarem Pixel-Platzhalter und eigenem Inventar-ID `reed_root`.
+- Der E-Hinweis benennt Schilfwurzel und Sammelaktion; außerhalb der Reichweite kann sie nicht aufgenommen werden.
+- Einsammeln erhöht ausschließlich den Schilfwurzelbestand um eins, aktualisiert „Schilfwurzel: N“ im HUD und entfernt die Pflanze aus der Karte.
+- Erneute Interaktion kann dieselbe Pflanze nicht ein zweites Mal aufnehmen; Sumpfminze-Bestand und Anzeige bleiben unverändert.
+- Ein eigener Headless-Test prüft Bestand, Hinweis, HUD, einmalige Aufnahme und Trennung von Sumpfminze.
+- Verarbeitung der Schilfwurzel und die übrigen Pflanzen, Rezepte, Bewohner, Auftragsbrett und Münzen bleiben eigene Folgepunkte.
+
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -218,3 +238,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | LOOP-002: Braukessel, Beruhigungstee und vollständige Sumpfminze-zu-Tee-Schleife ergänzt; Headless-, Import- und Laufzeitprüfungen bestanden. |
 | 30.09.2026 | QUEST-001: Fenjas Auftrag, Laufzeitstatus, Teeabgabe und Abschluss-HUD ergänzt; Feature- und Regressionstests bestanden. |
 | 30.09.2026 | UX-001: Quest-HUD leitet durch Sammeln, Trocknen, Brauen und Abgabe; End-to-End- und Regressionstests bestanden. |
+| 30.09.2026 | CONTENT-001a: Schilfwurzel als eigene Sammelpflanze samt Inventar-/HUD-Zähler ergänzt; Headless-Test zuerst rot und nach Implementierung grün. |

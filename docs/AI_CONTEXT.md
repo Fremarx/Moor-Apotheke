@@ -20,7 +20,9 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - ITEM-001 ist umgesetzt: Sumpfminze einmalig sammeln, Bestand im Inventar führen und im HUD anzeigen.
 - LOOP-001 ist umgesetzt: E am Trockengestell wandelt eine frische Sumpfminze in getrocknete Minze um.
 - LOOP-002 ist umgesetzt: Der Braukessel wandelt eine getrocknete Sumpfminze in Beruhigungstee um; Wasser steht dort unbegrenzt bereit.
-- Nächster Backlogpunkt: QUEST-001 – Fenjas Bitte um Beruhigungstee annehmen und erfüllen.
+- QUEST-001 und UX-001 sind abgeschlossen; Fenjas Kernauftrag führt vom Sammeln bis zur Abgabe.
+- CONTENT-001a ist abgeschlossen: Schilfwurzel als eigenständiges Pickup mit Inventarbestand und HUD-Zähler.
+- Nächster Backlogpunkt: LOOP-003 – Schilfwurzel am Trockengestell verarbeiten.
 - Erster Kernablauf: Sumpfminze → trocknen → Beruhigungstee → Fenja.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
