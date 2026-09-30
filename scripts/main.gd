@@ -20,6 +20,7 @@ extends Node2D
 @onready var _night_moss_count: Label = $HUD/NightMossCount
 @onready var _dried_night_moss_count: Label = $HUD/DriedNightMossCount
 @onready var _night_potion_count: Label = $HUD/NightPotionCount
+@onready var _coin_count: Label = $HUD/CoinCount
 @onready var _quest_status: Label = $HUD/QuestStatus
 @onready var _interaction_prompt: Label = $HUD/InteractionPrompt
 @onready var _interaction_feedback: Label = $HUD/InteractionFeedback
@@ -170,7 +171,9 @@ func _on_interaction_completed(feedback_text: String) -> void:
 
 
 func _on_item_count_changed(item_id: String, amount: int) -> void:
-	if item_id == "sump_mint":
+	if item_id == "coins":
+		_coin_count.text = "Münzen: %d" % amount
+	elif item_id == "sump_mint":
 		_inventory_count.text = "Sumpfminze: %d" % amount
 	elif item_id == "reed_root":
 		_reed_root_count.text = "Schilfwurzel: %d" % amount

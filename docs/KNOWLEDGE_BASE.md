@@ -58,6 +58,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 - **30.09.2026 – LOOP-006:** Der Nachttrank nutzt die bestehende RecipeDefinition-Resource für Zutaten, Ergebnis und Questfreischaltung. Main leitet Martens Status über die vorhandene Szenen- und Signalstruktur an den Braukessel weiter; ein Label zeigt das Produkt. Es kam keine neue Engine-API hinzu.
 - **30.09.2026 – QUEST-003:** Lene nutzt die bestehende Quest-, NPC-, Signal- und Inventarstruktur; Main injiziert Martens Quest als Freischaltbedingung. Die aktive Quest leitet das HUD aus den Inventarbeständen ab. Es wurde keine neue Godot-API eingeführt.
 
+- 30.09.2026 – ECON-001: Die Münzanzeige verwendet das bestehende item_count_changed-Signal und ein Godot-Label; die Questgutschrift nutzt Inventory.add_item. Keine neue Engine-API oder Abhängigkeit kommt hinzu. Quellen: https://docs.godotengine.org/en/4.7/classes/class_signal.html und https://docs.godotengine.org/en/4.7/classes/class_label.html.
+
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.
 - API-Details vor der Implementierung gegen die passende 4.7-Seite prüfen.

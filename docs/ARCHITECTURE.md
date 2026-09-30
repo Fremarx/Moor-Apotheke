@@ -33,6 +33,7 @@ Main (Node2D, main.gd)
     ├── NightMossCount
     ├── DriedNightMossCount
     ├── NightPotionCount
+    ├── CoinCount
     ├── QuestStatus
     ├── InteractionPrompt
     ├── InteractionFeedback
@@ -64,6 +65,8 @@ QUEST-002 ergänzt `MartenQuest` und Marten als zweiten interaktiven Bewohner. M
 
 BOARD-001 ergänzt `QuestBoard` als Interaktions-Area2D. Das Brett meldet über `open_requested`, dass Main sein `QuestBoardPanel` anzeigen soll. Main aktualisiert die drei Zeilen aus den Questzuständen und fragt `can_accept()` ab; nur verfügbare, noch nicht angenommene Aufträge werden aktiv. Die Questkomponenten stellen `accept()` bereit und behalten NPC-Interaktion für die spätere Abgabe. Im geöffneten Panel pausieren Bewegung und Weltinteraktion; Tastaturfokus, Escape und Schließen-Schaltfläche werden vom UI/Main-Fluss behandelt. Statussignale aktualisieren Brett, HUD und NPC-Hinweise.
 
+ECON-001 hält die Startbelohnungen als Konstanten in den Questkomponenten: Fenja zahlt 5, Marten 10 und Lene 15 Münzen. Eine Quest schreibt die Belohnung erst gut, nachdem das Inventar das Heilmittel erfolgreich entfernt hat; der Wechsel auf completed verhindert weitere Auszahlungen. Das Inventar verbucht coins und löst das bereits verwendete item_count_changed-Signal aus; Main aktualisiert CoinCount. Eine fehlgeschlagene Abgabe verändert den Münzbestand nicht. Queststatus und Münzen bleiben bis SAVE-001 Laufzeitdaten.
+
 LOOP-005 ergänzt als dritte Stufe `night_moss` → `dried_night_moss`. Das Trockengestell versucht weiterhin Sumpfminze zuerst, danach Schilfwurzel und zuletzt Nachtmoos. Die vorhandene atomare `Inventory.transfer_item`-Übertragung aktualisiert beide Bestände samt Signal; Main zeigt den getrockneten Bestand in `DriedNightMossCount`. Bei leerem Vorrat nennt das Feedback alle drei zulässigen Pflanzen.
 
 LOOP-006 ergänzt night_potion als RecipeDefinition mit je einer getrockneten Schilfwurzel und einem getrockneten Nachtmoos. Der Braukessel schaltet das Rezept erst nach Abschluss von Martens Auftrag frei. Main übergibt beim Start beide Queststatus an die Verarbeitungsstationen und leitet spätere Marten-Änderungen weiter. craft_items verbraucht beide Zutaten atomar; NightPotionCount zeigt das Ergebnis.
@@ -86,7 +89,7 @@ Szenen sollen möglichst wenig über feste Pfade auf Geschwister zugreifen. Elte
 - Interaktives Objekt: eigene Aktion ausführen und Erfolg melden.
 - Inventory: Mengenbestände verwalten und Änderungen signalisieren.
 - Station: Verarbeitung ausführen; UI bleibt separat.
-- Quest: Annahme, benötigtes Produkt und Abschlussstatus verwalten.
+- Quest: Annahme, benötigtes Produkt, Abschlussstatus und einmalige Belohnung verwalten.
 - HUD: Spielzustand darstellen, nicht eigenständig verändern.
 
 ## Erster Datenfluss
@@ -109,14 +112,15 @@ flowchart LR
   Fenja --> Quest
   Player --> Marten[Marten ansprechen und Aufguss abgeben]
   Marten --> MartenQuest
+  MartenQuest -->|Aufguss abgeben + 10 Münzen| Inventory
   MartenQuest -->|state_changed| HUDQuest
   MartenQuest -->|Abschluss schaltet frei| LeneQuest
-  Quest -->|einen Tee abgeben| Inventory
-  Inventory --> HUD[Inventaranzeige]
+  Quest -->|Tee abgeben + 5 Münzen| Inventory
+  Inventory --> HUD[Inventar- und Münzanzeige]
   Quest -->|state_changed| HUDQuest[Auftragsstatus]
   Player --> Lene[Lene ansprechen und Trank abgeben]
   Lene --> LeneQuest
-  LeneQuest -->|einen Nachttrank abgeben| Inventory
+  LeneQuest -->|Nachttrank abgeben + 15 Münzen| Inventory
   LeneQuest -->|state_changed| HUDQuest
 ~~~
 
@@ -146,6 +150,7 @@ Aufträge werden am Brett angenommen und weiterhin direkt bei Fenja, Marten oder
 - Das Spiel liegt eigenständig in `Fremarx/Moor-Apotheke`. Eine spätere Zusammenführung mit dem früher verwendeten 2DGame-Repo wäre eine eigene Migrationsentscheidung.
 
 ## Engine-Dokumentation
+ECON-001 nutzt das bestehende Inventaränderungssignal, um CoinCount zu aktualisieren; die verwendete Signal- und Label-API ist in der versionierten [Signal-Referenz](https://docs.godotengine.org/en/4.7/classes/class_signal.html) und [Label-Referenz](https://docs.godotengine.org/en/4.7/classes/class_label.html) dokumentiert. Es kommt keine neue Engine-API hinzu.
 Das Auftragsbrett nutzt vorläufige Pixelzeichnung und ein textbasiertes HUD; die visuelle Prüfung im Spielmaßstab steht noch aus.
 
 Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Für CORE-001 wurden [2D-Bewegung](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html), [CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) und [Input-Beispiele](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) verwendet. Weitere Quellen betreffen Szenenorganisation, TileSets und Resources.

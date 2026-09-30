@@ -8,13 +8,13 @@ Stand: 30.09.2026
 Phase 6 – Inhaltserweiterung
 
 ### Zuletzt bearbeiteter Task
-BOARD-001 – Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge.
+ECON-001 – Münzbelohnungen für erfüllte Bewohneraufträge anzeigen und verbuchen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE.
 
 ### Fortschritt
-Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die drei Bewohnerbitten, schaltet Folgeaufträge nach Abschluss der vorherigen Bitte frei und trennt Annahme am Brett von Abgabe bei den Bewohnern.
+Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -34,9 +34,10 @@ Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanze
 - **LOOP-006:** Der Braukessel verarbeitet nach Martens Auftrag getrocknete Schilfwurzel und Nachtmoos gemeinsam zu einem Nachttrank.
 - **QUEST-003:** Lene bietet nach Martens Abschluss ihre Bitte an; das Quest-HUD führt durch Sammeln, Trocknen und Brauen, und die Abgabe verbraucht genau einen Nachttrank.
 - **BOARD-001:** Das Auftragsbrett zeigt Fenjas, Martens und Lenes Bitte; verfügbare Aufträge lassen sich am Brett annehmen und die Abgabe bleibt bei den Bewohnern.
+- **ECON-001:** Erfolgreiche Abgaben zahlen einmalig 5/10/15 Münzen; Inventar und HUD zeigen den aktuellen Bestand.
 
 ### Als Nächstes
-ECON-001 – Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen.
+SAVE-001 – Position, Inventar und Questfortschritt speichern und laden.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -142,7 +143,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | LOOP-006 | Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen; nach Martens Auftrag freischalten | P2 | LOOP-005, QUEST-002 | DONE |
 | QUEST-003 | Lenes Bitte um einen Nachttrank annehmen und erfüllen | P2 | LOOP-006 | DONE |
 | BOARD-001 | Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen | P2 | QUEST-002, QUEST-003 | DONE |
-| ECON-001 | Einfache Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen | P2 | BOARD-001 | PLANNED |
+| ECON-001 | Einfache Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen | P2 | BOARD-001 | DONE |
 | SAVE-001 | Position, Inventar und Questfortschritt speichern und laden | P2 | QUEST-001 | PLANNED |
 | EXP-001 | Jahreszeiten, weitere Gebiete und Automatisierung nach Spieltest neu priorisieren | P3 | CONTENT-001, SAVE-001 | PLANNED |
 | REL-001 | Exportziel wählen, Exportvorlagen einrichten, Release-Checkliste ergänzen | P3 | stabile Kernschleife | PLANNED |
@@ -274,6 +275,13 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Der Headless-Test prüft Sperre/Freigabe, atomare Zutatenverarbeitung, wiederholtes Brauen und HUD; alle vorherigen Schleifen bestehen als Regressionen.
 - Sichtprüfung des neuen HUD-Zählers und Brauablaufs im Godot-Fenster bleibt separat dokumentiert.
 
+### ECON-001 Abnahmekriterien – erledigt
+- Fenja, Marten und Lene zahlen nach erfolgreicher Abgabe jeweils 5, 10 und 15 Münzen; nur nach erfolgreichem Entfernen des Heilmittels wird die Belohnung verbucht.
+- Die Rückmeldung nennt den Betrag; der Bestand coins und die HUD-Zeile „Münzen: N“ aktualisieren sich sofort.
+- Fehlende Heilmittel und wiederholte Interaktion nach Abschluss zahlen keine Münzen ein zweites Mal.
+- Ein Headless-Test prüft Startstand, alle drei Beträge, Feedback, HUD, fehlgeschlagene Abgaben und Einmaligkeit; frühere Tests bestehen als Regressionen.
+- Münzbestand und Questzustände bleiben bis SAVE-001 laufzeitgebunden.
+
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -329,3 +337,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | LOOP-006: Nachttrank-Rezept an Martens Abschluss gebunden, atomare Mehrzutatenverarbeitung und eigener HUD-Zähler ergänzt; Featuretest rot/grün, alle dreizehn Headless-Tests, Editorimport und Startcheck bestanden. |
 | 30.09.2026 | QUEST-003: Lenes Folgeauftrag, HUD-Führung durch beide Zutatenketten und genau-ein-Nachttrank-Abgabe ergänzt; Featuretest rot/grün, alle vierzehn Headless-Tests, Editorimport und Startcheck bestanden. |
 | 30.09.2026 | BOARD-001: Auftragsbrett mit Statusanzeige und Verfügbarkeitsregeln ergänzt; Annahme dorthin verlegt, direkte NPC-Abgabe erhalten; 15 Headless-Tests, Editorimport und Startcheck bestanden. |
+| 30.09.2026 | ECON-001: einmalige Questbelohnungen von 5/10/15 Münzen und HUD-Zähler ergänzt; neuer Headless-Test rot/grün, alle 16 Tests, Editorimport und 60-Frame-Startlauf bestanden. |

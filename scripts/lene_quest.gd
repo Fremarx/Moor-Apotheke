@@ -5,6 +5,7 @@ signal state_changed(state: String)
 const STATE_NOT_ACCEPTED := "not_accepted"
 const STATE_ACTIVE := "active"
 const STATE_COMPLETED := "completed"
+const REWARD_COINS := 15
 
 var state: String = STATE_NOT_ACCEPTED
 var _inventory: Node
@@ -48,7 +49,8 @@ func interact() -> String:
 			return "Lene braucht noch einen Nachttrank."
 
 		_set_state(STATE_COMPLETED)
-		return "Danke für den Nachttrank. Lenes Bitte ist erfüllt."
+		_inventory.call("add_item", "coins", REWARD_COINS)
+		return "Danke für den Nachttrank. Lenes Bitte ist erfüllt. Du erhältst %d Münzen." % REWARD_COINS
 
 	return "Lene dankt dir noch einmal."
 

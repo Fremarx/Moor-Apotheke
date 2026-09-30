@@ -65,9 +65,9 @@ Ziel ist ein kurzer, vollständiger Spielabschnitt, in dem eine Person vom Verla
 
 ### Umfang in zwei Stufen
 
-**Erster Kernablauf:** Fenjas Bitte am Auftragsbrett annehmen, eine Sumpfminze sammeln, am Trockengestell verarbeiten, am Braukessel einen Beruhigungstee herstellen und den Tee Fenja direkt geben. Das Brett zeigt auch spätere Bewohneraufträge und deren Freischaltung. Ein einfaches Bestätigungsfeedback reicht als erste Belohnung; seltene Pflanzen, Vertrauenssystem und Münzbelohnungen sind zusätzliche Ausbauschritte.
+**Erster Kernablauf:** Fenjas Bitte am Auftragsbrett annehmen, eine Sumpfminze sammeln, am Trockengestell verarbeiten, am Braukessel einen Beruhigungstee herstellen und den Tee Fenja direkt geben. Das Brett zeigt auch spätere Bewohneraufträge und ihre Freischaltung. Bei erfolgreicher Abgabe erhält man fünf Münzen; seltene Pflanzen und ein Vertrauenssystem sind zusätzliche Ausbauschritte.
 
-**Erweiterter Vertical Slice:** Danach folgen Schilfwurzel, Nachtmoos, zwei weitere Rezepte, Marten, Lene und eine einfache Münzbelohnung. Diese Erweiterungen verwenden dieselbe getestete Kernschleife.
+**Erweiterter Vertical Slice:** Schilfwurzel, Nachtmoos, zwei weitere Rezepte sowie Marten und Lene erweitern die Kernschleife. Ihre Aufträge zahlen 10 beziehungsweise 15 Münzen; die Belohnungswerte sind Startwerte und können beim Spielen angepasst werden.
 
 ### Inhalt
 
@@ -116,7 +116,7 @@ Die Rezeptmengen sind Startwerte und werden beim Spielen angepasst. Eine Sumpfmi
 | Marten, der Torfstecher | 1 stärkender Aufguss | Nutzt zwei Pflanzenarten und führt die Bewohner-Auftragskette fort |
 | Lene, die Dorfheilerin | 1 Nachttrank | Führt zum seltenen Fund am alten Steg und schließt den Ausschnitt ab |
 
-Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenja nimmt den Tee direkt entgegen. Nach der Annahme zeigt das HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss bis zum Ende der laufenden Partie sichtbar. Der Queststatus wird in diesem ersten Slice noch nicht gespeichert. Münzen und Vertrauensfortschritt gehören zu einer späteren Ausbaustufe.
+Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenja nimmt den Tee direkt entgegen. Nach der Annahme zeigt das HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss bis zum Ende der laufenden Partie sichtbar und Fenja zahlt fünf Münzen. Marten zahlt zehn und Lene fünfzehn Münzen. Das Inventar führt Münzen unter coins und zeigt den Bestand im HUD. Queststatus und Münzen werden erst mit SAVE-001 gespeichert.
 
 ### Eingaben und Anzeigen
 
@@ -213,4 +213,4 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Sie wird am Auftragsbret
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-BOARD-001 ergänzt ein physisches Auftragsbrett mit Status für alle drei Bewohnerbitten. Verfügbare Aufträge werden dort angenommen; Heilmittel gehen weiterhin direkt an Fenja, Marten oder Lene. Als Nächstes folgt ECON-001 für Münzbelohnungen. So werden die Erweiterungen gegen die bestehende Kernschleife geprüft.
+ECON-001 ergänzt eine einmalige Münzbelohnung bei jeder erfolgreichen Abgabe: fünf für Fenja, zehn für Marten und fünfzehn für Lene. Als Nächstes folgt SAVE-001, damit Münzbestand und Fortschritt über Spielsitzungen hinweg erhalten bleiben.

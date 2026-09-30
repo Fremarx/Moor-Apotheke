@@ -143,6 +143,13 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - GREEN: Der BOARD-001-Test, alle bestehenden Quest-/Rezept-/Sammelregressionen, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
 - Offen: Sichtprüfung des gezeichneten Bretts, UI-Größe, Lesbarkeit und Tastaturfokus im Godot-Fenster.
 
+## ECON-001 – Münzbelohnungen
+- tests/econ_001_quest_rewards_test.gd prüft den Startbestand, erfolgreiche und fehlgeschlagene Abgaben für Fenja, Marten und Lene, die Beträge 5/10/15, Rückmeldung, HUD-Aktualisierung und Schutz vor doppelter Auszahlung.
+- RED: Der neue Test schlug vor der Implementierung erwartungsgemäß fehl, weil CoinCount noch nicht existierte.
+- GREEN: „ECON-001 quest reward checks passed.“; anschließend bestanden alle 16 Headless-Tests, der Godot-4.7.2-Editorimport und der 60-Frame-Startlauf.
+- Prüfbefehl für den Featuretest: Godot 4.7.2 --headless --path . --script res://tests/econ_001_quest_rewards_test.gd. Für die Regression wurden alle 16 GDScript-Testdateien einzeln im Headless-Modus gestartet.
+- Offen: Sichtprüfung der Münzzeile und ihrer Lesbarkeit im Godot-Fenster.
+
 ## Automatisierung und CI
 
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
