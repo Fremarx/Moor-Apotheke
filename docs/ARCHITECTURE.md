@@ -14,13 +14,14 @@ Die Startszene stellt Graybox-Karte und Platzhalterfigur zusammen:
 ~~~text
 Main (Node2D, main.gd)
 ├── World (Node2D)
-│   ├── TestMap (Node2D, Interaktionsprobe und Sumpfminze)
+│   ├── TestMap (Node2D, Interaktionsprobe, Sumpfminze und Trockengestell)
 │   └── Player (CharacterBody2D)
 │       ├── InteractionArea (Area2D)
 │       └── Camera2D
 ├── Inventory (Node)
 └── HUD (CanvasLayer)
     ├── InventoryCount
+    ├── DriedMintCount
     ├── InteractionPrompt
     ├── InteractionFeedback
     └── FeedbackTimer
@@ -30,7 +31,9 @@ Main (Node2D, main.gd)
 
 CORE-002 ergänzt eine wiederverwendbare Area2D-Interaktionsfläche am Player. Interaktive Ziele tragen die Gruppe `interactables` und stellen Hinweistext sowie `interact()` bereit. Der Player wählt das räumlich nächste Ziel und meldet Hinweis bzw. Ergebnis über Signale. Main verbindet diese Signale mit dem HUD; das Objekt führt seine eigene Aktion aus. Ein Autoload ist dafür nicht erforderlich.
 
-ITEM-001 ergänzt eine Sumpfminze-Area2D, die von `interactable.gd` erbt. Beim Einsammeln sendet sie `item_collected(item_id, amount)` und deaktiviert sich. Main verbindet die Sammelsignale mit dem lokalen `Inventory`-Node. Dieser verwaltet Mengen und sendet `item_count_changed`; Main aktualisiert damit `InventoryCount` im HUD. Das Inventar ist in diesem Slice flüchtiger Spielzustand und wird noch nicht gespeichert.
+ITEM-001 ergänzt eine Sumpfminze-Area2D, die von `interactable.gd` erbt. Beim Einsammeln sendet sie `item_collected(item_id, amount)` und deaktiviert sich. Main verbindet die Sammelsignale mit dem lokalen `Inventory`-Node. Dieser verwaltet Mengen und sendet `item_count_changed`; Main aktualisiert damit `InventoryCount` im HUD.
+
+LOOP-001 ergänzt das `Trockengestell` als spezialisierte Interaktions-Area2D. Main übergibt der Station beim Szenenaufbau das lokale Inventar. Bei E ruft die Station `Inventory.transfer_item("sump_mint", "dried_sump_mint", 1)` auf. Die Inventarkomponente prüft den Bestand vor der Änderung, aktualisiert beide Mengen und sendet anschließend beide Zählersignale. Die Station gibt bei Erfolg oder fehlender Zutat Text an den vorhandenen Interaktionsfluss zurück. Main zeigt `sump_mint` und `dried_sump_mint` über getrennte Labels `InventoryCount` und `DriedMintCount` an. Die Verarbeitung ist in diesem Slice sofort; Inventar und Stationszustand werden nicht gespeichert.
 
 Spätere eigenständige Szenen:
 - player/player.tscn: Bewegung, Kollision, Sprite/Animation und Kamera.
@@ -88,7 +91,7 @@ Im ersten Slice wird der Auftrag direkt bei Fenja angenommen und abgegeben. Das 
 - Keine Konten oder Secrets; fremde Add-ons und Assets prüfen.
 
 ## Bekannte Einschränkungen
-- Noch keine Stations- oder Auftragslogik, Save-/Load-Logik, finale Pixelgrafik oder Exportprofile.
+- LOOP-001 nutzt eine direkt in der Testkarte gezeichnete Trocknungsstation; eine eigenständige wiederverwendbare Stationsszene, Trocknungszeit, Produktionsanimation, Auftragslogik, Save-/Load-Logik, finale Pixelgrafik und Exportprofile fehlen noch.
 - Das Spiel liegt eigenständig in `Fremarx/Moor-Apotheke`. Eine spätere Zusammenführung mit dem früher verwendeten 2DGame-Repo wäre eine eigene Migrationsentscheidung.
 
 ## Engine-Dokumentation

@@ -3,6 +3,7 @@ extends Node2D
 @onready var _player: Node = $World/Player
 @onready var _inventory: Node = $Inventory
 @onready var _inventory_count: Label = $HUD/InventoryCount
+@onready var _dried_mint_count: Label = $HUD/DriedMintCount
 @onready var _interaction_prompt: Label = $HUD/InteractionPrompt
 @onready var _interaction_feedback: Label = $HUD/InteractionFeedback
 @onready var _feedback_timer: Timer = $HUD/FeedbackTimer
@@ -17,6 +18,10 @@ func _ready() -> void:
 	for pickup in get_tree().get_nodes_in_group("item_pickups"):
 		if pickup.has_signal("item_collected"):
 			pickup.item_collected.connect(_inventory.add_item)
+
+	for station in get_tree().get_nodes_in_group("processing_stations"):
+		if station.has_method("set_inventory"):
+			station.set_inventory(_inventory)
 
 
 func _on_interaction_hint_changed(prompt_text: String) -> void:
@@ -36,6 +41,8 @@ func _on_interaction_completed(feedback_text: String) -> void:
 func _on_item_count_changed(item_id: String, amount: int) -> void:
 	if item_id == "sump_mint":
 		_inventory_count.text = "Sumpfminze: %d" % amount
+	elif item_id == "dried_sump_mint":
+		_dried_mint_count.text = "Getrocknete Minze: %d" % amount
 
 
 func _on_feedback_timer_timeout() -> void:

@@ -18,7 +18,8 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - CORE-001 ist umgesetzt: Graybox-Moorfläche, Platzhalterfigur, Kamera, WASD-/Pfeiltastensteuerung und einfache Hindernisse.
 - CORE-002 ist umgesetzt: E-Interaktion mit Reichweitenprüfung, Auswahl des nächsten Ziels, kontextuellem HUD-Hinweis und grauer Kräuterprobe.
 - ITEM-001 ist umgesetzt: Sumpfminze einmalig sammeln, Bestand im Inventar führen und im HUD anzeigen.
-- Nächster Backlogpunkt: LOOP-001 – Sumpfminze am Trockengestell verarbeiten.
+- LOOP-001 ist umgesetzt: E am Trockengestell wandelt eine frische Sumpfminze in getrocknete Minze um; beide Bestände erscheinen getrennt im HUD.
+- Nächster Backlogpunkt: LOOP-002 – Getrocknete Minze und Wasser zu Beruhigungstee verarbeiten.
 - Erster Kernablauf: Sumpfminze → trocknen → Beruhigungstee → Fenja.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 

@@ -36,6 +36,14 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: ITEM-001- und CORE-002-Headless-Tests, Godot-4.7.2-Headless-Editorimport und 60-Frame-Startszene ohne Parser- oder Laufzeitfehler.
 - Offen: Sichtprüfung der Pflanzendarstellung und Inventaranzeige im Godot-Fenster.
 
+## LOOP-001 – Sumpfminze am Trockengestell verarbeiten
+- Erledigt: `tests/loop_001_drying_rack_test.gd` prüft leeren Startbestand, verständliche Fehlermeldung ohne frische Minze, Aufnahme der Zutat, zwei 1:1-Verarbeitungsschritte, beide HUD-Zähler und erneute Ablehnung ohne Vorrat.
+- Prüfbefehl: `godot --headless --path . --script res://tests/loop_001_drying_rack_test.gd`
+- RED: Vor der Umsetzung fehlten das Trockengestell und der Zähler für getrocknete Minze; der neue Test schlug an diesen erwarteten Stellen fehl.
+- GREEN: LOOP-001-Test sowie ITEM-001- und CORE-002-Regressionstests bestanden.
+- Erledigt: Godot-4.7.2-Headless-Editorimport und 60-Frame-Startlauf ohne Parser- oder Laufzeitfehler.
+- Offen: Sichtprüfung von Station, Interaktionshinweis und beiden Inventarzählern im Godot-Fenster.
+
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.

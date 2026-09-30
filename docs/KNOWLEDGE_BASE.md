@@ -37,6 +37,7 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 - **30.09.2026 – CORE-001:** 2D-Bewegung: `CharacterBody2D` mit `Input.get_vector()` für normalisierte Richtungssteuerung; CharacterBody2D: Bewegung in `_physics_process()` mit `move_and_slide()`, für Top-down-Bewegung `MOTION_MODE_FLOATING`; Input-Beispiele: benannte Aktionen in der Project Input Map statt Tastencodes im Bewegungs-Skript.
 - **30.09.2026 – CORE-002:** Area2D definiert einen Überlappungsbereich; der Player fragt darin interaktive Ziele ab und wählt das nächste. Die benannte Aktion interact wird in _unhandled_input() verarbeitet, damit GUI-Elemente Eingaben zuerst behandeln können.
 - **30.09.2026 – ITEM-001:** Area2D wird als nicht blockierender Sammelbereich verwendet und nach Aufnahme deaktiviert. Das Pickup-Skript leitet sich über `extends` vom Interaktionsskript ab und meldet `item_id` sowie Anzahl per Signal an Inventory.
+- **30.09.2026 – LOOP-001:** Die Trocknungsstation nutzt dieselbe Area2D-Interaktionsbasis und liefert das Ergebnis über den bestehenden Interaktionsrückgabewert. Inventory führt eine atomare Mengenübertragung aus und sendet `item_count_changed` für Quell- und Zielgegenstand. Dafür waren die bereits gelisteten Godot-4.7-Quellen zu Area2D, Signalen und GDScript-Vererbung ausreichend; keine neue Engine-API eingeführt.
 
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.
