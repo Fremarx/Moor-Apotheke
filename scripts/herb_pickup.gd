@@ -25,6 +25,10 @@ func interact() -> String:
 
 
 func _draw() -> void:
+	if item_id == "night_moss":
+		_draw_night_moss()
+		return
+
 	if item_id == "reed_root":
 		_draw_reed_root()
 		return
@@ -58,3 +62,15 @@ func _draw_reed_root() -> void:
 	draw_rect(Rect2(Vector2(-4, 4), Vector2(7, 1)), Color("c19a64"))
 	draw_rect(Rect2(Vector2(-2, 1), Vector2(2, 2)), Color("d0ad74"))
 	draw_rect(Rect2(Vector2(3, 2), Vector2(2, 2)), Color("d0ad74"))
+
+
+func _draw_night_moss() -> void:
+	# A low, damp blue-green cluster reads differently from the upright herbs.
+	draw_rect(Rect2(Vector2(-10, 5), Vector2(20, 3)), Color("35443d"))
+	draw_rect(Rect2(Vector2(-9, 1), Vector2(18, 6)), Color("344b42"))
+	draw_rect(Rect2(Vector2(-7, -1), Vector2(7, 5)), Color("426456"))
+	draw_rect(Rect2(Vector2(-2, -4), Vector2(8, 7)), Color("3c5b50"))
+	draw_rect(Rect2(Vector2(4, -2), Vector2(7, 5)), Color("496c5b"))
+	draw_rect(Rect2(Vector2(-6, 0), Vector2(3, 2)), Color("7e9b74"))
+	draw_rect(Rect2(Vector2(0, -3), Vector2(3, 2)), Color("9aac7c"))
+	draw_rect(Rect2(Vector2(6, -1), Vector2(3, 2)), Color("83a287"))

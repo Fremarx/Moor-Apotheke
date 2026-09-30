@@ -10,6 +10,7 @@ func _ready() -> void:
 	_add_solid_rect(Rect2(Vector2.ZERO, Vector2(WALL_THICKNESS, MAP_SIZE.y)))
 	_add_solid_rect(Rect2(Vector2(MAP_SIZE.x - WALL_THICKNESS, 0), Vector2(WALL_THICKNESS, MAP_SIZE.y)))
 	_add_solid_rect(Rect2(Vector2(429, 16), Vector2(181, 91)))
+	_add_solid_rect(Rect2(Vector2(533, 82), Vector2(27, 31)))
 
 	# Blocked patches are simple placeholders for future rocks, roots, and reeds.
 	_add_solid_rect(Rect2(Vector2(134, 108), Vector2(28, 22)))
@@ -32,6 +33,7 @@ func _add_solid_rect(rect: Rect2) -> void:
 func _draw() -> void:
 	_draw_ground()
 	_draw_pond()
+	_draw_old_peat_dock()
 	_draw_path()
 	_draw_obstacles()
 	_draw_reeds()
@@ -64,6 +66,23 @@ func _draw_pond() -> void:
 	draw_line(Vector2(549, 98), Vector2(573, 105), Color("82916d"), 3.0)
 	for ripple in [Vector2(472, 48), Vector2(539, 66), Vector2(584, 41)]:
 		draw_line(ripple, ripple + Vector2(12, 0), Color("6f8580"), 1.0)
+
+
+func _draw_old_peat_dock() -> void:
+	draw_colored_polygon(
+		PackedVector2Array([
+			Vector2(516, 111), Vector2(545, 107), Vector2(575, 120),
+			Vector2(566, 151), Vector2(538, 158), Vector2(516, 140)
+		]),
+		Color("4b5a48")
+	)
+	draw_rect(Rect2(Vector2(531, 79), Vector2(30, 35)), Color("3c3d33"))
+	draw_rect(Rect2(Vector2(534, 79), Vector2(23, 31)), Color("735c40"))
+	for y in [84.0, 91.0, 98.0, 105.0]:
+		draw_line(Vector2(534, y), Vector2(557, y + 1), Color("4c4437"), 2.0)
+	draw_rect(Rect2(Vector2(532, 79), Vector2(3, 38)), Color("554733"))
+	draw_rect(Rect2(Vector2(556, 80), Vector2(3, 35)), Color("5b4a35"))
+	draw_line(Vector2(539, 84), Vector2(552, 84), Color("917550"), 1.0)
 
 
 func _draw_path() -> void:

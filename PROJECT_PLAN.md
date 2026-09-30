@@ -8,13 +8,13 @@ Stand: 30.09.2026
 Phase 6 – Inhaltserweiterung
 
 ### Zuletzt bearbeiteter Task
-QUEST-002 – Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen.
+CONTENT-001b – Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE.
 
 ### Fortschritt
-Die erste Herstellungskette, Fenjas Auftrag und Martens Folgeauftrag sind spielbar. Nach Fenjas Auftrag wird der stärkende Aufguss aus getrockneter Sumpfminze und Schilfwurzel braubar; Marten nimmt ihn als nächsten Auftrag entgegen.
+Die erste Herstellungskette, Fenjas und Martens Aufträge sowie drei sammelbare Pflanzen sind spielbar. Nachtmoos wächst als seltener Fund am schattigen Torfsteg; Trocknung und Weiterverarbeitung kommen als nächste Schritte.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -29,9 +29,10 @@ Die erste Herstellungskette, Fenjas Auftrag und Martens Folgeauftrag sind spielb
 - **LOOP-003:** Trockengestell verarbeitet frische Sumpfminze zuerst und danach frische Schilfwurzel; beide erhalten getrennte getrocknete Bestände.
 - **LOOP-004:** Beruhigungstee und stärkender Aufguss sind datengetriebene Rezepte; der Aufguss wird nach Fenjas Auftrag freigeschaltet und verbraucht beide Zutaten gemeinsam.
 - **QUEST-002:** Marten bietet nach Fenjas Abschluss den Folgeauftrag an, nimmt genau einen stärkenden Aufguss an und zeigt den Fortschritt im Quest-HUD.
+- **CONTENT-001b:** Einmalig sammelbares Nachtmoos am schattigen Torfsteg mit eigenem Inventarbestand und HUD-Zähler ergänzt.
 
 ### Als Nächstes
-CONTENT-001b – Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen.
+LOOP-005 – Nachtmoos am Trockengestell verarbeiten.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -65,7 +66,8 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - LOOP-003-Headless-Test, sämtliche vorherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - LOOP-004-Headless-Test, sämtliche vorherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - QUEST-002-Headless-Test sowie alle bisherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
-- Sichtprüfung von Fenja, Marten, Quest-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen; die Tests bestätigen Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
+- CONTENT-001b-Headless-Test sowie alle zehn bisherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- Sichtprüfung von Pflanzen, NPCs, Quest-/Inventar-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen; die Tests bestätigen Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
 
 ### Sicherheitsstatus
 Kleines lokales Einzelspielerprojekt ohne Konto, Netzwerkdienst oder personenbezogene Nutzerdaten. Für spätere Spielstände gilt: nur benötigte Daten in user:// speichern und geladene Werte validieren. Fremde Add-ons und Assets vor Übernahme prüfen; Zugangsdaten gehören nicht ins Repository.
@@ -127,7 +129,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | LOOP-003 | Schilfwurzel am Trockengestell verarbeiten und als getrocknete Zutat anzeigen | P2 | CONTENT-001a | DONE |
 | LOOP-004 | Stärkenden Aufguss aus getrockneter Schilfwurzel und Sumpfminze brauen; nach Fenjas Auftrag freischalten | P2 | LOOP-003, QUEST-001 | DONE |
 | QUEST-002 | Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen | P2 | LOOP-004 | DONE |
-| CONTENT-001b | Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen | P2 | QUEST-002 | PLANNED |
+| CONTENT-001b | Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen | P2 | QUEST-002 | DONE |
 | LOOP-005 | Nachtmoos am Trockengestell verarbeiten | P2 | CONTENT-001b | PLANNED |
 | LOOP-006 | Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen; nach Martens Auftrag freischalten | P2 | LOOP-005, QUEST-002 | PLANNED |
 | QUEST-003 | Lenes Bitte um einen Nachttrank annehmen und erfüllen | P2 | LOOP-006 | PLANNED |
@@ -197,6 +199,14 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Erneute Interaktion kann dieselbe Pflanze nicht ein zweites Mal aufnehmen; Sumpfminze-Bestand und Anzeige bleiben unverändert.
 - Ein eigener Headless-Test prüft Bestand, Hinweis, HUD, einmalige Aufnahme und Trennung von Sumpfminze.
 - Verarbeitung der Schilfwurzel und die übrigen Pflanzen, Rezepte, Bewohner, Auftragsbrett und Münzen bleiben eigene Folgepunkte.
+
+### CONTENT-001b Abnahmekriterien
+- Am schattigen alten Torfsteg wächst ein einmalig sammelbares Nachtmoos mit einer dunklen, klar unterscheidbaren Pixel-Platzhaltergrafik.
+- Der E-Hinweis nennt Nachtmoos und die Sammelaktion; außerhalb der Interaktionsreichweite kann es nicht aufgenommen werden.
+- Einsammeln erhöht ausschließlich den Bestand `night_moss` um eins, aktualisiert „Nachtmoos: N“ im HUD und entfernt die Pflanze aus der Karte.
+- Erneute Interaktion kann dasselbe Nachtmoos nicht noch einmal aufnehmen; Sumpfminze- und Schilfwurzelbestand bleiben unverändert.
+- Ein eigener Headless-Test deckt Fundstelle, Reichweite, Inventar-ID, HUD, Einmaligkeit und Trennung der Bestände ab; frühere Inhalte bestehen als Regressionen.
+- Trocknung und Verwendung in einem Rezept bleiben LOOP-005 und LOOP-006 vorbehalten.
 
 ### LOOP-003 Abnahmekriterien
 - Das Trockengestell verarbeitet genau eine frische Schilfwurzel zu einer getrockneten Schilfwurzel pro E-Druck.
@@ -271,3 +281,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | LOOP-003: Schilfwurzel im Trockengestell verarbeitet, frischen und getrockneten HUD-Zähler ergänzt; Headless-Test zuerst rot und danach grün. |
 | 30.09.2026 | LOOP-004: zweites Rezept als Resource ergänzt, Freischaltung an Fenjas Abschluss gebunden und atomare Mehrzutatenverarbeitung samt HUD umgesetzt; Headless-Test rot/grün. |
 | 30.09.2026 | QUEST-002: Martens Folgeauftrag, genau-ein-Aufguss-Abgabe und HUD-Führung ergänzt; Headless-Test rot/grün, Regressionen, Editorimport und Startcheck bestanden. |
+| 30.09.2026 | CONTENT-001b: Nachtmoos am schattigen Torfsteg als eigenes Pickup mit Inventar-ID und HUD-Zähler ergänzt; Headless-Test rot/grün und Regressionen bestanden. |
