@@ -8,13 +8,13 @@ Stand: 30.09.2026
 Phase 6 – Inhaltserweiterung
 
 ### Zuletzt bearbeiteter Task
-LOOP-003 – Schilfwurzel am Trockengestell verarbeiten und als getrocknete Zutat anzeigen.
+LOOP-004 – Stärkenden Aufguss aus getrockneter Schilfwurzel und Sumpfminze brauen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE.
 
 ### Fortschritt
-Die erste Herstellungskette und Fenjas Auftrag sind spielbar. Sumpfminze und Schilfwurzel lassen sich getrennt sammeln, zählen und am Trockengestell einzeln verarbeiten; die weiteren Inhalte werden als kleine, einzeln prüfbare Schritte ergänzt.
+Die erste Herstellungskette und Fenjas Auftrag sind spielbar. Nach Fenjas Auftrag wird der stärkende Aufguss aus getrockneter Sumpfminze und Schilfwurzel braubar; die weiteren Inhalte werden als kleine, einzeln prüfbare Schritte ergänzt.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -27,9 +27,10 @@ Die erste Herstellungskette und Fenjas Auftrag sind spielbar. Sumpfminze und Sch
 - **UX-001:** Das dauerhafte HUD-Ziel führt vom Sammeln über Trocknen und Brauen bis zur Abgabe.
 - **CONTENT-001a:** Schilfwurzel als eigene Sammelpflanze, Inventar-ID und HUD-Zähler ergänzt.
 - **LOOP-003:** Trockengestell verarbeitet frische Sumpfminze zuerst und danach frische Schilfwurzel; beide erhalten getrennte getrocknete Bestände.
+- **LOOP-004:** Beruhigungstee und stärkender Aufguss sind datengetriebene Rezepte; der Aufguss wird nach Fenjas Auftrag freigeschaltet und verbraucht beide Zutaten gemeinsam.
 
 ### Als Nächstes
-LOOP-004 – Stärkenden Aufguss aus getrockneter Schilfwurzel und Sumpfminze brauen.
+QUEST-002 – Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -61,6 +62,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - UX-001-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - CONTENT-001a-Headless-Test sowie alle sechs vorherigen Tests, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - LOOP-003-Headless-Test, sämtliche vorherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- LOOP-004-Headless-Test, sämtliche vorherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - Sichtprüfung von Fenja, Quest-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen; die Tests bestätigen Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
 
 ### Sicherheitsstatus
@@ -121,7 +123,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | CONTENT-001 | Erweiterter Vertical Slice als kleine, unabhängig prüfbare Inhalte | P2 | UX-001 | IN PROGRESS |
 | CONTENT-001a | Schilfwurzel sammeln, als eigene Pflanze darstellen und im HUD zählen | P2 | UX-001 | DONE |
 | LOOP-003 | Schilfwurzel am Trockengestell verarbeiten und als getrocknete Zutat anzeigen | P2 | CONTENT-001a | DONE |
-| LOOP-004 | Stärkenden Aufguss aus getrockneter Schilfwurzel und Sumpfminze brauen; nach Fenjas Auftrag freischalten | P2 | LOOP-003, QUEST-001 | PLANNED |
+| LOOP-004 | Stärkenden Aufguss aus getrockneter Schilfwurzel und Sumpfminze brauen; nach Fenjas Auftrag freischalten | P2 | LOOP-003, QUEST-001 | DONE |
 | QUEST-002 | Martens Bitte um einen stärkenden Aufguss annehmen und erfüllen | P2 | LOOP-004 | PLANNED |
 | CONTENT-001b | Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen | P2 | QUEST-002 | PLANNED |
 | LOOP-005 | Nachtmoos am Trockengestell verarbeiten | P2 | CONTENT-001b | PLANNED |
@@ -201,6 +203,13 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Ohne frische Zutat werden keine Bestände geändert und die Rückmeldung nennt beide akzeptierten Pflanzen.
 - LOOP-001 und die restlichen Kernschleifen bestehen unverändert als Regressionen.
 
+### LOOP-004 Abnahmekriterien
+- Beruhigungstee bleibt vor und nach Fenjas Auftrag als Startrezept verfügbar.
+- Der stärkende Aufguss benötigt genau eine getrocknete Sumpfminze und eine getrocknete Schilfwurzel und ist vor Fenjas abgeschlossenem Auftrag gesperrt.
+- Nach Fenjas Abschluss verbraucht ein erfolgreicher Brauvorgang beide Zutaten zusammen und erzeugt genau einen Aufguss; fehlende Zutaten verursachen keinen Teilverbrauch.
+- Beide Rezepte sind als Godot-Resources definiert; Inventar, Freischaltung, Feedback und Ergebnisanzeige bleiben getrennte Zuständigkeiten.
+- Ein eigener Headless-Test prüft Rezeptfreischaltung, Zutatenverbrauch, Ergebnis-HUD und atomare Mehrzutatenverarbeitung.
+
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -249,3 +258,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | UX-001: Quest-HUD leitet durch Sammeln, Trocknen, Brauen und Abgabe; End-to-End- und Regressionstests bestanden. |
 | 30.09.2026 | CONTENT-001a: Schilfwurzel als eigene Sammelpflanze samt Inventar-/HUD-Zähler ergänzt; Headless-Test zuerst rot und nach Implementierung grün. |
 | 30.09.2026 | LOOP-003: Schilfwurzel im Trockengestell verarbeitet, frischen und getrockneten HUD-Zähler ergänzt; Headless-Test zuerst rot und danach grün. |
+| 30.09.2026 | LOOP-004: zweites Rezept als Resource ergänzt, Freischaltung an Fenjas Abschluss gebunden und atomare Mehrzutatenverarbeitung samt HUD umgesetzt; Headless-Test rot/grün. |

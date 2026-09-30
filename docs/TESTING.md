@@ -89,6 +89,15 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: alle acht Headless-Tests (LOOP-003 und sieben Regressionen), Godot-4.7.2-Editorimport und 60-Frame-Startlauf.
 - Offen: Sichtprüfung der erweiterten HUD-Zeilen im Godot-Fenster.
 
+## LOOP-004 – Stärkenden Aufguss brauen
+- `tests/loop_004_strengthening_infusion_test.gd` prüft Startbestand, den weiterhin braubaren Beruhigungstee vor Fenjas Abschluss, die gesperrte Aufguss-Rückmeldung, Questannahme/-abschluss und den Aufguss danach.
+- Der Test prüft außerdem genau einen Verbrauch jeder getrockneten Zutat, Produkt-/Zähleranzeige und dass eine fehlende Mehrzutat keinerlei Teilverbrauch oder Ergebnis erzeugt.
+- RED: Vor der Implementierung fehlte der `InfusionCount`-Knoten.
+- GREEN: `LOOP-004 strengthening infusion checks passed.` nach Resource-, Inventar- und Kesselimplementierung.
+- Prüfbefehl: `godot --headless --path . --script res://tests/loop_004_strengthening_infusion_test.gd`.
+- Erledigt: alle neun Headless-Tests (LOOP-004 und acht Regressionen), Godot-4.7.2-Editorimport und 60-Frame-Startlauf.
+- Offen: Sichtprüfung des erweiterten HUD und des gesperrten Rezeptfeedbacks im Godot-Fenster.
+
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.

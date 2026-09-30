@@ -45,6 +45,39 @@ func transfer_item(source_id: String, destination_id: String, amount: int = 1) -
 	return true
 
 
+func craft_items(ingredients: Dictionary, result_id: String, result_amount: int = 1) -> bool:
+	if ingredients.is_empty() or result_id.is_empty() or result_amount <= 0:
+		return false
+	if ingredients.has(result_id):
+		return false
+
+	var ingredient_ids: Array[String] = []
+	for raw_item_id in ingredients.keys():
+		if typeof(raw_item_id) != TYPE_STRING:
+			return false
+		var item_id := str(raw_item_id)
+		var required_amount: Variant = ingredients[raw_item_id]
+		if item_id.is_empty() or typeof(required_amount) != TYPE_INT or int(required_amount) <= 0:
+			return false
+		if get_count(item_id) < int(required_amount):
+			return false
+		ingredient_ids.append(item_id)
+
+	var changed_counts: Dictionary[String, int] = {}
+	for item_id in ingredient_ids:
+		var next_count := get_count(item_id) - int(ingredients[item_id])
+		_store_count(item_id, next_count)
+		changed_counts[item_id] = next_count
+
+	var next_result_count := get_count(result_id) + result_amount
+	_store_count(result_id, next_result_count)
+	changed_counts[result_id] = next_result_count
+
+	for item_id in changed_counts:
+		item_count_changed.emit(item_id, changed_counts[item_id])
+	return true
+
+
 func get_count(item_id: String) -> int:
 	return _items.get(item_id, 0)
 

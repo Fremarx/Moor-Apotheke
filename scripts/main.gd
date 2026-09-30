@@ -8,6 +8,7 @@ extends Node2D
 @onready var _dried_mint_count: Label = $HUD/DriedMintCount
 @onready var _dried_reed_root_count: Label = $HUD/DriedReedRootCount
 @onready var _tea_count: Label = $HUD/TeaCount
+@onready var _infusion_count: Label = $HUD/InfusionCount
 @onready var _quest_status: Label = $HUD/QuestStatus
 @onready var _interaction_prompt: Label = $HUD/InteractionPrompt
 @onready var _interaction_feedback: Label = $HUD/InteractionFeedback
@@ -29,6 +30,8 @@ func _ready() -> void:
 	for station in get_tree().get_nodes_in_group("processing_stations"):
 		if station.has_method("set_inventory"):
 			station.set_inventory(_inventory)
+		if station.has_method("set_quest_state"):
+			station.set_quest_state("fenja", str(_fenja_quest.get("state")))
 
 	for quest_npc in get_tree().get_nodes_in_group("quest_npcs"):
 		if quest_npc.has_method("set_quest"):
@@ -62,11 +65,16 @@ func _on_item_count_changed(item_id: String, amount: int) -> void:
 		_dried_reed_root_count.text = "Getrocknete Schilfwurzel: %d" % amount
 	elif item_id == "calming_tea":
 		_tea_count.text = "Beruhigungstee: %d" % amount
+	elif item_id == "strengthening_infusion":
+		_infusion_count.text = "Stärkender Aufguss: %d" % amount
 
 	_update_quest_status()
 
 
-func _on_quest_state_changed(_state: String) -> void:
+func _on_quest_state_changed(state: String) -> void:
+	for station in get_tree().get_nodes_in_group("processing_stations"):
+		if station.has_method("set_quest_state"):
+			station.set_quest_state("fenja", state)
 	_update_quest_status()
 	_player.call("refresh_interactable_prompt")
 

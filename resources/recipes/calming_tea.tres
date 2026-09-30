@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/recipe_definition.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+recipe_id = "calming_tea"
+ingredients = {"dried_sump_mint": 1}
+result_item_id = "calming_tea"
+success_feedback = "Der Beruhigungstee ist fertig."
+missing_feedback = "Du brauchst getrocknete Sumpfminze für den Beruhigungstee."

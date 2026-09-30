@@ -1,6 +1,11 @@
 extends "res://scripts/interactable.gd"
 
+const STRENGTHENING_RECIPE: Resource = preload("res://resources/recipes/strengthening_infusion.tres")
+const CALMING_TEA_RECIPE: Resource = preload("res://resources/recipes/calming_tea.tres")
+
+var _recipes: Array[Resource] = [STRENGTHENING_RECIPE, CALMING_TEA_RECIPE]
 var _inventory: Node
+var _quest_states: Dictionary = {}
 
 
 func _ready() -> void:
@@ -12,15 +17,41 @@ func set_inventory(inventory: Node) -> void:
 	_inventory = inventory
 
 
+func set_quest_state(quest_id: String, state: String) -> void:
+	if quest_id.is_empty():
+		return
+	_quest_states[quest_id] = state
+
+
 func interact() -> String:
 	if not is_instance_valid(_inventory):
 		return "Der Braukessel ist gerade nicht erreichbar."
 
-	var brewed := bool(_inventory.call("transfer_item", "dried_sump_mint", "calming_tea", 1))
-	if not brewed:
-		return "Du brauchst getrocknete Sumpfminze für den Beruhigungstee."
+	for recipe in _recipes:
+		if not _is_recipe_unlocked(recipe):
+			continue
+		var brewed := bool(_inventory.call(
+			"craft_items",
+			recipe.get("ingredients"),
+			recipe.get("result_item_id"),
+			1
+		))
+		if brewed:
+			return str(recipe.get("success_feedback"))
 
-	return "Der Beruhigungstee ist fertig."
+	if int(_inventory.call("get_count", "dried_reed_root")) > 0:
+		if _is_recipe_unlocked(STRENGTHENING_RECIPE):
+			return str(STRENGTHENING_RECIPE.get("missing_feedback"))
+		return str(STRENGTHENING_RECIPE.get("locked_feedback"))
+
+	return str(CALMING_TEA_RECIPE.get("missing_feedback"))
+
+
+func _is_recipe_unlocked(recipe: Resource) -> bool:
+	var required_quest_id := str(recipe.get("required_quest_id"))
+	if required_quest_id.is_empty():
+		return true
+	return str(_quest_states.get(required_quest_id, "")) == str(recipe.get("required_quest_state"))
 
 
 func _draw() -> void:
