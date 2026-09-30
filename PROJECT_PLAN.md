@@ -8,13 +8,13 @@ Stand: 30.09.2026
 Phase 5 – Lesbarkeit und Stil
 
 ### Zuletzt bearbeiteter Task
-QUEST-001 – Fenjas Bitte annehmen, Beruhigungstee abgeben und Abschluss anzeigen.
+UX-001 – Nächstes Ziel entlang der Sumpfminze-zu-Tee-Schleife anzeigen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE.
 
 ### Fortschritt
-Projektgrundlage, Graybox-Karte, Spielerbewegung, E-Interaktion, die Herstellungskette bis zum Beruhigungstee und Fenjas erster Auftrag sind umgesetzt.
+Die erste Herstellungskette und Fenjas Auftrag sind spielbar; während der Aufgabe zeigt das HUD nach jedem Herstellungsschritt das nächste Ziel.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -24,9 +24,10 @@ Projektgrundlage, Graybox-Karte, Spielerbewegung, E-Interaktion, die Herstellung
 - **LOOP-001:** Trockengestell wandelt genau eine frische Sumpfminze pro E in getrocknete Minze um.
 - **LOOP-002:** Braukessel verbraucht eine getrocknete Minze und stellt mit unbegrenzt verfügbarem Wasser einen Beruhigungstee her.
 - **QUEST-001:** Fenja nimmt den Auftrag an, verbraucht bei der Abgabe genau einen Beruhigungstee und zeigt den Abschluss dauerhaft in der laufenden Partie.
+- **UX-001:** Das dauerhafte HUD-Ziel führt vom Sammeln über Trocknen und Brauen bis zur Abgabe.
 
 ### Als Nächstes
-UX-001 – Kernablauf auf Verständlichkeit und hilfreiche Rückmeldungen prüfen.
+CONTENT-001 – weitere Kräuter, Rezepte und Bewohner planen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -54,7 +55,9 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - LOOP-002-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden; Sichtprüfung des Braukessels und HUD steht noch aus.
 - QUEST-001-Headless-Test prüft Fenjas Bitte, HUD-Status, fehlenden Tee, Abgabe von genau einem Beruhigungstee, wiederholte Interaktion sowie gültige und ungültige `remove_item`-Aufrufe.
 - QUEST-001-Headless-Test, alle bisherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
-- Sichtprüfung von Fenja, Quest-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen.
+- UX-001-Headless-Test prüft das Ziel vor Annahme, nach jedem Inventar-/Verarbeitungsschritt und nach dem Abschluss; QUEST-001 sowie frühere Schleifen bestehen als Regressionen.
+- UX-001-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- Sichtprüfung von Fenja, Quest-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen; die Tests bestätigen Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
 
 ### Sicherheitsstatus
 Kleines lokales Einzelspielerprojekt ohne Konto, Netzwerkdienst oder personenbezogene Nutzerdaten. Für spätere Spielstände gilt: nur benötigte Daten in user:// speichern und geladene Werte validieren. Fremde Add-ons und Assets vor Übernahme prüfen; Zugangsdaten gehören nicht ins Repository.
@@ -110,7 +113,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | LOOP-001 | Minze am Trockengestell verarbeiten | P1 | ITEM-001 | DONE |
 | LOOP-002 | Getrocknete Minze und Wasser zu Beruhigungstee verarbeiten | P1 | LOOP-001 | DONE |
 | QUEST-001 | Fenjas Bitte annehmen, Tee abgeben und Abschluss anzeigen | P1 | LOOP-002 | DONE |
-| UX-001 | Kernablauf auf Lesbarkeit prüfen und Rückmeldungen ergänzen | P2 | QUEST-001 | PLANNED |
+| UX-001 | Kernablauf auf Lesbarkeit prüfen und Rückmeldungen ergänzen | P2 | QUEST-001 | DONE |
 | CONTENT-001 | Schilfwurzel, Nachtmoos, zwei weitere Rezepte, Marten, Lene und Auftragsbrett | P2 | UX-001 | PLANNED |
 | SAVE-001 | Position, Inventar und Questfortschritt speichern und laden | P2 | QUEST-001 | PLANNED |
 | EXP-001 | Jahreszeiten, weitere Gebiete und Automatisierung nach Spieltest neu priorisieren | P3 | CONTENT-001, SAVE-001 | PLANNED |
@@ -161,6 +164,14 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Queststatus wird in diesem Backlogpunkt nicht gespeichert; Belohnungen, weitere Bewohner und finale Fenja-Grafik bleiben späteren Punkten vorbehalten.
 - Godot-Editorimport und 60-Frame-Laufzeittest bestehen; manuelle Sichtprüfung im Godot-Fenster ist separat als offen dokumentiert.
 
+### UX-001 Abnahmekriterien – erledigt
+- Vor Annahme bleibt die Zielzeile verborgen; nach Annahme zeigt sie „Sammle eine Sumpfminze.“.
+- Frische Minze, getrocknete Minze und fertiger Tee führen nacheinander zu „Trockne die Sumpfminze.“, „Braue Beruhigungstee.“ und „Bringe Fenja den Beruhigungstee.“.
+- Nach der Abgabe bleibt „Aufgabe erfüllt: Fenjas Bitte.“ sichtbar.
+- Anleitung wird aus vorhandenem Inventarstatus abgeleitet; Rezepte, Interaktionsfeedback, Questbedingungen und Inventarregeln ändern sich nicht.
+- Quest-/UX-Headless-Tests und Regressionen, Editorimport sowie 60-Frame-Laufzeittest bestehen.
+- Sichtprüfung im Godot-Fenster und Test mit neuen Spielenden bleiben als spätere manuelle Validierung offen.
+
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -206,3 +217,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | LOOP-001: Trockengestell, atomare 1:1-Inventarverarbeitung und zweiter HUD-Zähler ergänzt; Headless-, Import- und Laufzeitprüfungen bestanden. |
 | 30.09.2026 | LOOP-002: Braukessel, Beruhigungstee und vollständige Sumpfminze-zu-Tee-Schleife ergänzt; Headless-, Import- und Laufzeitprüfungen bestanden. |
 | 30.09.2026 | QUEST-001: Fenjas Auftrag, Laufzeitstatus, Teeabgabe und Abschluss-HUD ergänzt; Feature- und Regressionstests bestanden. |
+| 30.09.2026 | UX-001: Quest-HUD leitet durch Sammeln, Trocknen, Brauen und Abgabe; End-to-End- und Regressionstests bestanden. |

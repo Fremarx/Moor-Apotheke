@@ -182,9 +182,10 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt d
 
 - Platzhalter durch eine zusammenhängende kleine Palette und einfache Pixelgrafiken ersetzen.
 - Rückmeldungen für Sammeln, Herstellen und Abgeben verbessern.
+- Während Fenjas Auftrag das nächste Ziel passend zum Inventar dauerhaft in der HUD anzeigen.
 - Kurze Umgebungsgeräusche und Musik ergänzen, sofern sie den Ablauf unterstützen.
 
-**Fertig, wenn:** Neue Spielende die Hauptschleife ohne Erklärung von außen verstehen.
+**In UX-001 umgesetzt:** Die aktive Aufgabe führt dauerhaft durch Sammeln, Trocknen, Brauen und Abgabe; kurze Interaktionsrückmeldungen bleiben ergänzend. Ob neue Spielende den Ablauf ohne Erklärung verstehen, muss noch manuell getestet werden.
 
 ### Phase 6 – Spieltest und Erweiterungsentscheidung
 
@@ -212,4 +213,4 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt d
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-UX-001: Den vollständigen Ablauf vom Sammeln bis zu Fenjas erfüllter Bitte im Spielmaßstab durchgehen, unklare Hinweise identifizieren und die wichtigsten Rückmeldungen gezielt verbessern.
+CONTENT-001 vorbereiten: Schilfwurzel und Nachtmoos, zwei passende Rezepte und Marten/Lene in kleinen, testbaren Inhaltsschnitten planen.

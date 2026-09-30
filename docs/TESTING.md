@@ -62,6 +62,16 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Offen: Sichtprüfung von Fenjas Platzhalterfigur, Queststatus-HUD und realer Tastaturinteraktion im Godot-Fenster.
 - Kein GDScript-Coverage-Werkzeug ist im Projekt eingerichtet; daher wird keine Coverage-Prozentzahl ausgewiesen.
 
+## UX-001 – Nächstes Ziel entlang der Herstellungskette
+- `tests/ux_001_core_loop_guidance_test.gd` spielt den gesamten Ablauf: Fenja ansprechen, Sumpfminze sammeln, trocknen, brauen und den Tee abgeben.
+- Der Test prüft die ausgeblendete Zielzeile vor Annahme und danach exakt jeden Zielwechsel: „Sammle eine Sumpfminze.“, „Trockne die Sumpfminze.“, „Braue Beruhigungstee.“, „Bringe Fenja den Beruhigungstee.“ und die bleibende Abschlussmeldung.
+- `tests/quest_001_fenja_quest_test.gd` prüft zusätzlich die Übergänge von „Sammle eine Sumpfminze.“ direkt zu „Bringe Fenja den Beruhigungstee.“, wenn bereits Tee im Inventar liegt.
+- RED: Vor der Implementierung scheiterten die neuen und erweiterten Prüfungen erwartungsgemäß an der statischen Zielzeile und den fehlenden Zielwechseln.
+- GREEN: `UX-001 core loop guidance checks passed.` und `QUEST-001 Fenja quest checks passed.`.
+- Prüfbefehl: `godot --headless --path . --script tests/ux_001_core_loop_guidance_test.gd`.
+- Erledigt: UX-001- und QUEST-001-Tests sowie LOOP-002-, LOOP-001-, ITEM-001- und CORE-002-Regressionsläufe, Godot-4.7.2-Editorimport und 60-Frame-Startlauf.
+- Offen: Sichtprüfung im Godot-Fenster und Beobachtung durch neue Spielende. Die automatisierten Tests belegen Zieltexte und Übergänge, nicht subjektive Verständlichkeit.
+
 ## Automatisierung und CI
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.

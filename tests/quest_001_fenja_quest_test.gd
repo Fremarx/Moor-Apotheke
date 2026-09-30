@@ -46,7 +46,7 @@ func _run() -> void:
 	_press_e(player)
 	_check(str(quest.get("state")) == "active", "interacting with Fenja accepts her request")
 	_check(quest_status.visible, "accepting the request shows the quest HUD")
-	_check(quest_status.text.contains("Beruhigungstee"), "the active quest names the needed tea")
+	_check(quest_status.text == "Sammle eine Sumpfminze.", "the active quest guides the player to collect fresh mint")
 	_check(feedback.text.contains("Beruhigungstee"), "Fenja confirms the request")
 	_check(prompt.text.contains("Abgeben"), "Fenja offers tea hand-in after acceptance")
 	_check(int(inventory.call("get_count", "calming_tea")) == 0, "accepting the quest consumes no tea")
@@ -58,6 +58,7 @@ func _run() -> void:
 
 	inventory.call("add_item", "calming_tea", 2)
 	_check(tea_count.text == "Beruhigungstee: 2", "adding tea updates its HUD count")
+	_check(quest_status.text == "Bringe Fenja den Beruhigungstee.", "the active objective changes when tea becomes available")
 	_press_e(player)
 	_check(str(quest.get("state")) == "completed", "giving Fenja tea completes the quest")
 	_check(int(inventory.call("get_count", "calming_tea")) == 1, "handing in tea consumes exactly one item")

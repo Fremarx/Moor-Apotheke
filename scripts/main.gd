@@ -32,6 +32,8 @@ func _ready() -> void:
 		if quest_npc.has_method("set_quest"):
 			quest_npc.set_quest(_fenja_quest)
 
+	_update_quest_status()
+
 
 func _on_interaction_hint_changed(prompt_text: String) -> void:
 	_interaction_prompt.text = prompt_text
@@ -55,16 +57,31 @@ func _on_item_count_changed(item_id: String, amount: int) -> void:
 	elif item_id == "calming_tea":
 		_tea_count.text = "Beruhigungstee: %d" % amount
 
+	_update_quest_status()
 
-func _on_quest_state_changed(state: String) -> void:
-	if state == "active":
-		_quest_status.text = "Aufgabe: Fenja braucht einen Beruhigungstee."
+
+func _on_quest_state_changed(_state: String) -> void:
+	_update_quest_status()
+	_player.call("refresh_interactable_prompt")
+
+
+func _update_quest_status() -> void:
+	var quest_state := str(_fenja_quest.get("state"))
+	if quest_state == "active":
+		if int(_inventory.call("get_count", "calming_tea")) > 0:
+			_quest_status.text = "Bringe Fenja den Beruhigungstee."
+		elif int(_inventory.call("get_count", "dried_sump_mint")) > 0:
+			_quest_status.text = "Braue Beruhigungstee."
+		elif int(_inventory.call("get_count", "sump_mint")) > 0:
+			_quest_status.text = "Trockne die Sumpfminze."
+		else:
+			_quest_status.text = "Sammle eine Sumpfminze."
 		_quest_status.show()
-	elif state == "completed":
+	elif quest_state == "completed":
 		_quest_status.text = "Aufgabe erfüllt: Fenjas Bitte."
 		_quest_status.show()
-
-	_player.call("refresh_interactable_prompt")
+	else:
+		_quest_status.hide()
 
 
 func _on_feedback_timer_timeout() -> void:
