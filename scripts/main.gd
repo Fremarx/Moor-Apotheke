@@ -5,6 +5,12 @@ extends Node2D
 @onready var _fenja_quest: Node = $Quest/FenjaQuest
 @onready var _marten_quest: Node = $Quest/MartenQuest
 @onready var _lene_quest: Node = $Quest/LeneQuest
+@onready var _quest_board: Area2D = $World/TestMap/QuestBoard
+@onready var _quest_board_panel: PanelContainer = $HUD/QuestBoardPanel
+@onready var _fenja_accept_button: Button = $HUD/QuestBoardPanel/Content/FenjaRow/AcceptButton
+@onready var _marten_accept_button: Button = $HUD/QuestBoardPanel/Content/MartenRow/AcceptButton
+@onready var _lene_accept_button: Button = $HUD/QuestBoardPanel/Content/LeneRow/AcceptButton
+@onready var _quest_board_close_button: Button = $HUD/QuestBoardPanel/Content/CloseButton
 @onready var _inventory_count: Label = $HUD/InventoryCount
 @onready var _reed_root_count: Label = $HUD/ReedRootCount
 @onready var _dried_mint_count: Label = $HUD/DriedMintCount
@@ -27,6 +33,11 @@ func _ready() -> void:
 	_fenja_quest.state_changed.connect(_on_quest_state_changed)
 	_marten_quest.state_changed.connect(_on_marten_quest_state_changed)
 	_lene_quest.state_changed.connect(_on_lene_quest_state_changed)
+	_quest_board.connect("open_requested", _on_quest_board_open_requested)
+	_fenja_accept_button.pressed.connect(_on_fenja_accept_pressed)
+	_marten_accept_button.pressed.connect(_on_marten_accept_pressed)
+	_lene_accept_button.pressed.connect(_on_lene_accept_pressed)
+	_quest_board_close_button.pressed.connect(_close_quest_board)
 	_feedback_timer.timeout.connect(_on_feedback_timer_timeout)
 	_fenja_quest.set_inventory(_inventory)
 	_marten_quest.set_inventory(_inventory)
@@ -53,6 +64,95 @@ func _ready() -> void:
 				quest_npc.set_quest(quests_by_id[quest_id])
 
 	_update_quest_status()
+	_refresh_quest_board()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if _quest_board_panel.visible and event.is_action_pressed("ui_cancel"):
+		_close_quest_board()
+		get_viewport().set_input_as_handled()
+
+
+func _on_quest_board_open_requested() -> void:
+	_refresh_quest_board()
+	_quest_board_panel.show()
+	_player.set_physics_process(false)
+	_player.set_process_unhandled_input(false)
+	if not _fenja_accept_button.disabled:
+		_fenja_accept_button.grab_focus()
+	elif not _marten_accept_button.disabled:
+		_marten_accept_button.grab_focus()
+	elif not _lene_accept_button.disabled:
+		_lene_accept_button.grab_focus()
+	else:
+		_quest_board_close_button.grab_focus()
+
+
+func _close_quest_board() -> void:
+	_quest_board_panel.hide()
+	_fenja_accept_button.release_focus()
+	_marten_accept_button.release_focus()
+	_lene_accept_button.release_focus()
+	_quest_board_close_button.release_focus()
+	_player.set_physics_process(true)
+	_player.set_process_unhandled_input(true)
+	_player.call_deferred("refresh_interactable_prompt")
+
+
+func _on_fenja_accept_pressed() -> void:
+	_accept_quest_from_board(
+		_fenja_quest,
+		"Fenja bittet dich um einen Beruhigungstee.",
+		"Fenjas Bitte kann gerade nicht angenommen werden."
+	)
+
+
+func _on_marten_accept_pressed() -> void:
+	_accept_quest_from_board(
+		_marten_quest,
+		"Marten bittet dich um einen stärkenden Aufguss.",
+		"Martens Bitte ist noch gesperrt. Hilf zuerst Fenja."
+	)
+
+
+func _on_lene_accept_pressed() -> void:
+	_accept_quest_from_board(
+		_lene_quest,
+		"Lene bittet dich um einen Nachttrank.",
+		"Lenes Bitte ist noch gesperrt. Hilf zuerst Marten."
+	)
+
+
+func _accept_quest_from_board(quest: Node, accepted_feedback: String, locked_feedback: String) -> void:
+	if bool(quest.call("accept")):
+		_on_interaction_completed(accepted_feedback)
+	else:
+		_on_interaction_completed(locked_feedback)
+	_refresh_quest_board()
+
+
+func _refresh_quest_board() -> void:
+	if not is_node_ready():
+		return
+	_refresh_quest_row(_fenja_accept_button, _fenja_quest)
+	_refresh_quest_row(_marten_accept_button, _marten_quest)
+	_refresh_quest_row(_lene_accept_button, _lene_quest)
+
+
+func _refresh_quest_row(button: Button, quest: Node) -> void:
+	var state := str(quest.get("state"))
+	if state == "active":
+		button.text = "In Arbeit"
+		button.disabled = true
+	elif state == "completed":
+		button.text = "Erledigt"
+		button.disabled = true
+	elif bool(quest.call("can_accept")):
+		button.text = "Annehmen"
+		button.disabled = false
+	else:
+		button.text = "Gesperrt"
+		button.disabled = true
 
 
 func _on_interaction_hint_changed(prompt_text: String) -> void:
@@ -97,11 +197,13 @@ func _on_quest_state_changed(state: String) -> void:
 		if station.has_method("set_quest_state"):
 			station.set_quest_state("fenja", state)
 	_update_quest_status()
+	_refresh_quest_board()
 	_player.call("refresh_interactable_prompt")
 
 
 func _on_lene_quest_state_changed(_state: String) -> void:
 	_update_quest_status()
+	_refresh_quest_board()
 	_player.call("refresh_interactable_prompt")
 
 
@@ -110,7 +212,9 @@ func _on_marten_quest_state_changed(state: String) -> void:
 		if station.has_method("set_quest_state"):
 			station.set_quest_state("marten", state)
 	_update_quest_status()
+	_refresh_quest_board()
 	_player.call("refresh_interactable_prompt")
+
 
 func _update_quest_status() -> void:
 	var quest_state := str(_fenja_quest.get("state"))

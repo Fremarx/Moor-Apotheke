@@ -14,7 +14,7 @@ Die Startszene stellt Graybox-Karte und Platzhalterfigur zusammen:
 ~~~text
 Main (Node2D, main.gd)
 ├── World (Node2D)
-│   ├── TestMap (Node2D, Interaktionsprobe, Sumpfminze, Schilfwurzel, Nachtmoos, Trockengestell, Braukessel, Fenja, Marten und Lene)
+│   ├── TestMap (Node2D, Interaktionsprobe, Pflanzen, Stationen, Bewohner und QuestBoard)
 │   └── Player (CharacterBody2D)
 │       ├── InteractionArea (Area2D)
 │       └── Camera2D
@@ -36,7 +36,9 @@ Main (Node2D, main.gd)
     ├── QuestStatus
     ├── InteractionPrompt
     ├── InteractionFeedback
-    └── FeedbackTimer
+    ├── FeedbackTimer
+    └── QuestBoardPanel
+        └── Content (VBoxContainer: Bewohneraufträge, Status und Aktionen)
 ~~~
 
 `TestMap` zeichnet die provisorische Moorfläche und stellt Begrenzungen sowie einige blockierte Stellen bereit. `Player` liest die benannten Richtungsaktionen aus der Input Map, bewegt sich als `CharacterBody2D` und führt die Kamera mit Kartengrenzen. Die Figuren- und Kartengrafik besteht bis zur Grafikphase aus einfachen gezeichneten Farbblöcken.
@@ -59,6 +61,8 @@ QUEST-002 ergänzt `MartenQuest` und Marten als zweiten interaktiven Bewohner. M
 
 
 `QUEST-003` ergänzt `LeneQuest` und Lene. Main injiziert das Inventar und Martens Quest; `LeneQuest.is_available()` schaltet den Folgeauftrag erst nach Martens Abschluss frei. Das HUD führt anhand der vorhandenen Inventarbestände durch Schilfwurzel und Nachtmoos bis zum Brauen und zur Abgabe. `Inventory.remove_item("night_potion", 1)` verbraucht genau einen Trank; die Wiederholungsinteraktion verändert den Bestand nicht.
+
+BOARD-001 ergänzt `QuestBoard` als Interaktions-Area2D. Das Brett meldet über `open_requested`, dass Main sein `QuestBoardPanel` anzeigen soll. Main aktualisiert die drei Zeilen aus den Questzuständen und fragt `can_accept()` ab; nur verfügbare, noch nicht angenommene Aufträge werden aktiv. Die Questkomponenten stellen `accept()` bereit und behalten NPC-Interaktion für die spätere Abgabe. Im geöffneten Panel pausieren Bewegung und Weltinteraktion; Tastaturfokus, Escape und Schließen-Schaltfläche werden vom UI/Main-Fluss behandelt. Statussignale aktualisieren Brett, HUD und NPC-Hinweise.
 
 LOOP-005 ergänzt als dritte Stufe `night_moss` → `dried_night_moss`. Das Trockengestell versucht weiterhin Sumpfminze zuerst, danach Schilfwurzel und zuletzt Nachtmoos. Die vorhandene atomare `Inventory.transfer_item`-Übertragung aktualisiert beide Bestände samt Signal; Main zeigt den getrockneten Bestand in `DriedNightMossCount`. Bei leerem Vorrat nennt das Feedback alle drei zulässigen Pflanzen.
 
@@ -97,22 +101,26 @@ flowchart LR
   Inventory --> Rack[Trockengestell]
   Rack --> Cauldron[Braukessel]
   Cauldron --> Inventory
-  Player --> Fenja[Fenja ansprechen]
-  Fenja --> Quest[Fenjas Auftrag]
-  Player --> Marten[Marten ansprechen]
-  Marten --> MartenQuest[Martens Auftrag]
+  Player --> Board[Auftragsbrett öffnen]
+  Board --> Quest[Fenjas Auftrag annehmen]
+  Board --> MartenQuest[Martens Auftrag annehmen]
+  Board --> LeneQuest[Lenes Auftrag annehmen]
+  Player --> Fenja[Fenja ansprechen und Tee abgeben]
+  Fenja --> Quest
+  Player --> Marten[Marten ansprechen und Aufguss abgeben]
+  Marten --> MartenQuest
   MartenQuest -->|state_changed| HUDQuest
   MartenQuest -->|Abschluss schaltet frei| LeneQuest
   Quest -->|einen Tee abgeben| Inventory
   Inventory --> HUD[Inventaranzeige]
   Quest -->|state_changed| HUDQuest[Auftragsstatus]
-  Player --> Lene[Lene ansprechen]
-  Lene --> LeneQuest[Lenes Auftrag]
+  Player --> Lene[Lene ansprechen und Trank abgeben]
+  Lene --> LeneQuest
   LeneQuest -->|einen Nachttrank abgeben| Inventory
   LeneQuest -->|state_changed| HUDQuest
 ~~~
 
-Der erste Kernauftrag wird direkt bei Fenja angenommen und abgegeben. Marten und Lene erweitern die Bewohnerkette; das Auftragsbrett zum Anzeigen und Annehmen bleibt ein eigener Backlogpunkt.
+Aufträge werden am Brett angenommen und weiterhin direkt bei Fenja, Marten oder Lene abgegeben. Marten und Lene werden nach Abschluss des jeweiligen Vorgängerauftrags am Brett freigeschaltet.
 
 ## Daten und Persistenz
 - Im ersten Slice bleibt die Datenmenge klein und explizit.
@@ -134,10 +142,14 @@ Der erste Kernauftrag wird direkt bei Fenja angenommen und abgegeben. Marten und
 - Keine Konten oder Secrets; fremde Add-ons und Assets prüfen.
 
 ## Bekannte Einschränkungen
-- Trockengestell, Braukessel sowie Fenja, Marten und Lene sind vorläufig direkt in der Testkarte gezeichnet; eigenständige Szenen, Produktionszeiten und Animationen, Auftragsbrett, Save-/Load-Logik, finale Pixelgrafik und Exportprofile fehlen noch.
+- Trockengestell, Braukessel sowie Fenja, Marten und Lene sind vorläufig direkt in der Testkarte gezeichnet; eigenständige Szenen, Produktionszeiten und Animationen, Save-/Load-Logik, finale Pixelgrafik und Exportprofile fehlen noch.
 - Das Spiel liegt eigenständig in `Fremarx/Moor-Apotheke`. Eine spätere Zusammenführung mit dem früher verwendeten 2DGame-Repo wäre eine eigene Migrationsentscheidung.
 
 ## Engine-Dokumentation
+Das Auftragsbrett nutzt vorläufige Pixelzeichnung und ein textbasiertes HUD; die visuelle Prüfung im Spielmaßstab steht noch aus.
+
 Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Für CORE-001 wurden [2D-Bewegung](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html), [CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) und [Input-Beispiele](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) verwendet. Weitere Quellen betreffen Szenenorganisation, TileSets und Resources.
+
+Für BOARD-001 wurden außerdem [Control](https://docs.godotengine.org/en/4.7/classes/class_control.html), [Button](https://docs.godotengine.org/en/4.7/classes/class_button.html) und die [GUI-Tastatur-/Controller-Navigation](https://docs.godotengine.org/en/4.7/tutorials/ui/gui_navigation.html) verwendet. Control verwaltet GUI-Eingabe und Fokus, Button stellt die Aktivierungsaktion bereit und die Navigation-Doku beschreibt Fokuswechsel zwischen Bedienelementen.
 
 Für CORE-002 wurden zusätzlich die versionierte [Area2D-Dokumentation](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) und die [Node-Klassenreferenz](https://docs.godotengine.org/en/4.7/classes/class_node.html) zur Overlap-Erkennung und Eingabeweitergabe herangezogen. ITEM-001 verwendet zudem die dokumentierte [Signal-API](https://docs.godotengine.org/en/4.7/classes/class_signal.html) und [GDScript-Vererbung](https://docs.godotengine.org/en/4.7/tutorials/scripting/gdscript/gdscript_basics.html). QUEST-001 verwendet außerdem die offizielle [Godot-4.7-Szenenorganisation](https://docs.godotengine.org/en/4.7/tutorials/best_practices/scene_organization.html) für die Übergabe von Abhängigkeiten über Main sowie die bestehende Signal-API für Statusänderungen. UX-001 aktualisiert ein bestehendes [Label](https://docs.godotengine.org/en/4.7/classes/class_label.html) über die Inventaränderungssignale; neue UI- oder Engine-Abhängigkeiten kommen nicht hinzu.

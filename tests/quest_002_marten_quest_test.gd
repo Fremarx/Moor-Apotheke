@@ -54,18 +54,18 @@ func _run() -> void:
 	_check(feedback.text.contains("Fenja"), "Marten explains that Fenja must be helped first")
 
 	inventory.call("add_item", "calming_tea", 1)
+	main.call("_on_fenja_accept_pressed")
+	_check(str(fenja_quest.get("state")) == "active", "Fenja's request can be accepted from the board")
 	await _move_near(player, fenja)
-	_press_e(player)
-	_check(str(fenja_quest.get("state")) == "active", "Fenja's request can still be accepted")
 	_press_e(player)
 	_check(str(fenja_quest.get("state")) == "completed", "Fenja's request can still be completed")
 	_check(int(inventory.call("get_count", "calming_tea")) == 0, "Fenja receives her tea")
 	_check(tea_count.text == "Beruhigungstee: 0", "Fenja's hand-in updates the tea HUD")
 
 	await _move_near(player, marten)
-	_check(prompt.text.contains("Annehmen"), "Marten offers his request after Fenja's is complete")
-	_press_e(player)
-	_check(str(marten_quest.get("state")) == "active", "talking to Marten accepts his request")
+	_check(prompt.text.contains("Sprechen"), "Marten directs available requests to the board")
+	main.call("_on_marten_accept_pressed")
+	_check(str(marten_quest.get("state")) == "active", "accepting Marten's request from the board starts his quest")
 	_check(quest_status.text == "Sammle eine Sumpfminze für Marten.", "the HUD starts with the first missing infusion ingredient")
 	_check(feedback.text.to_lower().contains("stärkenden aufguss"), "Marten names the requested infusion")
 

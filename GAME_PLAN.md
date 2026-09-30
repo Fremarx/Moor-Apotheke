@@ -33,7 +33,7 @@ Ein gemütliches 2D-Pixelart-Spiel über eine kleine Apotheke am Rand eines gehe
 
 ### Grafikumfang
 
-Für den ersten Kernablauf genügen eine Platzhalterfigur, eine kleine Außenfläche mit Ufer, Sumpfminze, Trockengestell, Braukessel und Fenja sowie eine einfache Anzeige für Aufgabe und Inventar. Das erweiterte Spiel kann später drei Pflanzen, weitere Orte, Figuren und ein Auftragsbrett ergänzen.
+Für den ersten Kernablauf genügen eine Platzhalterfigur, eine kleine Außenfläche mit Ufer, Sumpfminze, Trockengestell, Braukessel und Fenja sowie eine einfache Anzeige für Aufgabe und Inventar. Das erweiterte Spiel kann später drei Pflanzen und weitere Orte sowie Figuren ergänzen.
 
 ### Arbeitsweise mit Codex
 
@@ -65,13 +65,13 @@ Ziel ist ein kurzer, vollständiger Spielabschnitt, in dem eine Person vom Verla
 
 ### Umfang in zwei Stufen
 
-**Erster Kernablauf:** Eine Bitte direkt bei Fenja annehmen, eine Sumpfminze sammeln, am Trockengestell verarbeiten, am Braukessel einen Beruhigungstee herstellen und den Tee Fenja direkt geben. Ein einfaches Bestätigungsfeedback reicht als erste Belohnung. Das Auftragsbrett, seltene Pflanzen, Vertrauenssystem und Freischaltungen sind dafür noch nicht nötig.
+**Erster Kernablauf:** Fenjas Bitte am Auftragsbrett annehmen, eine Sumpfminze sammeln, am Trockengestell verarbeiten, am Braukessel einen Beruhigungstee herstellen und den Tee Fenja direkt geben. Das Brett zeigt auch spätere Bewohneraufträge und deren Freischaltung. Ein einfaches Bestätigungsfeedback reicht als erste Belohnung; seltene Pflanzen, Vertrauenssystem und Münzbelohnungen sind zusätzliche Ausbauschritte.
 
-**Erweiterter Vertical Slice:** Danach folgen Schilfwurzel, Nachtmoos, zwei weitere Rezepte, Marten, Lene, das Auftragsbrett und eine einfache Münzbelohnung. Diese Erweiterungen verwenden dieselbe getestete Kernschleife.
+**Erweiterter Vertical Slice:** Danach folgen Schilfwurzel, Nachtmoos, zwei weitere Rezepte, Marten, Lene und eine einfache Münzbelohnung. Diese Erweiterungen verwenden dieselbe getestete Kernschleife.
 
 ### Inhalt
 
-- **Erster Kernablauf:** eine kleine Außenfläche, eine steuerbare Figur, eine Sammelstelle für Sumpfminze, je eine Verarbeitungsstation und Fenja als Auftraggeberin. Inventar und Aufgabe werden einfach angezeigt.
+- **Erster Kernablauf:** eine kleine Außenfläche, eine steuerbare Figur, ein Auftragsbrett, eine Sammelstelle für Sumpfminze, je eine Verarbeitungsstation und Fenja als Auftraggeberin. Inventar und Aufgabe werden einfach angezeigt.
 - **Erweiterte Inhalte:** eine größere Moor-Karte mit Apotheke, Dorfweg und drei Sammelstellen; drei sammelbare Pflanzen:
   - **Sumpfminze** – häufig, Grundlage für beruhigende Mittel.
   - **Schilfwurzel** – wächst an nassen Ufern, Grundlage für stärkende Mittel.
@@ -80,7 +80,7 @@ Ziel ist ein kurzer, vollständiger Spielabschnitt, in dem eine Person vom Verla
   - **Trockengestell:** frische Pflanzen werden zu getrockneten Zutaten.
   - **Braukessel:** Zutaten werden nach einem Rezept zu einem Heilmittel verarbeitet.
 - Drei Rezepte, darunter ein einfaches Startrezept und zwei, die weitere Zutaten benötigen.
-- Drei Dorfbewohner-Aufträge mit unterschiedlichen Bedürfnissen.
+- Drei Dorfbewohner-Aufträge mit unterschiedlichen Bedürfnissen; Annahme am Auftragsbrett und Abgabe direkt beim jeweiligen Bewohner.
 - Inventar, Auftragsanzeige und eine einfache Belohnung in Münzen.
 - Eine kleine Verbesserung als Abschlussbelohnung, zum Beispiel ein größeres Trockengestell.
 
@@ -116,7 +116,7 @@ Die Rezeptmengen sind Startwerte und werden beim Spielen angepasst. Eine Sumpfmi
 | Marten, der Torfstecher | 1 stärkender Aufguss | Nutzt zwei Pflanzenarten und führt die Bewohner-Auftragskette fort |
 | Lene, die Dorfheilerin | 1 Nachttrank | Führt zum seltenen Fund am alten Steg und schließt den Ausschnitt ab |
 
-Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt die HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss bis zum Ende der laufenden Partie sichtbar. Der Queststatus wird in diesem ersten Slice noch nicht gespeichert. Münzen und Vertrauensfortschritt gehören zu einer späteren Ausbaustufe.
+Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenja nimmt den Tee direkt entgegen. Nach der Annahme zeigt das HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss bis zum Ende der laufenden Partie sichtbar. Der Queststatus wird in diesem ersten Slice noch nicht gespeichert. Münzen und Vertrauensfortschritt gehören zu einer späteren Ausbaustufe.
 
 ### Eingaben und Anzeigen
 
@@ -137,7 +137,7 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt d
 ## 6. Geplanter Ablauf im Spiel
 
 1. Eine Bewohnerin bittet um ein Mittel gegen Unwohlsein.
-2. Die Spielerin oder der Spieler nimmt Fenjas Bitte direkt bei ihr an.
+2. Die Spielerin oder der Spieler nimmt Fenjas Bitte am Auftragsbrett an.
 3. Sumpfminze wird im Moor gesammelt.
 4. Die Minze wird am Trockengestell verarbeitet.
 5. Das passende Rezept wird im Braukessel ausgewählt und hergestellt.
@@ -172,7 +172,7 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt d
 
 ### Phase 4 – Aufträge und Fortschritt
 
-- Fenjas Auftrag direkt bei ihr annehmen und das Heilmittel direkt bei ihr abgeben. Das Auftragsbrett und weitere Bewohner folgen später.
+- Fenjas Auftrag am Auftragsbrett annehmen und das Heilmittel direkt bei ihr abgeben. Das Brett führt die Folgeaufträge von Marten und Lene entsprechend ihren Freischaltbedingungen auf.
 - Fenja den Tee direkt geben und den Abschluss verständlich bestätigen.
 - Den Spielablauf vom Auftrag bis zur Bestätigung verbinden.
 
@@ -213,4 +213,4 @@ Fenjas Bitte hat im ersten Kernablauf keine Ablaufzeit. Nach der Annahme zeigt d
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-Der erweiterte Vertical Slice umfasst Schilfwurzel sammeln und trocknen, den stärkenden Aufguss, Martens Folgeauftrag, Nachtmoos sammeln und trocknen, den freigeschalteten Nachttrank sowie Lenes Bitte und die Abgabe. Als Nächstes folgt das Auftragsbrett; Münzbelohnung bleibt ein eigener Schritt. So wird jede neue Zutat, Verarbeitung oder Aufgabe gegen die bestehende Kernschleife geprüft.
+BOARD-001 ergänzt ein physisches Auftragsbrett mit Status für alle drei Bewohnerbitten. Verfügbare Aufträge werden dort angenommen; Heilmittel gehen weiterhin direkt an Fenja, Marten oder Lene. Als Nächstes folgt ECON-001 für Münzbelohnungen. So werden die Erweiterungen gegen die bestehende Kernschleife geprüft.

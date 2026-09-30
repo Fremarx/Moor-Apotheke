@@ -14,10 +14,20 @@ func set_inventory(inventory: Node) -> void:
 	_inventory = inventory
 
 
+func can_accept() -> bool:
+	return state == STATE_NOT_ACCEPTED
+
+
+func accept() -> bool:
+	if not can_accept():
+		return false
+	_set_state(STATE_ACTIVE)
+	return true
+
+
 func interact() -> String:
 	if state == STATE_NOT_ACCEPTED:
-		_set_state(STATE_ACTIVE)
-		return "Fenja bittet dich um einen Beruhigungstee."
+		return "Nimm Fenjas Bitte am Auftragsbrett an."
 
 	if state == STATE_ACTIVE:
 		if not is_instance_valid(_inventory):

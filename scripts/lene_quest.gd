@@ -23,13 +23,23 @@ func is_available() -> bool:
 	return is_instance_valid(_marten_quest) and str(_marten_quest.get("state")) == "completed"
 
 
+func can_accept() -> bool:
+	return state == STATE_NOT_ACCEPTED and is_available()
+
+
+func accept() -> bool:
+	if not can_accept():
+		return false
+	_set_state(STATE_ACTIVE)
+	return true
+
+
 func interact() -> String:
 	if not is_available():
 		return "Bitte hilf zuerst Marten mit seinem Auftrag."
 
 	if state == STATE_NOT_ACCEPTED:
-		_set_state(STATE_ACTIVE)
-		return "Lene bittet dich um einen Nachttrank."
+		return "Nimm Lenes Bitte am Auftragsbrett an."
 
 	if state == STATE_ACTIVE:
 		if not is_instance_valid(_inventory):

@@ -64,9 +64,9 @@ func _run() -> void:
 	_check(int(inventory.call("get_count", "dried_reed_root")) == 1, "a locked recipe consumes no root")
 	_check(feedback.text.contains("Fenjas Auftrag"), "the cauldron explains how to unlock the infusion")
 
+	main.call("_on_fenja_accept_pressed")
+	_check(str(quest.get("state")) == "active", "Fenja's request can be accepted from the board")
 	await _move_near(player, fenja)
-	_press_e(player)
-	_check(str(quest.get("state")) == "active", "talking to Fenja accepts her request")
 	_press_e(player)
 	_check(str(quest.get("state")) == "completed", "handing Fenja the tea completes her request")
 	_check(int(inventory.call("get_count", "calming_tea")) == 0, "Fenja consumes the calming tea")

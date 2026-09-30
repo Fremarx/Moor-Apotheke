@@ -19,7 +19,7 @@ func get_prompt_text() -> String:
 
 	var quest_state := str(_quest.get("state"))
 	if quest_state == "not_accepted":
-		return "[E] Annehmen: Lenes Bitte"
+		return "[E] Sprechen: Lene"
 	if quest_state == "active":
 		return "[E] Abgeben: Nachttrank"
 	return "[E] Sprechen: Lene"

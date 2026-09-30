@@ -136,6 +136,13 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - GREEN: `QUEST-003 Lene quest checks passed.`; alle vierzehn Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
 - Offen: Sichtprüfung von Lenes Platzhaltergrafik, Kartenposition und Quest-HUD im Godot-Fenster.
 
+## BOARD-001 – Auftragsbrett
+- tests/board_001_quest_board_test.gd prüft Interaktionsprompt und Öffnen, Status aller drei Aufträge, Freischaltung nach Vorgängerabschluss, Annahme am Brett, NPC-Abgabe, Fokus-/Inputpause, Escape und Schließen-Schaltfläche.
+- Die Questtests, der UX-Kernablauf sowie LOOP-004 und LOOP-006 wurden auf die Annahme am Brett umgestellt; NPCs bleiben für die Abgabe zuständig.
+- RED: Der neue Test schlug vor der Implementierung wegen fehlendem Brett und Panel erwartungsgemäß fehl.
+- GREEN: Der BOARD-001-Test, alle bestehenden Quest-/Rezept-/Sammelregressionen, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
+- Offen: Sichtprüfung des gezeichneten Bretts, UI-Größe, Lesbarkeit und Tastaturfokus im Godot-Fenster.
+
 ## Automatisierung und CI
 
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.

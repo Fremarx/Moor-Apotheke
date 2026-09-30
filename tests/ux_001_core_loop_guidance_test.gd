@@ -22,6 +22,9 @@ func _run() -> void:
 	var rack := main.get_node_or_null("World/TestMap/Trockengestell") as Node2D
 	var cauldron := main.get_node_or_null("World/TestMap/Braukessel") as Node2D
 	var quest := main.get_node_or_null("Quest/FenjaQuest")
+	var quest_board := main.get_node_or_null("World/TestMap/QuestBoard") as Area2D
+	var board_button := main.get_node_or_null("HUD/QuestBoardPanel/Content/FenjaRow/AcceptButton") as Button
+	var board_close := main.get_node_or_null("HUD/QuestBoardPanel/Content/CloseButton") as Button
 	var quest_status := main.get_node_or_null("HUD/QuestStatus") as Label
 	var prompt := main.get_node_or_null("HUD/InteractionPrompt") as Label
 
@@ -34,16 +37,19 @@ func _run() -> void:
 	_check(quest != null, "Fenja's quest exists")
 	_check(quest_status != null, "the quest status HUD exists")
 	_check(prompt != null, "the interaction prompt exists")
-	if player == null or inventory == null or fenja == null or herb == null or rack == null or cauldron == null or quest == null or quest_status == null or prompt == null:
+	if player == null or inventory == null or fenja == null or herb == null or rack == null or cauldron == null or quest == null or quest_board == null or board_button == null or board_close == null or quest_status == null or prompt == null:
 		main.queue_free()
 		_finish()
 		return
 
 	_check(not quest_status.visible, "the objective is hidden until the quest is accepted")
 
-	await _move_near(player, fenja)
+	await _move_near(player, quest_board)
 	_press_e(player)
-	_check(str(quest.get("state")) == "active", "talking to Fenja starts the quest")
+	_check(main.get_node("HUD/QuestBoardPanel").visible, "the board opens before the first request")
+	board_button.emit_signal("pressed")
+	board_close.emit_signal("pressed")
+	_check(str(quest.get("state")) == "active", "accepting Fenja's request from the board starts the quest")
 	_check(quest_status.text == "Sammle eine Sumpfminze.", "the first objective asks the player to collect mint")
 
 	await _move_near(player, herb)

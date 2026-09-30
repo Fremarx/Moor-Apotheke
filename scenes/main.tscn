@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/world/test_map.tscn" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
@@ -7,6 +7,18 @@
 [ext_resource type="Script" path="res://scripts/fenja_quest.gd" id="5_fenja_quest"]
 [ext_resource type="Script" path="res://scripts/marten_quest.gd" id="6_marten_quest"]
 [ext_resource type="Script" path="res://scripts/lene_quest.gd" id="7_lene_quest"]
+
+[sub_resource type="StyleBoxFlat" id="QuestBoardPanelStyle"]
+bg_color = Color(0.12, 0.17, 0.14, 0.98)
+border_color = Color(0.66, 0.57, 0.38, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("3_main")
@@ -190,6 +202,96 @@ theme_override_colors/font_shadow_color = Color(0.12, 0.16, 0.13, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 10
+
+[node name="QuestBoardPanel" type="PanelContainer" parent="HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -100.0
+offset_right = 190.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("QuestBoardPanelStyle")
+
+[node name="Content" type="VBoxContainer" parent="HUD/QuestBoardPanel"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="HUD/QuestBoardPanel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.83, 0.68, 1)
+theme_override_font_sizes/font_size = 13
+text = "Bewohneraufträge"
+
+[node name="HelpText" type="Label" parent="HUD/QuestBoardPanel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.78, 0.68, 1)
+theme_override_font_sizes/font_size = 9
+text = "Nimm verfügbare Bitten hier an. Abgeben kannst du sie bei den Bewohnern."
+
+[node name="FenjaRow" type="HBoxContainer" parent="HUD/QuestBoardPanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Description" type="Label" parent="HUD/QuestBoardPanel/Content/FenjaRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.88, 0.83, 0.68, 1)
+theme_override_font_sizes/font_size = 9
+text = "Fenja · Beruhigungstee"
+
+[node name="AcceptButton" type="Button" parent="HUD/QuestBoardPanel/Content/FenjaRow"]
+custom_minimum_size = Vector2(78, 23)
+layout_mode = 2
+focus_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Annehmen"
+
+[node name="MartenRow" type="HBoxContainer" parent="HUD/QuestBoardPanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Description" type="Label" parent="HUD/QuestBoardPanel/Content/MartenRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.88, 0.83, 0.68, 1)
+theme_override_font_sizes/font_size = 9
+text = "Marten · Stärkender Aufguss"
+
+[node name="AcceptButton" type="Button" parent="HUD/QuestBoardPanel/Content/MartenRow"]
+custom_minimum_size = Vector2(78, 23)
+layout_mode = 2
+focus_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Gesperrt"
+
+[node name="LeneRow" type="HBoxContainer" parent="HUD/QuestBoardPanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Description" type="Label" parent="HUD/QuestBoardPanel/Content/LeneRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.88, 0.83, 0.68, 1)
+theme_override_font_sizes/font_size = 9
+text = "Lene · Nachttrank"
+
+[node name="AcceptButton" type="Button" parent="HUD/QuestBoardPanel/Content/LeneRow"]
+custom_minimum_size = Vector2(78, 23)
+layout_mode = 2
+focus_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Gesperrt"
+
+[node name="CloseButton" type="Button" parent="HUD/QuestBoardPanel/Content"]
+custom_minimum_size = Vector2(82, 23)
+layout_mode = 2
+focus_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Schließen"
 
 [node name="FeedbackTimer" type="Timer" parent="HUD"]
 wait_time = 2.0

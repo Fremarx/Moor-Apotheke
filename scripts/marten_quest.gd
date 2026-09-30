@@ -23,13 +23,23 @@ func is_available() -> bool:
 	return is_instance_valid(_fenja_quest) and str(_fenja_quest.get("state")) == "completed"
 
 
+func can_accept() -> bool:
+	return state == STATE_NOT_ACCEPTED and is_available()
+
+
+func accept() -> bool:
+	if not can_accept():
+		return false
+	_set_state(STATE_ACTIVE)
+	return true
+
+
 func interact() -> String:
 	if not is_available():
 		return "Bitte hilf zuerst Fenja mit ihrer Bitte."
 
 	if state == STATE_NOT_ACCEPTED:
-		_set_state(STATE_ACTIVE)
-		return "Marten bittet dich um einen stärkenden Aufguss."
+		return "Nimm Martens Bitte am Auftragsbrett an."
 
 	if state == STATE_ACTIVE:
 		if not is_instance_valid(_inventory):

@@ -8,13 +8,13 @@ Stand: 30.09.2026
 Phase 6 – Inhaltserweiterung
 
 ### Zuletzt bearbeiteter Task
-QUEST-003 – Lenes Bitte um einen Nachttrank annehmen und erfüllen.
+BOARD-001 – Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE.
 
 ### Fortschritt
-Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Nach Martens Auftrag wird der Nachttrank freigeschaltet, den Lene für ihren Folgeauftrag benötigt.
+Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die drei Bewohnerbitten, schaltet Folgeaufträge nach Abschluss der vorherigen Bitte frei und trennt Annahme am Brett von Abgabe bei den Bewohnern.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -33,9 +33,10 @@ Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanze
 - **LOOP-005:** Das Trockengestell verarbeitet Nachtmoos nach Sumpfminze und Schilfwurzel; frischer und getrockneter Bestand werden getrennt angezeigt.
 - **LOOP-006:** Der Braukessel verarbeitet nach Martens Auftrag getrocknete Schilfwurzel und Nachtmoos gemeinsam zu einem Nachttrank.
 - **QUEST-003:** Lene bietet nach Martens Abschluss ihre Bitte an; das Quest-HUD führt durch Sammeln, Trocknen und Brauen, und die Abgabe verbraucht genau einen Nachttrank.
+- **BOARD-001:** Das Auftragsbrett zeigt Fenjas, Martens und Lenes Bitte; verfügbare Aufträge lassen sich am Brett annehmen und die Abgabe bleibt bei den Bewohnern.
 
 ### Als Nächstes
-BOARD-001 – Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen.
+ECON-001 – Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -73,7 +74,8 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - LOOP-005-Headless-Test sowie alle elf früheren Tests bestanden; Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - LOOP-006-Headless-Test sowie alle zwölf vorherigen Tests (insgesamt dreizehn) bestanden; Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - QUEST-003-Headless-Test zuerst rot, danach grün; alle dreizehn früheren Tests (insgesamt vierzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
-- Sichtprüfung von Pflanzen, NPCs, Quest-/Inventar-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen; die Tests bestätigen Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
+- BOARD-001-Headless-Test zuerst rot, danach grün; alle vierzehn vorherigen Tests (insgesamt fünfzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- Sichtprüfung von Pflanzen, NPCs, Quest-/Inventar-HUD, Auftragsbrett und realer Tastatureingabe im Godot-Fenster ist noch offen; Headless-Tests bestätigen Logik und Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
 
 ### Sicherheitsstatus
 Kleines lokales Einzelspielerprojekt ohne Konto, Netzwerkdienst oder personenbezogene Nutzerdaten. Für spätere Spielstände gilt: nur benötigte Daten in user:// speichern und geladene Werte validieren. Fremde Add-ons und Assets vor Übernahme prüfen; Zugangsdaten gehören nicht ins Repository.
@@ -100,7 +102,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 
 ### Annahmen
 - Der erste Prototyp nutzt Platzhaltergrafik und braucht keine finale Animation.
-- Fenja ist die erste Auftraggeberin. Auftrag annehmen und Heilmittel abgeben geschehen zunächst direkt bei ihr; ein Auftragsbrett kommt später.
+- Fenja ist die erste Auftraggeberin. Ihre Bitte wird am Auftragsbrett angenommen und das Heilmittel direkt bei ihr abgegeben.
 - Erste Testschleife: Sumpfminze sammeln → trocknen → Beruhigungstee brauen → Fenja helfen.
 - Der erste Test hat keinen Zeitdruck, kein Verderben und keine Spielstandpersistenz.
 
@@ -139,7 +141,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | LOOP-005 | Nachtmoos am Trockengestell verarbeiten | P2 | CONTENT-001b | DONE |
 | LOOP-006 | Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen; nach Martens Auftrag freischalten | P2 | LOOP-005, QUEST-002 | DONE |
 | QUEST-003 | Lenes Bitte um einen Nachttrank annehmen und erfüllen | P2 | LOOP-006 | DONE |
-| BOARD-001 | Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen | P2 | QUEST-002, QUEST-003 | PLANNED |
+| BOARD-001 | Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen | P2 | QUEST-002, QUEST-003 | DONE |
 | ECON-001 | Einfache Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen | P2 | BOARD-001 | PLANNED |
 | SAVE-001 | Position, Inventar und Questfortschritt speichern und laden | P2 | QUEST-001 | PLANNED |
 | EXP-001 | Jahreszeiten, weitere Gebiete und Automatisierung nach Spieltest neu priorisieren | P3 | CONTENT-001, SAVE-001 | PLANNED |
@@ -181,7 +183,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Sichtprüfung von Braukessel, Interaktionshinweis und Inventarzählern wird durchgeführt oder als offen dokumentiert.
 
 ### QUEST-001 Abnahmekriterien – erledigt
-- Fenja nimmt per E die Bitte um einen Beruhigungstee an und die HUD zeigt das aktive Ziel.
+- Fenjas Bitte wird am Auftragsbrett per E-Auswahl angenommen; die HUD zeigt danach das aktive Ziel.
 - Ohne Tee bleibt die Bitte aktiv und Fenja erklärt freundlich, was noch fehlt.
 - Die Abgabe verbraucht genau einen Tee, markiert die Bitte als erfüllt und zeigt den Abschluss dauerhaft in dieser Partie.
 - Wiederholtes Ansprechen nach Abschluss verändert weder Queststatus noch Inventar.
@@ -204,7 +206,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Einsammeln erhöht ausschließlich den Schilfwurzelbestand um eins, aktualisiert „Schilfwurzel: N“ im HUD und entfernt die Pflanze aus der Karte.
 - Erneute Interaktion kann dieselbe Pflanze nicht ein zweites Mal aufnehmen; Sumpfminze-Bestand und Anzeige bleiben unverändert.
 - Ein eigener Headless-Test prüft Bestand, Hinweis, HUD, einmalige Aufnahme und Trennung von Sumpfminze.
-- Verarbeitung der Schilfwurzel und die übrigen Pflanzen, Rezepte, Bewohner, Auftragsbrett und Münzen bleiben eigene Folgepunkte.
+- Verarbeitung der Schilfwurzel und die übrigen Pflanzen, Rezepte, Bewohner sowie Münzbelohnungen bleiben eigene Folgepunkte; das Auftragsbrett ist in BOARD-001 ergänzt.
 
 ### CONTENT-001b Abnahmekriterien
 - Am schattigen alten Torfsteg wächst ein einmalig sammelbares Nachtmoos mit einer dunklen, klar unterscheidbaren Pixel-Platzhaltergrafik.
@@ -236,6 +238,17 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Wiederholtes Ansprechen nach Abschluss verbraucht keinen weiteren Aufguss.
 - Das HUD führt während Martens Bitte anhand der Bestände zum nächsten benötigten Schritt.
 - Ein eigener Headless-Test prüft die Freischaltung nach Fenja, Annahme, fehlenden Gegenstand, Abgabe und Wiederholungsinteraktion; frühere Schleifen bleiben Regressionen.
+
+### BOARD-001 Abnahmekriterien – erledigt
+- Ein physisches Auftragsbrett ist über die normale E-Interaktion erreichbar und öffnet ein eigenes HUD-Panel.
+- Das Panel zeigt Fenja, Marten und Lene mit ihrem jeweiligen Heilmittel und dem Status „Annehmen“, „Gesperrt“, „In Arbeit“ oder „Erledigt“.
+- Marten wird erst nach Fenjas Abschluss und Lene erst nach Martens Abschluss am Brett freigeschaltet.
+- Aufträge lassen sich nur am Brett annehmen; Bewohner nehmen weiterhin die fertigen Mittel direkt entgegen.
+- Während das Panel geöffnet ist, pausieren Bewegung und Weltinteraktion; Escape und die Schaltfläche „Schließen“ schließen es wieder und stellen die Eingabe her.
+- Fokus liegt beim Öffnen auf der ersten verfügbaren Aktion; gesperrte und bereits angenommene Aufträge sind deaktiviert.
+- BOARD-001-, Quest-, Kernablauf- und Rezeptregressionstests bestehen; Godot-Editorimport und 60-Frame-Laufzeittest bestehen.
+- Sichtprüfung der Brettgrafik, Panelgröße und Lesbarkeit im Spielmaßstab bleibt offen.
+
 ### QUEST-003 Abnahmekriterien
 - Lene ist als interaktive Bewohnerin vorhanden und bietet ihre Bitte erst nach Martens Abschluss zur Annahme an.
 - Die aktive Quest führt das HUD anhand des Inventars durch Schilfwurzel sammeln/trocknen, Nachtmoos sammeln/trocknen und Nachttrank brauen.
@@ -315,3 +328,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | LOOP-005: Nachtmoos als dritte Zutat am Trockengestell verarbeitet, eigener HUD-Zähler ergänzt; Featuretest rot/grün, alle zwölf Headless-Tests, Editorimport und Startcheck bestanden. |
 | 30.09.2026 | LOOP-006: Nachttrank-Rezept an Martens Abschluss gebunden, atomare Mehrzutatenverarbeitung und eigener HUD-Zähler ergänzt; Featuretest rot/grün, alle dreizehn Headless-Tests, Editorimport und Startcheck bestanden. |
 | 30.09.2026 | QUEST-003: Lenes Folgeauftrag, HUD-Führung durch beide Zutatenketten und genau-ein-Nachttrank-Abgabe ergänzt; Featuretest rot/grün, alle vierzehn Headless-Tests, Editorimport und Startcheck bestanden. |
+| 30.09.2026 | BOARD-001: Auftragsbrett mit Statusanzeige und Verfügbarkeitsregeln ergänzt; Annahme dorthin verlegt, direkte NPC-Abgabe erhalten; 15 Headless-Tests, Editorimport und Startcheck bestanden. |
