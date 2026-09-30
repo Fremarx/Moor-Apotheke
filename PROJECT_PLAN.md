@@ -1,20 +1,20 @@
 # Die Moor-Apotheke – Projektplan
 
-Stand: 30.09.2026
+Stand: 01.10.2026
 
 ## Project Status
 
 ### Aktuelle Phase
-Phase 6 – Inhaltserweiterung
+Phase 7 – Persistenz und Ausbau
 
 ### Zuletzt bearbeiteter Task
-ECON-001 – Münzbelohnungen für erfüllte Bewohneraufträge anzeigen und verbuchen.
+SAVE-001 – Position, Inventar, Aufträge und gesammelte Pflanzen zwischen Spielsitzungen speichern.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE.
 
 ### Fortschritt
-Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen.
+Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -35,9 +35,10 @@ Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanze
 - **QUEST-003:** Lene bietet nach Martens Abschluss ihre Bitte an; das Quest-HUD führt durch Sammeln, Trocknen und Brauen, und die Abgabe verbraucht genau einen Nachttrank.
 - **BOARD-001:** Das Auftragsbrett zeigt Fenjas, Martens und Lenes Bitte; verfügbare Aufträge lassen sich am Brett annehmen und die Abgabe bleibt bei den Bewohnern.
 - **ECON-001:** Erfolgreiche Abgaben zahlen einmalig 5/10/15 Münzen; Inventar und HUD zeigen den aktuellen Bestand.
+- **SAVE-001:** Versionierte JSON-Spielstände in `user://` speichern und laden Position, Inventar, Queststatus und abgeerntete Pflanzen.
 
 ### Als Nächstes
-SAVE-001 – Position, Inventar und Questfortschritt speichern und laden.
+EXP-001 – Nach Spieltest Jahreszeiten, weitere Gebiete und Automatisierung neu priorisieren.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -76,10 +77,11 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - LOOP-006-Headless-Test sowie alle zwölf vorherigen Tests (insgesamt dreizehn) bestanden; Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - QUEST-003-Headless-Test zuerst rot, danach grün; alle dreizehn früheren Tests (insgesamt vierzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - BOARD-001-Headless-Test zuerst rot, danach grün; alle vierzehn vorherigen Tests (insgesamt fünfzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- SAVE-001-Test zuerst rot, danach grün; prüft F5/F9, automatische Startladung, Wiederherstellung aller gespeicherten Daten und unveränderten Laufzeitzustand bei fehlendem, beschädigtem oder nicht unterstütztem Save. Alle 17 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - Sichtprüfung von Pflanzen, NPCs, Quest-/Inventar-HUD, Auftragsbrett und realer Tastatureingabe im Godot-Fenster ist noch offen; Headless-Tests bestätigen Logik und Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
 
 ### Sicherheitsstatus
-Kleines lokales Einzelspielerprojekt ohne Konto, Netzwerkdienst oder personenbezogene Nutzerdaten. Für spätere Spielstände gilt: nur benötigte Daten in user:// speichern und geladene Werte validieren. Fremde Add-ons und Assets vor Übernahme prüfen; Zugangsdaten gehören nicht ins Repository.
+Kleines lokales Einzelspielerprojekt ohne Konto, Netzwerkdienst oder personenbezogene Nutzerdaten. Der Spielstand speichert nur benötigte Daten in `user://`; das vollständige Format wird vor Änderungen am laufenden Spiel validiert. Fremde Add-ons und Assets vor Übernahme prüfen; Zugangsdaten gehören nicht ins Repository.
 
 ## Projektziel und Anforderungen
 
@@ -144,7 +146,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | QUEST-003 | Lenes Bitte um einen Nachttrank annehmen und erfüllen | P2 | LOOP-006 | DONE |
 | BOARD-001 | Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen | P2 | QUEST-002, QUEST-003 | DONE |
 | ECON-001 | Einfache Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen | P2 | BOARD-001 | DONE |
-| SAVE-001 | Position, Inventar und Questfortschritt speichern und laden | P2 | QUEST-001 | PLANNED |
+| SAVE-001 | Position, Inventar, Questfortschritt und abgeerntete Pflanzen speichern und laden | P2 | CORE-001, ITEM-001, QUEST-003, ECON-001 | DONE |
 | EXP-001 | Jahreszeiten, weitere Gebiete und Automatisierung nach Spieltest neu priorisieren | P3 | CONTENT-001, SAVE-001 | PLANNED |
 | REL-001 | Exportziel wählen, Exportvorlagen einrichten, Release-Checkliste ergänzen | P3 | stabile Kernschleife | PLANNED |
 
@@ -280,7 +282,15 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Die Rückmeldung nennt den Betrag; der Bestand coins und die HUD-Zeile „Münzen: N“ aktualisieren sich sofort.
 - Fehlende Heilmittel und wiederholte Interaktion nach Abschluss zahlen keine Münzen ein zweites Mal.
 - Ein Headless-Test prüft Startstand, alle drei Beträge, Feedback, HUD, fehlgeschlagene Abgaben und Einmaligkeit; frühere Tests bestehen als Regressionen.
-- Münzbestand und Questzustände bleiben bis SAVE-001 laufzeitgebunden.
+- Münzbestand und Questzustände werden durch SAVE-001 sitzungsübergreifend gespeichert.
+
+### SAVE-001 Abnahmekriterien – erledigt
+- F5 speichert eine versionierte JSON-Datei in Godots `user://`; F9 lädt sie und beim Start wird ein gültiger Spielstand automatisch wiederhergestellt.
+- Spielerposition, alle bekannten Inventarmengen inklusive Münzen, die drei Bewohneraufträge und abgeerntete Kräuterstellen werden gespeichert.
+- Unbekannte Inventar-IDs, ungültige Zahlen, Questzustände mit unmöglicher Freischaltreihenfolge, unbekannte/doppelte Pickup-IDs, beschädigte Daten und nicht unterstützte Versionen werden vor dem Anwenden abgelehnt.
+- Ein ungültiger Spielstand verändert weder Position, Inventar noch Queststatus; die Laufzeitaktion zeigt verständliches Feedback.
+- Der SAVE-001-Headless-Test besteht rot/grün; alle 17 Headless-Tests, Editorimport und 60-Frame-Laufzeit-Smoke-Check bestehen.
+- Sichtprüfung der F5-/F9-Hinweise im Godot-Fenster bleibt Teil der noch offenen manuellen Sichtprüfung.
 
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
@@ -338,3 +348,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | QUEST-003: Lenes Folgeauftrag, HUD-Führung durch beide Zutatenketten und genau-ein-Nachttrank-Abgabe ergänzt; Featuretest rot/grün, alle vierzehn Headless-Tests, Editorimport und Startcheck bestanden. |
 | 30.09.2026 | BOARD-001: Auftragsbrett mit Statusanzeige und Verfügbarkeitsregeln ergänzt; Annahme dorthin verlegt, direkte NPC-Abgabe erhalten; 15 Headless-Tests, Editorimport und Startcheck bestanden. |
 | 30.09.2026 | ECON-001: einmalige Questbelohnungen von 5/10/15 Münzen und HUD-Zähler ergänzt; neuer Headless-Test rot/grün, alle 16 Tests, Editorimport und 60-Frame-Startlauf bestanden. |
+| 01.10.2026 | SAVE-001: versionierter JSON-Spielstand mit F5/F9, automatischem Laden, Positions-, Inventar-, Quest- und Pickup-Persistenz ergänzt; ungültige Spielstände werden vor Anwendung verworfen. Featuretest rot/grün; alle 17 Headless-Tests, Editorimport und 60-Frame-Startlauf bestanden. |

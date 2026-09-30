@@ -120,6 +120,7 @@ display_name = "Sumpfminze"
 action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Sumpfminze."
 item_id = "sump_mint"
+pickup_id = "sump_mint_patch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sumpfminze"]
 shape = SubResource("CircleShape2D_sumpfminze")
@@ -133,6 +134,7 @@ display_name = "Schilfwurzel"
 action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Schilfwurzel."
 item_id = "reed_root"
+pickup_id = "reed_root_patch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Schilfwurzel"]
 shape = SubResource("CircleShape2D_schilfwurzel")
@@ -146,6 +148,7 @@ display_name = "Nachtmoos"
 action_verb = "Sammeln"
 feedback_text = "Du sammelst Nachtmoos am schattigen Torfsteg."
 item_id = "night_moss"
+pickup_id = "night_moss_patch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Nachtmoos"]
 shape = SubResource("CircleShape2D_nachtmoos")

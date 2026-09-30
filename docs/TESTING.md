@@ -150,6 +150,15 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Prüfbefehl für den Featuretest: Godot 4.7.2 --headless --path . --script res://tests/econ_001_quest_rewards_test.gd. Für die Regression wurden alle 16 GDScript-Testdateien einzeln im Headless-Modus gestartet.
 - Offen: Sichtprüfung der Münzzeile und ihrer Lesbarkeit im Godot-Fenster.
 
+## SAVE-001 – Spielstand speichern und laden
+- `tests/save_001_game_persistence_test.gd` prüft F5/F9 in der Input Map, manuelles Speichern/Laden, automatisches Laden beim Start, Position, alle Inventarmengen einschließlich Münzen, alle drei Questzustände sowie abgeerntete und noch sichtbare Sammelstellen.
+- Der Test prüft zudem fehlenden, beschädigten und nicht unterstützten Spielstand, unbekannte Inventar-IDs sowie eine unmögliche Questabhängigkeit; ungültige Dateien dürfen Position, Inventar oder Queststatus nicht teilweise verändern.
+- RED: Vor der Implementierung fehlte der SaveManager in der Main-Szene.
+- GREEN: `SAVE-001 persistence checks passed.` nach JSON-Format, vollständiger Validierung und Wiederherstellung.
+- Prüfbefehl: `godot --headless --path . --script res://tests/save_001_game_persistence_test.gd`.
+- Erledigt: alle 17 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
+- Offen: F5/F9, HUD-Hinweise, Lesbarkeit und tatsächliche Tastatureingabe noch im sichtbaren Godot-Fenster prüfen.
+
 ## Automatisierung und CI
 
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.

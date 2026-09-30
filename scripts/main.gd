@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var _player: Node = $World/Player
 @onready var _inventory: Node = $Inventory
+@onready var _save_manager: Node = $SaveManager
 @onready var _fenja_quest: Node = $Quest/FenjaQuest
 @onready var _marten_quest: Node = $Quest/MartenQuest
 @onready var _lene_quest: Node = $Quest/LeneQuest
@@ -64,6 +65,7 @@ func _ready() -> void:
 			if quests_by_id.has(quest_id):
 				quest_npc.set_quest(quests_by_id[quest_id])
 
+	_load_save_on_startup()
 	_update_quest_status()
 	_refresh_quest_board()
 
@@ -72,6 +74,151 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _quest_board_panel.visible and event.is_action_pressed("ui_cancel"):
 		_close_quest_board()
 		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("save_game"):
+		save_game()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("load_game"):
+		load_game()
+		get_viewport().set_input_as_handled()
+
+
+func save_game() -> bool:
+	var pickups := _get_pickups_by_id()
+	if pickups.is_empty():
+		_on_interaction_completed("Speichern ist gerade nicht möglich.")
+		return false
+
+	var collected_pickups: Array[String] = []
+	for pickup_id in pickups:
+		if bool(pickups[pickup_id].call("is_collected")):
+			collected_pickups.append(pickup_id)
+	collected_pickups.sort()
+
+	var save_data := {
+		"version": 1,
+		"player": {"x": _player.position.x, "y": _player.position.y},
+		"inventory": _inventory.call("get_save_data"),
+		"quests": {
+			"fenja": str(_fenja_quest.get("state")),
+			"marten": str(_marten_quest.get("state")),
+			"lene": str(_lene_quest.get("state")),
+		},
+		"collected_pickups": collected_pickups,
+	}
+	if not bool(_save_manager.call("write_save_data", save_data)):
+		_on_interaction_completed("Der Spielstand konnte nicht gespeichert werden.")
+		return false
+
+	_on_interaction_completed("Spielstand gespeichert.")
+	return true
+
+
+func load_game() -> bool:
+	if not bool(_save_manager.call("has_save_file")):
+		_on_interaction_completed("Kein Spielstand gefunden.")
+		return false
+
+	var save_data: Dictionary = _save_manager.call("read_save_data")
+	if not _is_valid_save_data(save_data):
+		_on_interaction_completed("Der Spielstand ist ungültig oder nicht unterstützt.")
+		return false
+
+	_apply_save_data(save_data)
+	_on_interaction_completed("Spielstand geladen.")
+	return true
+
+
+func _load_save_on_startup() -> void:
+	if not bool(_save_manager.call("has_save_file")):
+		return
+
+	var save_data: Dictionary = _save_manager.call("read_save_data")
+	if _is_valid_save_data(save_data):
+		_apply_save_data(save_data)
+
+
+func _is_valid_save_data(save_data: Variant) -> bool:
+	if typeof(save_data) != TYPE_DICTIONARY:
+		return false
+	if not _is_save_number(save_data.get("version")) or float(save_data["version"]) != 1.0:
+		return false
+
+	var saved_player: Variant = save_data.get("player")
+	if typeof(saved_player) != TYPE_DICTIONARY or not saved_player.has("x") or not saved_player.has("y"):
+		return false
+	if not _is_save_number(saved_player["x"]) or not _is_save_number(saved_player["y"]):
+		return false
+	var saved_position := Vector2(float(saved_player["x"]), float(saved_player["y"]))
+	if saved_position.x < 0.0 or saved_position.x > 640.0 or saved_position.y < 0.0 or saved_position.y > 360.0:
+		return false
+
+	if not bool(_inventory.call("validate_save_data", save_data.get("inventory"))):
+		return false
+
+	var saved_quests: Variant = save_data.get("quests")
+	if typeof(saved_quests) != TYPE_DICTIONARY:
+		return false
+	if not saved_quests.has("fenja") or not saved_quests.has("marten") or not saved_quests.has("lene"):
+		return false
+	if not bool(_fenja_quest.call("can_restore_state", saved_quests["fenja"])):
+		return false
+	if not bool(_marten_quest.call("can_restore_state", saved_quests["marten"])):
+		return false
+	if not bool(_lene_quest.call("can_restore_state", saved_quests["lene"])):
+		return false
+	if str(saved_quests["marten"]) != "not_accepted" and str(saved_quests["fenja"]) != "completed":
+		return false
+	if str(saved_quests["lene"]) != "not_accepted" and str(saved_quests["marten"]) != "completed":
+		return false
+
+	var pickups := _get_pickups_by_id()
+	if pickups.is_empty():
+		return false
+	var saved_pickups: Variant = save_data.get("collected_pickups")
+	if typeof(saved_pickups) != TYPE_ARRAY:
+		return false
+	var seen_pickups: Dictionary = {}
+	for pickup_id in saved_pickups:
+		if typeof(pickup_id) != TYPE_STRING or not pickups.has(pickup_id) or seen_pickups.has(pickup_id):
+			return false
+		seen_pickups[pickup_id] = true
+	return true
+
+
+func _is_save_number(value: Variant) -> bool:
+	if typeof(value) != TYPE_INT and typeof(value) != TYPE_FLOAT:
+		return false
+	return is_finite(float(value))
+
+
+func _get_pickups_by_id() -> Dictionary:
+	var pickups: Dictionary = {}
+	for pickup in get_tree().get_nodes_in_group("item_pickups"):
+		if not pickup.has_method("get_pickup_id") or not pickup.has_method("is_collected"):
+			return {}
+		var pickup_id: Variant = pickup.call("get_pickup_id")
+		if typeof(pickup_id) != TYPE_STRING or str(pickup_id).is_empty() or pickups.has(pickup_id):
+			return {}
+		pickups[pickup_id] = pickup
+	return pickups
+
+
+func _apply_save_data(save_data: Dictionary) -> void:
+	var saved_player: Dictionary = save_data["player"]
+	_player.position = Vector2(float(saved_player["x"]), float(saved_player["y"]))
+	_inventory.call("restore_from_save", save_data["inventory"])
+	_fenja_quest.call("restore_state", save_data["quests"]["fenja"])
+	_marten_quest.call("restore_state", save_data["quests"]["marten"])
+	_lene_quest.call("restore_state", save_data["quests"]["lene"])
+
+	var collected_pickups: Array = save_data["collected_pickups"]
+	var pickups := _get_pickups_by_id()
+	for pickup_id in pickups:
+		pickups[pickup_id].call("set_collected", collected_pickups.has(pickup_id))
+
+	_update_quest_status()
+	_refresh_quest_board()
+	_player.call("refresh_interactable_prompt")
 
 
 func _on_quest_board_open_requested() -> void:

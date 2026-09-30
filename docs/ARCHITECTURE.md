@@ -65,7 +65,11 @@ QUEST-002 ergänzt `MartenQuest` und Marten als zweiten interaktiven Bewohner. M
 
 BOARD-001 ergänzt `QuestBoard` als Interaktions-Area2D. Das Brett meldet über `open_requested`, dass Main sein `QuestBoardPanel` anzeigen soll. Main aktualisiert die drei Zeilen aus den Questzuständen und fragt `can_accept()` ab; nur verfügbare, noch nicht angenommene Aufträge werden aktiv. Die Questkomponenten stellen `accept()` bereit und behalten NPC-Interaktion für die spätere Abgabe. Im geöffneten Panel pausieren Bewegung und Weltinteraktion; Tastaturfokus, Escape und Schließen-Schaltfläche werden vom UI/Main-Fluss behandelt. Statussignale aktualisieren Brett, HUD und NPC-Hinweise.
 
-ECON-001 hält die Startbelohnungen als Konstanten in den Questkomponenten: Fenja zahlt 5, Marten 10 und Lene 15 Münzen. Eine Quest schreibt die Belohnung erst gut, nachdem das Inventar das Heilmittel erfolgreich entfernt hat; der Wechsel auf completed verhindert weitere Auszahlungen. Das Inventar verbucht coins und löst das bereits verwendete item_count_changed-Signal aus; Main aktualisiert CoinCount. Eine fehlgeschlagene Abgabe verändert den Münzbestand nicht. Queststatus und Münzen bleiben bis SAVE-001 Laufzeitdaten.
+ECON-001 hält die Startbelohnungen als Konstanten in den Questkomponenten: Fenja zahlt 5, Marten 10 und Lene 15 Münzen. Eine Quest schreibt die Belohnung erst gut, nachdem das Inventar das Heilmittel erfolgreich entfernt hat; der Wechsel auf completed verhindert weitere Auszahlungen. Das Inventar verbucht coins und löst das bereits verwendete item_count_changed-Signal aus; Main aktualisiert CoinCount. Eine fehlgeschlagene Abgabe verändert den Münzbestand nicht. SAVE-001 persistiert den Münzbestand zusammen mit dem restlichen Inventar und den Questzuständen.
+
+SAVE-001 ergänzt `SaveManager` als untergeordneten Dienst von Main. Er schreibt einen versionierten JSON-Spielstand in `user://moor_apotheke_save.json`; Main steuert automatische Startladung sowie die benannten Aktionen `save_game` (F5) und `load_game` (F9). Version 1 enthält Spielerposition als x/y-Zahlen, ein Inventar aus erlaubten Item-IDs und Mengen, die drei Questzustände und IDs bereits abgeernteter Sammelstellen. Jede Sammelstelle hat dafür eine stabile, eindeutige `pickup_id`.
+
+Vor dem Laden prüft Main den gesamten Datensatz: Version, Zahlenbereiche, bekannte Inventar- und Pickup-IDs, Questzustände sowie die Freischaltreihenfolge. Erst wenn alle Felder gültig sind, werden Position, Bestand, Aufträge und Pickup-Sichtbarkeit gemeinsam angewendet. Fehlende, beschädigte oder nicht unterstützte Spielstände ändern den aktuellen Laufzeitzustand nicht. Beim automatischen Laden wird ein ungültiger Spielstand still verworfen; bei F9 zeigt das HUD eine Fehlermeldung.
 
 LOOP-005 ergänzt als dritte Stufe `night_moss` → `dried_night_moss`. Das Trockengestell versucht weiterhin Sumpfminze zuerst, danach Schilfwurzel und zuletzt Nachtmoos. Die vorhandene atomare `Inventory.transfer_item`-Übertragung aktualisiert beide Bestände samt Signal; Main zeigt den getrockneten Bestand in `DriedNightMossCount`. Bei leerem Vorrat nennt das Feedback alle drei zulässigen Pflanzen.
 
@@ -129,7 +133,8 @@ Aufträge werden am Brett angenommen und weiterhin direkt bei Fenja, Marten oder
 ## Daten und Persistenz
 - Im ersten Slice bleibt die Datenmenge klein und explizit.
 - Sobald mehrere Gegenstände und Rezepte existieren, prüfen wir Godot-Resource-Dateien für Item-, Rezept- und Auftragsdefinitionen. Laufzeitbestand und Queststatus bleiben veränderlicher Spielzustand.
-- Das erste Saveformat wird in SAVE-001 festgelegt. Es speichert nur benötigte IDs, Zahlen und Zustände in user:// und validiert geladene Werte.
+- SAVE-001 legt ein versioniertes JSON-Format in `user://moor_apotheke_save.json` fest; Einzelheiten stehen in [ADR-0002](adr/0002-versioned-json-save.md). Persistiert werden nur IDs, Zahlen und Zustände. F5 speichert, F9 lädt und beim Start wird ein gültiger Spielstand automatisch geladen.
+- Der ganze Spielstand wird vor dem Anwenden auf Typen, Wertebereiche, IDs und Questabhängigkeiten validiert.
 - Keine Datenbank und keine Netzwerk-API.
 
 ## Grafik und Eingaben
@@ -137,7 +142,7 @@ Aufträge werden am Brett angenommen und weiterhin direkt bei Fenja, Marten oder
 - Erster Build verwendet Platzhaltergrafik.
 - Bildgenerator-Ausgaben werden auf Transparenz, Raster, Anschlüsse und Lesbarkeit geprüft.
 - Fremde Assets benötigen Herkunft und Lizenzangabe; Prompts finaler eigener Bilder werden gespeichert.
-- Benannte Aktionen: move_left/right/up/down, interact, inventory. Die Belegung wird nicht in Gameplay-Skripte eingebrannt.
+- Benannte Aktionen: move_left/right/up/down, interact, inventory, save_game, load_game. Die Belegung wird nicht in Gameplay-Skripte eingebrannt.
 
 ## Qualität, Sicherheit und Performance
 - GDScript typisieren, wo dies Lesbarkeit und Fehlererkennung verbessert.
@@ -146,7 +151,7 @@ Aufträge werden am Brett angenommen und weiterhin direkt bei Fenja, Marten oder
 - Keine Konten oder Secrets; fremde Add-ons und Assets prüfen.
 
 ## Bekannte Einschränkungen
-- Trockengestell, Braukessel sowie Fenja, Marten und Lene sind vorläufig direkt in der Testkarte gezeichnet; eigenständige Szenen, Produktionszeiten und Animationen, Save-/Load-Logik, finale Pixelgrafik und Exportprofile fehlen noch.
+- Trockengestell, Braukessel sowie Fenja, Marten und Lene sind vorläufig direkt in der Testkarte gezeichnet; eigenständige Szenen, Produktionszeiten und Animationen, finale Pixelgrafik und Exportprofile fehlen noch.
 - Das Spiel liegt eigenständig in `Fremarx/Moor-Apotheke`. Eine spätere Zusammenführung mit dem früher verwendeten 2DGame-Repo wäre eine eigene Migrationsentscheidung.
 
 ## Engine-Dokumentation
@@ -156,5 +161,7 @@ Das Auftragsbrett nutzt vorläufige Pixelzeichnung und ein textbasiertes HUD; di
 Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Für CORE-001 wurden [2D-Bewegung](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html), [CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) und [Input-Beispiele](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) verwendet. Weitere Quellen betreffen Szenenorganisation, TileSets und Resources.
 
 Für BOARD-001 wurden außerdem [Control](https://docs.godotengine.org/en/4.7/classes/class_control.html), [Button](https://docs.godotengine.org/en/4.7/classes/class_button.html) und die [GUI-Tastatur-/Controller-Navigation](https://docs.godotengine.org/en/4.7/tutorials/ui/gui_navigation.html) verwendet. Control verwaltet GUI-Eingabe und Fokus, Button stellt die Aktivierungsaktion bereit und die Navigation-Doku beschreibt Fokuswechsel zwischen Bedienelementen.
+
+SAVE-001 verwendet die versionierte [Saving-Games-Anleitung](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html) für den Speicherort und serialisierbare Zustände, die [JSON-Referenz](https://docs.godotengine.org/en/4.7/classes/class_json.html) für Parsefehler und typgeprüfte Daten sowie die [InputEventKey-Referenz](https://docs.godotengine.org/en/4.7/classes/class_inputeventkey.html) für benannte Tastaturbelegungen.
 
 Für CORE-002 wurden zusätzlich die versionierte [Area2D-Dokumentation](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) und die [Node-Klassenreferenz](https://docs.godotengine.org/en/4.7/classes/class_node.html) zur Overlap-Erkennung und Eingabeweitergabe herangezogen. ITEM-001 verwendet zudem die dokumentierte [Signal-API](https://docs.godotengine.org/en/4.7/classes/class_signal.html) und [GDScript-Vererbung](https://docs.godotengine.org/en/4.7/tutorials/scripting/gdscript/gdscript_basics.html). QUEST-001 verwendet außerdem die offizielle [Godot-4.7-Szenenorganisation](https://docs.godotengine.org/en/4.7/tutorials/best_practices/scene_organization.html) für die Übergabe von Abhängigkeiten über Main sowie die bestehende Signal-API für Statusänderungen. UX-001 aktualisiert ein bestehendes [Label](https://docs.godotengine.org/en/4.7/classes/class_label.html) über die Inventaränderungssignale; neue UI- oder Engine-Abhängigkeiten kommen nicht hinzu.

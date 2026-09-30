@@ -116,12 +116,13 @@ Die Rezeptmengen sind Startwerte und werden beim Spielen angepasst. Eine Sumpfmi
 | Marten, der Torfstecher | 1 stärkender Aufguss | Nutzt zwei Pflanzenarten und führt die Bewohner-Auftragskette fort |
 | Lene, die Dorfheilerin | 1 Nachttrank | Führt zum seltenen Fund am alten Steg und schließt den Ausschnitt ab |
 
-Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenja nimmt den Tee direkt entgegen. Nach der Annahme zeigt das HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss bis zum Ende der laufenden Partie sichtbar und Fenja zahlt fünf Münzen. Marten zahlt zehn und Lene fünfzehn Münzen. Das Inventar führt Münzen unter coins und zeigt den Bestand im HUD. Queststatus und Münzen werden erst mit SAVE-001 gespeichert.
+Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenja nimmt den Tee direkt entgegen. Nach der Annahme zeigt das HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss sichtbar und Fenja zahlt fünf Münzen. Marten zahlt zehn und Lene fünfzehn Münzen. Das Inventar führt Münzen unter coins und zeigt den Bestand im HUD. SAVE-001 erhält Inventar, Münzen und Auftragsstatus über Spielsitzungen hinweg.
 
 ### Eingaben und Anzeigen
 
 - **WASD oder Pfeiltasten:** laufen.
 - **E:** mit Pflanze, Station, Bewohner oder Brett interagieren.
+- **F5:** Spielstand speichern; **F9:** Spielstand laden. Ein gültiger Spielstand wird außerdem beim Start automatisch geladen.
 - **I:** Inventar öffnen und schließen.
 - Die HUD zeigt aktuelle Aufgabe, Interaktionshinweis und Münzen.
 - Stationsfenster zeigen Zutatenplätze, verfügbares Rezept und Herstellungsfortschritt.
@@ -213,4 +214,4 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-ECON-001 ergänzt eine einmalige Münzbelohnung bei jeder erfolgreichen Abgabe: fünf für Fenja, zehn für Marten und fünfzehn für Lene. Als Nächstes folgt SAVE-001, damit Münzbestand und Fortschritt über Spielsitzungen hinweg erhalten bleiben.
+SAVE-001 speichert Spielerposition, Inventar, Auftragsfortschritt und abgeerntete Pflanzen; F5 speichert, F9 lädt, und ein gültiger Spielstand wird beim Start automatisch geladen. Als Nächstes folgt EXP-001: Nach einem Spieltest entscheiden, welche Jahreszeiten, Moorbereiche oder Automatisierung die Kernschleife sinnvoll erweitern.

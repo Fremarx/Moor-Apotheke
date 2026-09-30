@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/world/test_map.tscn" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/fenja_quest.gd" id="5_fenja_quest"]
 [ext_resource type="Script" path="res://scripts/marten_quest.gd" id="6_marten_quest"]
 [ext_resource type="Script" path="res://scripts/lene_quest.gd" id="7_lene_quest"]
+[ext_resource type="Script" path="res://scripts/save_manager.gd" id="8_save_manager"]
 
 [sub_resource type="StyleBoxFlat" id="QuestBoardPanelStyle"]
 bg_color = Color(0.12, 0.17, 0.14, 0.98)
@@ -33,6 +34,9 @@ z_index = 10
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("4_inventory")
+
+[node name="SaveManager" type="Node" parent="."]
+script = ExtResource("8_save_manager")
 
 [node name="Quest" type="Node" parent="."]
 
@@ -70,7 +74,7 @@ theme_override_colors/font_shadow_color = Color(0.12, 0.16, 0.13, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 9
-text = "WASD/PFEILE: LAUFEN    E: INTERAGIEREN"
+text = "WASD/PFEILE: LAUFEN  E: INTERAGIEREN  F5: SPEICHERN  F9: LADEN"
 
 [node name="InventoryCount" type="Label" parent="HUD"]
 offset_left = 10.0

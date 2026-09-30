@@ -55,6 +55,22 @@ func interact() -> String:
 	return "Marten dankt dir noch einmal."
 
 
+func can_restore_state(saved_state: Variant) -> bool:
+	return typeof(saved_state) == TYPE_STRING and str(saved_state) in [
+		STATE_NOT_ACCEPTED,
+		STATE_ACTIVE,
+		STATE_COMPLETED,
+	]
+
+
+func restore_state(saved_state: Variant) -> bool:
+	if not can_restore_state(saved_state):
+		return false
+
+	_set_state(str(saved_state))
+	return true
+
+
 func _set_state(next_state: String) -> void:
 	if state == next_state:
 		return

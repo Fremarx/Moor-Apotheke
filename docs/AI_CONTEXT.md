@@ -31,8 +31,9 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - QUEST-003 ist abgeschlossen: Lene bietet nach Martens Abschluss den Nachttrank-Auftrag an; das HUD führt durch beide Zutatenketten und die Abgabe verbraucht genau einen Trank.
 - BOARD-001 ist abgeschlossen: Das Brett zeigt alle drei Aufträge, nimmt nur freigeschaltete Bitten an und lässt die Abgabe bei den Bewohnern.
 - ECON-001 ist abgeschlossen: Erfolgreiche Abgaben zahlen einmalig 5/10/15 Münzen; das HUD zeigt den Bestand.
+- SAVE-001 ist abgeschlossen: Versioniertes Speichern in `user://`; F5 speichert, F9 lädt und beim Start wird automatisch geladen. Position, Inventar, Queststatus und abgeerntete Pflanzen werden vor dem Wiederherstellen validiert.
 - Erster Kernablauf: Sumpfminze → trocknen → Beruhigungstee → Fenja.
-- Nächster Backlogpunkt: SAVE-001 – Position, Inventar und Questfortschritt speichern und laden.
+- Nächster Backlogpunkt: EXP-001 – nach Spieltest Jahreszeiten, weitere Gebiete und Automatisierung neu priorisieren.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
 ## Wissens- und Skillhinweise
