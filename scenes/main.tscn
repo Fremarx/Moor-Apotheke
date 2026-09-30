@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/world/test_map.tscn" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/inventory.gd" id="4_inventory"]
 [ext_resource type="Script" path="res://scripts/fenja_quest.gd" id="5_fenja_quest"]
 [ext_resource type="Script" path="res://scripts/marten_quest.gd" id="6_marten_quest"]
+[ext_resource type="Script" path="res://scripts/lene_quest.gd" id="7_lene_quest"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("3_main")
@@ -28,6 +29,9 @@ script = ExtResource("5_fenja_quest")
 
 [node name="MartenQuest" type="Node" parent="Quest"]
 script = ExtResource("6_marten_quest")
+
+[node name="LeneQuest" type="Node" parent="Quest"]
+script = ExtResource("7_lene_quest")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

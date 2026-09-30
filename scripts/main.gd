@@ -4,6 +4,7 @@ extends Node2D
 @onready var _inventory: Node = $Inventory
 @onready var _fenja_quest: Node = $Quest/FenjaQuest
 @onready var _marten_quest: Node = $Quest/MartenQuest
+@onready var _lene_quest: Node = $Quest/LeneQuest
 @onready var _inventory_count: Label = $HUD/InventoryCount
 @onready var _reed_root_count: Label = $HUD/ReedRootCount
 @onready var _dried_mint_count: Label = $HUD/DriedMintCount
@@ -25,10 +26,13 @@ func _ready() -> void:
 	_inventory.item_count_changed.connect(_on_item_count_changed)
 	_fenja_quest.state_changed.connect(_on_quest_state_changed)
 	_marten_quest.state_changed.connect(_on_marten_quest_state_changed)
+	_lene_quest.state_changed.connect(_on_lene_quest_state_changed)
 	_feedback_timer.timeout.connect(_on_feedback_timer_timeout)
 	_fenja_quest.set_inventory(_inventory)
 	_marten_quest.set_inventory(_inventory)
 	_marten_quest.set_fenja_quest(_fenja_quest)
+	_lene_quest.set_inventory(_inventory)
+	_lene_quest.set_marten_quest(_marten_quest)
 
 	for pickup in get_tree().get_nodes_in_group("item_pickups"):
 		if pickup.has_signal("item_collected"):
@@ -41,7 +45,7 @@ func _ready() -> void:
 			station.set_quest_state("fenja", str(_fenja_quest.get("state")))
 			station.set_quest_state("marten", str(_marten_quest.get("state")))
 
-	var quests_by_id := {"fenja": _fenja_quest, "marten": _marten_quest}
+	var quests_by_id := {"fenja": _fenja_quest, "marten": _marten_quest, "lene": _lene_quest}
 	for quest_npc in get_tree().get_nodes_in_group("quest_npcs"):
 		if quest_npc.has_method("set_quest"):
 			var quest_id := str(quest_npc.get("quest_id"))
@@ -96,6 +100,11 @@ func _on_quest_state_changed(state: String) -> void:
 	_player.call("refresh_interactable_prompt")
 
 
+func _on_lene_quest_state_changed(_state: String) -> void:
+	_update_quest_status()
+	_player.call("refresh_interactable_prompt")
+
+
 func _on_marten_quest_state_changed(state: String) -> void:
 	for station in get_tree().get_nodes_in_group("processing_stations"):
 		if station.has_method("set_quest_state"):
@@ -106,7 +115,27 @@ func _on_marten_quest_state_changed(state: String) -> void:
 func _update_quest_status() -> void:
 	var quest_state := str(_fenja_quest.get("state"))
 	var marten_state := str(_marten_quest.get("state"))
-	if marten_state == "active":
+	var lene_state := str(_lene_quest.get("state"))
+	if lene_state == "active":
+		if int(_inventory.call("get_count", "night_potion")) > 0:
+			_quest_status.text = "Bringe Lene den Nachttrank."
+		elif int(_inventory.call("get_count", "dried_reed_root")) == 0:
+			if int(_inventory.call("get_count", "reed_root")) > 0:
+				_quest_status.text = "Trockne die Schilfwurzel für Lene."
+			else:
+				_quest_status.text = "Sammle eine Schilfwurzel für Lene."
+		elif int(_inventory.call("get_count", "dried_night_moss")) == 0:
+			if int(_inventory.call("get_count", "night_moss")) > 0:
+				_quest_status.text = "Trockne das Nachtmoos für Lene."
+			else:
+				_quest_status.text = "Sammle Nachtmoos für Lene."
+		else:
+			_quest_status.text = "Braue den Nachttrank für Lene."
+		_quest_status.show()
+	elif lene_state == "completed":
+		_quest_status.text = "Aufgabe erfüllt: Lenes Bitte."
+		_quest_status.show()
+	elif marten_state == "active":
 		if int(_inventory.call("get_count", "strengthening_infusion")) > 0:
 			_quest_status.text = "Bringe Marten den Stärkenden Aufguss."
 		elif int(_inventory.call("get_count", "dried_sump_mint")) == 0:

@@ -14,14 +14,15 @@ Die Startszene stellt Graybox-Karte und Platzhalterfigur zusammen:
 ~~~text
 Main (Node2D, main.gd)
 ├── World (Node2D)
-│   ├── TestMap (Node2D, Interaktionsprobe, Sumpfminze, Schilfwurzel, Nachtmoos, Trockengestell, Braukessel, Fenja und Marten)
+│   ├── TestMap (Node2D, Interaktionsprobe, Sumpfminze, Schilfwurzel, Nachtmoos, Trockengestell, Braukessel, Fenja, Marten und Lene)
 │   └── Player (CharacterBody2D)
 │       ├── InteractionArea (Area2D)
 │       └── Camera2D
 ├── Inventory (Node)
 ├── Quest (Node)
 │   ├── FenjaQuest (Node)
-│   └── MartenQuest (Node)
+│   ├── MartenQuest (Node)
+│   └── LeneQuest (Node)
 └── HUD (CanvasLayer)
     ├── InventoryCount
     ├── ReedRootCount
@@ -55,6 +56,9 @@ LOOP-004 legt beide Kesselrezepte als externe `RecipeDefinition`-Resources ab. M
 QUEST-001 ergänzt eine kleine `FenjaQuest`-Komponente neben Inventar und Welt. Main übergibt ihr das lokale Inventar und verbindet `state_changed` mit `QuestStatus`. Fenja erhält die Quest über Dependency Injection und delegiert ihre Interaktion an sie. Die Quest schaltet zwischen `not_accepted`, `active` und `completed`; für die Abgabe ruft sie `Inventory.remove_item("calming_tea", 1)` auf und wechselt nur bei Erfolg in den Abschlusszustand. Main fordert den Player anschließend auf, den aktuellen Fenja-Prompt neu zu senden. Wiederholtes Ansprechen nach Abschluss ändert den Bestand nicht. Der Status lebt nur in der laufenden Partie und wird nicht gespeichert.
 
 QUEST-002 ergänzt `MartenQuest` und Marten als zweiten interaktiven Bewohner. Main übergibt Martens Quest das Inventar und Fenjas Quest; `MartenQuest.is_available()` lässt den Folgeauftrag erst nach Fenjas Abschluss zu. Beide NPCs melden ihre Quest-ID, sodass Main ihnen die passende Questkomponente übergibt. Marten gibt mit `Inventory.remove_item("strengthening_infusion", 1)` genau einen Aufguss ab. Das vorhandene Quest-HUD zeigt nach Annahme Martens den nächsten Zutaten- oder Abgabeschritt und nach Abschluss dauerhaft Martens Erledigung an. Beide Questzustände bleiben laufzeitgebunden.
+
+
+`QUEST-003` ergänzt `LeneQuest` und Lene. Main injiziert das Inventar und Martens Quest; `LeneQuest.is_available()` schaltet den Folgeauftrag erst nach Martens Abschluss frei. Das HUD führt anhand der vorhandenen Inventarbestände durch Schilfwurzel und Nachtmoos bis zum Brauen und zur Abgabe. `Inventory.remove_item("night_potion", 1)` verbraucht genau einen Trank; die Wiederholungsinteraktion verändert den Bestand nicht.
 
 LOOP-005 ergänzt als dritte Stufe `night_moss` → `dried_night_moss`. Das Trockengestell versucht weiterhin Sumpfminze zuerst, danach Schilfwurzel und zuletzt Nachtmoos. Die vorhandene atomare `Inventory.transfer_item`-Übertragung aktualisiert beide Bestände samt Signal; Main zeigt den getrockneten Bestand in `DriedNightMossCount`. Bei leerem Vorrat nennt das Feedback alle drei zulässigen Pflanzen.
 
@@ -95,12 +99,20 @@ flowchart LR
   Cauldron --> Inventory
   Player --> Fenja[Fenja ansprechen]
   Fenja --> Quest[Fenjas Auftrag]
+  Player --> Marten[Marten ansprechen]
+  Marten --> MartenQuest[Martens Auftrag]
+  MartenQuest -->|state_changed| HUDQuest
+  MartenQuest -->|Abschluss schaltet frei| LeneQuest
   Quest -->|einen Tee abgeben| Inventory
   Inventory --> HUD[Inventaranzeige]
   Quest -->|state_changed| HUDQuest[Auftragsstatus]
+  Player --> Lene[Lene ansprechen]
+  Lene --> LeneQuest[Lenes Auftrag]
+  LeneQuest -->|einen Nachttrank abgeben| Inventory
+  LeneQuest -->|state_changed| HUDQuest
 ~~~
 
-Im ersten Slice wird der Auftrag direkt bei Fenja angenommen und abgegeben. Das Brett kommt erst mit CONTENT-001.
+Der erste Kernauftrag wird direkt bei Fenja angenommen und abgegeben. Marten und Lene erweitern die Bewohnerkette; das Auftragsbrett zum Anzeigen und Annehmen bleibt ein eigener Backlogpunkt.
 
 ## Daten und Persistenz
 - Im ersten Slice bleibt die Datenmenge klein und explizit.
@@ -122,7 +134,7 @@ Im ersten Slice wird der Auftrag direkt bei Fenja angenommen und abgegeben. Das 
 - Keine Konten oder Secrets; fremde Add-ons und Assets prüfen.
 
 ## Bekannte Einschränkungen
-- Trockengestell, Braukessel und Fenja sind vorläufig direkt in der Testkarte gezeichnet; eigenständige Szenen, Produktionszeiten und Animationen, zusätzliche Aufträge, Save-/Load-Logik, finale Pixelgrafik und Exportprofile fehlen noch.
+- Trockengestell, Braukessel sowie Fenja, Marten und Lene sind vorläufig direkt in der Testkarte gezeichnet; eigenständige Szenen, Produktionszeiten und Animationen, Auftragsbrett, Save-/Load-Logik, finale Pixelgrafik und Exportprofile fehlen noch.
 - Das Spiel liegt eigenständig in `Fremarx/Moor-Apotheke`. Eine spätere Zusammenführung mit dem früher verwendeten 2DGame-Repo wäre eine eigene Migrationsentscheidung.
 
 ## Engine-Dokumentation

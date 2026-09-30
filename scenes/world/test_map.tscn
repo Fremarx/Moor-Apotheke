@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/test_map.gd" id="1_map"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="2_interactable"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/brewing_cauldron.gd" id="5_brewing_cauldron"]
 [ext_resource type="Script" path="res://scripts/fenja.gd" id="6_fenja"]
 [ext_resource type="Script" path="res://scripts/marten.gd" id="7_marten"]
+[ext_resource type="Script" path="res://scripts/lene.gd" id="8_lene"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_interaction_probe"]
 radius = 6.0
@@ -30,6 +31,9 @@ radius = 8.0
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_marten"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lene"]
 radius = 8.0
 
 [node name="TestMap" type="Node2D"]
@@ -67,6 +71,17 @@ action_verb = "Sprechen"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marten"]
 shape = SubResource("CircleShape2D_marten")
+
+[node name="Lene" type="Area2D" parent="."]
+position = Vector2(590, 180)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("8_lene")
+display_name = "Lene"
+action_verb = "Sprechen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lene"]
+shape = SubResource("CircleShape2D_lene")
 
 [node name="InteractionProbe" type="Area2D" parent="."]
 position = Vector2(270, 198)

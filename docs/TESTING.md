@@ -128,7 +128,16 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Erledigt: LOOP-006 und alle zwölf vorherigen Headless-Tests (insgesamt dreizehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check.
 - Offen: Sichtprüfung des Nachttrank-Zählers und der Rezeptfreischaltung im Godot-Fenster.
 
+## QUEST-003 – Lenes Nachttrank-Auftrag
+
+- `tests/quest_003_lene_quest_test.gd` prüft, dass Lene erst nach Martens Abschluss verfügbar wird und der HUD-Zieltext durch Schilfwurzel sammeln/trocknen, Nachtmoos sammeln/trocknen und Nachttrank brauen führt.
+- Der Test prüft Annahme, Rückmeldung und unveränderten Zustand ohne Trank, Abgabe genau eines Nachttranks aus zwei, Zähler-/Quest-/Interaktions-HUD sowie Wiederholungsinteraktion ohne weiteren Verbrauch.
+- RED: Vor der Implementierung fehlten Lene und LeneQuest in der Spielszene.
+- GREEN: `QUEST-003 Lene quest checks passed.`; alle vierzehn Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
+- Offen: Sichtprüfung von Lenes Platzhaltergrafik, Kartenposition und Quest-HUD im Godot-Fenster.
+
 ## Automatisierung und CI
+
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.
 - Erfolgreicher Editorstart ist kein Nachweis für korrekte Spielregeln oder gute Spielbarkeit.

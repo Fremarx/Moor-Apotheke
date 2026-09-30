@@ -8,13 +8,13 @@ Stand: 30.09.2026
 Phase 6 – Inhaltserweiterung
 
 ### Zuletzt bearbeiteter Task
-LOOP-006 – Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen.
+QUEST-003 – Lenes Bitte um einen Nachttrank annehmen und erfüllen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE.
 
 ### Fortschritt
-Die erste Herstellungskette, Fenjas und Martens Aufträge sowie drei sammelbare Pflanzen sind spielbar. Nach Martens Auftrag kann der Braukessel aus getrockneter Schilfwurzel und Nachtmoos einen Nachttrank brauen.
+Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Nach Martens Auftrag wird der Nachttrank freigeschaltet, den Lene für ihren Folgeauftrag benötigt.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -32,9 +32,10 @@ Die erste Herstellungskette, Fenjas und Martens Aufträge sowie drei sammelbare 
 - **CONTENT-001b:** Einmalig sammelbares Nachtmoos am schattigen Torfsteg mit eigenem Inventarbestand und HUD-Zähler ergänzt.
 - **LOOP-005:** Das Trockengestell verarbeitet Nachtmoos nach Sumpfminze und Schilfwurzel; frischer und getrockneter Bestand werden getrennt angezeigt.
 - **LOOP-006:** Der Braukessel verarbeitet nach Martens Auftrag getrocknete Schilfwurzel und Nachtmoos gemeinsam zu einem Nachttrank.
+- **QUEST-003:** Lene bietet nach Martens Abschluss ihre Bitte an; das Quest-HUD führt durch Sammeln, Trocknen und Brauen, und die Abgabe verbraucht genau einen Nachttrank.
 
 ### Als Nächstes
-QUEST-003 – Lenes Bitte um einen Nachttrank annehmen und erfüllen.
+BOARD-001 – Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -71,6 +72,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - CONTENT-001b-Headless-Test sowie alle zehn bisherigen Regressionen, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - LOOP-005-Headless-Test sowie alle elf früheren Tests bestanden; Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - LOOP-006-Headless-Test sowie alle zwölf vorherigen Tests (insgesamt dreizehn) bestanden; Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- QUEST-003-Headless-Test zuerst rot, danach grün; alle dreizehn früheren Tests (insgesamt vierzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - Sichtprüfung von Pflanzen, NPCs, Quest-/Inventar-HUD und realer Tastatureingabe im Godot-Fenster ist noch offen; die Tests bestätigen Textwechsel, nicht die Verständlichkeit bei neuen Spielenden.
 
 ### Sicherheitsstatus
@@ -136,7 +138,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | CONTENT-001b | Nachtmoos am schattigen Torfsteg sammeln und im HUD zählen | P2 | QUEST-002 | DONE |
 | LOOP-005 | Nachtmoos am Trockengestell verarbeiten | P2 | CONTENT-001b | DONE |
 | LOOP-006 | Nachttrank aus getrockneter Schilfwurzel und Nachtmoos brauen; nach Martens Auftrag freischalten | P2 | LOOP-005, QUEST-002 | DONE |
-| QUEST-003 | Lenes Bitte um einen Nachttrank annehmen und erfüllen | P2 | LOOP-006 | PLANNED |
+| QUEST-003 | Lenes Bitte um einen Nachttrank annehmen und erfüllen | P2 | LOOP-006 | DONE |
 | BOARD-001 | Auftragsbrett zum Anzeigen und Annehmen verfügbarer Bewohneraufträge ergänzen | P2 | QUEST-002, QUEST-003 | PLANNED |
 | ECON-001 | Einfache Münzbelohnung für erfüllte Aufträge anzeigen und verbuchen | P2 | BOARD-001 | PLANNED |
 | SAVE-001 | Position, Inventar und Questfortschritt speichern und laden | P2 | QUEST-001 | PLANNED |
@@ -234,6 +236,14 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 - Wiederholtes Ansprechen nach Abschluss verbraucht keinen weiteren Aufguss.
 - Das HUD führt während Martens Bitte anhand der Bestände zum nächsten benötigten Schritt.
 - Ein eigener Headless-Test prüft die Freischaltung nach Fenja, Annahme, fehlenden Gegenstand, Abgabe und Wiederholungsinteraktion; frühere Schleifen bleiben Regressionen.
+### QUEST-003 Abnahmekriterien
+- Lene ist als interaktive Bewohnerin vorhanden und bietet ihre Bitte erst nach Martens Abschluss zur Annahme an.
+- Die aktive Quest führt das HUD anhand des Inventars durch Schilfwurzel sammeln/trocknen, Nachtmoos sammeln/trocknen und Nachttrank brauen.
+- Ohne Nachttrank bleibt die Bitte aktiv und Bestand sowie Queststatus ändern sich nicht.
+- Die erfolgreiche Abgabe verbraucht genau einen Nachttrank, schließt die Bitte ab und aktualisiert Zähler, Feedback, Interaktionshinweis und Quest-HUD.
+- Wiederholtes Ansprechen nach Abschluss verbraucht keinen weiteren Nachttrank.
+- Der Headless-Test prüft Freischaltung, Zutatenführung, Annahme, fehlenden Gegenstand, Abgabe und Wiederholungsinteraktion; alle bisherigen Tests bleiben Regressionen.
+- Sichtprüfung von Lene, ihrer Platzierung und dem Quest-HUD im Godot-Fenster bleibt separat dokumentiert.
 
 ### LOOP-005 Abnahmekriterien
 - Das Trockengestell verarbeitet pro E-Druck genau eine frische Nachtmoos-Einheit zu einer getrockneten Einheit.
@@ -304,3 +314,4 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | 30.09.2026 | CONTENT-001b: Nachtmoos am schattigen Torfsteg als eigenes Pickup mit Inventar-ID und HUD-Zähler ergänzt; Headless-Test rot/grün und Regressionen bestanden. |
 | 30.09.2026 | LOOP-005: Nachtmoos als dritte Zutat am Trockengestell verarbeitet, eigener HUD-Zähler ergänzt; Featuretest rot/grün, alle zwölf Headless-Tests, Editorimport und Startcheck bestanden. |
 | 30.09.2026 | LOOP-006: Nachttrank-Rezept an Martens Abschluss gebunden, atomare Mehrzutatenverarbeitung und eigener HUD-Zähler ergänzt; Featuretest rot/grün, alle dreizehn Headless-Tests, Editorimport und Startcheck bestanden. |
+| 30.09.2026 | QUEST-003: Lenes Folgeauftrag, HUD-Führung durch beide Zutatenketten und genau-ein-Nachttrank-Abgabe ergänzt; Featuretest rot/grün, alle vierzehn Headless-Tests, Editorimport und Startcheck bestanden. |
