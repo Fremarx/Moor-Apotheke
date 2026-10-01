@@ -5,13 +5,13 @@ Stand: 01.10.2026
 ## Project Status
 
 ### Aktuelle Phase
-Phase 7 – Persistenz und Ausbau
+Phase 8 – Release-Vorbereitung
 
 ### Zuletzt bearbeiteter Task
-VIS-003 – Arbeitsstationen, Bewohner und Sammelstellen an die neue Moor-Pixelart anpassen.
+REL-001 – Windows-x86_64-Exportprofil und Release-Checkliste einrichten.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; REL-001 DONE.
 
 ### Fortschritt
 Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen.
@@ -40,9 +40,10 @@ Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanze
 - **VIS-001:** Die bestehende Testkarte mit warmen Bodenfarben, Teichufer, Torfweg und pixeligen Moorpflanzen sichtbar ausgestalten.
 - **VIS-002:** Den abgestimmten Spielerentwurf als vier Richtungsansichten integrieren und die anatomisch feste Taschen- und Minzplatzierung bewahren.
 - **VIS-003:** Trockengestell, Braukessel, Auftragsbrett, Fenja, Marten, Lene sowie Sumpfminze, Schilfwurzel und Nachtmoos als konsistente Sprite-Atlanten integrieren.
+- **REL-001:** Windows-x86_64-Exportprofil und Release-Checkliste einrichten; passende Vorlagen lokal installiert; Release-EXE exportiert und gestartet.
 
 ### Als Nächstes
-REL-001 – Exportziel wählen, Exportvorlagen einrichten und Release-Checkliste ergänzen.
+PLAY-001 – Kernablauf, Eingaben, Kollisionen, HUD-Führung und Speichern im sichtbaren Godot-Fenster prüfen.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Fremarx/Moor-Apotheke`; abgeschlossene Backlogitems werden auf `codex/moor-apotheke` gepusht. Die manuelle Sichtprüfung von Bewegung und HUD im Godot-Fenster steht noch aus.
@@ -55,7 +56,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 ### Technische Schulden
 - Bewegung und Testkarte sind provisorisch gezeichnet; weitere Pflanzen, Rezepte und Aufträge fehlen noch.
 - Echte Tastatureingabe und Kameragefühl wurden noch nicht im sichtbaren Godot-Fenster geprüft.
-- Exportvorlagen und Exportprofile werden erst für einen konkreten Build-Zielpunkt ergänzt.
+- Der erste Windows-x86_64-Testbuild ist noch unsigniert; App-Metadaten, Lizenzhinweise und öffentlicher Vertriebsweg sind offen.
 
 ### Teststatus
 - Godot 4.7.2 wurde mit gültiger Windows-Signatur installiert.
@@ -82,6 +83,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo `Frema
 - QUEST-003-Headless-Test zuerst rot, danach grün; alle dreizehn früheren Tests (insgesamt vierzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - BOARD-001-Headless-Test zuerst rot, danach grün; alle vierzehn vorherigen Tests (insgesamt fünfzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - SAVE-001-Test zuerst rot, danach grün; prüft F5/F9, automatische Startladung, Wiederherstellung aller gespeicherten Daten und unveränderten Laufzeitzustand bei fehlendem, beschädigtem oder nicht unterstütztem Save. Alle 17 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- REL-001: Godot 4.7.2 Windows-Exportvorlagen installiert; Release-Export nach build/windows/Moor-Apotheke.exe und 60-Frame-Start der EXE mit Exitcode 0 bestanden. Keine Codesignatur; kein öffentlicher Upload.
 - Noch offen: reale Tastatureingabe, HUD-Führung und Verständlichkeit im Godot-Fenster manuell prüfen; Headless-Tests bestätigen Logik, nicht Spielgefühl.
 
 ### Sicherheitsstatus
@@ -155,7 +157,8 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | VIS-001 | Die Moor-Testkarte in einer zusammenhängenden Pixelart-Richtung gestalten und integrieren | P1 | EXP-001, SAVE-001 | DONE |
 | VIS-002 | Den abgestimmten Spielerentwurf mit Tasche und Minze als 4-Wege-Spielfigur integrieren | P1 | VIS-001 | DONE |
 | VIS-003 | Arbeitsstationen, Bewohner und Sammelstellen visuell an die neue Moor-Pixelart anpassen | P1 | VIS-002 | DONE |
-| REL-001 | Exportziel wählen, Exportvorlagen einrichten, Release-Checkliste ergänzen | P3 | stabile Kernschleife | PLANNED |
+| REL-001 | Windows-x86_64-Exportprofil und Release-Checkliste einrichten | P3 | stabile Kernschleife | DONE |
+| PLAY-001 | Kernablauf, Steuerung, Kollisionen, HUD-Führung und Speichern im sichtbaren Godot-Fenster prüfen | P1 | VIS-003 | PLANNED |
 
 ### CORE-002 Abnahmekriterien
 - Die Interaktion nutzt die benannte Aktion interact auf E.
@@ -374,6 +377,7 @@ Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten wede
 | Datum | Änderung |
 | --- | --- |
 | 30.09.2026 | Projektgrundlage und Roadmap angelegt; erster Slice auf eine Kräuter-zu-Auftrag-Schleife fokussiert. |
+| 01.10.2026 | REL-001: Windows-x86_64-Exportprofil, passende lokale Vorlagen, Exportdokumentation und Release-Checkliste ergänzt. |
 | 30.09.2026 | CORE-001: Graybox-Moorfläche, Hindernisse, Spielerbewegung und Kamera ergänzt; Headless-Prüfung bestanden. |
 | 30.09.2026 | GitHub-Ziel auf das eigenständige Repo Fremarx/Moor-Apotheke umgestellt. |
 | 30.09.2026 | Repository auf GitHub veröffentlicht; lokale Maschinenpfade aus der Entwicklungsdoku entfernt. |
@@ -398,3 +402,4 @@ Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten wede
 | 01.10.2026 | VIS-001: warmes Moorsegment mit strukturierterem Boden, Torfweg, Teichufer und transparentem 4 × 4-Dekorationsatlas integriert; alle 17 vorhandenen Tests, Editorimport, 60-Frame-Start und gerenderte Hauptszene geprüft. |
 | 01.10.2026 | VIS-002: Spielerentwurf als transparenten 2 × 2-Richtungsatlas integriert; Tasche und Minzblatt perspektivisch konsistent; 18 Tests, Editorimport, 60-Frame-Start und Spielbild geprüft. |
 | 01.10.2026 | VIS-003: Stationen, Bewohner und Sammelpflanzen als drei transparente 3-Zellen-Atlanten integriert; 19 Tests, Godot-Import, 60-Frame-Start und Hauptszene bei 480 × 270 geprüft. |
+| 01.10.2026 | REL-001: Windows-x86_64-Exportprofil, passende lokale Vorlagen, Exportdokumentation und Release-Checkliste ergänzt. |

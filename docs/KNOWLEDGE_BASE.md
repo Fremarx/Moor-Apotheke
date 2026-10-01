@@ -41,6 +41,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 | [JSON class reference](https://docs.godotengine.org/en/4.7/classes/class_json.html) | 4.7, 01.10.2026 | JSON.parse(), Fehlerbehandlung und validiertes Variant-Ergebnis | Offizielle Engine-Doku; SAVE-001 |
 | [InputEventKey class reference](https://docs.godotengine.org/en/4.7/classes/class_inputeventkey.html) | 4.7, 01.10.2026 | Physische Tastaturbelegungen für F5 und F9 in der Input Map | Offizielle Engine-Doku; SAVE-001 |
 | [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html) | 4.7, 01.10.2026 | 2 × 2-Spieleratlas mit hframes, vframes und frame_coords darstellen | Offizielle Engine-Doku; VIS-002 |
+| [Exporting projects](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_projects.html) | 4.7, 01.10.2026 | Exportprofile, Exportvorlagen, CLI-Export und sichere Ablage von Zugangsdaten | Offizielle Engine-Doku; REL-001 |
+| [Exporting for Windows](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_for_windows.html) | 4.7, 01.10.2026 | Windows-Desktop-Export und Architektur x86_64 | Offizielle Engine-Doku; REL-001 |
 
 
 ## Abrufnotizen
@@ -72,6 +74,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 
 ## VIS-003 – Sprite-Atlanten für Weltobjekte
 Stationen, Bewohner und Sammelpflanzen liegen jeweils in einem horizontalen 3-Zellen-Atlas. Godots Sprite2D nutzt hframes = 3 und frame = 0, 1 oder 2 zur Zellwahl. Die Grafik bleibt ein Sprite2D-Kind ihrer Interaktionsobjekte; Sichtbarkeit und Kollision der Sammelstelle bleiben in der vorhandenen Gameplay-Logik. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).
+
+- **01.10.2026 – REL-001:** Exportprofile werden als export_presets.cfg versioniert. Exportvorlagen müssen lokal zur identischen Godot-Version installiert sein. Zugangsdaten bleiben in .godot/export_credentials.cfg und damit außerhalb der Versionsverwaltung. Für den ersten Testbuild ist Windows Desktop x86_64 gewählt; der Release-Export wird mit --export-release erstellt. Quellen: [Exporting projects](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_projects.html) und [Exporting for Windows](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_for_windows.html).
 
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.

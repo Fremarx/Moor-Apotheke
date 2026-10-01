@@ -211,8 +211,8 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - **Schwerpunkt:** Für den Anfang ist eine Mischung aus Erkunden, Aufträgen und einfacher Verarbeitung vorgesehen; Automatisierung kommt später.
 - **Spieltempo:** Der erste Ausschnitt bleibt ohne Zeitdruck. Jahreszeiten können später die Fundorte und Rezepte verändern.
 - **Geschichte und Ton:** Noch offen; Vorschlag ist märchenhaft und gemütlich, mit etwas geheimnisvoller Moorstimmung.
-- **Nächster Ausbau:** VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen an den warmen Moor-Pixelstil angepasst. Als Nächstes folgen Exportziel, Exportvorlagen und Release-Checkliste in REL-001; weitere Moorgebiete, Jahreszeiten und Automatisierung werden danach neu priorisiert.
+- **Nächster Ausbau:** VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen an den warmen Moor-Pixelstil angepasst. REL-001 richtet den Windows-x86_64-Testexport ein. Als Nächstes prüft PLAY-001 den Kernablauf im sichtbaren Godot-Fenster; weitere Moorgebiete, Jahreszeiten und Automatisierung werden danach neu priorisiert.
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen mit transparenten Pixelart-Atlanten gestaltet. Die Hauptszene wurde bei 480 × 270 geprüft; Spiellogik, Positionen und Kollisionsflächen blieben unverändert. Als Nächster konkreter Schritt folgt REL-001: Exportziel wählen, Exportvorlagen einrichten und Release-Checkliste ergänzen.
+VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen mit transparenten Pixelart-Atlanten gestaltet. Die Hauptszene wurde bei 480 × 270 geprüft; Spiellogik, Positionen und Kollisionsflächen blieben unverändert. REL-001 hat Windows Desktop x86_64 als erstes Exportziel eingerichtet. Der nächste konkrete Schritt ist PLAY-001: Bewegung, Kollisionen, HUD-Führung und Speichern im sichtbaren Godot-Fenster manuell prüfen.

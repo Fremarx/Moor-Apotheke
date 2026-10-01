@@ -10,32 +10,22 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - docs/ARCHITECTURE.md: derzeitige Architekturannahmen
 - docs/KNOWLEDGE_BASE.md: versionierte offizielle Godot-Quellen
 - docs/TESTING.md: Prüfstrategie
+- docs/RELEASE_CHECKLIST.md: Windows-Build und offene Release-Schritte
 - docs/adr/: nummerierte Architekturentscheidungen
 
 ## Stand
-- Eigenständiges Repository `Fremarx/Moor-Apotheke`, öffentlich auf GitHub; Entwicklungsbranch `codex/moor-apotheke`.
+- Eigenständiges öffentliches Repository Fremarx/Moor-Apotheke; Entwicklungsbranch codex/moor-apotheke.
 - Godot 4.7.2 ist lokal installiert.
-- CORE-001 ist umgesetzt: Graybox-Moorfläche, Platzhalterfigur, Kamera, WASD-/Pfeiltastensteuerung und einfache Hindernisse.
-- CORE-002 ist umgesetzt: E-Interaktion mit Reichweitenprüfung, Auswahl des nächsten Ziels, kontextuellem HUD-Hinweis und grauer Kräuterprobe.
-- ITEM-001 ist umgesetzt: Sumpfminze einmalig sammeln, Bestand im Inventar führen und im HUD anzeigen.
-- LOOP-001 ist umgesetzt: E am Trockengestell wandelt eine frische Sumpfminze in getrocknete Minze um.
-- LOOP-002 ist umgesetzt: Der Braukessel wandelt eine getrocknete Sumpfminze in Beruhigungstee um; Wasser steht dort unbegrenzt bereit.
+- CORE-001 und CORE-002 sind umgesetzt: Moor-Testkarte, Spielfigur, Kamera, Steuerung, Hindernisse und E-Interaktion.
+- ITEM-001 und LOOP-001/002 sind umgesetzt: Sumpfminze sammeln, trocknen und zu Beruhigungstee verarbeiten.
 - QUEST-001 und UX-001 sind abgeschlossen; Fenjas Kernauftrag führt vom Sammeln bis zur Abgabe.
-- CONTENT-001a ist abgeschlossen: Schilfwurzel als eigenständiges Pickup mit Inventarbestand und HUD-Zähler.
-- LOOP-003 ist abgeschlossen: Das Trockengestell verarbeitet Schilfwurzel und zählt die getrocknete Zutat separat.
-- LOOP-004 ist abgeschlossen: Der Stärkende Aufguss nutzt beide getrockneten Zutaten und wird nach Fenjas Auftrag freigeschaltet.
-- QUEST-002 ist abgeschlossen: Marten nimmt nach Fenjas Abschluss einen Stärkenden Aufguss an; die Quest-HUD führt zu den Zutaten und bleibt nach Abgabe abgeschlossen.
-- CONTENT-001b ist abgeschlossen: Nachtmoos ist als seltenes, einmalig sammelbares Pickup am schattigen Torfsteg ergänzt und wird separat im HUD gezählt.
-- LOOP-005 ist abgeschlossen: Das Trockengestell verarbeitet Nachtmoos nach Sumpfminze und Schilfwurzel; frischer und getrockneter Bestand haben getrennte HUD-Zähler.
-- LOOP-006 ist abgeschlossen: Der Braukessel braut aus getrockneter Schilfwurzel und Nachtmoos einen Nachttrank, sobald Martens Auftrag abgeschlossen ist.
-- QUEST-003 ist abgeschlossen: Lene bietet nach Martens Abschluss den Nachttrank-Auftrag an; das HUD führt durch beide Zutatenketten und die Abgabe verbraucht genau einen Trank.
-- BOARD-001 ist abgeschlossen: Das Brett zeigt alle drei Aufträge, nimmt nur freigeschaltete Bitten an und lässt die Abgabe bei den Bewohnern.
-- ECON-001 ist abgeschlossen: Erfolgreiche Abgaben zahlen einmalig 5/10/15 Münzen; das HUD zeigt den Bestand.
-- SAVE-001 ist abgeschlossen: Versioniertes Speichern in `user://`; F5 speichert, F9 lädt und beim Start wird automatisch geladen. Position, Inventar, Queststatus und abgeerntete Pflanzen werden vor dem Wiederherstellen validiert.
-- EXP-001 und VIS-001 sind abgeschlossen: Die 640 × 360-Testkarte zeigt warmere, abwechslungsreiche Moorflächen, einen Torfweg, ein detaillierteres Teichufer und Vegetation aus assets/tilesets/moor_vegetation_atlas_ai_20261001.png. Spiellogik und Kollisionsflächen blieben unverändert; die Hauptszene wurde bei 480 × 270 gerendert und sichtbar geprüft.
-- Erster Kernablauf: Sumpfminze → trocknen → Beruhigungstee → Fenja.
-- VIS-002 ist abgeschlossen: ein transparenter 2 × 2-Spieleratlas zeigt vorne, hinten und beide Profile. Die Richtung folgt der Bewegung und bleibt im Leerlauf erhalten; die Tasche bleibt anatomisch links, das Minzblatt wird von Körper und Taschenöffnung logisch verdeckt.
-- VIS-003 ist abgeschlossen: drei transparente 3-Zellen-Atlanten für Stationen, Bewohner und Sammelpflanzen sind integriert; neun Weltobjekte nutzen Sprite2D-Frames. Nächster Backlogpunkt: REL-001 – Exportziel und Release-Checkliste.
+- CONTENT-001a, LOOP-003/004 und QUEST-002 ergänzen Schilfwurzel, stärkenden Aufguss und Martens Auftrag.
+- CONTENT-001b, LOOP-005/006 und QUEST-003 ergänzen Nachtmoos, Nachttrank und Lenes Auftrag.
+- BOARD-001 und ECON-001 ergänzen das Auftragsbrett sowie Münzbelohnungen.
+- SAVE-001 speichert und lädt Position, Inventar, Auftragsstatus und abgeerntete Pflanzen in user://.
+- VIS-001 bis VIS-003 integrieren die warme Moor-Pixelart für Karte, Spieler, Stationen, Bewohner und Sammelpflanzen.
+- REL-001 ist abgeschlossen: Windows Desktop x86_64 ist das erste Exportziel. export_presets.cfg ist versioniert, Godot-4.7.2-Exportvorlagen sind lokal installiert und der exportierte Build startete im Headless-Smoke-Test erfolgreich.
+- Nächster Backlogpunkt: PLAY-001 – Kernablauf, Eingaben, Kollisionen, HUD-Führung und Speichern im sichtbaren Godot-Fenster manuell prüfen.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
 ## Wissens- und Skillhinweise

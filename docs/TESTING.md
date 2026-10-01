@@ -190,3 +190,8 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Die Hauptszene wurde mit GL Compatibility gerendert und bei 480 × 270 auf Lesbarkeit, Zellzuschnitt und Stil geprüft. Das Trockengestell hält 76 Pixel Abstand zur Zellgrenze; die nächste Grafik beginnt 92 Pixel innerhalb der Nachbarzelle.
 - Codeprüfung bestätigt unveränderte Interaktionslogik, Weltpositionen, Kollisionsradien, Inventar, Quests und Speicherverhalten.
 - Offen: WASD-/Pfeiltasten, Kollisionen und HUD-Führung noch im sichtbaren Godot-Fenster manuell prüfen.
+
+## REL-001 – Windows-Testbuild vorbereiten
+- Das versionierte Profil Windows Desktop exportiert Godot 4.7.2 als x86_64-EXE nach build/windows/Moor-Apotheke.exe; build/ bleibt ignoriert.
+- Die passenden Godot-4.7.2-Windows-Vorlagen wurden lokal installiert. Das Release-Preset exportierte erfolgreich; die erzeugte EXE beendete --headless --quit-after 60 mit Exitcode 0.
+- Der Testbuild ist nicht signiert. Sichtprüfung und Freigabe einer öffentlichen Veröffentlichung bleiben offen.
