@@ -36,6 +36,8 @@ const INVENTORY_COLUMNS: Array = [
 ]
 
 @onready var _player: Node = $World/Player
+@onready var _camera: Camera2D = $World/Player/Camera2D
+@onready var _schilfufer: Node = $World/Schilfufer
 @onready var _inventory: Node = $Inventory
 @onready var _save_manager: Node = $SaveManager
 @onready var _fenja_quest: Node = $Quest/FenjaQuest
@@ -167,6 +169,7 @@ func save_game() -> bool:
 			"lene": str(_lene_quest.get("state")),
 		},
 		"collected_pickups": collected_pickups,
+		"schilfufer": _schilfufer.call("get_save_data"),
 	}
 	if not bool(_save_manager.call("write_save_data", save_data)):
 		_on_interaction_completed("Der Spielstand konnte nicht gespeichert werden.")
@@ -206,13 +209,17 @@ func _is_valid_save_data(save_data: Variant) -> bool:
 	if not _is_save_number(save_data.get("version")) or float(save_data["version"]) != 1.0:
 		return false
 
+	var saved_schilfufer: Variant = save_data.get("schilfufer", {})
+	if not bool(_schilfufer.call("can_restore_save_data", saved_schilfufer)):
+		return false
+
 	var saved_player: Variant = save_data.get("player")
 	if typeof(saved_player) != TYPE_DICTIONARY or not saved_player.has("x") or not saved_player.has("y"):
 		return false
 	if not _is_save_number(saved_player["x"]) or not _is_save_number(saved_player["y"]):
 		return false
 	var saved_position := Vector2(float(saved_player["x"]), float(saved_player["y"]))
-	if saved_position.x < 0.0 or saved_position.x > 1280.0 or saved_position.y < 0.0 or saved_position.y > 360.0:
+	if not _is_valid_world_position(saved_position):
 		return false
 
 	if not bool(_inventory.call("validate_save_data", save_data.get("inventory"))):
@@ -269,6 +276,7 @@ func _get_pickups_by_id() -> Dictionary:
 func _apply_save_data(save_data: Dictionary) -> void:
 	var saved_player: Dictionary = save_data["player"]
 	_player.position = Vector2(float(saved_player["x"]), float(saved_player["y"]))
+	_configure_camera_for_position(_player.global_position)
 	_inventory.call("restore_from_save", save_data["inventory"])
 	_fenja_quest.call("restore_state", save_data["quests"]["fenja"])
 	_marten_quest.call("restore_state", save_data["quests"]["marten"])
@@ -278,6 +286,7 @@ func _apply_save_data(save_data: Dictionary) -> void:
 	var pickups := _get_pickups_by_id()
 	for pickup_id in pickups:
 		pickups[pickup_id].call("set_collected", collected_pickups.has(pickup_id))
+	_schilfufer.call("restore_save_data", save_data.get("schilfufer", {}))
 
 	_update_quest_status()
 	_refresh_quest_board()
@@ -580,15 +589,42 @@ func _update_quest_status() -> void:
 		_quest_status.hide()
 
 
+func _is_valid_world_position(position: Vector2) -> bool:
+	var village_bounds := Rect2(Vector2.ZERO, Vector2(640.0, 360.0))
+	var reeds_bounds := Rect2(Vector2(640.0, 0.0), Vector2(2400.0, 1088.0))
+	return village_bounds.has_point(position) or reeds_bounds.has_point(position)
+
+
+func _configure_camera_for_position(position: Vector2) -> void:
+	if Rect2(Vector2(640.0, 0.0), Vector2(2400.0, 1088.0)).has_point(position):
+		_configure_camera_for_area(&"Schilfufer")
+	else:
+		_configure_camera_for_area(&"Dorfplatz")
+
+
+func _configure_camera_for_area(destination_id: StringName) -> void:
+	if destination_id == &"Schilfufer":
+		_camera.limit_left = 640
+		_camera.limit_top = 0
+		_camera.limit_right = 3040
+		_camera.limit_bottom = 1088
+	else:
+		_camera.limit_left = 0
+		_camera.limit_top = 0
+		_camera.limit_right = 640
+		_camera.limit_bottom = 360
+	_camera.force_update_scroll()
+
+
 func _on_map_transition_requested(destination_id: StringName, destination_position: Vector2, feedback_text: String) -> void:
 	for area in get_tree().get_nodes_in_group("world_areas"):
 		if StringName(area.get("area_id")) != destination_id:
 			continue
 		_player.velocity = Vector2.ZERO
 		_player.global_position = area.to_global(destination_position)
+		_configure_camera_for_area(destination_id)
 		_on_interaction_completed(feedback_text)
 		return
-
 
 func _on_feedback_timer_timeout() -> void:
 	_interaction_feedback.hide()

@@ -230,12 +230,12 @@ Die 27 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, d
 
 
 ## AREA-001 – Zweites Moorgebiet
-- `tests/area_001_connected_moor_area_test.gd` prüft beide Übergänge und läuft per InputMap-Physikframes zu allen drei neuen Fundorten. Es sammelt Sumpfminze, Schilfwurzel und Nachtmoos, prüft acht global eindeutige IDs und das gemeinsame Inventar.
-- Ein isolierter Spielstand prüft Position und alle drei geernteten Pflanzen beim Laden und beim automatischen Wiederherstellen nach Szenenneustart.
-- RED: Vor der Implementierung schlug der Test fehl, weil Schilfufer noch nicht in `World` vorhanden war. GREEN: `AREA-001 connected moor area checks passed.`
-- Nach einer durch die neue Karte überholten RESOURCE-001-Bestandsannahme wurde der Ressourcen-Audit auf 3 Sumpfminzen, 3 Schilfwurzeln und 2 Nachtmoose über beide Gebiete angepasst.
-- Alle 23 Godot-4.7.2-Headless-Tests, Editorimport und 60-Frame-Hauptszene bestanden.
-- Ein sichtbarer manueller Test von Bildausschnitt, echter Tastatur und subjektivem Steuerungsgefühl bleibt offen.
+- Beim ersten AREA-001-Ausschnitt prüfte `tests/area_001_connected_moor_area_test.gd` die Dorfübergänge und drei neue Pflanzenziele. REG-01 hat dieselbe Abnahme anschließend auf die Großkarte, zwölf eindeutige Pickup-IDs und den größeren Laufweg erweitert; der aktuelle Testumfang steht unten unter REG-01.
+- Der ursprüngliche AREA-001-Speichercheck sicherte Spielerposition und geerntete Pflanzen beim Laden und beim automatischen Wiederherstellen nach Szenenneustart.
+- RED: Vor AREA-001 schlug der Test fehl, weil Schilfufer noch nicht in `World` vorhanden war. Der Übergang und Rückweg wurden danach mit `AREA-001 connected moor area checks passed.` bestätigt.
+- Der aktuelle Ressourcen-Audit zählt 5 Sumpfminzen, 5 Schilfwurzeln und 2 Nachtmoose über beide Gebiete; `playtest_001_core_loop_test.gd` prüft diese Bestände und die vollständige Auftragskette.
+- REG-01 hat alle 27 Godot-4.7.2-Headless-Tests, den Editorimport und den 60-Frame-Startlauf bestanden.
+- Sichtbarer Renderercheck, echte Tastatureingabe und subjektives Steuerungsgefühl bleiben für die manuelle Spielprüfung offen.
 
 ## MAP-01 – Dorfplatz
 - `tests/map_01_village_plaza_test.gd` prüft die logische Gebiets-ID `Dorfplatz`, Spielerstart und Platzmitte, Apotheke/Eingang, die Wege in fünf Richtungen sowie das Auftragsbrett im Fußweg und seine Bedienbarkeit.
@@ -248,7 +248,7 @@ Die 27 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, d
 ## MAP-02 – Fünf Dorfwege
 
 - `tests/map_02_routes_and_locks_test.gd` prüft fünf Richtungen, die logische Dorfplatz-ID, den offenen NW-Übergang, vier sichtbare Interaktionssperren und deren physische Kollisionsbarrieren.
-- `tests/area_001_connected_moor_area_test.gd` läuft den NW-Weg zum Schilfufer, sammelt dort alle drei Kräuter und prüft den Rückweg zum Dorfplatz sowie Speichern/Laden.
+- `tests/area_001_connected_moor_area_test.gd` läuft den NW-Weg ins Schilfufer, sammelt alle sechs Sumpfminz- und Schilfwurzelgruppen, senkt den Fährensteg und prüft den Rückweg sowie Speichern/Laden.
 - Die Torhinweise geben die geplanten Voraussetzungen wieder. Die tatsächliche questabhängige Freischaltung wird erst im späteren PROG-01 umgesetzt.
 - MAP-02-Routentest, AREA-001-Rückweg, vollständige Questkette, 25 Headless-Testskripte, Editorimport, 60-Frame-Start und sichtbarer 480 × 270-Renderer bestehen.
 - REG-01 bis REG-05 ergänzen sichere Rückwege und Rastpunkte für ihre Gebiete, sobald die Szenen entstehen.
@@ -277,3 +277,10 @@ SCALE-01 ist ein Designpunkt; es wurden keine Karten-Szenen geändert und keine 
 - Hauptroute, zwei Seitenwege, Rundroute/Abkürzung, drei Landmarken, drei Gruppen je gebietseigener Sammelressource, zwei optionale Begegnungsorte, Geheimnis und sicherer Rückweg in der laufenden Szene abgehen.
 - Mindestens drei neue Spielende pro fertigem Gebiet ohne Vorabhinweise beobachten. Medianzeit, erreichte Teilbereiche, entdeckte Ressourcengruppen, Abkürzung und Geheimnis sowie verpasste Orte festhalten.
 - Ziel sind 25–40 Minuten gründliche Ersterkundung. Bei kürzeren Besuchen neue interessante Ziele und Routen ergänzen; keine leeren Laufwege. Kein Hauptfortschritt darf Kampf oder spätere Ausrüstung voraussetzen.
+
+## REG-01 – Schilfufer als Startgebiet
+- `tests/area_001_connected_moor_area_test.gd` prüft 150×68 Zellen, mindestens 6.120 passierbare Kacheln, sechs Sumpfminz-/Schilfwurzelgruppen, den sicheren Rundweg, den physisch zunächst gesperrten und nach Mastinteraktion passierbaren Steg, die sichtbare Marksteinfolge, die verborgene Nachtmooslichtung, den Schilfschnapper, Rückweg, Kamera sowie Speichern/Laden und automatisches Wiederherstellen.
+- Version-1-Spielstände ohne Schilfuferdaten bleiben gültig; vorhandene Fähren- und Rätselzustände werden bei F9 und beim Start wiederhergestellt.
+- `tests/map_03_reusable_terrain_tileset_test.gd` prüft das gemeinsame 16×16-TileSet und die konfigurierte Kartengröße beider Regionen. Alle 27 vorhandenen Godot-Testskripte, der Headless-Editorimport und der vollständige QUEST-/Ressourcen-End-to-End-Test sind bestanden.
+- Die schnelle Schilfschnapper-Begegnung ist optional und verlustfrei. Der Mückenschwarm bleibt eine spätere seltene Variante.
+- Noch offen vor Veröffentlichung: ein sichtbarer Renderercheck der aktualisierten Fährenszene sowie ein blinder Erstbesuch durch mindestens drei neue Personen mit Zeit-, Landmarken- und Geheimnisnotiz. Der Headless-Bildexport hing in dieser Umgebung; es wird deshalb kein aktueller Screenshot als visuell abgenommen ausgewiesen.

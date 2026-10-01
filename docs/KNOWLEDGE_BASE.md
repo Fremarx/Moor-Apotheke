@@ -115,3 +115,9 @@ Stationen, Bewohner und Sammelpflanzen liegen jeweils in einem horizontalen 3-Ze
 ## MAP-02 – Fünf Dorfwege
 
 - **01.10.2026:** Die Pfadillustration, Beschilderung und Holzbrücke nutzen die vorhandenen CanvasItem-Zeichenfunktionen. Interaktive Wegweiser bleiben Area2D-Ziele; gesperrte Abschnitte verwenden die bestehenden statischen Kollisionskörper. Es kommt keine neue Godot-API hinzu; die für MAP-01 und AREA-001 gelisteten CanvasItem-, Area2D- und CharacterBody2D-Referenzen decken die Umsetzung ab.
+
+## REG-01 – Großes Schilfufer
+- CanvasItem draw_polyline() und draw_ellipse() zeichnen lokale Weg- und Uferformen im 2D-Canvas; draw_texture_rect_region() verwendet weiterhin Quell- und Zielrechtecke aus den vorhandenen Pixelatlasgrafiken.
+- TileMapLayer.set_cell() füllt das 16×16-Raster; das Schilfufer verwendet 150×68 Zellen. Camera2D.limit_* begrenzt die Ansicht auf die aktive Szene und wird beim Übergang sowie beim Laden neu gesetzt.
+- Die Fährenbarriere ist ein `StaticBody2D` mit `CollisionShape2D`; `disabled` wird mit `set_deferred()` geschaltet, damit die Form sicher aus der Physikwelt entfernt wird. Der Regionzustand bleibt als optionale Ergänzung im vorhandenen Version-1-JSON mit alten Saves kompatibel.
+- Quellen: [CanvasItem class reference](https://docs.godotengine.org/en/4.7/classes/class_canvasitem.html), [TileMapLayer class reference](https://docs.godotengine.org/en/4.7/classes/class_tilemaplayer.html), [Camera2D class reference](https://docs.godotengine.org/en/4.7/classes/class_camera2d.html) und [CollisionShape2D class reference](https://docs.godotengine.org/en/4.7/classes/class_collisionshape2d.html), geprüft am 01.10.2026.

@@ -2,11 +2,9 @@ extends SceneTree
 
 const TERRAIN_TILESET: TileSet = preload("res://assets/tilesets/moor_terrain_tileset.tres")
 const MAP_CASES := [
-	{"path": "res://scenes/world/test_map.tscn", "profile": 0, "pickup": "Sumpfminze/Visual"},
-	{"path": "res://scenes/world/schilfufer.tscn", "profile": 1, "pickup": "SumpfminzeSchilfufer/Visual"},
+	{"path": "res://scenes/world/test_map.tscn", "profile": 0, "pickup": "Sumpfminze/Visual", "map_size": Vector2i(40, 23)},
+	{"path": "res://scenes/world/schilfufer.tscn", "profile": 1, "pickup": "SumpfminzeSchilfufer/Visual", "map_size": Vector2i(150, 68)},
 ]
-const MAP_SIZE := Vector2i(40, 23)
-
 var _failures: Array[String] = []
 
 
@@ -56,10 +54,10 @@ func _check_map(map_case: Dictionary) -> void:
 	if terrain != null:
 		_expect(terrain.tile_set == TERRAIN_TILESET, "%s reuses the shared TileSet" % map_case.path)
 		_expect(terrain.terrain_profile == map_case.profile, "%s has the expected terrain profile" % map_case.path)
-		_expect(terrain.map_size == MAP_SIZE, "%s fills a 40x23 tile area" % map_case.path)
-		_expect(terrain.get_used_cells().size() == MAP_SIZE.x * MAP_SIZE.y, "%s has no empty ground cells" % map_case.path)
+		_expect(terrain.map_size == map_case.map_size, "%s fills its configured tile area" % map_case.path)
+		_expect(terrain.get_used_cells().size() == map_case.map_size.x * map_case.map_size.y, "%s has no empty ground cells" % map_case.path)
 		_expect(terrain.get_cell_source_id(Vector2i(0, 0)) == 0, "%s uses atlas source 0 at the origin" % map_case.path)
-		_expect(terrain.get_cell_source_id(Vector2i(39, 22)) == 0, "%s covers the bottom-right map cell" % map_case.path)
+		_expect(terrain.get_cell_source_id(Vector2i(map_case.map_size.x - 1, map_case.map_size.y - 1)) == 0, "%s covers the bottom-right map cell" % map_case.path)
 		_expect(not terrain.collision_enabled, "%s ground does not add blocking collision" % map_case.path)
 		_expect(not terrain.navigation_enabled, "%s decorative ground does not add navigation data" % map_case.path)
 		var adjacent_center_delta := terrain.map_to_local(Vector2i(1, 0)) - terrain.map_to_local(Vector2i(0, 0))

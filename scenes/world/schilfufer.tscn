@@ -1,16 +1,25 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://scripts/schilfufer.gd" id="1_map"]
 [ext_resource type="Script" path="res://scripts/herb_pickup.gd" id="2_herb"]
 [ext_resource type="Texture2D" path="res://assets/sprites/herb_pickups_ai_20261001.png" id="3_herbs"]
 [ext_resource type="Script" path="res://scripts/map_transition.gd" id="4_transition"]
 [ext_resource type="Script" path="res://scripts/terrain_base_layer.gd" id="5_terrain"]
+[ext_resource type="Script" path="res://scripts/schilfschnapper.gd" id="6_schnapper"]
+[ext_resource type="Script" path="res://scripts/ferry_mast.gd" id="7_ferry"]
+[ext_resource type="Script" path="res://scripts/reed_ring_marker.gd" id="8_marker"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_herb"]
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_transition"]
 radius = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_schnapper"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_marker"]
+radius = 11.0
 
 [node name="Schilfufer" type="Node2D"]
 script = ExtResource("1_map")
@@ -19,9 +28,57 @@ script = ExtResource("1_map")
 z_index = -1
 script = ExtResource("5_terrain")
 terrain_profile = 1
+map_size = Vector2i(150, 68)
+
+[node name="FerryMast" type="Area2D" parent="."]
+position = Vector2(720, 348)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_ferry")
+display_name = "Fährenmast"
+action_verb = "Senken"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FerryMast"]
+shape = SubResource("CircleShape2D_marker")
+
+[node name="ReedMarkerOne" type="Area2D" parent="."]
+position = Vector2(1170, 952)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("8_marker")
+display_name = "Markstein mit einer Kerbe"
+action_verb = "Aktivieren"
+sequence_number = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReedMarkerOne"]
+shape = SubResource("CircleShape2D_marker")
+
+[node name="ReedMarkerTwo" type="Area2D" parent="."]
+position = Vector2(1200, 952)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("8_marker")
+display_name = "Markstein mit zwei Kerben"
+action_verb = "Aktivieren"
+sequence_number = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReedMarkerTwo"]
+shape = SubResource("CircleShape2D_marker")
+
+[node name="ReedMarkerThree" type="Area2D" parent="."]
+position = Vector2(1230, 952)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("8_marker")
+display_name = "Markstein mit drei Kerben"
+action_verb = "Aktivieren"
+sequence_number = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReedMarkerThree"]
+shape = SubResource("CircleShape2D_marker")
 
 [node name="SumpfminzeSchilfufer" type="Area2D" parent="."]
-position = Vector2(136, 178)
+position = Vector2(2240, 952)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_herb")
@@ -42,7 +99,7 @@ scale = Vector2(0.05, 0.05)
 shape = SubResource("CircleShape2D_herb")
 
 [node name="SchilfwurzelSchilfufer" type="Area2D" parent="."]
-position = Vector2(322, 298)
+position = Vector2(1680, 952)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_herb")
@@ -62,8 +119,93 @@ scale = Vector2(0.05, 0.05)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SchilfwurzelSchilfufer"]
 shape = SubResource("CircleShape2D_herb")
 
+
+[node name="SumpfminzeC3" type="Area2D" parent="."]
+position = Vector2(1200, 680)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Sumpfminze"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst eine Sumpfminze am dreifachen Schilfring."
+item_id = "sump_mint"
+pickup_id = "schilfufer_sump_mint_c3"
+
+[node name="Visual" type="Sprite2D" parent="SumpfminzeC3"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 0
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SumpfminzeC3"]
+shape = SubResource("CircleShape2D_herb")
+
+[node name="SumpfminzeB2" type="Area2D" parent="."]
+position = Vector2(720, 408)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Sumpfminze"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst eine Sumpfminze an der alten Fähre."
+item_id = "sump_mint"
+pickup_id = "schilfufer_sump_mint_b2"
+
+[node name="Visual" type="Sprite2D" parent="SumpfminzeB2"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 0
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SumpfminzeB2"]
+shape = SubResource("CircleShape2D_herb")
+
+[node name="SchilfwurzelC2" type="Area2D" parent="."]
+position = Vector2(1200, 408)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Schilfwurzel"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst eine Schilfwurzel am Rand des Labyrinths."
+item_id = "reed_root"
+pickup_id = "schilfufer_reed_root_c2"
+
+[node name="Visual" type="Sprite2D" parent="SchilfwurzelC2"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 1
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SchilfwurzelC2"]
+shape = SubResource("CircleShape2D_herb")
+
+[node name="SchilfwurzelB3" type="Area2D" parent="."]
+position = Vector2(720, 680)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Schilfwurzel"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst eine Schilfwurzel in der Uferbucht."
+item_id = "reed_root"
+pickup_id = "schilfufer_reed_root_b3"
+
+[node name="Visual" type="Sprite2D" parent="SchilfwurzelB3"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 1
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SchilfwurzelB3"]
+shape = SubResource("CircleShape2D_herb")
+
 [node name="NachtmoosSchilfufer" type="Area2D" parent="."]
-position = Vector2(520, 190)
+position = Vector2(1350, 990)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_herb")
@@ -83,8 +225,33 @@ scale = Vector2(0.05, 0.05)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NachtmoosSchilfufer"]
 shape = SubResource("CircleShape2D_herb")
 
+
+[node name="Schilfschnapper" type="Area2D" parent="."]
+position = Vector2(1740, 475)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_schnapper")
+display_name = "Schilfschnapper"
+action_verb = "Scheuchen"
+
+[node name="Body" type="Polygon2D" parent="Schilfschnapper"]
+polygon = PackedVector2Array(-14, 0, -9, -6, 0, -9, 9, -6, 15, 0, 9, 6, 0, 8, -9, 5)
+color = Color(0.24, 0.32, 0.2, 1)
+
+[node name="Tail" type="Polygon2D" parent="Schilfschnapper"]
+polygon = PackedVector2Array(-11, 0, -20, -6, -19, 6)
+color = Color(0.32, 0.4, 0.23, 1)
+
+[node name="Eye" type="Polygon2D" parent="Schilfschnapper"]
+polygon = PackedVector2Array(4, -4, 7, -4, 7, -1, 4, -1)
+color = Color(0.94, 0.82, 0.43, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Schilfschnapper"]
+shape = SubResource("CircleShape2D_schnapper")
+
 [node name="ReturnToTestMap" type="Area2D" parent="."]
-position = Vector2(30, 230)
+position = Vector2(2310, 1006)
 collision_layer = 0
 collision_mask = 1
 script = ExtResource("4_transition")

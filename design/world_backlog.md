@@ -199,11 +199,13 @@ Umgesetzt mit einem gemeinsamen 16×16-TileSet und einem 8×8-Atlas für beide S
 
 ### REG-01: Schilfufer als Startgebiet — P0
 
+**Status: TECHNISCH UMGESETZT; Blindtest vor Veröffentlichung offen.** Das 5×4-Gebiet hat Einstieg, Rückweg, Mindestfläche, sechs Kräutergruppen, eine dauerhaft freischaltbare Fährenabkürzung, ein dreistufiges Marksteinrätsel und den optionalen, verlustfrei vertreibbaren Schilfschnapper.
+
 - **Lage und Eingang:** nordwestlicher Abzweig direkt vom Dorf.
-- **Aufbau:** drei Teilbereiche: Uferwiesen am Eingang, ein verzweigtes Schilflabyrinth und die Lichtung an der versunkenen Fähre. Hauptpfad plus zwei Seitenwege; Steg und Schilfschleife bilden eine Abkürzung zurück.
-- **Fundstellen:** mehrere Sumpfminz- und Schilfwurzelgruppen verteilt über alle Teilbereiche; ein sichtbarer Sammelpunkt erklärt die Ernte, seltene Pflanzen liegen abseits des Hauptpfads.
-- **Größe und Erkundung:** SCALE-01 erfüllen; Ziel sind 25–40 Minuten beim ersten Besuch, einschließlich mindestens einer optionalen Schleife.
-- **Gegner:** zuerst Schilfschnapper als einzelner, gut angekündigter Gegner; Mückenschwarm später als seltene Variante ergänzen.
+- **Aufbau:** drei Teilbereiche: Uferwiesen am Eingang, ein verzweigtes Schilflabyrinth und die Lichtung an der versunkenen Fähre. Ein sicherer Hauptrundweg und zwei Nebenwege verbinden die Bereiche. Die zunächst angehobene Fährenplanke verbindet C2 und D4 erst nach Betätigung des Masts dauerhaft; ein Weg um den Teich bleibt offen.
+- **Fundstellen:** je drei Gruppen Sumpfminze und Schilfwurzel liegen über alle Teilbereiche verteilt. Die Marksteinfolge in C4 öffnet zusätzlich eine verborgene Nachtmooslichtung; die sichtbaren Kerben zeigen die Reihenfolge eins bis drei.
+- **Größe und Erkundung:** passierbare Fläche und Wege nach SCALE-01 sind umgesetzt. 25–40 Minuten und die Entdeckbarkeit von Schleife, Abkürzung und Geheimnis bleiben bis zum blinden Ersterkundungstest mit mindestens drei neuen Spielenden unbestätigte Ziele.
+- **Gegner:** Schilfschnapper als einzelner, gut angekündigter Gegner in einer optionalen Seitennische mit sicherem Bypass; Mückenschwarm später als seltene Variante ergänzen.
 - **Look:** helles Schilf, olivgrüne Inseln, schlammige Wege und wenige offene Wasserflächen.
 
 **Fertig, wenn:** Beide bestehenden Pflanzen hier gesammelt werden können, der Weg zum Dorf klar bleibt und der Gegner ohne Verlust von Gegenständen umgangen oder vertrieben werden kann.

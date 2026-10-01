@@ -358,7 +358,7 @@ collision_layer = 0
 collision_mask = 1
 script = ExtResource("13_transition")
 destination_area = &"Schilfufer"
-destination_position = Vector2(70, 230)
+destination_position = Vector2(2240, 952)
 feedback_text = "Du betrittst das Schilfufer."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterSchilfufer"]
