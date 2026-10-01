@@ -1,0 +1,244 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/alter_torfstich.gd" id="1_map"]
+[ext_resource type="Script" path="res://scripts/herb_pickup.gd" id="2_herb"]
+[ext_resource type="Texture2D" path="res://assets/sprites/herb_pickups_ai_20261001.png" id="3_herbs"]
+[ext_resource type="Script" path="res://scripts/map_transition.gd" id="4_transition"]
+[ext_resource type="Script" path="res://scripts/terrain_base_layer.gd" id="5_terrain"]
+[ext_resource type="Script" path="res://scripts/peat_heart_pickup.gd" id="6_torfherz"]
+[ext_resource type="Script" path="res://scripts/peat_hoist.gd" id="7_hoist"]
+[ext_resource type="Script" path="res://scripts/peat_survey_stake.gd" id="8_stake"]
+[ext_resource type="Script" path="res://scripts/peat_optional_encounter.gd" id="9_encounter"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="10_interactable"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pickup"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_transition"]
+radius = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interaction"]
+radius = 12.0
+
+[node name="AlterTorfstich" type="Node2D"]
+script = ExtResource("1_map")
+
+[node name="TerrainBase" type="TileMapLayer" parent="."]
+z_index = -1
+script = ExtResource("5_terrain")
+terrain_profile = 2
+map_size = Vector2i(150, 68)
+
+[node name="Torfkran" type="Area2D" parent="."]
+position = Vector2(250, 408)
+z_index = 2
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_hoist")
+display_name = "Torfkran"
+action_verb = "Senken"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Torfkran"]
+shape = SubResource("CircleShape2D_interaction")
+
+[node name="NachtmoosD2" type="Area2D" parent="."]
+position = Vector2(1850, 520)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Nachtmoos"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst Nachtmoos aus einer schattigen Nische am alten Torfsteg."
+item_id = "night_moss"
+pickup_id = "torfstich_night_moss_d2"
+
+[node name="Visual" type="Sprite2D" parent="NachtmoosD2"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 2
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NachtmoosD2"]
+shape = SubResource("CircleShape2D_pickup")
+
+[node name="NachtmoosC3" type="Area2D" parent="."]
+position = Vector2(1190, 528)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Nachtmoos"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst Nachtmoos am dunklen Grubensteg."
+item_id = "night_moss"
+pickup_id = "torfstich_night_moss_c3"
+
+[node name="Visual" type="Sprite2D" parent="NachtmoosC3"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 2
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NachtmoosC3"]
+shape = SubResource("CircleShape2D_pickup")
+
+[node name="NachtmoosD4" type="Area2D" parent="."]
+position = Vector2(1725, 930)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Nachtmoos"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst Nachtmoos neben dem verwitterten Torftor."
+item_id = "night_moss"
+pickup_id = "torfstich_night_moss_d4"
+
+[node name="Visual" type="Sprite2D" parent="NachtmoosD4"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 2
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NachtmoosD4"]
+shape = SubResource("CircleShape2D_pickup")
+
+[node name="TorfherzA3" type="Area2D" parent="."]
+position = Vector2(360, 700)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_torfherz")
+display_name = "Torfherz"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst ein Torfherz vom sicheren Rand der Grube."
+item_id = "peat_heart"
+pickup_id = "torfstich_peat_heart_a3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TorfherzA3"]
+shape = SubResource("CircleShape2D_pickup")
+
+[node name="TorfherzB3" type="Area2D" parent="."]
+position = Vector2(900, 620)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_torfherz")
+display_name = "Torfherz"
+action_verb = "Sammeln"
+feedback_text = "Du hebst ein Torfherz vom trockenen Grubensteg auf."
+item_id = "peat_heart"
+pickup_id = "torfstich_peat_heart_b3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TorfherzB3"]
+shape = SubResource("CircleShape2D_pickup")
+
+[node name="TorfherzC4" type="Area2D" parent="."]
+position = Vector2(1320, 910)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_torfherz")
+display_name = "Torfherz"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst ein Torfherz am trockenen Rand des alten Torfwegs."
+item_id = "peat_heart"
+pickup_id = "torfstich_peat_heart_c4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TorfherzC4"]
+shape = SubResource("CircleShape2D_pickup")
+
+[node name="Moorwuehler" type="Area2D" parent="."]
+position = Vector2(1050, 424)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("9_encounter")
+encounter_kind = 0
+display_name = "Moorwühler"
+action_verb = "Vertreiben"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moorwuehler"]
+shape = SubResource("CircleShape2D_interaction")
+
+[node name="Irrlicht" type="Area2D" parent="."]
+position = Vector2(760, 940)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("9_encounter")
+encounter_kind = 1
+display_name = "Irrlicht"
+action_verb = "Ansprechen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Irrlicht"]
+shape = SubResource("CircleShape2D_interaction")
+
+[node name="MesspfahlB4" type="Area2D" parent="."]
+position = Vector2(720, 980)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("8_stake")
+display_name = "Messpfahl mit einer Kerbe"
+action_verb = "Prüfen"
+sequence_number = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MesspfahlB4"]
+shape = SubResource("CircleShape2D_interaction")
+
+[node name="MesspfahlC4" type="Area2D" parent="."]
+position = Vector2(1200, 980)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("8_stake")
+display_name = "Messpfahl mit zwei Kerben"
+action_verb = "Prüfen"
+sequence_number = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MesspfahlC4"]
+shape = SubResource("CircleShape2D_interaction")
+
+[node name="MesspfahlD4" type="Area2D" parent="."]
+position = Vector2(1680, 980)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("8_stake")
+display_name = "Messpfahl mit drei Kerben"
+action_verb = "Prüfen"
+sequence_number = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MesspfahlD4"]
+shape = SubResource("CircleShape2D_interaction")
+
+[node name="HiddenWorkgang" type="Area2D" parent="."]
+visible = false
+position = Vector2(1980, 970)
+z_index = 3
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("10_interactable")
+display_name = "Freigelegter Arbeitssteg"
+action_verb = "Untersuchen"
+feedback_text = "Der alte Arbeitssteg führt in einer sicheren Schleife zurück zum Hauptweg."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HiddenWorkgang"]
+shape = SubResource("CircleShape2D_interaction")
+
+[node name="ReturnToVillage" type="Area2D" parent="."]
+position = Vector2(32, 408)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_transition")
+destination_area = &"Dorfplatz"
+destination_position = Vector2(560, 184)
+feedback_text = "Du kehrst zum Dorfplatz zurück."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnToVillage"]
+shape = SubResource("CircleShape2D_transition")

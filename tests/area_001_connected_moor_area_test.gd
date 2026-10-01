@@ -35,7 +35,7 @@ func _run() -> void:
 	_check(camera != null and camera.limit_right == 640 and camera.limit_bottom == 360, "the village camera starts inside the village bounds")
 
 	var pickups: Dictionary = main.call("_get_pickups_by_id")
-	_check(pickups.size() == 12, "all twelve world pickups have unique persistent IDs")
+	_check(pickups.size() == 18, "all eighteen world pickups have unique persistent IDs")
 	var mint_e4 := main.get_node("World/Schilfufer/SumpfminzeSchilfufer") as Area2D
 	var root_d4 := main.get_node("World/Schilfufer/SchilfwurzelSchilfufer") as Area2D
 	var mint_c3 := main.get_node("World/Schilfufer/SumpfminzeC3") as Area2D

@@ -212,6 +212,8 @@ Umgesetzt mit einem gemeinsamen 16×16-TileSet und einem 8×8-Atlas für beide S
 
 ### REG-02: Alter Torfstich und Torfsteg — P0
 
+**Status: TECHNISCH UMGESETZT; Blindtest vor Veröffentlichung offen.** Die 150×68-Karte hat mehr als 6.120 passierbare Kacheln. Drei Nachtmoos- und drei Torfherzstellen, ein dauerhaft absenkbarer Torfsteg, das dreistufige Messpfahl-Geheimnis, zwei umgehbare Begegnungen und ein sicherer Rückweg sind vorhanden.
+
 - **Lage und Eingang:** östlicher Pfad vom Dorf.
 - **Aufbau:** drei Teilbereiche: Torfhof mit Werkzeugresten, verzweigte Grubenstege und der alte Torfweg als Moosgebiet. Mehrere Stegschleifen verbinden sichere und optionale Routen.
 - **Fundstellen:** Nachtmoos in mehreren schattigen Nischen am alten Steg; Torfherz an sicheren Grubenrändern und in einer optionalen Seitenroute.

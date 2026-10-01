@@ -29,6 +29,10 @@ const INVENTORY_COLUMNS: Array = [
 			],
 		},
 		{
+			"title": "REGIONALE FUNDSTÜCKE",
+			"items": [["peat_heart", "Torfherz", "special"]],
+		},
+		{
 			"title": "MÜNZEN",
 			"items": [["coins", "Münzen", "coin"]],
 		},
@@ -38,6 +42,7 @@ const INVENTORY_COLUMNS: Array = [
 @onready var _player: Node = $World/Player
 @onready var _camera: Camera2D = $World/Player/Camera2D
 @onready var _schilfufer: Node = $World/Schilfufer
+@onready var _alter_torfstich: Node = $World/AlterTorfstich
 @onready var _inventory: Node = $Inventory
 @onready var _save_manager: Node = $SaveManager
 @onready var _fenja_quest: Node = $Quest/FenjaQuest
@@ -116,6 +121,7 @@ func _ready() -> void:
 				quest_npc.set_quest(quests_by_id[quest_id])
 
 	_load_save_on_startup()
+	_sync_torfstich_access()
 	_refresh_inventory_window()
 	_update_quest_status()
 	_refresh_quest_board()
@@ -170,6 +176,7 @@ func save_game() -> bool:
 		},
 		"collected_pickups": collected_pickups,
 		"schilfufer": _schilfufer.call("get_save_data"),
+		"alter_torfstich": _alter_torfstich.call("get_save_data"),
 	}
 	if not bool(_save_manager.call("write_save_data", save_data)):
 		_on_interaction_completed("Der Spielstand konnte nicht gespeichert werden.")
@@ -211,6 +218,9 @@ func _is_valid_save_data(save_data: Variant) -> bool:
 
 	var saved_schilfufer: Variant = save_data.get("schilfufer", {})
 	if not bool(_schilfufer.call("can_restore_save_data", saved_schilfufer)):
+		return false
+	var saved_torfstich: Variant = save_data.get("alter_torfstich", {})
+	if not bool(_alter_torfstich.call("can_restore_save_data", saved_torfstich)):
 		return false
 
 	var saved_player: Variant = save_data.get("player")
@@ -287,6 +297,8 @@ func _apply_save_data(save_data: Dictionary) -> void:
 	for pickup_id in pickups:
 		pickups[pickup_id].call("set_collected", collected_pickups.has(pickup_id))
 	_schilfufer.call("restore_save_data", save_data.get("schilfufer", {}))
+	_alter_torfstich.call("restore_save_data", save_data.get("alter_torfstich", {}))
+	_sync_torfstich_access()
 
 	_update_quest_status()
 	_refresh_quest_board()
@@ -510,10 +522,16 @@ func _on_quest_state_changed(state: String) -> void:
 	for station in get_tree().get_nodes_in_group("processing_stations"):
 		if station.has_method("set_quest_state"):
 			station.set_quest_state("fenja", state)
+	_sync_torfstich_access()
 	_update_quest_status()
 	_refresh_quest_board()
 	_player.call("refresh_interactable_prompt")
 
+
+func _sync_torfstich_access() -> void:
+	var village := get_node_or_null("World/TestMap")
+	if village != null and village.has_method("set_torfstich_unlocked"):
+		village.call("set_torfstich_unlocked", str(_fenja_quest.get("state")) == "completed")
 
 func _on_lene_quest_state_changed(_state: String) -> void:
 	_update_quest_status()
@@ -590,31 +608,42 @@ func _update_quest_status() -> void:
 
 
 func _is_valid_world_position(position: Vector2) -> bool:
-	var village_bounds := Rect2(Vector2.ZERO, Vector2(640.0, 360.0))
-	var reeds_bounds := Rect2(Vector2(640.0, 0.0), Vector2(2400.0, 1088.0))
-	return village_bounds.has_point(position) or reeds_bounds.has_point(position)
+	for area in get_tree().get_nodes_in_group("world_areas"):
+		if not (area is Node2D) or not area.has_method("get_map_bounds"):
+			continue
+		var local_bounds: Rect2 = area.call("get_map_bounds")
+		var world_bounds := Rect2(area.to_global(local_bounds.position), local_bounds.size)
+		if world_bounds.has_point(position):
+			return true
+	return false
 
 
 func _configure_camera_for_position(position: Vector2) -> void:
-	if Rect2(Vector2(640.0, 0.0), Vector2(2400.0, 1088.0)).has_point(position):
-		_configure_camera_for_area(&"Schilfufer")
-	else:
-		_configure_camera_for_area(&"Dorfplatz")
+	for area in get_tree().get_nodes_in_group("world_areas"):
+		if not (area is Node2D) or not area.has_method("get_map_bounds"):
+			continue
+		var local_bounds: Rect2 = area.call("get_map_bounds")
+		var world_bounds := Rect2(area.to_global(local_bounds.position), local_bounds.size)
+		if world_bounds.has_point(position):
+			_configure_camera_for_area(StringName(area.get("area_id")))
+			return
+	_configure_camera_for_area(&"Dorfplatz")
 
 
 func _configure_camera_for_area(destination_id: StringName) -> void:
-	if destination_id == &"Schilfufer":
-		_camera.limit_left = 640
-		_camera.limit_top = 0
-		_camera.limit_right = 3040
-		_camera.limit_bottom = 1088
-	else:
-		_camera.limit_left = 0
-		_camera.limit_top = 0
-		_camera.limit_right = 640
-		_camera.limit_bottom = 360
-	_camera.force_update_scroll()
-
+	for area in get_tree().get_nodes_in_group("world_areas"):
+		if not (area is Node2D) or StringName(area.get("area_id")) != destination_id:
+			continue
+		if not area.has_method("get_map_bounds"):
+			return
+		var local_bounds: Rect2 = area.call("get_map_bounds")
+		var world_origin: Vector2 = (area as Node2D).to_global(local_bounds.position)
+		_camera.limit_left = floori(world_origin.x)
+		_camera.limit_top = floori(world_origin.y)
+		_camera.limit_right = ceili(world_origin.x + local_bounds.size.x)
+		_camera.limit_bottom = ceili(world_origin.y + local_bounds.size.y)
+		_camera.force_update_scroll()
+		return
 
 func _on_map_transition_requested(destination_id: StringName, destination_position: Vector2, feedback_text: String) -> void:
 	for area in get_tree().get_nodes_in_group("world_areas"):

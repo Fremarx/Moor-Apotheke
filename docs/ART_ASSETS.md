@@ -116,10 +116,9 @@ Strong constraints: exactly 8 by 8 equal tiles, muted ground texture with restra
 </pre>
 
 ## VIS-004 – Hausarchitektur und Moorvegetation
-
 - Datei: `assets/sprites/moor_environment_atlas_ai_20261001.png`
 - Format: PNG mit transparentem Hintergrund, 1774 × 887 Pixel. Das Blatt enthält eine Apotheke, ein kleineres Torfhaus, ein üppiges Schilfbüschel und einen bemoosten Steinhaufen.
-- Verwendung: Dorfplatz zeichnet das Apothekenmotiv aus dem Quellrechteck `(230, 20, 640, 500)` in 180 × 141 Spielpixel. Schilf- und Moosgruppen werden in beiden Karten als transparente Sprites verwendet. Das kleinere Torfhaus bleibt als passende Architektur für spätere Dorfbereiche verfügbar. Kollisionsrechtecke und Wege bleiben bestehen.
+- Verwendung: Dorfplatz zeichnet das Apothekenmotiv aus dem Quellrechteck `(230, 20, 640, 500)` in 180 × 141 Spielpixel. Schilf- und Moosgruppen werden in beiden Karten als transparente Sprites verwendet. Das kleinere Torfhaus wird im Alten Torfstich als vorhandene Gebietsarchitektur eingesetzt. Kollisionsrechtecke und Wege bleiben bestehen.
 - Stil: dunkle Torfkonturen, warme obere Lichtkante, abgestufte Materialfarben und dichte Pixelcluster wie bei Spieler und Kräutern. Die Naturmotive sind bei 480 × 270 größer und klarer platziert, ohne die Wege zuzudecken.
 - Herkunft: am 01.10.2026 mit OpenAI Imagegen in Codex erzeugt und mit einer gezielten Layoutkorrektur weitergeführt. Es wurden keine Fremdassets eingebunden; eine externe Lizenz ist nicht betroffen.
 
@@ -136,6 +135,9 @@ Make a precise layout correction to the provided transparent 2-by-2 pixel-art en
 </pre>
 
 Godot nutzt explizite Quellrechtecke, damit die Motive aus dem transparenten Atlas ohne Zelltrennlinien ausgeschnitten werden. Der kleine Schriftzug `APO` im Holzschild hält das Ladenmotiv bei nativer Pixelgröße erkennbar.
+
+### REG-02 – Alter Torfstich
+Die neue Region verwendet das bestehende `moor_vegetation_atlas_ai_20261001.png` für Pflanzen, Steine und Moos sowie das bestehende `moor_environment_atlas_ai_20261001.png` für das Torfhaus. Weg-, Wasser- und Torfkran-Details sind im Pixelmaßstab von Hand mit `CanvasItem` gezeichnet; REG-02 fügt keine externen Bilddateien oder Fremdassets hinzu.
 
 ## VIS-003 – Stationen, Bewohner und Sammelpflanzen
 

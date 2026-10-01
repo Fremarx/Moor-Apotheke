@@ -9,6 +9,9 @@ const ENVIRONMENT_ATLAS: Texture2D = preload("res://assets/sprites/moor_environm
 
 @export var area_id: StringName = &"Dorfplatz"
 
+var _torfstich_gate_shape: CollisionShape2D
+var _torfstich_unlocked := false
+
 
 func _ready() -> void:
 	add_to_group("world_areas")
@@ -21,7 +24,7 @@ func _ready() -> void:
 	_add_solid_rect(Rect2(Vector2(429, 120), Vector2(181, 14)))
 	# Locked route barriers stop the player at each unbuilt region entrance.
 	_add_solid_rect(Rect2(Vector2(574, 76), Vector2(18, 44)))
-	_add_solid_rect(Rect2(Vector2(576, 166), Vector2(18, 36)))
+	_add_torfstich_gate(Rect2(Vector2(576, 166), Vector2(18, 36)))
 	_add_solid_rect(Rect2(Vector2(42, 280), Vector2(18, 38)))
 	_add_solid_rect(Rect2(Vector2(574, 290), Vector2(18, 38)))
 	# The apothecary walls leave a clear approach to the front door.
@@ -39,6 +42,38 @@ func _ready() -> void:
 	_add_solid_rect(Rect2(Vector2(470, 139), Vector2(26, 34)))
 	_add_solid_rect(Rect2(Vector2(402, 267), Vector2(32, 24)))
 
+
+func get_map_bounds() -> Rect2:
+	return Rect2(Vector2.ZERO, MAP_SIZE)
+
+
+func set_torfstich_unlocked(unlocked: bool) -> void:
+	_torfstich_unlocked = unlocked
+	if _torfstich_gate_shape != null:
+		_torfstich_gate_shape.set_deferred("disabled", unlocked)
+	var gate_prompt := get_node_or_null("GateTorfstich")
+	if gate_prompt != null:
+		gate_prompt.set(
+			"feedback_text",
+			"Der Torfstichweg ist offen. Der Torfkran kann den alten Steg absenken."
+			if unlocked
+			else "Der Torfstichweg ist vorerst gesperrt; Fenjas Beruhigungstee ist die Voraussetzung."
+		)
+	queue_redraw()
+
+
+func _add_torfstich_gate(rect: Rect2) -> void:
+	var body := StaticBody2D.new()
+	body.name = "LockedTorfstichGate"
+	body.position = rect.position + rect.size / 2.0
+	var collision := CollisionShape2D.new()
+	collision.name = "CollisionShape2D"
+	var shape := RectangleShape2D.new()
+	shape.size = rect.size
+	collision.shape = shape
+	body.add_child(collision)
+	add_child(body)
+	_torfstich_gate_shape = collision
 
 func _add_solid_rect(rect: Rect2) -> void:
 	var body := StaticBody2D.new()
@@ -269,14 +304,16 @@ func _draw_route_sign(origin: Vector2, label: String, width: float) -> void:
 
 
 func _draw_locked_route_gates() -> void:
-	for gate_center in [Vector2(583, 98), Vector2(585, 184), Vector2(51, 299), Vector2(583, 309)]:
+	var gate_centers: Array[Vector2] = [Vector2(583, 98), Vector2(51, 299), Vector2(583, 309)]
+	if not _torfstich_unlocked:
+		gate_centers.append(Vector2(585, 184))
+	for gate_center in gate_centers:
 		var gate := Rect2(gate_center - Vector2(8, 20), Vector2(16, 40))
 		draw_rect(gate.grow(2), Color("493a2f"))
 		draw_rect(gate, Color("956746"))
 		draw_rect(Rect2(gate.position + Vector2(1, 7), Vector2(14, 4)), Color("c09a67"))
 		draw_rect(Rect2(gate.position + Vector2(1, 28), Vector2(14, 4)), Color("c09a67"))
 		draw_line(gate.position + Vector2(3, 34), gate.position + Vector2(13, 5), Color("d68b63"), 2.0)
-
 
 func _draw_obstacles() -> void:
 	_draw_sprite_shadow(Vector2(399, 130), Vector2(27, 8))

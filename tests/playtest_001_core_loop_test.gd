@@ -76,7 +76,7 @@ func _run() -> void:
 	var night_moss_patch_count := _pickup_count(main, "night_moss")
 	_check(mint_patch_count == 5, "all five mint patches are available across both areas")
 	_check(reed_root_patch_count == 5, "all five reed-root patches are available across both areas")
-	_check(night_moss_patch_count == 2, "two night-moss patches are available across both areas")
+	_check(night_moss_patch_count == 5, "five night-moss patches are available across all three areas")
 	var pickup_ids: Dictionary = {}
 	var total_pickups := 0
 	for pickup in main.get_tree().get_nodes_in_group("item_pickups"):

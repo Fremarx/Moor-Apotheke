@@ -4,6 +4,7 @@ extends TileMapLayer
 enum TerrainProfile {
 	VILLAGE,
 	SCHILFUFER,
+	TORFSTICH,
 }
 
 const TERRAIN_TILESET: TileSet = preload("res://assets/tilesets/moor_terrain_tileset.tres")
@@ -15,7 +16,7 @@ const BASE_GRASS_TILES := [
 	Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1), Vector2i(7, 1),
 ]
 
-@export_enum("Dorfplatz", "Schilfufer") var terrain_profile: int = TerrainProfile.VILLAGE
+@export_enum("Dorfplatz", "Schilfufer", "Alter Torfstich") var terrain_profile: int = TerrainProfile.VILLAGE
 @export var map_size: Vector2i = Vector2i(40, 23)
 
 
@@ -23,8 +24,11 @@ func _ready() -> void:
 	tile_set = TERRAIN_TILESET
 	collision_enabled = false
 	navigation_enabled = false
-	if terrain_profile == TerrainProfile.SCHILFUFER:
-		modulate = Color(0.98, 1.0, 0.93, 1.0)
+	match terrain_profile:
+		TerrainProfile.SCHILFUFER:
+			modulate = Color(0.98, 1.0, 0.93, 1.0)
+		TerrainProfile.TORFSTICH:
+			modulate = Color(0.97, 0.87, 0.75, 1.0)
 	clear()
 	for y in range(map_size.y):
 		for x in range(map_size.x):

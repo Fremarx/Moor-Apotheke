@@ -363,3 +363,15 @@ feedback_text = "Du betrittst das Schilfufer."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterSchilfufer"]
 shape = SubResource("CircleShape2D_map_transition")
+
+[node name="EnterTorfstich" type="Area2D" parent="."]
+position = Vector2(612, 184)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("13_transition")
+destination_area = &"AlterTorfstich"
+destination_position = Vector2(80, 408)
+feedback_text = "Du betrittst den Alten Torfstich."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTorfstich"]
+shape = SubResource("CircleShape2D_map_transition")

@@ -3,7 +3,7 @@
 ## Aktueller Stand
 Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Startszene im Headless-Editor importiert und 60 Laufzeitframes ohne Fehler ausgeführt. Ein sichtbarer Godot-Fenstertest mit echter Tastatur steht noch aus.
 
-Die 27 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, damit Godot beim Start per `--script` die verzögerten und asynchronen Prüfschritte tatsächlich ausführt. Ohne diesen MainLoop-Hook endete der Prozess nach dem Laden des Skripts, bevor die Tests liefen.
+Die 28 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, damit Godot beim Start per `--script` die verzögerten und asynchronen Prüfschritte tatsächlich ausführt. Ohne diesen MainLoop-Hook endete der Prozess nach dem Laden des Skripts, bevor die Tests liefen.
 
 ## Pro Backlogpunkt
 1. Godot-Editor-/Parserfehlerstand prüfen.
@@ -233,7 +233,7 @@ Die 27 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, d
 - Beim ersten AREA-001-Ausschnitt prüfte `tests/area_001_connected_moor_area_test.gd` die Dorfübergänge und drei neue Pflanzenziele. REG-01 hat dieselbe Abnahme anschließend auf die Großkarte, zwölf eindeutige Pickup-IDs und den größeren Laufweg erweitert; der aktuelle Testumfang steht unten unter REG-01.
 - Der ursprüngliche AREA-001-Speichercheck sicherte Spielerposition und geerntete Pflanzen beim Laden und beim automatischen Wiederherstellen nach Szenenneustart.
 - RED: Vor AREA-001 schlug der Test fehl, weil Schilfufer noch nicht in `World` vorhanden war. Der Übergang und Rückweg wurden danach mit `AREA-001 connected moor area checks passed.` bestätigt.
-- Der aktuelle Ressourcen-Audit zählt 5 Sumpfminzen, 5 Schilfwurzeln und 2 Nachtmoose über beide Gebiete; `playtest_001_core_loop_test.gd` prüft diese Bestände und die vollständige Auftragskette.
+- Der aktuelle Ressourcen-Audit zählt 5 Sumpfminzen, 5 Schilfwurzeln und 5 Nachtmoose über alle drei Gebiete; `playtest_001_core_loop_test.gd` prüft diese Bestände, 18 eindeutige Pickup-IDs und die vollständige Auftragskette.
 - REG-01 hat alle 27 Godot-4.7.2-Headless-Tests, den Editorimport und den 60-Frame-Startlauf bestanden.
 - Sichtbarer Renderercheck, echte Tastatureingabe und subjektives Steuerungsgefühl bleiben für die manuelle Spielprüfung offen.
 
@@ -291,3 +291,9 @@ SCALE-01 ist ein Designpunkt; es wurden keine Karten-Szenen geändert und keine 
 - `tests/map_03_reusable_terrain_tileset_test.gd` prüft das gemeinsame 16×16-TileSet und die konfigurierte Kartengröße beider Regionen. Alle 27 vorhandenen Godot-Testskripte, der Headless-Editorimport und der vollständige QUEST-/Ressourcen-End-to-End-Test sind bestanden.
 - Die schnelle Schilfschnapper-Begegnung ist optional und verlustfrei. Der Mückenschwarm bleibt eine spätere seltene Variante.
 - Noch offen vor Veröffentlichung: ein sichtbarer Renderercheck der aktualisierten Fährenszene sowie ein blinder Erstbesuch durch mindestens drei neue Personen mit Zeit-, Landmarken- und Geheimnisnotiz. Der Headless-Bildexport hing in dieser Umgebung; es wird deshalb kein aktueller Screenshot als visuell abgenommen ausgewiesen.
+## REG-02 – Alter Torfstich und Torfsteg
+- `tests/reg_02_old_peat_cut_test.gd` prüft die 150×68-Karte, das Torfstich-Terrainprofil, mindestens 6.120 passierbare Kacheln, die gesperrte Dorftür vor Fenjas Abschluss, alle sechs neuen Fundstellen, Hauptweg und Kameragrenzen.
+- Der Test öffnet den Ostweg, sammelt Nachtmoos und Torfherzen, senkt den Torfsteg, löst die Messpfahlfolge, öffnet die verborgene Arbeitsnische, umgeht beide Begegnungen ohne Inventarverlust und kehrt sicher ins Dorf zurück.
+- Regionszustand und Fundstellen bleiben nach F5/F9 sowie automatischem Laden erhalten; ältere Version-1-Spielstände ohne REG-02-Daten bleiben gültig. Der Test deckt außerdem 18 eindeutige Pickup-IDs und fünf Nachtmoosstellen über drei Gebiete ab.
+- Alle 28 Godot-4.7.2-Tests, Editorimport und 60-Frame-Startlauf bestanden. Der normale OpenGL-Renderer zeigt den Torfhof im 480×270-Maßstab in `build/reg02-torfstich-480x270.png`.
+- Vor Veröffentlichung bleibt der blinde Erstbesuch mit mindestens drei neuen Personen und Messung der Erkundungsdauer offen.
