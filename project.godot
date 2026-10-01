@@ -23,6 +23,8 @@ toggle_inventory={"deadzone": 0.5, "events": [Object(InputEventKey,"physical_key
 toggle_herb_book={"deadzone": 0.5, "events": [Object(InputEventKey,"physical_keycode":72)]}
 save_game={"deadzone": 0.5, "events": [Object(InputEventKey,"physical_keycode":4194336)]}
 load_game={"deadzone": 0.5, "events": [Object(InputEventKey,"physical_keycode":4194340)]}
+herb_staff_attack={"deadzone": 0.5, "events": [Object(InputEventKey,"physical_keycode":70)]}
+dodge={"deadzone": 0.5, "events": [Object(InputEventKey,"physical_keycode":32)]}
 
 [rendering]
 renderer/rendering_method="gl_compatibility"

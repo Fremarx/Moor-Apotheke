@@ -118,7 +118,7 @@ func _run() -> void:
 		await physics_frame
 		_check(player.try_interact(), "%s can be safely driven away" % encounter_name)
 		_check(not encounter.visible, "%s leaves its optional side path open" % encounter_name)
-	_check(inventory.call("get_save_data") == before_encounters, "optional encounters do not take or grant items before the later enemy-system task")
+	_check(inventory.call("get_save_data") == before_encounters, "walking past optional encounters neither removes inventory nor grants a reward")
 
 	player.global_position = SAVED_REGION_POSITION
 	_check(bool(main.call("save_game")), "the Torfstich position, inventory, shortcut, discovery, and pickups can be saved")

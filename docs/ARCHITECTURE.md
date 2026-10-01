@@ -16,6 +16,7 @@ Main (Node2D, main.gd)
 ├── World (Node2D)
 │   ├── TestMap (Node2D, mit TerrainBase, Interaktionsprobe, Pflanzen, Stationen, Bewohner, QuestBoard und Ausgang)
 │   ├── Schilfufer (Node2D, mit TerrainBase, sechs Kräutergruppen, Fährenhebel, Marksteinrätsel, Schnapper und Rückweg)
+│   ├── AlterTorfstich (Node2D, mit Ressourcen, Geheimnis, Moorwühler, Irrlicht und Rückweg)
 │   └── Player (CharacterBody2D)
 │       ├── InteractionArea (Area2D)
 │       └── Camera2D
@@ -25,6 +26,7 @@ Main (Node2D, main.gd)
 │   ├── MartenQuest (Node)
 │   └── LeneQuest (Node)
 └── HUD (CanvasLayer)
+    ├── Hearts (Node2D)
     ├── InventoryCount
     ├── ReedRootCount
     ├── DriedMintCount
@@ -94,7 +96,7 @@ MAP-02 ergänzt fünf gezeichnete Wege. Der aktive Nordwestweg führt ins Schilf
 
 ## Zuständigkeiten
 - Main/World: Spielabschnitt zusammenstellen und Zustand vermitteln.
-- Player: Eingaben lesen, Bewegung ausführen, Interaktionsnähe darstellen.
+- Player: Bewegung und Interaktionsnähe verwalten; Treffer, Herzen, Ausweichen und Kräuterstab-Eingaben melden.
 - Interaktives Objekt: eigene Aktion ausführen und Erfolg melden.
 - Inventory: Mengenbestände verwalten und Änderungen signalisieren.
 - Station: Verarbeitung ausführen; UI bleibt separat.
@@ -135,6 +137,12 @@ flowchart LR
 
 Aufträge werden am Brett angenommen und weiterhin direkt bei Fenja, Marten oder Lene abgegeben. Marten und Lene werden nach Abschluss des jeweiligen Vorgängerauftrags am Brett freigeschaltet.
 
+## SYS-02 – Sichere Begegnungen
+
+`EnemyEncounter` bündelt Warnung, ausweichbare Angriffslinie, Erholung, Trefferpunkte, sicheres Vorbeigehen und einmalige Niederlage. Gebietsskripte setzen Reichweite, Breite, Stärke und passende Drop-ID. Main verbindet `encounter_defeated` mit Inventory und ergänzt exakt einen Gegenstand. Die Spielerfigur signalisiert Treffer und Niederlage; Main aktualisiert `Hearts`, wartet kurz und setzt die Figur auf den letzten Gebietswegpunkt zurück. Die drei `SafeWaypoint`-Marker liegen in den Kartenszenen. Gegnerzustand und aktuelle Herzen werden nicht gespeichert; ein gültiger Spielstand setzt beim Laden den Wegpunkt der geladenen Region.
+
+Die benannten Eingaben `herb_staff_attack` (F) und `dodge` (Leertaste) laufen über Player. E bleibt für sicheres Vorbeigehen erhalten. Ein Gegner verlangt keinen Sieg für Aufträge oder Sammelstellen.
+
 ## Daten und Persistenz
 - Im ersten Slice bleibt die Datenmenge klein und explizit.
 - Sobald mehrere Gegenstände und Rezepte existieren, prüfen wir Godot-Resource-Dateien für Item-, Rezept- und Auftragsdefinitionen. Laufzeitbestand und Queststatus bleiben veränderlicher Spielzustand.
@@ -147,7 +155,7 @@ Aufträge werden am Brett angenommen und weiterhin direkt bei Fenja, Marten oder
 - Der Spielstand verwendet Pixelart-Atlanten für Moor, Spieler, Stationen, Bewohner und Sammelpflanzen; weitere Inhalte können zunächst Platzhaltergrafik nutzen.
 - Bildgenerator-Ausgaben werden auf Transparenz, Raster, Anschlüsse und Lesbarkeit geprüft.
 - Fremde Assets benötigen Herkunft und Lizenzangabe; Prompts finaler eigener Bilder werden gespeichert.
-- Benannte Aktionen: move_left/right/up/down, interact, inventory, save_game, load_game. Die Belegung wird nicht in Gameplay-Skripte eingebrannt.
+- Benannte Aktionen: move_left/right/up/down, interact, toggle_inventory, toggle_herb_book, save_game, load_game, herb_staff_attack und dodge. Die Belegung wird nicht in Gameplay-Skripte eingebrannt.
 
 ## Qualität, Sicherheit und Performance
 - GDScript typisieren, wo dies Lesbarkeit und Fehlererkennung verbessert.

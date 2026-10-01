@@ -14,6 +14,12 @@ Die Gegner sollen die Gebiete lebendig und geheimnisvoll machen, ohne den gemüt
 - Seltene Gegner bewachen besondere Fundstellen, sperren aber keinen Pflichtweg. Man kann sie umgehen oder mit dem Kräuterstab vertreiben.
 - Bei einer Niederlage erscheint die Spielfigur am letzten sicheren Wegpunkt; bereits gefundene Dinge bleiben erhalten.
 
+## Umsetzungsstand des Prototyps (SYS-02)
+
+Schilfschnapper und Moorwühler zeigen im aktuellen Spiel vor einem Angriff eine goldene, gerichtete Bodenlinie für 0,8–1,2 Sekunden. Die Linie lässt sich durch einen Schritt zur Seite verlassen; ein Treffer kostet ein Herz und stößt den Spieler leicht zurück. Nach drei Herzen kehrt er nach kurzer Pause an den sicheren Punkt des Gebiets zurück, ohne Kräuter oder Münzen zu verlieren.
+
+Der kostenlose Kräuterstab liegt auf F und trifft in Blickrichtung. Zwei Treffer vertreiben die beiden häufigen Gegner; jeder Stabsieg gibt einmal die passende Zutat. Leertaste weicht kurz in die gedrückte Richtung aus. E bleibt eine sichere Alternative: vorbeigehen beziehungsweise dem Irrlicht folgen verschiebt das Hindernis und gibt keine Zutat. Es gibt keinen Auftrag, der einen Sieg voraussetzt. Trankgürtel und die späteren Gegnervarianten gehören zu nachfolgenden Backlogpunkten.
+
 ## Kampfsystem des Spielers
 
 Der Kampf ist direkt und leicht lesbar: Der Spieler weicht einem klar angekündigten Angriff aus, schlägt während der Erholung zurück und setzt Tränke ein, wenn ein Gegner oder Gebiet besondere Vorbereitung verlangt.

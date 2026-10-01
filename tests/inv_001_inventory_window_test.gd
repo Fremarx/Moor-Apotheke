@@ -53,6 +53,10 @@ func _run() -> void:
 		"calming_tea",
 		"strengthening_infusion",
 		"night_potion",
+		"peat_heart",
+		"snapper_slime",
+		"peat_armor_flake",
+		"will_o_wisp_spark",
 		"coins",
 	]
 	var count_labels: Dictionary = {}
@@ -61,7 +65,7 @@ func _run() -> void:
 		_check(count_label != null, "%s has a row in the inventory window" % item_id)
 		if count_label != null:
 			count_labels[item_id] = count_label
-	_check(count_labels.size() == 10, "the window lists all ten inventory items")
+	_check(count_labels.size() == 14, "the window lists all fourteen inventory items")
 	_check(panel.get_theme_stylebox("panel") is StyleBoxFlat, "the panel uses the existing moor-themed style")
 
 	inventory.call("restore_from_save", {})

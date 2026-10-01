@@ -1,24 +1,16 @@
-extends "res://scripts/interactable.gd"
-
-var _driven_off := false
+extends "res://scripts/enemy_encounter.gd"
 
 
 func _ready() -> void:
+	drop_item_id = "snapper_slime"
+	max_health = 2
+	attack_windup_seconds = 1.0
+	attack_recovery_seconds = 0.9
+	attack_range = 64.0
+	attack_half_width = 12.0
+	can_attack_player = true
 	super._ready()
-	add_to_group("optional_encounters")
 
 
 func interact() -> String:
-	if _driven_off:
-		return "Der Schilfschnapper ist zurück ins Wasser geflüchtet."
-	_driven_off = true
-	visible = false
-	set_deferred("monitoring", false)
-	set_deferred("monitorable", false)
-	return "Du scheuchst den Schilfschnapper ins Wasser. Deine Kräuter bleiben bei dir."
-
-func reset_encounter() -> void:
-	_driven_off = false
-	visible = true
-	set_deferred("monitoring", true)
-	set_deferred("monitorable", true)
+	return dismiss_safely("Du scheuchst den Schilfschnapper ins Wasser. Deine Kräuter bleiben bei dir.")

@@ -293,6 +293,8 @@ Umgesetzt mit einem gemeinsamen 16×16-TileSet und einem 8×8-Atlas für beide S
 
 ### SYS-02: Sichere Begegnungen mit Gegnern — P0
 
+**Status: DONE.** Die drei vorhandenen Begegnungen teilen eine sichere Warn-/Trefferlogik; SYS-02 legt die Spieleraktionen, Lebenspunkte und Folgen einer Niederlage fest.
+
 - Gegner kündigen Angriffe klar über Animation, Geräusch oder Bodeneffekt an.
 - Ausweichen, Abstand halten oder Laterne/Schutzmittel als einfache Antwort ermöglichen.
 - Treffer dürfen keine Zutaten aus dem Inventar löschen.

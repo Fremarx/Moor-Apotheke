@@ -8,10 +8,10 @@ Stand: 01.10.2026
 Phase 7 – Gebietsausbau nach dem überarbeiteten Weltentwurf
 
 ### Zuletzt bearbeiteter Task
-MAP-04 – Dorfplatz, Wege und Wohnviertel ausbauen.
+SYS-02 – sichere Gegner-Begegnungen und schadloser Umgang mit Niederlagen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; VIS-004 DONE; VIS-005 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE; PLAYTEST-001 DONE; CONTENT-001 DONE; RESOURCE-001 DONE; AREA-001 DONE; MAP-01 DONE; MAP-02 DONE; MAP-03 DONE; SCALE-01 DONE; REG-01 IMPLEMENTED (blind playtest pending); REG-02 IMPLEMENTED (blind playtest pending); SYS-01 DONE; MAP-04 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; VIS-004 DONE; VIS-005 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE; PLAYTEST-001 DONE; CONTENT-001 DONE; RESOURCE-001 DONE; AREA-001 DONE; MAP-01 DONE; MAP-02 DONE; MAP-03 DONE; SCALE-01 DONE; REG-01 IMPLEMENTED (blind playtest pending); REG-02 IMPLEMENTED (blind playtest pending); SYS-01 DONE; MAP-04 DONE; SYS-02 DONE.
 
 ### Fortschritt
 Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOURCE-001 ergänzt je eine zweite einmalig sammelbare Sumpfminze- und Schilfwurzelstelle. Alle drei Aufträge lassen sich aus einem frischen Spielstand nacheinander abschließen. Drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. INV-001 verlagert die Bestandsübersicht in ein kategorisiertes Fenster mit Taste I. VIS-001 gestaltet die ursprüngliche 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen. VIS-004 ersetzt die flach gezeichnete Apotheke durch ein reich schattiertes Hausmotiv und ergänzt passende Schilf- und Moosgruppen im Dorfplatz und Schilfufer. AREA-001 ergänzt das begehbare Schilfufer rechts neben der bisherigen Karte mit Torfplanken, Wasserflächen und drei zusätzlichen, dauerhaft speicherbaren Kräuterstellen. Alle drei Gebiete teilen Inventar und Spielstand; Übergänge laufen über eine kleine Area2D-Signal-Schnittstelle. MAP-01 übernimmt die neuen Entwurfsdateien unter `design/` als maßgebliche Weltplanung und gestaltet den bestehenden kompakten Startbereich als Dorfplatz mit gut erkennbarer Apotheke, Platzmitte, Auftragsbrett und sichtbaren Nord- und Ostwegen. Das Szenenobjekt `TestMap` behält seinen Knotennamen, seine logische Gebiets-ID lautet `Dorfplatz`. MAP-02 ergänzt fünf beschilderte Wege, öffnet Schilfufer im Nordwesten und sperrt vier spätere Übergänge sichtbar und physisch. MAP-03 ergänzt einen wiederverwendbaren 16×16-Mooratlas mit einem ruhigen Grundtile in beiden Startkarten; vorhandene Wege und Ufer bleiben lückenlos gezeichnet, der Atlas enthält passende manuell nutzbare Kachelmotive. Der Rückweg aus Schilfufer führt zum Startpunkt am Nordwestpfad; Rast- und Rückkehrpunkte weiterer Regionen entstehen mit ihren REG-Aufgaben. SCALE-01 legt für alle fünf Gebiete ein gemeinsames 5×4-Sektorraster mit 4×3-Mindestkern, Routen, Landmarken, Ressourcenstellen, optionalen Begegnungen und Geheimnissen fest. REG-01 baut das Schilfufer als 5×4-Karte mit mindestens 6.120 passierbaren Kacheln. REG-02 ergänzt den Alten Torfstich als drittes Gebiet mit Torfgruben, Nachtmoos, Torfherzen, dauerhaftem Stegrückweg und Markstein-Geheimnis.
@@ -19,6 +19,8 @@ Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOUR
 VIS-005 ergänzt eine neue 8×8-Bodentextur im Stil der Figuren, Kräuter und Natur-Sprites. Beide Karten verteilen 16 ruhige Moos- und Grasvarianten reproduzierbar über die Laufwege; alte flache Bodenkleckse entfallen, Torfwege erhalten kleine Abriebcluster.
 
 SYS-01 versieht alle 18 Sammelstellen in Dorfplatz, Schilfufer und Altem Torfstich mit stabiler Gebiets-, Ressourcen- und Fundortzuordnung. Fundstellen und vertriebene optionale Gegner kehren bei der Rückkehr ins Dorf zurück. Das kostenlose Basis-Kräuterbuch zeigt entdeckte Stellen; Erstentdeckungen bleiben getrennt vom Erntestatus auch in älteren Version-1-Spielständen kompatibel gespeichert.
+
+SYS-02 ergänzt sichtbare Angriffswarnungen, seitliches Ausweichen, drei Herzen, den kostenlosen Kräuterstab und sichere Wegpunkte in allen drei Gebieten. Niederlagen lassen Inventar und Münzen unangetastet; nur ein Stabsieg gibt genau eine passende Gebietszutat.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -60,16 +62,23 @@ SYS-01 versieht alle 18 Sammelstellen in Dorfplatz, Schilfufer und Altem Torfsti
 - **REG-01:** Schilfufer auf 150×68 Kacheln mit mindestens 6.120 begehbaren Kacheln ausgebaut; sechs Kräutergruppen, sicherer Umweg, dauerhaft senkbarer Fährensteg, dreistufiges Marksteinrätsel, verborgene Mooslichtung und verlustfrei vertreibbarer Schnapper umgesetzt. Blind-Ersterkundung und Spielzeitmessung mit drei neuen Personen bleiben vor Veröffentlichung offen.
 - **REG-02:** Alter Torfstich auf 150×68 Kacheln mit über 6.120 begehbaren Kacheln ergänzt; drei Nachtmoos- und drei Torfherzstellen, dauerhaft absenkbarer Torfsteg, drei Messpfähle mit verborgener Arbeitsnische, sichere optionale Begegnungen und Rückweg angelegt. Blinder Erstbesuch mit mindestens drei neuen Personen bleibt vor Veröffentlichung offen.
 - **SYS-01:** 18 Fundstellen erhalten feste Gebiets-, Ressourcen- und Ortsdaten. Rückkehr ins Dorf erneuert Pflanzen und optionale Begegnungen; H öffnet ein Basis-Kräuterbuch mit entdeckten Stellen. Erstentdeckungen bleiben separat gespeichert und Version-1-Spielstände ohne dieses Feld sind weiterhin gültig.
+- **SYS-02:** Klar sichtbare Warnlinien, Space-Ausweichschritt, kostenloser F-Kräuterstab, drei Herzen und sichere Rückkehrpunkte ergänzt. Sicheres Vorbeigehen gibt nichts und kostet nichts; Stabsiege geben genau eine Regionszutat.
 - **MAP-04:** Dorfplatz auf 640 × 544 Pixel vergrößert, drei Cottage-Sprites und Kollisionen integriert, Platzpflaster und südliches Wegenetz ausgearbeitet; Übergänge und Weltkoordinaten bleiben stabil.
 
 ### Als Nächstes
-Als Nächstes: SYS-02 – sichere Begegnungen mit Gegnern umsetzen. Jahreszeiten und Automatisierung bleiben nachrangig.
+Als Nächstes: ENE-01 – Startgegner einzeln platzieren und Warnung, Reichweite sowie Erholung im Gebiet überprüfen. Jahreszeiten und Automatisierung bleiben nachrangig.
 
 ### SYS-01 Abnahmekriterien – erledigt
 - Alle 18 Fundstellen besitzen eindeutige Save-ID sowie feste Gebiets-, Ressourcen-, Seltenheits- und Ortsdaten; jedes Gebiet hat mindestens zwei häufige und eine seltene Fundstelle.
 - Sammelstellen und vertriebene optionale Gegner kehren bei Rückkehr aus einem Gebiet in den Dorfplatz zurück; Geheimstellen bleiben entsprechend ihrem Rätselstatus verborgen.
 - Das Basis-Kräuterbuch listet erstentdeckte Stellen und zeigt Gegend, Ort, Pflanze und Seltenheit. Die separate kostenpflichtige UPG-02-Erweiterung bleibt für Rezept-Hinweise vorgesehen.
 - Erstentdeckungen werden separat vom Erntestatus gesichert; bestehende Version-1-Spielstände ohne Entdeckungsfeld laden weiter.
+
+### SYS-02 Abnahmekriterien – erledigt
+- Schilfschnapper und Moorwühler zeigen vor einem ausweichbaren Angriff eine klar sichtbare Linie; das harmlose Irrlicht lässt sich gefahrlos passieren.
+- Der Kräuterstab kostet nichts; bloßes Vorbeigehen gibt keinen Gegenstand, ein Stabsieg genau eine passende Zutat.
+- Treffer kosten höchstens ein Herz und löschen keine Zutaten. Nach drei Treffern wacht der Spieler am Gebietspunkt mit drei Herzen auf; Inventar und Münzen bleiben erhalten.
+- Kein Gegner ist Voraussetzung für einen Auftrag oder den Zugang zu einer Sammelstelle.
 
 ### Blocker
 Kein technischer Blocker für die vollständige Questkette. Das Spiel liegt als eigenes öffentliches Repo Fremarx/Moor-Apotheke; abgeschlossene Backlogitems werden auf codex/moor-apotheke gepusht. Physische Tastatur und subjektives Spielgefühl bleiben für deinen manuellen Test offen.
@@ -110,6 +119,7 @@ Kein technischer Blocker für die vollständige Questkette. Das Spiel liegt als 
 - BOARD-001-Headless-Test zuerst rot, danach grün; alle vierzehn vorherigen Tests (insgesamt fünfzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - SAVE-001-Test zuerst rot, danach grün; prüft F5/F9, automatische Startladung, Wiederherstellung aller gespeicherten Daten und unveränderten Laufzeitzustand bei fehlendem, beschädigtem oder nicht unterstütztem Save. Alle 17 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - AREA-001-Test zuerst rot, nach Karten- und Übergangsumsetzung grün; läuft über echte Physikframes zu allen drei neuen Pflanzen, prüft Hin- und Rückweg sowie Speichern, Laden und automatisches Wiederherstellen des zweiten Gebiets. Alle 23 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden.
+- SYS-02-Headless-Test zuerst rot, nach Umsetzung grün; prüft Warnphase, Ausweichschritt, Treffer, Rückkehr am Wegpunkt, Inventarerhalt und genau einen Gegnerdrop. Alle 31 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Hauptszenenlauf bestanden.
 - REL-001: Godot 4.7.2 Windows-Exportvorlagen installiert; Release-Export nach build/windows/Moor-Apotheke.exe und 60-Frame-Start der EXE mit Exitcode 0 bestanden. Keine Codesignatur; kein öffentlicher Upload.
 - PLAY-001: neuer Headless-Test prüft HUD-Hintergründe/-Ränder/-Zeichenreihenfolge, WASD- und Pfeiltastenbindungen, alle vier InputMap-Bewegungsrichtungen, aktive Kamera sowie Fels-, Teich- und Kartenrandkollisionen. Alle 20 Tests, Editorimport und 60-Frame-Lauf bestanden; Hauptszene bei 480 × 270 mit Godot Movie Maker gerendert und auf HUD-Lesbarkeit geprüft.
 - INV-001: Test prüft I-Belegung, Modalsteuerung, Fokus, Fenstergrenzen, zehn live aktualisierte Inventarbestände, Escape/Schließen und die Konfliktvermeidung mit dem Auftragsbrett. Alle 21 Tests, Editorimport und 60-Frame-Startlauf bestanden; echte Tastatureingabe bleibt manuell offen.
@@ -208,7 +218,8 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | REG-01 | Schilfufer als großes Startgebiet mit Ressourcenroute bauen | P0 | SCALE-01 | IMPLEMENTED (blind playtest pending) |
 | REG-02 | Alter Torfstich als großes Gebiet mit Ressourcen, Abkürzung, Geheimnis und Rückweg ergänzen | P0 | REG-01, SCALE-01 | IMPLEMENTED (blind playtest pending) |
 | SYS-01 | Gebietseigene Fundstellen, feste Ressourcen-IDs und Nachwachsen bei Rückkehr ins Dorf | P0 | REG-01, REG-02 | DONE |
-| SYS-02 | Sichere Begegnungen mit Gegnern | P0 | SYS-01 | NEXT |
+| SYS-02 | Sichere Begegnungen mit Gegnern | P0 | SYS-01 | DONE |
+| ENE-01 | Startgegner sicher platzieren und Begegnungen abstimmen | P0 | SYS-02, REG-01, REG-02 | NEXT |
 
 ### CORE-002 Abnahmekriterien
 - Die Interaktion nutzt die benannte Aktion interact auf E.
@@ -550,3 +561,4 @@ Der erweiterte End-to-End-Test startet ohne Spielstand, bewegt die Figur über P
 | 01.10.2026 | REG-01: Schilfufer auf 150×68 Kacheln mit mindestens 6.120 begehbaren Kacheln ausgebaut; sechs Kräutergruppen, sicherer Umweg, dauerhaft senkbarer Fährensteg, dreistufiges Marksteinrätsel, verborgene Mooslichtung und verlustfrei vertreibbarer Schnapper. Alle 27 Headless-Tests, Import und Start-Smoke bestehen; blinder Ersterkundungstest bleibt vor Veröffentlichung offen. |
 | 01.10.2026 | SYS-01: Gebietsdaten und 18 stabile Fundstellen-IDs ergänzt; Pflanzen und optionale Begegnungen kehren bei Dorfbesuch zurück. Das Basis-Kräuterbuch protokolliert Entdeckungen. Version-1-Save-Kompatibilität, vollständiger Headless-Testlauf, Editorimport und 60-Frame-Start-Smoke geprüft. |
 | 01.10.2026 | MAP-04: Dorfplatz von 640 × 360 auf 640 × 544 Pixel erweitert, drei Cottage-Sprites mit Hofdetails ergänzt und Pflaster/Wege sichtbar ausgearbeitet. Übergangskoordinaten blieben stabil; 30 Headless-Tests, Editorimport, 60-Frame-Start und zwei Dorfausschnitte bei 480 × 270 bestanden. |
+| 01.10.2026 | SYS-02: Warnlinien, Ausweichschritt, Kräuterstab, Herzen und sichere Wegpunkte umgesetzt; alle 31 Headless-Tests, Godot-4.7.2-Import und 60-Frame-Start bestanden. |

@@ -13,6 +13,9 @@ const VALID_ITEM_IDS: Array[String] = [
 	"dried_night_moss",
 	"night_potion",
 	"peat_heart",
+	"snapper_slime",
+	"peat_armor_flake",
+	"will_o_wisp_spark",
 	"coins",
 ]
 

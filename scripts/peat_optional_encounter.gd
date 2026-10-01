@@ -1,35 +1,32 @@
-extends "res://scripts/interactable.gd"
+extends "res://scripts/enemy_encounter.gd"
 
 @export_enum("Moorwühler", "Irrlicht") var encounter_kind: int = 0
 
-var _driven_off := false
-
 
 func _ready() -> void:
+	if encounter_kind == 0:
+		drop_item_id = "peat_armor_flake"
+		max_health = 2
+		attack_range = 92.0
+		attack_half_width = 17.0
+		can_attack_player = true
+	else:
+		drop_item_id = "will_o_wisp_spark"
+		max_health = 3
+		attack_range = 72.0
+		attack_half_width = 12.0
+		can_attack_player = false
 	super._ready()
-	add_to_group("optional_encounters")
 
 
 func interact() -> String:
-	if _driven_off:
-		return "Die Begegnung ist bereits weitergezogen."
-	_driven_off = true
-	visible = false
-	set_deferred("monitoring", false)
-	set_deferred("monitorable", false)
 	if encounter_kind == 0:
-		return "Du weichst der Torfwelle aus und scheuchst den Moorwühler fort. Deine Kräuter bleiben bei dir."
-	return "Du folgst dem echten Weglicht; das Irrlicht zieht von der sicheren Weggabelung weiter."
-
-
-func reset_encounter() -> void:
-	_driven_off = false
-	visible = true
-	set_deferred("monitoring", true)
-	set_deferred("monitorable", true)
+		return dismiss_safely("Du weichst der Torfwelle aus und gehst am Moorwühler vorbei. Deine Kräuter bleiben bei dir.")
+	return dismiss_safely("Du folgst dem echten Weglicht; das Irrlicht zieht von der sicheren Weggabelung weiter.")
 
 
 func _draw() -> void:
+	super._draw()
 	if encounter_kind == 0:
 		_draw_moorwuehler()
 	else:

@@ -167,6 +167,9 @@ location_name = "Alter Torfweg"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TorfherzC4"]
 shape = SubResource("CircleShape2D_pickup")
 
+[node name="SafeWaypoint" type="Marker2D" parent="."]
+position = Vector2(80, 408)
+
 [node name="Moorwuehler" type="Area2D" parent="."]
 position = Vector2(1050, 424)
 z_index = 3

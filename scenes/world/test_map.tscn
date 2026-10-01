@@ -363,6 +363,9 @@ feedback_text = "Der Wurzelhain folgt später; Lene braucht Aufträge aus Quells
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GateWurzelhain"]
 shape = SubResource("CircleShape2D_route_gate")
 
+[node name="SafeWaypoint" type="Marker2D" parent="."]
+position = Vector2(320, 190)
+
 [node name="EnterSchilfufer" type="Area2D" parent="."]
 position = Vector2(36, 64)
 collision_layer = 0

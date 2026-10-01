@@ -30,7 +30,12 @@ const INVENTORY_COLUMNS: Array = [
 		},
 		{
 			"title": "REGIONALE FUNDSTÜCKE",
-			"items": [["peat_heart", "Torfherz", "special"]],
+			"items": [
+				["peat_heart", "Torfherz", "special"],
+				["snapper_slime", "Schnapperschleim", "special"],
+				["peat_armor_flake", "Torfpanzerflocke", "special"],
+				["will_o_wisp_spark", "Irrlichtfunke", "special"],
+			],
 		},
 		{
 			"title": "MÜNZEN",
@@ -81,6 +86,7 @@ const AREA_DISPLAY_NAMES := {
 @onready var _dried_night_moss_count: Label = $HUD/DriedNightMossCount
 @onready var _night_potion_count: Label = $HUD/NightPotionCount
 @onready var _coin_count: Label = $HUD/CoinCount
+@onready var _hearts_display: Node2D = $HUD/Hearts
 @onready var _quest_status: Label = $HUD/QuestStatus
 @onready var _interaction_prompt: Label = $HUD/InteractionPrompt
 @onready var _interaction_feedback: Label = $HUD/InteractionFeedback
@@ -93,6 +99,9 @@ var _discovered_pickups: Dictionary = {}
 func _ready() -> void:
 	_player.connect("interaction_hint_changed", _on_interaction_hint_changed)
 	_player.connect("interaction_completed", _on_interaction_completed)
+	_player.connect("health_changed", _on_player_health_changed)
+	_player.connect("defeated", _on_player_defeated)
+	_player.connect("herb_staff_attack_requested", _on_herb_staff_attack_requested)
 	_inventory.item_count_changed.connect(_on_item_count_changed)
 	_fenja_quest.state_changed.connect(_on_quest_state_changed)
 	_marten_quest.state_changed.connect(_on_marten_quest_state_changed)
@@ -118,6 +127,10 @@ func _ready() -> void:
 		if pickup.has_signal("item_collected"):
 			pickup.item_collected.connect(_inventory.add_item)
 
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if enemy.has_signal("encounter_defeated"):
+			enemy.encounter_defeated.connect(_on_enemy_defeated)
+
 	for transition in get_tree().get_nodes_in_group("map_transitions"):
 		if transition.has_signal("transition_requested"):
 			transition.transition_requested.connect(_on_map_transition_requested)
@@ -136,6 +149,8 @@ func _ready() -> void:
 			if quests_by_id.has(quest_id):
 				quest_npc.set_quest(quests_by_id[quest_id])
 
+	_remember_safe_waypoint_for_position(_player.global_position)
+	_on_player_health_changed(int(_player.get("current_hearts")), int(_player.get("max_hearts")))
 	_load_save_on_startup()
 	_sync_torfstich_access()
 	_refresh_inventory_window()
@@ -329,6 +344,7 @@ func _apply_save_data(save_data: Dictionary) -> void:
 	var saved_player: Dictionary = save_data["player"]
 	_player.position = Vector2(float(saved_player["x"]), float(saved_player["y"]))
 	_configure_camera_for_position(_player.global_position)
+	_remember_safe_waypoint_for_position(_player.global_position)
 	_inventory.call("restore_from_save", save_data["inventory"])
 	_fenja_quest.call("restore_state", save_data["quests"]["fenja"])
 	_marten_quest.call("restore_state", save_data["quests"]["marten"])
@@ -545,6 +561,62 @@ func _on_item_count_changed(item_id: String, amount: int) -> void:
 		window_count_label.text = str(amount)
 
 	_update_quest_status()
+
+
+func _on_player_health_changed(current_hearts: int, maximum_hearts: int) -> void:
+	_hearts_display.call("set_hearts", current_hearts, maximum_hearts)
+
+
+func _on_player_defeated() -> void:
+	await get_tree().create_timer(0.35).timeout
+	if not is_instance_valid(_player):
+		return
+	_player.global_position = _player.call("get_last_safe_waypoint")
+	_player.velocity = Vector2.ZERO
+	_configure_camera_for_position(_player.global_position)
+	_player.call("recover_after_defeat")
+	_on_interaction_completed("Du wachst am sicheren Wegpunkt auf. Deine Kräuter und Münzen sind noch da.")
+
+
+func _on_herb_staff_attack_requested(origin: Vector2, direction: Vector2) -> void:
+	var attack_direction := direction.normalized()
+	if attack_direction.is_zero_approx():
+		return
+
+	var nearest_enemy: Area2D
+	var nearest_distance_squared := INF
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if not enemy is Area2D or not enemy.visible or not enemy.has_method("apply_staff_hit"):
+			continue
+		var offset: Vector2 = enemy.global_position - origin
+		var distance_forward := offset.dot(attack_direction)
+		var distance_sideways := absf(offset.cross(attack_direction))
+		if distance_forward < 4.0 or distance_forward > 42.0 or distance_sideways > 24.0:
+			continue
+		var distance_squared := offset.length_squared()
+		if distance_squared < nearest_distance_squared:
+			nearest_enemy = enemy
+			nearest_distance_squared = distance_squared
+
+	if nearest_enemy == null:
+		return
+	var was_defeated := bool(nearest_enemy.call("is_defeated"))
+	if not bool(nearest_enemy.call("apply_staff_hit")):
+		return
+	if not was_defeated and not bool(nearest_enemy.call("is_defeated")):
+		_on_interaction_completed("Der Kräuterstab trifft %s." % str(nearest_enemy.get("display_name")))
+
+
+func _on_enemy_defeated(enemy_name: String, drop_item_id: String) -> void:
+	if drop_item_id.is_empty():
+		return
+	_inventory.call("add_item", drop_item_id, 1)
+	var item_names := {
+		"snapper_slime": "Schnapperschleim",
+		"peat_armor_flake": "Torfpanzerflocke",
+		"will_o_wisp_spark": "Irrlichtfunke",
+	}
+	_on_interaction_completed("%s lässt 1 %s fallen." % [enemy_name, str(item_names.get(drop_item_id, drop_item_id))])
 
 
 func _on_resource_discovered(
@@ -805,6 +877,20 @@ func _configure_camera_for_area(destination_id: StringName) -> void:
 		_camera.force_update_scroll()
 		return
 
+func _remember_safe_waypoint_for_position(position: Vector2) -> void:
+	for area in get_tree().get_nodes_in_group("world_areas"):
+		if not area is Node2D or not area.has_method("get_map_bounds"):
+			continue
+		var local_bounds: Rect2 = area.call("get_map_bounds")
+		var world_bounds := Rect2(area.to_global(local_bounds.position), local_bounds.size)
+		if not world_bounds.has_point(position):
+			continue
+		var waypoint := area.get_node_or_null("SafeWaypoint") as Marker2D
+		_player.call("set_last_safe_waypoint", waypoint.global_position if waypoint != null else position)
+		return
+	_player.call("set_last_safe_waypoint", position)
+
+
 func _get_area_id_at_position(position: Vector2) -> StringName:
 	for area in get_tree().get_nodes_in_group("world_areas"):
 		if not area is Node2D or not area.has_method("get_map_bounds"):
@@ -837,6 +923,7 @@ func _on_map_transition_requested(destination_id: StringName, destination_positi
 			_respawn_resources_and_encounters()
 		_player.velocity = Vector2.ZERO
 		_player.global_position = area.to_global(destination_position)
+		_remember_safe_waypoint_for_position(_player.global_position)
 		_configure_camera_for_area(destination_id)
 		_on_interaction_completed(feedback_text)
 		return
