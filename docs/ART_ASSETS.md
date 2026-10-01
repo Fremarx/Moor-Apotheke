@@ -64,6 +64,28 @@ Changes required: (1) shrink each sprite so it occupies no more than the centere
 Do not add or remove subjects. No cell dividers, no text, no labels, no background fill, no neighboring shadows.
 </pre>
 
+## MAP-03 – Wiederverwendbarer Moor-Kachelatlas
+
+- Datei: `assets/tilesets/moor_terrain_atlas_ai_20261001.png`
+- Format: PNG, 128 × 128 Pixel, 8 × 8 Zellen à 16 × 16 Pixel; eingesetzt über `assets/tilesets/moor_terrain_tileset.tres`.
+- Aufbau: Reihe 0 enthält den ruhigen, einfarbigen Basistile (`#707A50`) und dezente Grasvarianten; Reihe 1 Gras- und Moosvarianten; Reihe 2 Torf und Schlamm; Reihe 3 gerade Wege, Kurven und Endstücke; Reihe 4 Wasser; Reihe 5 Ufer; Reihe 6 Holzstege und Brückenteile; Reihe 7 Schilf und nasse Uferkanten.
+- Verwendung: Ein gemeinsames TileSet wird von den `TerrainBase`-TileMapLayers im Dorfplatz und Schilfufer genutzt. Der Basistile füllt das Kartenraster; die bestehenden Wege, Uferkonturen und Bodendetails werden weiterhin von den Kartenskripten gezeichnet. Weitere Kacheln sind im Editor zur manuellen Verwendung verfügbar. Automatische Terrainmasken sind nicht eingerichtet.
+- Herkunft: Mit dem integrierten OpenAI Imagegen in Codex am 01.10.2026 erstellt und gezielt vereinfacht. Das 1254 × 1254-Ausgangsbild wurde zellenweise auf 128 × 128 Pixel mit Nearest-Neighbor-Skalierung verkleinert. Es wurden keine Fremdassets verwendet; eine externe Lizenz ist nicht betroffen.
+
+### Prompt zur Erstgenerierung
+
+<pre>
+Create a top-down 8-by-8 atlas of seamless 16-by-16 pixel-art terrain tiles for a cozy warm evening moor game. Keep every square tile aligned to the same grid, with hard pixel edges, restrained handcrafted clusters, and no outlines between cells. Arrange the rows by material: quiet olive grass and moss; peat and mud; readable dirt paths with straight, curved, and ending pieces; shallow and deep dark teal water; marsh shore transitions; weathered wooden boardwalk and bridge sections; reeds and wet bank accents. Use warm moss green, sage, peat brown, muted teal, and weathered honey wood. No text, characters, props, lighting effects, perspective, blur, anti-aliasing, or tile gaps. The tiles must remain legible at native 16-pixel gameplay size.
+</pre>
+
+### Bereinigungsschritte
+
+<pre>
+Simplify the repeated ground texture so the upper-left cell is a uniform muted olive base tile (#707A50) without speckles or visible pattern. Preserve all other 63 atlas cells and their positions, keeping the existing grass and moss variants, peat, mud, paths, water, shore, boardwalk, reeds, and wet-bank tiles. Maintain a precise 8-by-8 grid with hard pixel edges and no seams.
+</pre>
+
+Das Atlasbild wurde anschließend zellenweise auf exakt 16 × 16 Pixel pro Motiv zugeschnitten und mit Nearest-Neighbor auf 128 × 128 gebracht. Die Prüfung im Spielmaßstab zeigte ruhige Grundflächen, lesbare Sammelpflanzen und durchgehende gezeichnete Wege.
+
 ## VIS-003 – Stationen, Bewohner und Sammelpflanzen
 
 Alle drei PNG-Dateien sind transparente Atlanten mit 2172 × 724 Pixeln und drei Zellen à 724 × 724 Pixel. Sie wurden mit dem integrierten OpenAI Imagegen in Codex erstellt; es wurden keine Fremdassets eingebunden. Die Mockups dienten nur als Stil- und Farbhinweis.

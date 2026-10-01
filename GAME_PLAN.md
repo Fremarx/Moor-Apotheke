@@ -2,7 +2,7 @@
 
 ## 1. Spielidee
 
-Ein gemütliches 2D-Pixelart-Spiel über eine kleine Apotheke am Rand eines geheimnisvollen Moors. Die Spielerin oder der Spieler sammelt Heilpflanzen, verarbeitet sie zu einfachen Mitteln und hilft den Bewohnern eines nahegelegenen Dorfs. In späteren Ausbaustufen schalten Einnahmen und das Vertrauen der Gemeinschaft neue Rezepte, Moorgebiete und praktische Produktionshilfen frei.
+Ein gemütliches 2D-Pixelart-Spiel über eine kleine Apotheke am Rand eines geheimnisvollen Moors. Die Spielerin oder der Spieler sammelt Heilpflanzen, verarbeitet sie zu einfachen Mitteln und hilft den Bewohnern eines nahegelegenen Dorfs. Mit den Einnahmen werden optionale Verbesserungen gekauft; benannte Aufträge öffnen die Hauptgebiete. Einmaliges Vertrauen schaltet nur optionale Dorfinhalte frei.
 
 **Arbeitsannahme:** Godot 4 mit GDScript, zunächst mit einfachen Platzhaltergrafiken. Der erste Schwerpunkt liegt auf Erkunden, Herstellen und den Dorfbewohnern. Automatisierung ist ein späterer Ausbau, sobald die kleine Produktionsschleife Spaß macht.
 
@@ -31,9 +31,13 @@ Ein gemütliches 2D-Pixelart-Spiel über eine kleine Apotheke am Rand eines gehe
 - Import in Godot mit scharfer Pixel-Darstellung ohne geglättete Kanten.
 - Diese Werte sind Startpunkte und werden im laufenden Spiel geprüft.
 
-### Grafikumfang
+### Grafikumfang für den ersten Ausschnitt
 
-Für den ersten Kernablauf genügen eine Platzhalterfigur, eine kleine Außenfläche mit Ufer, Sumpfminze, Trockengestell, Braukessel und Fenja sowie eine einfache Anzeige für Aufgabe und Inventar. Das erweiterte Spiel kann später drei Pflanzen und weitere Orte sowie Figuren ergänzen.
+- Eine Spielfigur mit vier Laufrichtungen und einfacher Standanimation.
+- Ein kleines Bodenkachelset für Gras, Torf, Wasser, Weg und Ufer.
+- Drei klar unterscheidbare Pflanzen, zwei Verarbeitungsstationen und wenige Moor-Details.
+- Eine warme Innenansicht der Apotheke und eine kleine Außenkarte.
+- Einfache UI-Rahmen, Gegenstandssymbole und ein gut lesbares Auftragsfenster.
 
 ### Arbeitsweise mit Codex
 
@@ -53,9 +57,9 @@ flowchart LR
   A[Ins Moor gehen] --> B[Kräuter sammeln]
   B --> C[Zutaten trocknen]
   C --> D[Heilmittel brauen]
-  D --> E[Aufträge erfüllen]
-  E --> F[Später: Münzen und Vertrauen erhalten]
-  F --> G[Rezepte und Bereiche freischalten]
+  D --> E[Aufträge erfüllen oder fertige Mittel verkaufen]
+  E --> F[Münzen und Vertrauen erhalten]
+  F --> G[Optionale Ausbauten und Dorfinhalte freischalten]
   G --> A
 ```
 
@@ -63,16 +67,13 @@ flowchart LR
 
 Ziel ist ein kurzer, vollständiger Spielabschnitt, in dem eine Person vom Verlassen der Apotheke bis zur erfüllten Bestellung alle Hauptschritte selbst erlebt.
 
-### Umfang in zwei Stufen
-
-**Erster Kernablauf:** Fenjas Bitte am Auftragsbrett annehmen, eine Sumpfminze sammeln, am Trockengestell verarbeiten, am Braukessel einen Beruhigungstee herstellen und den Tee Fenja direkt geben. Das Brett zeigt auch spätere Bewohneraufträge und ihre Freischaltung. Bei erfolgreicher Abgabe erhält man fünf Münzen; seltene Pflanzen und ein Vertrauenssystem sind zusätzliche Ausbauschritte.
-
-**Erweiterter Vertical Slice:** Schilfwurzel, Nachtmoos, zwei weitere Rezepte sowie Marten und Lene erweitern die Kernschleife. Ihre Aufträge zahlen 10 beziehungsweise 15 Münzen; die Belohnungswerte sind Startwerte und können beim Spielen angepasst werden.
+Der Vertical Slice begrenzt zunächst die Zahl der Systeme und Gebiete, **nicht die Größe der beiden Startgebiete**. Schilfufer und Alter Torfstich werden bereits in der vorgesehenen vollen Arealgröße gebaut. Die Maß- und Spielzeitvorgaben für alle fünf Gebiete stehen im [Weltentwurf](design/world_design_plan.md) und [Backlog](design/world_backlog.md).
 
 ### Inhalt
 
-- **Erster Kernablauf:** eine kleine Außenfläche, eine steuerbare Figur, ein Auftragsbrett, eine Sammelstelle für Sumpfminze, je eine Verarbeitungsstation und Fenja als Auftraggeberin. Inventar und Aufgabe werden einfach angezeigt.
-- **Erweiterte Inhalte:** eine größere Moor-Karte mit Apotheke, Dorfweg und drei Sammelstellen; drei sammelbare Pflanzen:
+- Dorfzentrum sowie Schilfufer und Alter Torfstich als zwei große, vollständig begehbare Gebiete; spätere Pfade sind sichtbar und zunächst gesperrt.
+- Eine steuerbare Spielfigur mit Laufen, Interagieren und Kamera.
+- Drei sammelbare Pflanzen:
   - **Sumpfminze** – häufig, Grundlage für beruhigende Mittel.
   - **Schilfwurzel** – wächst an nassen Ufern, Grundlage für stärkende Mittel.
   - **Nachtmoos** – selten und an schattigen Stellen, Zutat für ein spezielles Rezept.
@@ -80,7 +81,8 @@ Ziel ist ein kurzer, vollständiger Spielabschnitt, in dem eine Person vom Verla
   - **Trockengestell:** frische Pflanzen werden zu getrockneten Zutaten.
   - **Braukessel:** Zutaten werden nach einem Rezept zu einem Heilmittel verarbeitet.
 - Drei Rezepte, darunter ein einfaches Startrezept und zwei, die weitere Zutaten benötigen.
-- Drei Dorfbewohner-Aufträge mit unterschiedlichen Bedürfnissen; Annahme am Auftragsbrett und Abgabe direkt beim jeweiligen Bewohner.
+- Gegner lassen nach dem Vertreiben mit dem Kräuterstab eine Alchemiezutat fallen; sicheres Vorbeigehen gibt keinen Drop. Optionale Trankrezepte stehen im [Gegnerkatalog](design/enemy_roster.md).
+- Drei Dorfbewohner-Aufträge mit unterschiedlichen Bedürfnissen.
 - Inventar, Auftragsanzeige und eine einfache Belohnung in Münzen.
 - Eine kleine Verbesserung als Abschlussbelohnung, zum Beispiel ein größeres Trockengestell.
 
@@ -90,8 +92,8 @@ Ziel ist ein kurzer, vollständiger Spielabschnitt, in dem eine Person vom Verla
 | --- | --- |
 | Apotheke | Startpunkt, Inventar und Braukessel |
 | Hinterhof | Trockengestell und kurze Einführung |
-| Schilfufer | Sumpfminze und Schilfwurzel |
-| Alter Torfsteg | Nachtmoos als seltener Fund |
+| Schilfufer | Uferwiesen, Schilflabyrinth und versunkene Fähre; Sumpfminze und Schilfwurzel |
+| Alter Torfstich | Torfhof, Grubenstege und alter Torfweg; Nachtmoos als seltener Fund |
 | Dorfplatz | Bewohner und Auftragsbrett |
 
 | Zutat | Fundort | Verwendung |
@@ -102,48 +104,52 @@ Ziel ist ein kurzer, vollständiger Spielabschnitt, in dem eine Person vom Verla
 
 | Rezept | Zutaten | Ergebnis | Freischaltung |
 | --- | --- | --- | --- |
-| Beruhigungstee | 1 getrocknete Sumpfminze + Wasser | 1 Tee | Von Anfang an |
+| Beruhigungstee | 2 getrocknete Sumpfminzen + Wasser | 1 Tee | Von Anfang an |
 | Stärkender Aufguss | 1 getrocknete Schilfwurzel + 1 getrocknete Sumpfminze + Wasser | 1 Aufguss | Nach dem ersten Auftrag |
 | Nachttrank | 1 getrocknete Schilfwurzel + 1 getrocknetes Nachtmoos + Wasser | 1 Trank | Nach dem zweiten Auftrag |
 
-Die Rezeptmengen sind Startwerte und werden beim Spielen angepasst. Eine Sumpfminze ergibt eine getrocknete Minze. Das Wasser ist unbegrenzt am Braukessel verfügbar, damit keine dritte Sammelressource nötig ist.
+Die Rezeptmengen sind Startwerte und werden beim Spielen angepasst. Das Wasser ist für den ersten Ausschnitt unbegrenzt am Braukessel verfügbar, damit keine dritte Sammelressource nötig ist.
 
 ### Bewohner und Aufträge
 
 | Person | Bitte | Spielziel |
 | --- | --- | --- |
 | Fenja, die Fährfrau | 1 Beruhigungstee | Führt in Sammeln, Trocknen, Brauen und Abgeben ein |
-| Marten, der Torfstecher | 1 stärkender Aufguss | Nutzt zwei Pflanzenarten und führt die Bewohner-Auftragskette fort |
+| Marten, der Torfstecher | 1 stärkender Aufguss | Nutzt zwei Pflanzenarten und schaltet das zweite Rezept frei |
 | Lene, die Dorfheilerin | 1 Nachttrank | Führt zum seltenen Fund am alten Steg und schließt den Ausschnitt ab |
 
-Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenja nimmt den Tee direkt entgegen. Nach der Annahme zeigt das HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss sichtbar und Fenja zahlt fünf Münzen. Marten zahlt zehn und Lene fünfzehn Münzen. Das Inventar führt Münzen unter coins; Bestände erscheinen im Inventarfenster, Münzen zusätzlich in der HUD-Leiste. SAVE-001 erhält Inventar, Münzen und Auftragsstatus über Spielsitzungen hinweg.
+Aufträge haben im ersten Ausschnitt keine Ablaufzeit. Die Erfüllung wird durch eine kurze Textzeile, Münzen und einen sichtbaren Vertrauensfortschritt bestätigt.
 
 ### Eingaben und Anzeigen
 
 - **WASD oder Pfeiltasten:** laufen.
-- **E:** mit Pflanze, Station, Bewohner oder Brett interagieren.
-- **F5:** Spielstand speichern; **F9:** Spielstand laden. Ein gültiger Spielstand wird außerdem beim Start automatisch geladen.
-- **I:** Inventarfenster öffnen und schließen. Es zeigt frische und getrocknete Kräuter, Heilmittel und Münzen.
-- Die HUD zeigt aktuelle Aufgabe, Interaktionshinweis und Münzen.
+- **F oder Linksklick:** mit dem Kräuterstab in Blickrichtung angreifen.
+- **Leertaste:** angekündigten Angriffen ausweichen.
+- **1/2, danach Q:** Schnelltrank auswählen und anwenden oder werfen.
+- **E:** mit Pflanze, Station, Bewohner oder Brett interagieren. Gegner werden mit dem Kräuterstab angegriffen.
+- **I:** Inventar öffnen und schließen.
+- Die HUD zeigt aktuelle Aufgabe, Interaktionshinweis, Münzen, drei Herzen und den gewählten Schnelltrank.
 - Stationsfenster zeigen Zutatenplätze, verfügbares Rezept und Herstellungsfortschritt.
+
+Das geplante Kampfsystem mit Trefferregeln, Ausweichschritt und Trankeffekten steht im [Gegnerkatalog](design/enemy_roster.md).
 
 ### Nicht Teil des ersten Ausschnitts
 
 - Automatische Förder- oder Verarbeitungsmaschinen.
 - Mehrere Jahreszeiten, Wettereffekte und dynamisches Nachwachsen.
-- Große Weltkarte, umfangreiche Dialoge oder komplexe Beziehungen.
+- Vollständige spielbare Weltübersicht mit allen fünf Gebieten, umfangreiche Dialoge oder komplexe Beziehungen. Das Karten-Mockup dient zunächst nur als Entwurfsübersicht; die beiden Startgebiete bleiben trotzdem groß und vollständig begehbar.
 - Hunger, Energie, Zeitdruck oder verderbliche Waren.
 - Eigene finale Pixelart-Assets: Erst Platzhalter verwenden und den Ablauf spielbar machen.
 
 ## 6. Geplanter Ablauf im Spiel
 
 1. Eine Bewohnerin bittet um ein Mittel gegen Unwohlsein.
-2. Die Spielerin oder der Spieler nimmt Fenjas Bitte am Auftragsbrett an.
+2. Die Spielerin oder der Spieler nimmt den Auftrag am Brett an.
 3. Sumpfminze wird im Moor gesammelt.
 4. Die Minze wird am Trockengestell verarbeitet.
 5. Das passende Rezept wird im Braukessel ausgewählt und hergestellt.
-6. Das Heilmittel wird Fenja direkt gegeben und der Abschluss bestätigt.
-7. Im späteren Ausbau schalten Münzen und Vertrauen eine Verbesserung oder das nächste Rezept frei.
+6. Das Heilmittel wird im Dorf abgegeben.
+7. Eine feste Storybelohnung und Vertrauen bestätigen den Auftrag; benannte Storyaufträge öffnen das nächste Gebiet, Geld und Vertrauen bleiben für optionale Verbesserungen und Dorfinhalte.
 
 ## 7. Entwicklungsphasen und Abschlusskriterien
 
@@ -161,7 +167,7 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - Pflanzen als interaktive Objekte platzieren.
 - Sammeln und einfache Inventar-Stapel ermöglichen.
 
-**Fertig, wenn:** Sumpfminze gefunden, eingesammelt und im Inventar angezeigt werden kann. Die zwei weiteren Pflanzen folgen nach dem ersten Kernablauftest.
+**Fertig, wenn:** Alle drei Pflanzen gefunden, eingesammelt und im Inventar angezeigt werden können.
 
 ### Phase 3 – Verarbeiten
 
@@ -173,34 +179,37 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 
 ### Phase 4 – Aufträge und Fortschritt
 
-- Fenjas Auftrag am Auftragsbrett annehmen und das Heilmittel direkt bei ihr abgeben. Das Brett führt die Folgeaufträge von Marten und Lene entsprechend ihren Freischaltbedingungen auf.
-- Fenja den Tee direkt geben und den Abschluss verständlich bestätigen.
-- Den Spielablauf vom Auftrag bis zur Bestätigung verbinden.
+- Auftragsbrett und drei Bewohner-Aufträge ergänzen.
+- Abgabe, Münzbelohnung und einfache Freischaltung umsetzen.
+- Den Spielablauf vom Auftrag bis zur Belohnung verbinden.
 
-**Erledigt in QUEST-001:** Fenja nimmt den Auftrag an, die HUD zeigt das Ziel, ein Tee wird abgegeben und der Abschluss bleibt für die laufende Partie sichtbar. Spielstandpersistenz ist ein späterer eigener Task.
+**Fertig, wenn:** Ein Auftrag angenommen, erfüllt und belohnt werden kann, ohne dass ein Neustart nötig ist.
 
 ### Phase 5 – Lesbarkeit und Atmosphäre
 
 - Platzhalter durch eine zusammenhängende kleine Palette und einfache Pixelgrafiken ersetzen.
 - Rückmeldungen für Sammeln, Herstellen und Abgeben verbessern.
-- Während Fenjas Auftrag das nächste Ziel passend zum Inventar dauerhaft in der HUD anzeigen.
 - Kurze Umgebungsgeräusche und Musik ergänzen, sofern sie den Ablauf unterstützen.
 
-**In UX-001 umgesetzt:** Die aktive Aufgabe führt dauerhaft durch Sammeln, Trocknen, Brauen und Abgabe; kurze Interaktionsrückmeldungen bleiben ergänzend. Ob neue Spielende den Ablauf ohne Erklärung verstehen, muss noch manuell getestet werden.
+**Fertig, wenn:** Neue Spielende die Hauptschleife ohne Erklärung von außen verstehen.
 
 ### Phase 6 – Spieltest und Erweiterungsentscheidung
 
 - Den Ausschnitt wiederholt spielen und unnötige Schritte kürzen.
-- Danach entscheiden, ob als Nächstes Jahreszeiten, neue Moorbereiche oder erste Automatisierung folgen.
+- Danach die drei noch fehlenden großen Moorgebiete sowie weitere Rezepte und Upgrades gemäß [Ausbaupfad](design/progression_roadmap.md) ergänzen; Schilfufer und Torfstich behalten bereits ihre volle Zielgröße.
+- Jahreszeiten und Automatisierung erst nach dem Ausbau der Hauptgebiete als spätere Erweiterungen entscheiden.
 
-**PLAYTEST-001 Ergebnis:** Fenjas erster Auftrag wurde im Godot-Viewport von Annahme bis Belohnung durchgespielt; Bewegung läuft durch Physikframes, Interaktionen über simulierte Eingabeereignisse. Die vollständige Questreihe ist aus einem frischen Spielstand noch nicht machbar: Die Karte hat je eine einmalige Sumpfminze- und Schilfwurzelstelle, die Rezepte brauchen davon je zwei. Physische Tastatur und subjektives Spielgefühl bleiben offen.
+**Fertig, wenn:** Die Kernschleife verständlich und unterhaltsam genug ist, um gezielt erweitert zu werden.
 
-**Fertig, wenn:** Die Kernschleife verständlich und unterhaltsam genug ist, um gezielt erweitert zu werden; die subjektive Spielspaßbewertung erfolgt durch einen menschlichen Spieltest.
+### Langfristiger Ausbau
+
+Die Hauptreise erweitert die Apotheke und öffnet die Gebiete nacheinander. Jede Region bringt neue Zutaten, Gegner, Trankrezepte und eine Verbesserung. Nach dem Abschluss der fünf Hauptgebiete folgen freiwillige Aufträge und Unterbereiche ohne Zeitdruck. Die konkreten Stufen stehen im [Ausbaupfad](design/progression_roadmap.md).
 
 ## 8. Technische Leitplanken
 
 - Zuerst Godots eingebaute Werkzeuge und einfache Szenen verwenden.
 - Gegenstände, Rezepte und Aufträge möglichst als Daten statt fest im UI-Code pflegen.
+- Ressourcenverwendungen, Trankrezepte, Verkaufspreise und Ausbaukosten nach [Ressourcenplan](design/resource_economy.md) pflegen.
 - Die ersten Interaktionen klein halten: Objekt ansehen, benutzen, Ergebnis sehen.
 - Stationen zunächst mit klaren Eingabe- und Ausgabeplätzen bauen; keine komplexe Fabriklogik vorziehen.
 - Verarbeitung anfangs direkt und leicht nachvollziehbar halten; Produktionszeiten sind optional und kurz.
@@ -213,8 +222,7 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - **Schwerpunkt:** Für den Anfang ist eine Mischung aus Erkunden, Aufträgen und einfacher Verarbeitung vorgesehen; Automatisierung kommt später.
 - **Spieltempo:** Der erste Ausschnitt bleibt ohne Zeitdruck. Jahreszeiten können später die Fundorte und Rezepte verändern.
 - **Geschichte und Ton:** Noch offen; Vorschlag ist märchenhaft und gemütlich, mit etwas geheimnisvoller Moorstimmung.
-- **Nächster Ausbau:** Der neue Weltentwurf unter `design/` ist jetzt maßgeblich. MAP-01 gestaltet den kompakten Dorfhub; MAP-02 verbindet ihn sichtbar mit den fünf Gebieten und markiert vier künftige Übergänge samt Bedingungen. MAP-03 legt als Nächstes das wiederverwendbare Moor-Kachelset fest, danach folgt SCALE-01 als eigener Maßstabsaufbau. Jahreszeiten und Automatisierung bleiben nachrangig.
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-RESOURCE-001 hat die vollständige Questkette aus einem frischen Spielstand geprüft; alle drei Aufträge zahlen zusammen 30 Münzen. AREA-001 ergänzt das begehbare Schilfufer. MAP-01 setzt Apotheke und Auftragsbrett gut sichtbar auf den Dorfplatz; MAP-02 zeigt fünf radial verlaufende Wege: Schilfufer ist im Nordwesten offen, vier spätere Regionen haben sichtbare Sperren und erklärende Hinweise; der Nordostweg besitzt einen Holzsteg über dem Teich. Der neue Weltentwurf und seine Ressourcen-, Gegner- und Fortschrittspläne sind unter `design/` versioniert. Als Nächstes folgt MAP-03 mit dem wiederverwendbaren Moor-Kachelset. Danach bleibt SCALE-01 als eigener Maßstabsaufbau offen.
+MAP-01 bis MAP-03 sind abgeschlossen: Dorfplatz und fünf Wege sind angelegt, und beide Startkarten nutzen ein gemeinsames Moor-TileSet. Als Nächstes wird mit SCALE-01 der Maßstab und Inhaltsumfang der Gebiete konkret umgesetzt; danach folgen REG-01 (Schilfufer) und REG-02 (Alter Torfstich) gemäß [Welt-Backlog](design/world_backlog.md). Die neuen Welt- und Fortschrittsdokumente unter `design/` sind dafür maßgeblich.

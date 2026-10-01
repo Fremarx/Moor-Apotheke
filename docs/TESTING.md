@@ -250,3 +250,11 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Die Torhinweise geben die geplanten Voraussetzungen wieder. Die tatsächliche questabhängige Freischaltung wird erst im späteren PROG-01 umgesetzt.
 - MAP-02-Routentest, AREA-001-Rückweg, vollständige Questkette, 25 Headless-Testskripte, Editorimport, 60-Frame-Start und sichtbarer 480 × 270-Renderer bestehen.
 - REG-01 bis REG-05 ergänzen sichere Rückwege und Rastpunkte für ihre Gebiete, sobald die Szenen entstehen.
+
+## MAP-03 – Wiederverwendbares Moor-Kachelset
+
+- `tests/map_03_reusable_terrain_tileset_test.gd` prüft die gemeinsame TileSet-Ressource, das 16×16-Raster, alle 64 registrierten Zellen des 128×128-Atlas, beide `TerrainBase`-Layer, ihre Profile und vollständige 40×23-Abdeckung ohne Kollision oder Navigation.
+- Der Test prüft außerdem den 16-Pixel-Zellabstand sowie die Sichtbarkeit und Spielmaßstabbreite der Sammelpflanzen auf beiden Karten.
+- Beide Karten wurden mit normalem Godot-Renderer als 480×270-Viewport aufgenommen. Pfade und Ufer sind ohne sichtbare Lücken; Sammelpflanzen bleiben gegenüber dem ruhigen Grundtile erkennbar.
+- Abschlussprüfung: alle 26 Godot-Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden.
+- Das TileSet ist manuell bemalbar; automatische Terrainmasken sind noch nicht eingerichtet. Die vorhandene Grundkarte behält ihre durchgehenden gezeichneten Wege und Ufer.

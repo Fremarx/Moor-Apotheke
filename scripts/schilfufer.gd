@@ -48,8 +48,17 @@ func _draw() -> void:
 
 
 func _draw_ground() -> void:
-	draw_rect(Rect2(Vector2.ZERO, MAP_SIZE), Color("304844"))
-	draw_rect(Rect2(Vector2(16, 16), Vector2(608, 328)), Color("71805a"))
+	# TerrainBase supplies the reusable grass and peat texture beneath these accents.
+	for y in range(24, 344, 16):
+		for x in range(24, 624, 16):
+			var pattern := posmod(x * 11 + y * 23, 29)
+			var detail_position := Vector2(x + pattern % 5, y + pattern % 4)
+			if pattern < 6:
+				draw_rect(Rect2(detail_position, Vector2(4, 2)), Color("7f8a58"))
+			elif pattern < 14:
+				draw_rect(Rect2(detail_position, Vector2(4, 2)), Color("506b50"))
+			elif pattern == 16:
+				draw_rect(Rect2(detail_position, Vector2(2, 2)), Color("a49b6a"))
 	draw_colored_polygon(
 		PackedVector2Array([
 			Vector2(24, 34), Vector2(45, 27), Vector2(50, 62), Vector2(39, 87),
@@ -78,20 +87,6 @@ func _draw_ground() -> void:
 		]),
 		Color("81845a")
 	)
-	for y in range(24, 344, 16):
-		for x in range(24, 624, 16):
-			var pattern := (x * 11 + y * 23) % 19
-			var point := Vector2(x + pattern % 7, y + pattern % 5)
-			if pattern < 4:
-				draw_rect(Rect2(point, Vector2(5, 2)), Color("929867"))
-			elif pattern < 8:
-				draw_rect(Rect2(point, Vector2(4, 3)), Color("506b50"))
-			elif pattern == 12:
-				draw_rect(Rect2(point, Vector2(2, 2)), Color("b3a16a"))
-			elif pattern == 16:
-				draw_rect(Rect2(point, Vector2(6, 1)), Color("a2a36a"))
-
-
 func _draw_backwaters() -> void:
 	_draw_water_pool(Vector2(48, 34), Vector2(116, 64))
 	_draw_water_pool(Vector2(222, 24), Vector2(244, 101))

@@ -5,13 +5,13 @@ Die Gegner sollen die Gebiete lebendig und geheimnisvoll machen, ohne den gemüt
 ## Gemeinsame Regeln
 
 - Vor einem Angriff gibt es eine klare Warnung, meist etwa 0,8–1,2 Sekunden lang: Bewegung, Geräusch oder Bodeneffekt.
-- Ein gegnerischer Treffer kostet ein Herz und stößt kurz zurück oder verlangsamt höchstens für wenige Sekunden. Er löscht keine Zutaten aus dem Inventar.
+- Ein normaler gegnerischer Treffer kostet ein Herz und stößt kurz zurück oder verlangsamt höchstens für wenige Sekunden. Eine ausdrücklich als Falle beschriebene Sonderfähigkeit kann stattdessen kurz festhalten oder verlangsamen, ohne zusätzlichen Schaden zu stapeln. Gegner löschen keine Zutaten aus dem Inventar.
 - Jeder Angriff hat eine einfache Antwort: seitlich ausweichen, Abstand halten, auf einen sicheren Weg treten oder ein passendes Hilfsmittel benutzen.
 - Nach einem verfehlten Angriff erholt sich der Gegner kurz. So kann die Spielfigur vorbeigehen oder weiter erkunden.
-- Nach einer erfolgreich gelösten Begegnung (vertreiben, ablenken oder beruhigen) bleibt mindestens eine alchemistische Zutat liegen. Dafür muss kein Gegner getötet werden.
-- Jeder Gegner lässt bei jeder gelösten Begegnung genau eine Einheit seines Materials fallen. Gegner tauchen nach einem späteren Besuch wieder an ihrem Gebietsort auf, sodass Trankzutaten nachgesammelt werden können.
+- Eine Begegnung ist nur dann **abgeschlossen**, wenn der Gegner mit dem Kräuterstab vertrieben wurde. Sicheres Vorbeigehen ist immer möglich, zählt aber nicht als Abschluss und gibt keinen Drop.
+- Jeder vertriebene Gegner lässt genau eine Einheit seines Materials fallen. Gegner und seltene Fundstellen erneuern sich nach einer Rückkehr ins Dorf, sodass Trankzutaten nachgesammelt werden können.
 - Jede Zutat wird in mindestens einem benannten Trank oder einer Salbe verwendet. Diese Rezepte sind optionale Hilfen und keine Voraussetzung für Hauptaufträge.
-- Seltene Gegner bewachen besondere Fundstellen, sperren aber keinen Pflichtweg. Man kann sie ablenken, beruhigen oder umgehen.
+- Seltene Gegner bewachen besondere Fundstellen, sperren aber keinen Pflichtweg. Man kann sie umgehen oder mit dem Kräuterstab vertreiben.
 - Bei einer Niederlage erscheint die Spielfigur am letzten sicheren Wegpunkt; bereits gefundene Dinge bleiben erhalten.
 
 ## Kampfsystem des Spielers
@@ -20,16 +20,16 @@ Der Kampf ist direkt und leicht lesbar: Der Spieler weicht einem klar angekündi
 
 ### Grundaktionen
 
-- **Kräuterstab-Angriff — F oder Linksklick:** Der Spieler schlägt in Blickrichtung in einem kurzen Bogen von etwa zwei Kacheln. Der Kräuterstab ist von Beginn an verfügbar und verbraucht keine Zutaten.
+- **Kräuterstab-Angriff — F oder Linksklick:** Der Spieler schlägt in Blickrichtung in einem kurzen Bogen von etwa zwei Kacheln. Der Kräuterstab ist von Beginn an verfügbar und verbraucht keine Zutaten. Als Startwert gibt es etwa 0,45 Sekunden Erholung zwischen Schlägen.
 - **Ausweichschritt — Leertaste:** Ein kurzer Schritt von etwa zwei Kacheln in die gedrückte Richtung. Er lässt einfache Linien- und Flächenangriffe passieren; danach gibt es eine kurze Erholungszeit, aber keine Ausdauerleiste.
 - **Trankgürtel — Q:** Verwendet den ausgewählten Trank. 1 und 2 wählen die beiden Schnellplätze; geworfene Mixturen fliegen in Blickrichtung, Salben und Schutztränke wirken direkt auf den Spieler.
-- **Interagieren — E:** Kann an einem besiegten/beruhigten oder abgelenkten Gegner statt eines weiteren Angriffs zum Beruhigen eingesetzt werden, sofern die Begegnung das zulässt.
+- **Interagieren — E:** Dient Pflanzen, Stationen, Bewohnern und Gegenständen. Es gibt keine zusätzliche allgemeine Beruhigungsaktion im Kampf.
 
 ### Treffer und Niederlage
 
-- Der Spieler hat drei Herzen. Ein gegnerischer Treffer kostet ein Herz und gibt kurz Schutz vor einem direkten Folgetreffer.
-- Gewöhnliche Gegner haben zwei Widerstandspunkte, seltene Gegner drei. Ein Treffer mit dem Kräuterstab nimmt einen Punkt; bei null wird der Gegner vertrieben, lässt sein Material fallen und kehrt nach einem späteren Dorfbesuch zurück.
-- Kontrolltränke können einen Treffer ersetzen, Gegner unterbrechen oder kurz verlangsamen. Schutztränke fangen einen Angriff ab; Heiltränke stellen ein Herz wieder her.
+- Der Spieler hat drei Herzen. Ein gegnerischer Treffer kostet ein Herz und gibt als Startwert etwa 0,8 Sekunden Schutz vor direkten Folgetreffern.
+- Gewöhnliche Gegner haben zwei Widerstandspunkte, seltene Gegner drei. Ein Treffer mit dem Kräuterstab nimmt einen Punkt; bei null wird der Gegner vertrieben und lässt sein Material fallen. Er kehrt nach der nächsten Rückkehr ins Dorf zurück.
+- Kontrolltränke können einen Treffer ersetzen, Gegner unterbrechen oder kurz verlangsamen. Schutztränke fangen einen Angriff ab; Heiltränke stellen ein Herz wieder her. Tränke erleichtern den Kampf, sind aber keine Pflicht.
 - Bei null Herzen wacht der Spieler am letzten sicheren Wegpunkt auf. Inventar, Münzen und bereits gesammelte Gegnerzutaten bleiben erhalten.
 - Gegnerangriffe und Spielerangriffe dürfen nicht gleichzeitig ohne sichtbare Erholung ablaufen. Nach jedem gegnerischen Angriff bleibt Zeit für einen Gegenangriff oder zum Vorbeigehen.
 
@@ -56,7 +56,7 @@ Der Kampf ist direkt und leicht lesbar: Der Spieler weicht einem klar angekündi
 
 **Aussehen:** Eine schwebende, dunkelviolette Wolke aus kleinen Mücken mit wenigen warmen, bernsteinfarbenen Lichtpunkten.
 
-**Verhalten und Fähigkeiten:** Er kreist zunächst über einer Lichtung. Die Mücken verdichten sich sichtbar, dann fliegt der Schwarm in einer breiten Bahn über den Weg. Wer getroffen wird, bewegt sich etwa zwei Sekunden langsamer; der Schwarm verursacht keinen Gegenstandsverlust.
+**Verhalten und Fähigkeiten:** Er kreist zunächst über einer Lichtung. Die Mücken verdichten sich sichtbar, dann fliegt der Schwarm in einer breiten Bahn über den Weg. Wer getroffen wird, bewegt sich etwa zwei Sekunden langsamer; dieser Angriff verursacht keinen Herzschaden und keinen Gegenstandsverlust.
 
 **Gegenmaßnahme:** Aus der Flugbahn laufen oder eine Laterne beziehungsweise ein später erhältliches Kräuterrepellent einsetzen. Der Schwarm zieht danach für einige Sekunden weiter.
 
@@ -102,9 +102,9 @@ Der Kampf ist direkt und leicht lesbar: Der Spieler weicht einem klar angekündi
 
 **Verhalten und Fähigkeiten:** Er bewacht einen seltenen Fundort. Zuerst zieht er einen sichtbaren Kreis aus Wasserblasen um sich. Danach stampft er auf; die Blasen springen im Kreis nach außen, wobei eine erkennbare Lücke offen bleibt. Ein Treffer schubst die Spielfigur kurz zurück.
 
-**Gegenmaßnahme:** Durch die Lücke gehen, aus dem Kreis treten oder dem Wächter einen beruhigenden Trank anbieten. Nach zwei verfehlten Stampfern senkt er den Kopf und gibt den Fundort für eine Weile frei.
+**Gegenmaßnahme:** Durch die Lücke gehen oder aus dem Kreis treten. Nach zwei verfehlten Stampfern senkt er den Kopf und gibt den Fundort für eine Weile frei; zum Vorbeigehen ist kein Treffer nötig.
 
-**Drop für die Alchemie:** **Quellsteinsplitter** für den **Quellschutztrank** (Quellsteinsplitter + Quellperle); er fängt den nächsten Rückstoß ab.
+**Drop für die Alchemie:** **Quellsteinsplitter** für den **Quellschutztrank** (Quellsteinsplitter + Quellperle); er blockt den nächsten gegnerischen Treffer vollständig.
 
 ## Nebelhain
 
@@ -122,7 +122,7 @@ Der Kampf ist direkt und leicht lesbar: Der Spieler weicht einem klar angekündi
 
 **Aussehen:** Ein moosiger Baumstumpf mit zwei winzigen goldgrünen Augen, Pilzen am Fuß und einer Rinde, die wie ein hängender Mantel aussieht.
 
-**Verhalten und Fähigkeiten:** Er tarnt sich am Rand des Wegs. Bei Annäherung leuchten seine Augen auf und dünne Wurzeln schieben sich sichtbar über einen kurzen Abschnitt des Pfads. Wer darauf stehen bleibt, wird für etwa eine Sekunde festgehalten. Die Wurzeln lösen sich von selbst und der Hauptweg bleibt passierbar.
+**Verhalten und Fähigkeiten:** Er tarnt sich am Rand des Wegs. Bei Annäherung leuchten seine Augen auf und dünne Wurzeln schieben sich sichtbar über einen kurzen Abschnitt des Pfads. Wer darauf stehen bleibt, wird für etwa eine Sekunde festgehalten; die Falle verursacht keinen Herzschaden. Die Wurzeln lösen sich von selbst und der Hauptweg bleibt passierbar.
 
 **Gegenmaßnahme:** Die Wurzelbewegung abwarten, über nahe Steine gehen oder die Laterne kurz auf den Stumpf richten, damit er die Ranken einzieht.
 
@@ -146,9 +146,9 @@ Der Kampf ist direkt und leicht lesbar: Der Spieler weicht einem klar angekündi
 
 **Verhalten und Fähigkeiten:** Er bewacht eine Harzbeere-Lichtung. Vor dem Stampfen leuchtet eine Platte an seinem Körper auf. Der Stampf erzeugt einen sichtbaren, nach außen wandernden Erdstoßring. Danach wirft er drei kleine Harzklumpen in markierte Bereiche; dort klebt der Boden kurz, verlangsamt aber niemanden dauerhaft. Nach dieser Folge ruht er mehrere Sekunden.
 
-**Gegenmaßnahme:** Über den Erdstoßring springen oder durch eine freie Lücke laufen, Harzflächen umgehen und die Ruhepause nutzen. Ein stärkender Trank kann ihn beruhigen, ist aber nicht erforderlich, um an ihm vorbeizukommen.
+**Gegenmaßnahme:** Über den Erdstoßring springen oder durch eine freie Lücke laufen, Harzflächen umgehen und die Ruhepause nutzen. Zum Vorbeigehen ist kein Trank erforderlich.
 
-**Drop für die Alchemie:** **Bernsteintropfen** für das **Bernsteinschutzelixier** (Bernsteintropfen + Harzbeere); es schützt einmal vor einem Erdstoß oder Rückstoß.
+**Drop für die Alchemie:** **Bernsteintropfen** für das **Bernsteinschutzelixier** (Bernsteintropfen + Harzbeere); es blockt gezielt den nächsten Erdstoß, normale Treffer bleiben davon unberührt.
 
 ## Gegnerübersicht
 
@@ -159,8 +159,8 @@ Der Kampf ist direkt und leicht lesbar: Der Spieler weicht einem klar angekündi
 | Alter Torfstich | Moorwühler | Torfpanzerflocke | Standtrank: schützt kurz vor Rückstoß. |
 | Alter Torfstich | Irrlicht | Irrlichtfunke | Weglichtserum: zeigt falsche Lichter und verborgene Sammelstellen. |
 | Quellsenke | Blasenkröte | Blasenschleim | Trittsicherer Sud: schützt kurz vor Ausrutschen. |
-| Quellsenke | Quellwächter | Quellsteinsplitter | Quellschutztrank: fängt den nächsten Rückstoß ab. |
+| Quellsenke | Quellwächter | Quellsteinsplitter | Quellschutztrank: blockt den nächsten gegnerischen Treffer. |
 | Nebelhain | Nebelkrähe | Nebeldaune | Nebelklärtrank: Flüsterpilz und Irrlichtstaub lichten kurz den Nebel. |
 | Nebelhain | Wurzelhocker | Leuchtsporen | Ruhepoltrank: schützt kurz vor festhaltenden Wurzeln. |
 | Versunkener Wurzelhain | Rankenläufer | Rankensaft | Rankengangbalsam: verhindert kurz das Verlangsamen durch Ranken. |
-| Versunkener Wurzelhain | Bernsteinwächter | Bernsteintropfen | Bernsteinschutzelixier: schützt einmal vor Erdstoß oder Rückstoß. |
+| Versunkener Wurzelhain | Bernsteinwächter | Bernsteintropfen | Bernsteinschutzelixier: blockt den nächsten Erdstoß. |

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/schilfufer.gd" id="1_map"]
 [ext_resource type="Script" path="res://scripts/herb_pickup.gd" id="2_herb"]
 [ext_resource type="Texture2D" path="res://assets/sprites/herb_pickups_ai_20261001.png" id="3_herbs"]
 [ext_resource type="Script" path="res://scripts/map_transition.gd" id="4_transition"]
+[ext_resource type="Script" path="res://scripts/terrain_base_layer.gd" id="5_terrain"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_herb"]
 radius = 6.0
@@ -13,6 +14,11 @@ radius = 18.0
 
 [node name="Schilfufer" type="Node2D"]
 script = ExtResource("1_map")
+
+[node name="TerrainBase" type="TileMapLayer" parent="."]
+z_index = -1
+script = ExtResource("5_terrain")
+terrain_profile = 1
 
 [node name="SumpfminzeSchilfufer" type="Area2D" parent="."]
 position = Vector2(136, 178)

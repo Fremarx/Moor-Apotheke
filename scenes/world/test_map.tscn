@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://scripts/test_map.gd" id="1_map"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="2_interactable"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/villagers_ai_20261001.png" id="11_villagers"]
 [ext_resource type="Texture2D" path="res://assets/sprites/herb_pickups_ai_20261001.png" id="12_herbs"]
 [ext_resource type="Script" path="res://scripts/map_transition.gd" id="13_transition"]
+[ext_resource type="Script" path="res://scripts/terrain_base_layer.gd" id="14_terrain"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_interaction_probe"]
 radius = 6.0
@@ -52,6 +53,11 @@ radius = 9.0
 
 [node name="TestMap" type="Node2D"]
 script = ExtResource("1_map")
+
+[node name="TerrainBase" type="TileMapLayer" parent="."]
+z_index = -1
+script = ExtResource("14_terrain")
+terrain_profile = 0
 
 [node name="Braukessel" type="Area2D" parent="."]
 position = Vector2(110, 184)
