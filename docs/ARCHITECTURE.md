@@ -42,7 +42,7 @@ Main (Node2D, main.gd)
         └── Content (VBoxContainer: Bewohneraufträge, Status und Aktionen)
 ~~~
 
-`TestMap` zeichnet die provisorische Moorfläche und stellt Begrenzungen sowie einige blockierte Stellen bereit. `Player` liest die benannten Richtungsaktionen aus der Input Map, bewegt sich als `CharacterBody2D` und führt die Kamera mit Kartengrenzen. Die Figuren- und Kartengrafik besteht bis zur Grafikphase aus einfachen gezeichneten Farbblöcken.
+TestMap zeichnet die provisorische Moorfläche und stellt Begrenzungen sowie blockierte Stellen bereit. Player liest die benannten Richtungsaktionen aus der Input Map, bewegt sich als CharacterBody2D und führt die Kamera mit Kartengrenzen. Karte, Spieler, Stationen, Bewohner und Sammelpflanzen verwenden ihre Pixelart-Grafiken als getrennte Atlaszellen; VIS-003 ergänzt die neun Weltobjekte über Sprite2D-Kinder, während Interaktions- und Save-Skripte weiterhin die Spiellogik verwalten.
 
 CORE-002 ergänzt eine wiederverwendbare Area2D-Interaktionsfläche am Player. Interaktive Ziele tragen die Gruppe `interactables` und stellen Hinweistext sowie `interact()` bereit. Der Player wählt das räumlich nächste Ziel und meldet Hinweis bzw. Ergebnis über Signale. Main verbindet diese Signale mit dem HUD; das Objekt führt seine eigene Aktion aus. Ein Autoload ist dafür nicht erforderlich.
 
@@ -139,7 +139,7 @@ Aufträge werden am Brett angenommen und weiterhin direkt bei Fenja, Marten oder
 
 ## Grafik und Eingaben
 - Pixelmaßstab: 16-Pixel-Kacheln, Viewport 480 × 270 und scharfe Darstellung als Startwerte.
-- Erster Build verwendet Platzhaltergrafik.
+- Der Spielstand verwendet Pixelart-Atlanten für Moor, Spieler, Stationen, Bewohner und Sammelpflanzen; weitere Inhalte können zunächst Platzhaltergrafik nutzen.
 - Bildgenerator-Ausgaben werden auf Transparenz, Raster, Anschlüsse und Lesbarkeit geprüft.
 - Fremde Assets benötigen Herkunft und Lizenzangabe; Prompts finaler eigener Bilder werden gespeichert.
 - Benannte Aktionen: move_left/right/up/down, interact, inventory, save_game, load_game. Die Belegung wird nicht in Gameplay-Skripte eingebrannt.
@@ -151,12 +151,12 @@ Aufträge werden am Brett angenommen und weiterhin direkt bei Fenja, Marten oder
 - Keine Konten oder Secrets; fremde Add-ons und Assets prüfen.
 
 ## Bekannte Einschränkungen
-- Trockengestell, Braukessel sowie Fenja, Marten und Lene sind vorläufig direkt in der Testkarte gezeichnet; eigenständige Szenen, Produktionszeiten und Animationen, finale Pixelgrafik und Exportprofile fehlen noch.
+- Trockengestell, Braukessel, Auftragsbrett, Fenja, Marten, Lene und drei Sammelpflanzen verwenden Sprite2D-Atlaszellen in der Testkarte; eigenständige Szenen, Produktionszeiten und Animationen sowie Exportprofile fehlen noch.
 - Das Spiel liegt eigenständig in `Fremarx/Moor-Apotheke`. Eine spätere Zusammenführung mit dem früher verwendeten 2DGame-Repo wäre eine eigene Migrationsentscheidung.
 
 ## Engine-Dokumentation
 ECON-001 nutzt das bestehende Inventaränderungssignal, um CoinCount zu aktualisieren; die verwendete Signal- und Label-API ist in der versionierten [Signal-Referenz](https://docs.godotengine.org/en/4.7/classes/class_signal.html) und [Label-Referenz](https://docs.godotengine.org/en/4.7/classes/class_label.html) dokumentiert. Es kommt keine neue Engine-API hinzu.
-Das Auftragsbrett nutzt vorläufige Pixelzeichnung und ein textbasiertes HUD; die visuelle Prüfung im Spielmaßstab steht noch aus.
+Das Auftragsbrett nutzt den VIS-003-Atlasframe und ein textbasiertes HUD. Die Szene wurde bei 480 × 270 gerendert; Bewegung, HUD-Führung und echte Tastatureingabe bleiben manuell zu prüfen.
 
 Versionierte Quellen stehen in docs/KNOWLEDGE_BASE.md. Für CORE-001 wurden [2D-Bewegung](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html), [CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) und [Input-Beispiele](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) verwendet. Weitere Quellen betreffen Szenenorganisation, TileSets und Resources.
 

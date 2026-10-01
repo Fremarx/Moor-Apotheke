@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/test_map.gd" id="1_map"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="2_interactable"]
@@ -9,6 +9,9 @@
 [ext_resource type="Script" path="res://scripts/marten.gd" id="7_marten"]
 [ext_resource type="Script" path="res://scripts/lene.gd" id="8_lene"]
 [ext_resource type="Script" path="res://scripts/quest_board.gd" id="9_quest_board"]
+[ext_resource type="Texture2D" path="res://assets/sprites/workstations_ai_20261001.png" id="10_workstations"]
+[ext_resource type="Texture2D" path="res://assets/sprites/villagers_ai_20261001.png" id="11_villagers"]
+[ext_resource type="Texture2D" path="res://assets/sprites/herb_pickups_ai_20261001.png" id="12_herbs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_interaction_probe"]
 radius = 6.0
@@ -51,6 +54,13 @@ script = ExtResource("5_brewing_cauldron")
 display_name = "Beruhigungstee"
 action_verb = "Brauen"
 
+[node name="Visual" type="Sprite2D" parent="Braukessel"]
+texture = ExtResource("10_workstations")
+hframes = 3
+frame = 1
+position = Vector2(0, -6)
+scale = Vector2(0.06, 0.06)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Braukessel"]
 shape = SubResource("CircleShape2D_brewing_cauldron")
 
@@ -61,6 +71,13 @@ collision_mask = 0
 script = ExtResource("6_fenja")
 display_name = "Fenja"
 action_verb = "Sprechen"
+
+[node name="Visual" type="Sprite2D" parent="Fenja"]
+texture = ExtResource("11_villagers")
+hframes = 3
+frame = 0
+position = Vector2(0, 0)
+scale = Vector2(0.055, 0.055)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fenja"]
 shape = SubResource("CircleShape2D_fenja")
@@ -73,6 +90,13 @@ script = ExtResource("7_marten")
 display_name = "Marten"
 action_verb = "Sprechen"
 
+[node name="Visual" type="Sprite2D" parent="Marten"]
+texture = ExtResource("11_villagers")
+hframes = 3
+frame = 1
+position = Vector2(0, 0)
+scale = Vector2(0.055, 0.055)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marten"]
 shape = SubResource("CircleShape2D_marten")
 
@@ -83,6 +107,13 @@ collision_mask = 0
 script = ExtResource("8_lene")
 display_name = "Lene"
 action_verb = "Sprechen"
+
+[node name="Visual" type="Sprite2D" parent="Lene"]
+texture = ExtResource("11_villagers")
+hframes = 3
+frame = 2
+position = Vector2(0, 0)
+scale = Vector2(0.055, 0.055)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lene"]
 shape = SubResource("CircleShape2D_lene")
@@ -95,6 +126,13 @@ collision_mask = 0
 script = ExtResource("9_quest_board")
 display_name = "Auftragsbrett"
 action_verb = "Ansehen"
+
+[node name="Visual" type="Sprite2D" parent="QuestBoard"]
+texture = ExtResource("10_workstations")
+hframes = 3
+frame = 2
+position = Vector2(0, -6)
+scale = Vector2(0.06, 0.06)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestBoard"]
 shape = SubResource("CircleShape2D_quest_board")
@@ -122,6 +160,13 @@ feedback_text = "Du sammelst eine Sumpfminze."
 item_id = "sump_mint"
 pickup_id = "sump_mint_patch"
 
+[node name="Visual" type="Sprite2D" parent="Sumpfminze"]
+texture = ExtResource("12_herbs")
+hframes = 3
+frame = 0
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sumpfminze"]
 shape = SubResource("CircleShape2D_sumpfminze")
 
@@ -135,6 +180,13 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Schilfwurzel."
 item_id = "reed_root"
 pickup_id = "reed_root_patch"
+
+[node name="Visual" type="Sprite2D" parent="Schilfwurzel"]
+texture = ExtResource("12_herbs")
+hframes = 3
+frame = 1
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Schilfwurzel"]
 shape = SubResource("CircleShape2D_schilfwurzel")
@@ -150,6 +202,13 @@ feedback_text = "Du sammelst Nachtmoos am schattigen Torfsteg."
 item_id = "night_moss"
 pickup_id = "night_moss_patch"
 
+[node name="Visual" type="Sprite2D" parent="Nachtmoos"]
+texture = ExtResource("12_herbs")
+hframes = 3
+frame = 2
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Nachtmoos"]
 shape = SubResource("CircleShape2D_nachtmoos")
 
@@ -160,6 +219,13 @@ collision_mask = 0
 script = ExtResource("4_drying_rack")
 display_name = "Trockengestell"
 action_verb = "Trocknen"
+
+[node name="Visual" type="Sprite2D" parent="Trockengestell"]
+texture = ExtResource("10_workstations")
+hframes = 3
+frame = 0
+position = Vector2(0, -6)
+scale = Vector2(0.06, 0.06)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trockengestell"]
 shape = SubResource("CircleShape2D_drying_rack")

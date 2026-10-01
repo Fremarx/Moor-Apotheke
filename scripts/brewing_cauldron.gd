@@ -62,17 +62,3 @@ func _is_recipe_unlocked(recipe: Resource) -> bool:
 	if required_quest_id.is_empty():
 		return true
 	return str(_quest_states.get(required_quest_id, "")) == str(recipe.get("required_quest_state"))
-
-
-func _draw() -> void:
-	draw_rect(Rect2(Vector2(-14, 5), Vector2(28, 4)), Color("46513d"))
-	draw_line(Vector2(-10, 1), Vector2(-12, 7), Color("654d37"), 2.0)
-	draw_line(Vector2(10, 1), Vector2(12, 7), Color("654d37"), 2.0)
-	draw_rect(Rect2(Vector2(-11, -5), Vector2(22, 12)), Color("405b54"))
-	draw_rect(Rect2(Vector2(-12, -7), Vector2(24, 3)), Color("806448"))
-	draw_line(Vector2(-13, -5), Vector2(-16, -2), Color("806448"), 3.0)
-	draw_line(Vector2(13, -5), Vector2(16, -2), Color("806448"), 3.0)
-	draw_line(Vector2(-5, -9), Vector2(-7, -13), Color("a6a985"), 1.0)
-	draw_line(Vector2(3, -9), Vector2(4, -14), Color("a6a985"), 1.0)
-	draw_rect(Rect2(Vector2(-5, -2), Vector2(3, 2)), Color("839579"))
-	draw_rect(Rect2(Vector2(2, 1), Vector2(4, 2)), Color("a1ad85"))

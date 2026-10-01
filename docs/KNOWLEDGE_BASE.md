@@ -70,6 +70,9 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 
 - **01.10.2026 – VIS-002:** Die Godot-4.7-Sprite2D-Referenz beschreibt hframes und vframes als Spalten- und Zeilenanzahl eines Sprite-Sheets; frame_coords wählt eine Zelle, sobald mindestens eine Frame-Achse größer als eins ist. Der Spieler verwendet diese eingebaute Zellauswahl für vier getrennte Ansichten und behält im Skript die letzte Richtung im Leerlauf. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).
 
+## VIS-003 – Sprite-Atlanten für Weltobjekte
+Stationen, Bewohner und Sammelpflanzen liegen jeweils in einem horizontalen 3-Zellen-Atlas. Godots Sprite2D nutzt hframes = 3 und frame = 0, 1 oder 2 zur Zellwahl. Die Grafik bleibt ein Sprite2D-Kind ihrer Interaktionsobjekte; Sichtbarkeit und Kollision der Sammelstelle bleiben in der vorhandenen Gameplay-Logik. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).
+
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.
 - API-Details vor der Implementierung gegen die passende 4.7-Seite prüfen.

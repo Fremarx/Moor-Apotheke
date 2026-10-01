@@ -183,3 +183,10 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Kein Testframework wird vor dem Bedarf einer eigenständigen Spielregel ergänzt.
 - Kein CI-Workflow ist eingerichtet. Nach stabiler Projektstruktur neu bewerten, ob Headless-Import/Smoke-Start automatisiert werden soll.
 - Erfolgreicher Editorstart ist kein Nachweis für korrekte Spielregeln oder gute Spielbarkeit.
+
+## VIS-003 – Grafikatlanten für Weltobjekte
+- tests/vis_003_visual_atlas_test.gd prüft alle neun Sprite2D-Zuordnungen zu den drei 3-Zellen-Atlanten sowie das Ausblenden eines gesammelten Pflanzen-Sprites.
+- Godot-4.7.2-Editorimport einschließlich Reimport des korrigierten Stationenatlas, alle 19 Headless-Tests und ein 60-Frame-Startlauf bestanden.
+- Die Hauptszene wurde mit GL Compatibility gerendert und bei 480 × 270 auf Lesbarkeit, Zellzuschnitt und Stil geprüft. Das Trockengestell hält 76 Pixel Abstand zur Zellgrenze; die nächste Grafik beginnt 92 Pixel innerhalb der Nachbarzelle.
+- Codeprüfung bestätigt unveränderte Interaktionslogik, Weltpositionen, Kollisionsradien, Inventar, Quests und Speicherverhalten.
+- Offen: WASD-/Pfeiltasten, Kollisionen und HUD-Führung noch im sichtbaren Godot-Fenster manuell prüfen.

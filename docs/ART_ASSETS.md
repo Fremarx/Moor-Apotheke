@@ -63,3 +63,80 @@ Make a precise cleanup pass on this 4-by-4 pixel-art sprite atlas. Preserve exac
 Changes required: (1) shrink each sprite so it occupies no more than the centered 65 percent of its own cell, leaving a wide empty transparent safety margin on all four sides; no blade, leaf, shadow, or pixel may touch or cross a cell edge. (2) remove any bright red, pink, orange, white, or yellow fringe around silhouettes. Use only natural dark green/brown outline pixels that belong to the sprite; no external glow or colored rim. Keep the art as clean, flat, readable 16-bit pixel art with a small deliberate palette, not 3D or voxel art.
 Do not add or remove subjects. No cell dividers, no text, no labels, no background fill, no neighboring shadows.
 </pre>
+
+## VIS-003 – Stationen, Bewohner und Sammelpflanzen
+
+Alle drei PNG-Dateien sind transparente Atlanten mit 2172 × 724 Pixeln und drei Zellen à 724 × 724 Pixel. Sie wurden mit dem integrierten OpenAI Imagegen in Codex erstellt; es wurden keine Fremdassets eingebunden. Die Mockups dienten nur als Stil- und Farbhinweis.
+
+| Datei | Zellen von links nach rechts | Spielverwendung |
+| --- | --- | --- |
+| assets/sprites/workstations_ai_20261001.png | Trockengestell, Braukessel, Auftragsbrett | Drei Sprite2D-Frames; bestehende Interaktionen bleiben. |
+| assets/sprites/villagers_ai_20261001.png | Fenja, Marten, Lene | Drei Sprite2D-Frames an den bestehenden Bewohnern. |
+| assets/sprites/herb_pickups_ai_20261001.png | Sumpfminze, Schilfwurzel, Nachtmoos | Drei Sprite2D-Frames; Pickup-Logik steuert Sichtbarkeit. |
+
+Der korrigierte Stationenatlas wurde auf Zellrandabstand geprüft: Das Trockengestell endet 76 Pixel vor der Trennkante; die nächste Grafik beginnt 92 Pixel innerhalb der zweiten Zelle. Godot verwendet Nearest-Filterung.
+
+### Finaler Prompt – Stationen
+
+<pre>
+Use case: stylized-concept
+Asset type: transparent 3-cell horizontal pixel-art sprite atlas for a cozy Godot top-down game, Moor-Apotheke
+Input images: Image 1 is the approved player sprite, use only for pixel-art rendering style and warm outline treatment. Image 2 is the approved moor vegetation atlas, use only for its moss, peat, reed, and dusk palette. Do not copy any subject from either image.
+Primary request: Create exactly three distinct, readable game props in a single horizontal 3-cell atlas, one centered object per equal-width cell, with transparent background and no visible cell dividers.
+Scene/backdrop: no backdrop or ground plane; isolated props on transparency.
+Subject: Cell 1, a small sturdy wooden drying rack with crossbar, two hanging bunches of mint and reed herbs, and little cloth ties. Cell 2, a compact dark iron herbal cauldron on a simple peat-brick stand, with a copper rim and two tiny warm reflected highlights. Cell 3, a weathered timber village request board on two short posts, holding several pale parchment notes with simple tiny herb marks, absolutely no readable writing.
+Style/medium: handcrafted crisp 16-bit pixel art, deliberate blocky pixel clusters, hard pixel edges, limited palette, dark moss-brown outlines, richly textured wood, iron, peat and paper, matching the references' polished but compact sprite art.
+Composition/framing: front-facing props from a slightly elevated top-down game viewpoint, like the references; same visual scale and ground baseline, isolated per cell, generous transparent padding, no overlap across cell boundaries. Keep silhouettes distinctive and readable when each cell is displayed about 32–42 game pixels tall.
+Lighting/mood: soft warm late-evening highlights, calm and cozy.
+Color palette: peat brown, weathered honey wood, charcoal iron, muted copper, sage green, mint, parchment cream; harmonize with both references.
+Materials/textures: individual pixel clusters for wood grain, tied herbs, iron bands, paper corners; avoid smooth gradients.
+Constraints: actual transparent alpha background, exactly 3 equal cells in one row, no text, no labels, no scenery, no characters, no shadow extending into another cell, all props fully inside their cell.
+Avoid: photorealism, 3D rendering, blur, anti-aliased edges, glows, shiny modern metal, overly ornate fantasy machinery, UI frame, watermark, cast shadows outside each prop.
+</pre>
+
+### Finaler Prompt – Bewohner
+
+<pre>
+Use case: stylized-concept
+Asset type: transparent 3-cell horizontal atlas of front-facing stationary villager sprites for a cozy Godot top-down game, Moor-Apotheke
+Input images: Image 1 is the approved player character; use only as the scale, pixel-art craft, outline, and warm dusk style reference. Image 2 is the approved moor vegetation atlas; use only for the moss, peat, sage and muted flower palette. Do not copy its subjects.
+Primary request: Draw exactly three distinct friendly village residents as small full-body game sprites, one centered in each equal-width cell of one 3-cell horizontal atlas.
+Scene/backdrop: none, genuinely transparent background.
+Subject: Cell 1 Fenja, a practical village herbalist with chestnut-brown hair, a moss-green bonnet, sage-green work dress and warm cream scarf/apron detail. Cell 2 Marten, a sturdy peat gatherer with a weathered brown cap, earth-brown work coat, dark green accents, and one small simple hand shovel held at his side. Cell 3 Lene, an elderly healer with softly silver-gray hair, a pale sage shawl, layered deep teal dress, and one tiny leafy brooch. Keep each character recognizable through silhouette and two or three large color shapes, with kind understated expressions.
+Style/medium: polished hand-crafted 16-bit pixel art, visible deliberate pixel clusters, hard crisp pixel edges, the same thick dark outline, warm shaded highlights and restrained detail as the references; match their small readable sprite scale.
+Composition/framing: straight-on front-facing idle standing poses, same body proportions and height, feet on one shared baseline, full bodies visible, centered in separate equal square-like cells, generous transparent padding, no touching adjacent cells. Readable at about 28–32 game pixels tall.
+Lighting/mood: warm late-evening highlights, calm welcoming village.
+Color palette: moss green, peat brown, amber, sage, cream, muted teal and chestnut; clearly distinguish the three residents while harmonizing with the references.
+Materials/textures: discrete pixel clusters in cloth, hair and leather; simple folded fabric, no soft gradients.
+Constraints: actual transparent alpha, exactly 3 cells in one row, no names, no labels, no scenery, no extra items except Marten's small shovel, no cell dividers, no cropping, subtle compact foot shadows only.
+Avoid: 3D, photorealism, painterly blur, anti-aliased edges, complex anatomy, oversized heads, shiny armor, hats obscuring faces, large handheld objects, glows, text, watermark, ground tiles.
+</pre>
+
+### Finaler Prompt – Sammelpflanzen
+
+<pre>
+Use case: stylized-concept
+Asset type: transparent 3-cell horizontal atlas of collectible herb sprites for a cozy Godot top-down game, Moor-Apotheke
+Input images: Image 1 is the approved moor vegetation atlas, use its pixel-art craft, foliage shapes, dark outlines, and warm wetland palette. Image 2 is the approved player, use only as a scale and rendering-style reference. Do not copy their subjects.
+Primary request: Create exactly three distinctive collectible medicinal plants as isolated game sprites, one centered in each equal-width cell of a single horizontal 3-cell atlas.
+Scene/backdrop: none; real transparent background, no ground tile.
+Subject: Cell 1 Sumpfminze, a low but lush cluster of broad mint leaves with a few small mint blossoms, unmistakably leafy rather than a generic flower. Cell 2 Schilfwurzel, three narrow upright reed blades and two warm ochre exposed root segments crossing the base, so both reed and root are visible. Cell 3 Nachtmoos, a compact low cushion of deep blue-green bog moss with tiny pale sage dew flecks and one or two small muted purple buds; quiet and rare, no magical glow.
+Style/medium: crisp hand-crafted 16-bit pixel art, intentional blocky clusters, hard clean pixel edges, thick dark moss-brown outlines, rich but restrained natural shading, matching the approved moor atlas.
+Composition/framing: top-down game sprite viewed at the same slightly elevated angle as the reference plants; centered, compact silhouettes on a shared baseline; all leaves/roots fully inside their cell with generous transparent padding. Distinct forms must read when displayed around 20–24 game pixels tall.
+Lighting/mood: late-evening warm rim light with soft local highlights, damp and cozy.
+Color palette: moss, sage, fern green, muted mint, peat brown and ochre root; night moss adds restrained cool teal and a few plum pixels.
+Materials/textures: pixel clusters, no smooth gradients, clear leaf veins using only a few readable pixel groups.
+Constraints: genuine transparent alpha background, exactly 3 equal cells in one row, one plant species per cell, no labels, no text, no frame, no overlapping or crossing cell boundaries, no scenery, no extra flowers except specified blossoms/buds.
+Avoid: photorealism, 3D, painterly softness, anti-aliasing, glow, sparkles, water, pots, picked bouquets, repeated identical plants, watermark.
+</pre>
+
+### Gezielter Korrekturprompt – Zellabstand Stationen
+
+<pre>
+Use case: precise-object-edit
+Asset type: transparent horizontal 3-cell pixel-art atlas for Godot, preserving the existing Moor-Apotheke station sprites
+Input image: Image 1 is the exact atlas to edit. Preserve its three-column single-row layout, pixel-art style, palette, subjects, and overall canvas dimensions.
+Primary request: Fix only the first cell's drying-rack fit. Reduce the drying rack and both hanging herb bundles together by about 10 percent and center them in the first 724-by-724-pixel cell, leaving a clearly transparent margin of at least 48 pixels from every cell edge. Ensure no rack wood, foliage, tie, highlight, shadow, or fringe crosses x=723 into the second cell.
+Constraints: Keep the cauldron unchanged and centered in the second cell. Keep the request board unchanged and centered in the third cell. Preserve actual transparency, 3 equal square cells, current cell order, and the established crisp 16-bit pixel style. Do not alter colors, add or remove subjects, add dividers, or change any detail except the size and placement of the first-cell rack needed to create safe padding.
+Avoid: changing the canvas layout or dimensions, moving the cauldron or board, style drift, blur, anti-aliasing, black cell backgrounds, text, labels, watermark.
+</pre>
