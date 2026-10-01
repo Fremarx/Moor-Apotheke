@@ -193,7 +193,9 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - Den Ausschnitt wiederholt spielen und unnötige Schritte kürzen.
 - Danach entscheiden, ob als Nächstes Jahreszeiten, neue Moorbereiche oder erste Automatisierung folgen.
 
-**Fertig, wenn:** Die Kernschleife verständlich und unterhaltsam genug ist, um gezielt erweitert zu werden.
+**PLAYTEST-001 Ergebnis:** Fenjas erster Auftrag wurde im Godot-Viewport von Annahme bis Belohnung durchgespielt; Bewegung läuft durch Physikframes, Interaktionen über simulierte Eingabeereignisse. Die vollständige Questreihe ist aus einem frischen Spielstand noch nicht machbar: Die Karte hat je eine einmalige Sumpfminze- und Schilfwurzelstelle, die Rezepte brauchen davon je zwei. Physische Tastatur und subjektives Spielgefühl bleiben offen.
+
+**Fertig, wenn:** Die Kernschleife verständlich und unterhaltsam genug ist, um gezielt erweitert zu werden; die subjektive Spielspaßbewertung erfolgt durch einen menschlichen Spieltest.
 
 ## 8. Technische Leitplanken
 
@@ -211,8 +213,8 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - **Schwerpunkt:** Für den Anfang ist eine Mischung aus Erkunden, Aufträgen und einfacher Verarbeitung vorgesehen; Automatisierung kommt später.
 - **Spieltempo:** Der erste Ausschnitt bleibt ohne Zeitdruck. Jahreszeiten können später die Fundorte und Rezepte verändern.
 - **Geschichte und Ton:** Noch offen; Vorschlag ist märchenhaft und gemütlich, mit etwas geheimnisvoller Moorstimmung.
-- **Nächster Ausbau:** VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen an den warmen Moor-Pixelstil angepasst. REL-001 richtet den Windows-x86_64-Testexport ein. PLAY-001 hat HUD, Bewegungsrichtungen und Kollisionen geprüft. Als Nächstes wird der Kernablauf samt Inventar im sichtbaren Godot-Fenster durchgespielt und der weitere Ausbau anhand des Spielgefühls priorisiert.
+- **Nächster Ausbau:** Erst RESOURCE-001 – die Kräutermengen für die vollständige Questkette ergänzen und alle drei Aufträge aus einem neuen Spielstand end-to-end prüfen. Danach folgt ein neues Moorgebiet; Jahreszeiten und Automatisierung werden später anhand deines Spieltests neu bewertet.
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen mit transparenten Pixelart-Atlanten gestaltet. Die Hauptszene wurde bei 480 × 270 geprüft; Spiellogik, Positionen und Kollisionsflächen blieben unverändert. REL-001 hat Windows Desktop x86_64 als erstes Exportziel eingerichtet. PLAY-001 hat die HUD-Lesbarkeit verbessert und Bewegungsrichtungen sowie Kollisionen im Godot-Viewport geprüft. INV-001 ergänzt das kategorisierte Inventarfenster mit I und pausiert die Spielfigur; die sichtbare Prüfung mit echter Tastatur folgt im manuellen Spieltest.
+PLAYTEST-001 hat Fenjas Auftrag von der Annahme bis zur Münzbelohnung im 480 × 270 Godot-Viewport durchgespielt und das Inventar sichtbar geprüft. Als Nächstes folgt RESOURCE-001: zusätzliche Sumpfminze- und Schilfwurzelstellen bereitstellen, damit die Zutaten für Fenja, Marten und Lene im frischen Spielstand ausreichen. Echte Tastatur und subjektives Spielgefühl bleiben für den manuellen Spieltest offen.

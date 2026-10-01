@@ -8,13 +8,13 @@ Stand: 01.10.2026
 Phase 8 – Release-Vorbereitung
 
 ### Zuletzt bearbeiteter Task
-INV-001 – Kategorisiertes Inventarfenster mit Taste I.
+PLAYTEST-001 – Fenja-Kernschleife im Godot-Viewport geprüft.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE; PLAYTEST-001 DONE.
 
 ### Fortschritt
-Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. INV-001 verlagert die Bestandsübersicht in ein kategorisiertes Fenster mit Taste I. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen.
+Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; PLAYTEST-001 zeigt aber, dass der komplette Dreierablauf aus einem neuen Spielstand noch nicht versorgbar ist: Für Fenja und Marten werden zwei Sumpfminzen, für Marten und Lene zwei Schilfwurzeln benötigt, auf der Karte gibt es jeweils nur eine einmalig sammelbare Stelle. Drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. INV-001 verlagert die Bestandsübersicht in ein kategorisiertes Fenster mit Taste I. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -43,12 +43,13 @@ Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanze
 - **REL-001:** Windows-x86_64-Exportprofil und Release-Checkliste einrichten; passende Vorlagen lokal installiert; Release-EXE exportiert und gestartet.
 - **PLAY-001:** HUD-Hintergründe ergänzen; Richtungsbewegung und Karten-/Hinderniskollisionen prüfen; Spielansicht bei 480 × 270 gerendert.
 - **INV-001:** Kategorisiertes Inventarfenster mit Taste I, live aktualisierten Beständen, Escape-/Schließen-Option und pausierter Welt.
+- **PLAYTEST-001:** Fenjas Kernschleife mit Bewegung, Sammeln, Trocknen, Brauen, Abgabe und Inventar im Godot-Viewport durchgespielt; Ressourcenknappheit der Folgeaufträge ermittelt.
 
 ### Als Nächstes
-PLAYTEST-001 – Kernablauf samt Inventar im sichtbaren Godot-Fenster durchspielen und Ausbau anhand des Spielgefühls priorisieren.
+RESOURCE-001 – Genügend einmalig sammelbare Kräuter für alle drei Aufträge bereitstellen und die vollständige Questkette aus einem neuen Spielstand durchspielen.
 
 ### Blocker
-Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo Fremarx/Moor-Apotheke; abgeschlossene Backlogitems werden auf codex/moor-apotheke gepusht. Physische Tastatureingabe und subjektives Steuerungsgefühl bleiben als Spieltest offen.
+Technischer Blocker: Die drei Aufträge benötigen insgesamt zwei Sumpfminzen und zwei Schilfwurzeln; aktuell gibt es je nur eine einmalig sammelbare Stelle. Das Spiel liegt als eigenes öffentliches Repo Fremarx/Moor-Apotheke; abgeschlossene Backlogitems werden auf codex/moor-apotheke gepusht. Physische Tastatur und subjektives Spielgefühl bleiben für deinen manuellen Test offen.
 
 ### Offene Entscheidungen
 - Zielplattformen über Windows-Entwicklung hinaus werden nach dem ersten spielbaren Prototyp festgelegt.
@@ -164,7 +165,8 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | REL-001 | Windows-x86_64-Exportprofil und Release-Checkliste einrichten | P3 | stabile Kernschleife | DONE |
 | PLAY-001 | HUD-Lesbarkeit, Bewegungsrichtungen und Kollisionen im Godot-Viewport prüfen | P1 | VIS-003 | DONE |
 | INV-001 | Ein eigenes Inventarfenster mit Taste I öffnen und schließen | P1 | PLAY-001 | DONE |
-| PLAYTEST-001 | Kernablauf samt Inventar im sichtbaren Godot-Fenster durchspielen und Ausbau priorisieren | P1 | INV-001 | PLANNED |
+| PLAYTEST-001 | Fenjas Kernschleife, Viewport und nächste Ausbauschritte prüfen | P1 | INV-001 | DONE |
+| RESOURCE-001 | Genügend Kräuter für Fenja, Marten und Lene bereitstellen und Questkette end-to-end verifizieren | P1 | PLAYTEST-001 | PLANNED |
 
 ### CORE-002 Abnahmekriterien
 - Die Interaktion nutzt die benannte Aktion interact auf E.
@@ -322,6 +324,22 @@ Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten wede
 - Für den ersten Abschnitt dient das warme Abendmoor als Ausgangspunkt. Dämmerungs- und Frühlingsstimmungen werden als spätere Gebietsrichtungen vorgemerkt.
 - Jahreszeiten, zusätzliche Gebiete und Automatisierung werden nach Sichtprüfung des integrierten Grafikabschnitts erneut bewertet. Der manuelle Test im Godot-Fenster ist weiterhin offen; die Priorisierung behauptet nicht, dass die Graybox bereits als unterhaltsam bestätigt wurde.
 
+### PLAYTEST-001 Ergebnis – erledigt
+Der neue Integrationstest durchläuft Fenjas Auftrag im laufenden Godot-Viewport: Bewegung über physikalische Frames, Auftragsannahme am Brett, Minze sammeln, trocknen, Tee brauen, Fenja beliefern und anschließend das Inventar öffnen. Der Test isoliert den Spielstand unter `user://playtest_001_test_save.json`. `Input.action_press` bewegt die Figur über die echte Physik; E und I werden als simulierte Tastaturereignisse an die vorhandenen Handler gegeben. Das ist kein Test mit physischer Tastatur.
+
+Die gerenderte Hauptszene samt geöffnetem Inventar passt bei 480 × 270 in den Viewport. Zehn Inventarbestände und die Münzbelohnung sind sichtbar. Die visuelle Einschätzung ist eine Bildprüfung; Lesbarkeit und Steuerungsgefühl auf dem eigenen Bildschirm müssen noch von dir beurteilt werden.
+
+Der Ressourcen-Audit findet je eine nicht nachwachsende Sumpfminze-, Schilfwurzel- und Nachtmoosstelle. Die Rezepte der Questkette verbrauchen insgesamt zwei Sumpfminzen (Fenja und Marten), zwei Schilfwurzeln (Marten und Lene) und ein Nachtmoos (Lene). Deshalb lässt sich aus einem frischen Spielstand aktuell nur Fenjas Auftrag fertigstellen.
+
+| Nächste Option | Wirkung | Sicherheit | Aufwand | ICE |
+| --- | ---: | ---: | ---: | ---: |
+| RESOURCE-001: fehlende einmalige Kräuterstellen ergänzen und alle drei Aufträge spielbar machen | 5 | 5 | 2 | 12,5 |
+| Neues Moorgebiet mit weiterem Sammelziel | 4 | 3 | 4 | 3,0 |
+| Jahreszeiten und Nachwachsen | 3 | 2 | 4 | 1,5 |
+| Erste Automatisierung | 3 | 2 | 5 | 1,2 |
+
+Die ICE-Werte sind eine vorläufige Einschätzung nach dem reproduzierbaren Ressourcen-Audit, keine Aussage darüber, was sich für dich am unterhaltsamsten spielt.
+
 ### VIS-001 Abnahmekriterien – erledigt
 - Die 640 × 360-Testkarte zeigt bei 480 × 270 eine abgestimmte warme Moorpalette mit abwechslungsreichem Boden, lesbarem Teichufer und Torfweg.
 - Ein transparenter 4 × 4-Dekorationsatlas ergänzt Schilf, Farne, Blüten, Steine und Wasserlilien; die genaue Herkunft und die finalen Prompts stehen in docs/ART_ASSETS.md.
@@ -411,3 +429,4 @@ Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten wede
 | 01.10.2026 | REL-001: Windows-x86_64-Exportprofil, passende lokale Vorlagen, Exportdokumentation und Release-Checkliste ergänzt. |
 | 01.10.2026 | PLAY-001: HUD-Kontrast im Moor-Stil verbessert; vier Bewegungsrichtungen, Fels-/Teich-/Randkollisionen und 480 × 270-Spielansicht geprüft. |
 | 01.10.2026 | INV-001: Kräuter- und Heilmittelbestände in ein kategorisiertes Modal mit I/Escape und Live-Zählern verlagert; Spielersteuerung pausiert; Regressionen, Editorimport und Startlauf geprüft. |
+| 01.10.2026 | PLAYTEST-001: Fenjas komplette Kernschleife und Inventar im 480 × 270 Godot-Viewport geprüft; Ressourcen-Audit zeigt zu wenig Sumpfminze und Schilfwurzel für die Folgeaufträge. |

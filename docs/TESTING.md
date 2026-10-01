@@ -208,3 +208,11 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Der Test prüft außerdem die Verlagerung der detaillierten Bestände aus dem permanenten HUD, die Pause von Bewegung und Weltinteraktionen sowie den Schutz vor Überschneidung mit dem Auftragsbrett.
 - Alle 21 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
 - Offen: echte Tastatureingabe und Lesbarkeit im sichtbaren Spielfenster manuell prüfen.
+
+## PLAYTEST-001 – Fenjas Kernschleife im Godot-Viewport
+- `tests/playtest_001_core_loop_test.gd` bewegt die Figur über `Input.action_press()` und echte Physikframes vom Auftragsbrett zur Sammelstelle, zum Trockengestell, zum Braukessel und zu Fenja. E und I werden als simulierte Tastaturereignisse an die vorhandenen Handler gegeben.
+- Der Test nimmt Fenjas Auftrag an, sammelt Sumpfminze, trocknet sie, braut Beruhigungstee, liefert ihn ab und prüft Inventar, Queststatus sowie fünf Münzen. Ein eigener `user://playtest_001_test_save.json` wird vor und nach dem Lauf entfernt.
+- Ein optionaler CLI-Ausgabepfad rendert die geöffnete Inventaransicht im normalen Godot-Viewport als 480 × 270 PNG; die Aufnahme wartet bis `RenderingServer.frame_post_draw`.
+- Godot 4.7.2-Headless-Test und normaler GL-Viewportlauf bestanden. Alle 22 Headless-Tests, Editorimport und 60-Frame-Startlauf bestanden.
+- Ressourcen-Audit: Je eine einmalig sammelbare Stelle für Sumpfminze, Schilfwurzel und Nachtmoos. Die Questrezepte benötigen zwei Sumpfminzen, zwei Schilfwurzeln und ein Nachtmoos. Damit ist die Folgequestkette aus einem frischen Spielstand aktuell nicht vollständig spielbar.
+- Offen: echte Tastatur und subjektives Spielgefühl manuell prüfen.
