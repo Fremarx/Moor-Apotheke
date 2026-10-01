@@ -33,7 +33,7 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - MAP-01 ist abgeschlossen: Der bestehende TestMap-Knoten stellt logisch den Dorfplatz dar; Apotheke, Brett und Brunnen sind sichtbar. MAP-02 ergänzt fünf Richtungswege mit offenem NW-Übergang zum Schilfufer sowie vier sichtbar und physisch gesperrten Zukunftswegen. MAP-03 stellt einen gemeinsamen 16×16-Terrainatlas und ruhige Grundkacheln in beiden Karten bereit. Alle 26 Headless-Tests, Editorimport und 60-Frame-Start bestehen.
 - VIS-004 ersetzt das flach gezeichnete Apothekenmotiv und ergänzt passende größere Schilf- und Moosgruppen in beiden Startkarten; die Wege und Kollisionsflächen blieben unverändert.
 - Maßgebliche Entwurfsquellen: `design/world_design_plan.md`, `design/world_backlog.md`, `design/progression_roadmap.md`, `design/resource_economy.md`, `design/enemy_roster.md`, `design/agent_workflow.md` und `design/world_map_mockup.png`.
-- Nächster Schritt: SCALE-01 gemäß `design/world_backlog.md`; danach REG-01/REG-02. Jahreszeiten und Automatisierung bleiben nachrangig.
+- SCALE-01 ist abgeschlossen: `design/world_backlog.md` enthält für alle fünf Gebiete ein 5×4-Raster, den verbindlichen 4×3-Mindestkern und konkrete Routen, Fundstellen, Landmarken, optionale Begegnungen und Geheimnisse. Nächster Schritt sind REG-01 und REG-02; die aktuell gebauten 640×360-Karten bleiben Prototypen, bis die Großgebiete umgesetzt und vermessen sind.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
 ## Wissens- und Skillhinweise

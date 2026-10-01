@@ -14,7 +14,7 @@ Prioritäten: **P0** = erster spielbarer Ausbau, **P1** = nächste Erweiterung, 
 
 ## Maßstab als feste Vorgabe
 
-### SCALE-01: Große, inhaltsreiche Gebiete planen — P0
+### Größen- und Inhaltsvorgaben für SCALE-01
 
 - Die Weltkarte ist eine Übersicht; jedes Gebiet wird als eigenes, großes Areal gebaut.
 - Bei der geplanten Ansicht von 480×270 Pixeln mit 16×16-Kacheln entspricht ein Bildschirm etwa 30×17 Kacheln.
@@ -27,6 +27,138 @@ Prioritäten: **P0** = erster spielbarer Ausbau, **P1** = nächste Erweiterung, 
 - Spielzeit durch interessante Orte, Sammeln, Aufträge, Gegner, Geheimnisse und spätere Abkürzungen erzeugen; leere Laufstrecken zählen nicht als Inhalt.
 
 **Fertig, wenn:** Die beiden Startareale im ersten großen Spielmeilenstein die Mindestfläche und Inhaltsziele erfüllen; alle drei späteren Areale erfüllen sie vor ihrer Veröffentlichung. Mindestens drei Personen, die das Gebiet noch nicht kennen, spielen jeden fertiggestellten Erstbesuch; Medianzeit, besuchte Teilbereiche und verpasste Orte werden festgehalten. Bei zu kurzer Spielzeit werden Ziele, Routen und Fundorte ergänzt, keine leeren Laufwege. Für den Gesamtumfang werden Hauptpfad und optionale Erkundung getrennt ausgewertet.
+
+## SCALE-01 – Konkrete Flächenaufteilung der fünf Gebiete — P0
+
+**Status: DONE (Gebietslayout und Abnahmemethode geplant).** Die Szenen, TileMaps und Spielinhalte werden in REG-01 bis REG-05 gebaut; dieser Punkt vergrößert noch keine laufende Karte.
+
+### Gemeinsames Sektorraster
+
+Das Raster beschreibt die begehbaren Weg- und Lichtungsbereiche eines Gebiets, nicht dessen vollständige rechteckige TileMap. Norden liegt oben, Spalten A–E laufen von Westen nach Osten, Zeilen 1–4 von Norden nach Süden. Ein Sektor entspricht ungefähr einer 480×270-Ansicht beziehungsweise 30×17 Kacheln zusammenhängender Wege und freier Flächen. Wasser, Felswände, unpassierbare Dekoration und leere Ränder zählen nicht zur Mindestfläche; bei breiten Wasserbecken wird die Kartenbegrenzung so weit vergrößert, dass die begehbare Fläche trotzdem groß genug bleibt.
+
+Der Mindestkern umfasst zwölf Sektoren in einem 4×3-Block: ungefähr 120×51 begehbare 16×16-Kacheln (6.120 Kacheln). Das vollständige Planungsraster ist 5×4 Sektoren: ungefähr 150×68 Kacheln (10.200 Kacheln). Die acht übrigen Sektoren sind ein Ausbauziel, keine Pflicht, um ein Gebiet erstmals zu veröffentlichen. Die Kartenübersicht bleibt eine nicht maßstabsgetreue Wegkarte.
+
+In jedem Raster bezeichnet der wiederholte Buchstabe den vorherrschenden Teilbereich. Fundstellen und Objekte stehen zusätzlich in den Listen; mehrere Einträge im selben Sektor erhalten später eigene Kachelkoordinaten. Alle drei Sammelgruppen je Ressource sind getrennte, wieder auffindbare Patches mit mehreren Einzelpflanzen oder Fundstücken. Gegnerstellen liegen in optionalen Seitentaschen; ein sicherer Hauptweg führt an beiden vorbei.
+
+### 1. Schilfufer
+
+**Zugang:** nordwestlicher Dorfpfad; Eintritt am südöstlichen Rand bei E4. Sicherer Rückweg am selben Übergang, Rastpunkt bei der Uferbank E4.
+**Raster:** Kern B–E / Zeilen 2–4; A-Spalte und Zeile 1 erweitern die Uferroute.
+
+~~~text
+       A B C D E
+  1    F F F L L
+  2    F F L L U
+  3    S F L U U
+  4    S S U U U
+~~~
+
+U = Uferwiesen, L = Schilflabyrinth, F = Lichtung an der versunkenen Fähre, S = äußere Schilfschleife. Hauptroute: E4 → D4 → D3 → C3 → C2 → B2. Zwei Nebenwege: vom Labyrinth C2 zur Schnapper-Nische B3 und von den Uferwiesen D3 zur alten Schilfring-Lichtung C4. Der nordwestliche Fährenpfad bleibt ein weiterer, späterer Ausläufer.
+
+- **Drei Landmarken:** verwitterter Weidenbogen E3, dreifacher Schilfring C3, Fährenmast B2.
+- **Sammelgruppen:** Sumpfminze bei E4, C3 und B2; Schilfwurzel bei D4, C2 und B3.
+- **Optionale Begegnungen:** Schilfschnapper in D2 und seltener Mückenschwarm in E2; beide Nischen haben eine markierte, kampffreie Umgehung.
+- **Geheimnis/Nebenziel:** die drei versetzten Marksteine am Schilfring C4 in die richtige Reihenfolge bringen; das öffnet eine kleine, versteckte Kräuterlichtung.
+- **Abkürzung:** eine anfangs angehobene Fährenplanke verbindet C2 mit D4. Am Fährenmast B2 wird sie dauerhaft abgesenkt; anschließend ist sie von beiden Seiten nutzbar.
+- **Gebietsaufgabe:** Fenjas Einstieg führt zum beschilderten Minz- und Wurzelpatch und zur Herstellung des Beruhigungstees. Die Fährenmarksteine bleiben freiwillig.
+
+### 2. Alter Torfstich
+
+**Zugang:** östlicher Dorfpfad; Eintritt im Westen bei A2. Sicherer Rückweg und Rastpunkt am Werkzeugunterstand A2.
+**Raster:** Kern A–D / Zeilen 2–4; Zeile 1 und Spalte E bilden optionale Gruben- und Moorweg-Ausläufer.
+
+~~~text
+       A B C D E
+  1    T T G M M
+  2    T T G G M
+  3    G G G M M
+  4    T G G M M
+~~~
+
+T = Torfhof mit Werkzeugresten, G = verzweigte Grubenstege, M = alter Torfweg und Moosnischen. Hauptroute: A2 → B2 → B3 → C3 → D3 → D4. Zwei Nebenwege führen vom Grubensteg C3 zu einer sicheren Torfherz-Grube A3 und über D2 in eine optionale Moosnische. Der Rückweg bleibt auch ohne Abkürzung vollständig begehbar.
+
+- **Drei Landmarken:** Torfkran A2, gebrochene Wasserpumpe A4, moosbewachsenes Torftor D4.
+- **Sammelgruppen:** Nachtmoos bei D2, C3 und D4; Torfherz bei A3, B3 und C4. Torfherz liegt an sicheren Grubenrändern, nie auf einer Pflichtpassage.
+- **Optionale Begegnungen:** Moorwühler in C2 und Irrlicht in B4; Bodenwarnung und sichtbare Lücke zeigen den sicheren Bypass.
+- **Geheimnis/Nebenziel:** alte Messpfähle entlang B4–C4–D4 verfolgen, um einen verschütteten Arbeitssteg freizulegen.
+- **Abkürzung:** der Hebel am Torfkran A2 öffnet einen zurückführenden Steg zwischen A3 und D4. Der Steg bleibt danach offen.
+- **Gebietsaufgabe:** Lenes bestehende Nachtmoosbitte führt zum alten Torfweg. Als optionale lokale Aufgabe wird der sichere Rückweg für weitere Kräutersammler markiert.
+
+### 3. Quellsenke
+
+**Zugang:** nordöstlicher Dorfpfad; Eintritt nach Reparatur der Brücke im Südwesten bei A4. Rastpunkt auf der trockenen Uferterrasse A4.
+**Raster:** Kern A–D / Zeilen 2–4; Zeile 1 und Spalte E erweitern Wasserfall und Quellgrotte.
+
+~~~text
+       A B C D E
+  1    W W W Q Q
+  2    W W S G G
+  3    W S S G G
+  4    E U S G G
+~~~
+
+W = oberer Wasserfall, S = Seerosenteich und sichere Inselstege, G = Quellgrotte, U = trockene Uferwege. Hauptroute: A4 → B4 → B3 → C3 → C2 → D2. Zwei Nebenwege führen über den Westuferpfad A3 zu einem Aussichtspunkt und von C3 über D3 in eine optionale Grotte. Keine Ressource verlangt Schwimmen, Sprünge oder Kesselwasser aus der Quelle.
+
+- **Drei Landmarken:** Wasserfallkante A2, großer Seerosenkreis C3, Echohalle D2.
+- **Sammelgruppen:** Seerosenwurzel bei A3, B4 und C3; Quellperle bei C2, D3 und D4. Jede Quellperle ist eine einzelne seltene Fundstelle; die Erstentdeckung wird unabhängig vom Inventar dauerhaft notiert.
+- **Optionale Begegnungen:** Blasenkröte auf der Insel B2 und Quellwächter an einer Nebenbucht C4; beide können auf trockenen Uferwegen umgangen werden.
+- **Geheimnis/Nebenziel:** drei kleine Quellrinnen an der Grotte öffnen eine trockene Seitenkammer mit einer kurzen Erkundungsnotiz.
+- **Abkürzung:** ein Sperrschieber in D4 verbindet nach dem Öffnen den Grottenbogen D3 mit dem Uferweg B4 und schließt die Rundroute.
+- **Gebietsaufgabe:** eine Bitte aus der Quellsenke verbindet Seerosenwurzel mit dem Trittsicheren Sud; der Sperrschieber ist ein optionales Erkundungsziel.
+
+### 4. Nebelhain
+
+**Zugang:** südwestlicher Dorfpfad nach Lenes Nachttrank; Eintritt am nordöstlichen Rand bei E1. Rastpunkt am sichtbaren Weglicht E1.
+**Raster:** Kern B–E / Zeilen 1–3; A-Spalte und Zeile 4 bilden zusätzliche Nebelpfade.
+
+~~~text
+       A B C D E
+  1    S S F F N
+  2    S F F F N
+  3    N F F N N
+  4    N N F N N
+~~~
+
+N = äußerer Nebelpfad, F = Flüsterlichtung, S = alter Steinkreis. Hauptroute: E1 → D1 → C1 → C2 → B2 → B1. Zwei Nebenwege führen von E2 in einen äußeren Kräuterpfad und von C2 in eine optionale Lichtung D3. Die Landmarken und der Ausgang bleiben bei Nebel sichtbar; Nebel darf Gegnerwarnungen nicht verdecken.
+
+- **Drei Landmarken:** alter Steinkreis B1, Flüsterlichtung C2, Weglichtbogen E2.
+- **Sammelgruppen:** Flüsterpilz bei B2, C3 und D2; Irrlichtstaub bei B1, C2 und D3. Die erste Staubentdeckung wird als Questmarke gespeichert.
+- **Optionale Begegnungen:** Nebelkrähe in E3 und Wurzelhocker in B3; beide liegen neben dem Hauptpfad und blockieren keine Landmarke.
+- **Geheimnis/Nebenziel:** drei echte Lichtzeichen im Pfad von C1 über D3 bis C3 finden; zusammen zeigen sie den verborgenen Zugang zu einer kleinen Lichtung.
+- **Abkürzung:** zwei Wegsteine bei C1 und D3 lassen sich von ihren jeweiligen Seiten aktivieren und öffnen einen kurzen Rückweg zwischen B2 und E2.
+- **Gebietsaufgabe:** Lene bittet um Flüsterpilz und eine Meldung zum Irrlichtstaub. Die Meldung erfüllt ihre Forschungsstufe; das Geheimnis ist optional.
+
+### 5. Versunkener Wurzelhain
+
+**Zugang:** südöstlicher Dorfpfad, nachdem je ein Auftrag in Quellsenke und Nebelhain erfüllt sowie Quellperle und Irrlichtstaub entdeckt und Lene gemeldet wurden. Eintritt am nordwestlichen Rand A1. Rastpunkt am Wurzelbogen A1.
+**Raster:** Kern A–D / Zeilen 1–3; Zeile 4 und Spalte E erweitern Harzkanäle und die innere Lichtung.
+
+~~~text
+       A B C D E
+  1    W W H H H
+  2    W H H H I
+  3    W H I I I
+  4    W W H I I
+~~~
+
+W = Wurzelrand, H = verzweigte Harzkanäle, I = innere Lichtung. Hauptroute: A1 → B1 → C1 → C2 → C3 → D3. Zwei Nebenwege führen vom Rand B2 in einen ungefährlichen Wurzelbogen und von D3 über E3 in eine optionale Harzbucht.
+
+- **Drei Landmarken:** großer Wurzelbogen A1, warme Harzquelle C2, bernsteinfarbene Baumkrone D3.
+- **Sammelgruppen:** Wurzelrinde bei A2, B2 und C3; Harzbeere bei B1, C2 und D3.
+- **Optionale Begegnungen:** Rankenläufer in B3 und Bernsteinwächter in D2; die Harzbucht bleibt über den äußeren Steg ohne Kampf erreichbar.
+- **Geheimnis/Nebenziel:** drei Harzzeichen in der inneren Lichtung in eine Linie bringen; dahinter liegt ein begehbarer Wurzelhohlraum statt eines einzelnen Schatzgegenstands.
+- **Abkürzung:** der vom Gebietsauftrag gelöste Steg führt von B3 direkt zur inneren Lichtung D3 und bleibt permanent geöffnet.
+- **Gebietsaufgabe:** Lene lässt die beiden gemeldeten Erstfunde in ihrer regionalen Forschungsnotiz bestätigen; vor Ort wird zusätzlich ein sicherer Pfad durch die Harzkanäle markiert.
+
+### Abnahme und spätere Umsetzung
+
+- Alle fünf Raster besitzen drei zusammenhängende Teilbereiche, eine durchgehende Hauptroute, mindestens zwei freiwillige Nebenwege, eine schließbare Rundroute/Abkürzung, drei Landmarken, sechs Ressourcengruppen für die zwei gebietseigenen Sammelressourcen, zwei umgehbare Begegnungsorte und ein mehrschrittiges Geheimnis oder Nebenziel.
+- REG-01 und REG-02 bauen zuerst ihren jeweiligen 4×3-Kern mit dem gesamten oben genannten Mindestinhalt. REG-03 bis REG-05 übernehmen dasselbe Mindestmaß vor Veröffentlichung; die 5×4-Zielraster bleiben die geplante Erweiterungsform.
+- Bei der Szenenabnahme zählt nur passierbare 16×16-Terrainfläche. Wasser, unpassierbare Hindernisse, massive Dekoration und leere Ränder werden abgezogen. Falls ein 4×3-Kern dadurch unter 6.120 passierbare Kacheln fällt, wird seine Kartengrenze erweitert; ein nominell 4×3 großes Rechteck genügt dann nicht. 10.200 passierbare Kacheln sind das 5×4-Ziel.
+- Jede Region erhält zwei freiwillige Begegnungsstellen mit sicherem Bypass. Keine Gebietsaufgabe, Ressource, Abkürzung oder Geheimnis darf einen Pflichtkampf oder einen noch nicht erworbenen Trank verlangen.
+- Vor der Veröffentlichung spielen mindestens drei Personen, die das Gebiet nicht kennen, einen ersten Besuch ohne Hinweise. Festgehalten werden Medianzeit, erreichte Teilbereiche, gefundene Gruppen, Abkürzung/Geheimnis und verpasste Orte. Bei zu kurzer Erkundung kommen Routen, Ziele und Fundorte hinzu; leere Laufstrecken zählen nicht als Verlängerung.
+- Zielhypothese bleibt 25–40 Minuten für eine gründliche Ersterkundung je Gebiet. Die örtliche Aufgabe ist in dieser Zeit enthalten. Die bestehenden Gesamtziele von 3–4 Stunden Hauptpfad und 4–6 Stunden mit optionaler Erkundung bleiben Spieltesthypothesen.
+- SCALE-01 ändert keine laufende Karte oder Questlogik. REG-01/02 müssen bei der Umsetzung zusätzlich klären, wie Spawnpunkte, Kamera-/Save-Grenzen und regionale Übergänge mit der größeren Fläche zusammenspielen.
 
 ## Epic A — Dorfzentrum und Weltkarte
 

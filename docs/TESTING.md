@@ -243,7 +243,7 @@ Die 27 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, d
 - Der vollständige `playtest_001_core_loop_test.gd`-Lauf nach der Umgestaltung bestätigt die drei Aufträge, Verarbeitungsstationen und 30 Münzen. Eine Brunnenkollision blockierte zunächst den Querweg vom Ostbereich zum Trockengestell; das Gestell liegt nun unterhalb des Brunnens und der komplette Lauf besteht.
 - MAP-01-Test: `MAP-01 village plaza checks passed.` End-to-End-Test: `RESOURCE-001 full quest-chain checks passed.`
 - Alle 24 Godot-Headless-Testskripte, Godot-Editorimport und der 60-Frame-Startlauf bestehen; die gerenderte Ansicht wurde bei 480 × 270 geprüft.
-- MAP-03, SCALE-01 und die physischen Eingaben im sichtbaren Fenster bleiben offen.
+- SCALE-01 ist als Gebietsplan abgeschlossen; tatsächlicher Flächenaufbau und Blindtests folgen je Gebiet in REG-01 bis REG-05. Physische Eingaben im sichtbaren Fenster bleiben offen.
 
 ## MAP-02 – Fünf Dorfwege
 
@@ -267,3 +267,13 @@ Die 27 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, d
 - Dorfplatz und Schilfufer wurden mit normalem Godot-Renderer bei 480×270 aufgenommen. Die neue Apotheke sowie Schilf- und Moosgruppen wurden neben Spieler und Kräutern im Spielmaßstab geprüft; die Laufwege bleiben frei.
 - Kollisionsrechtecke, Übergänge und Weggeometrie sind unverändert.
 - Abschlussprüfung: alle 27 Godot-Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden.
+
+## SCALE-01 – Gebietsraster und spätere Gebietsabnahme
+
+SCALE-01 ist ein Designpunkt; es wurden keine Karten-Szenen geändert und keine Godot-Tests ausgeführt. Bei jedem folgenden REG-Punkt wird die Karte bei 480×270 im Spielmaßstab geprüft:
+
+- Für die Mindestfläche ausschließlich passierbare 16×16-Kacheln und zusammenhängende Lauf-/Lichtungsflächen zählen. Wasser, unpassierbare Hindernisse, massive Dekoration und leere Ränder abziehen.
+- Für jedes Gebiet mindestens 6.120 passierbare Kacheln (4×3-Sektor-Kern) nachweisen; 10.200 Kacheln entsprechen dem geplanten 5×4-Ausbauziel. Reicht der sichtbare Kern wegen Wasser oder Hindernissen nicht, werden Kartenränder und Wege erweitert.
+- Hauptroute, zwei Seitenwege, Rundroute/Abkürzung, drei Landmarken, drei Gruppen je gebietseigener Sammelressource, zwei optionale Begegnungsorte, Geheimnis und sicherer Rückweg in der laufenden Szene abgehen.
+- Mindestens drei neue Spielende pro fertigem Gebiet ohne Vorabhinweise beobachten. Medianzeit, erreichte Teilbereiche, entdeckte Ressourcengruppen, Abkürzung und Geheimnis sowie verpasste Orte festhalten.
+- Ziel sind 25–40 Minuten gründliche Ersterkundung. Bei kürzeren Besuchen neue interessante Ziele und Routen ergänzen; keine leeren Laufwege. Kein Hauptfortschritt darf Kampf oder spätere Ausrüstung voraussetzen.
