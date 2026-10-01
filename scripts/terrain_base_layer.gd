@@ -8,7 +8,12 @@ enum TerrainProfile {
 
 const TERRAIN_TILESET: TileSet = preload("res://assets/tilesets/moor_terrain_tileset.tres")
 const SOURCE_ID := 0
-const BASE_GRASS_TILE := Vector2i(0, 0)
+const BASE_GRASS_TILES := [
+	Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0),
+	Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0),
+	Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1),
+	Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1), Vector2i(7, 1),
+]
 
 @export_enum("Dorfplatz", "Schilfufer") var terrain_profile: int = TerrainProfile.VILLAGE
 @export var map_size: Vector2i = Vector2i(40, 23)
@@ -23,4 +28,15 @@ func _ready() -> void:
 	clear()
 	for y in range(map_size.y):
 		for x in range(map_size.x):
-			set_cell(Vector2i(x, y), SOURCE_ID, BASE_GRASS_TILE)
+			var cell := Vector2i(x, y)
+			set_cell(cell, SOURCE_ID, _base_grass_tile_for(cell))
+
+
+func _base_grass_tile_for(cell: Vector2i) -> Vector2i:
+	var mixed_cell_hash: int = (
+		(cell.x * 73856093)
+		^ (cell.y * 19349663)
+		^ (cell.x * cell.y * 83492791)
+		^ (terrain_profile * 265443576)
+	)
+	return BASE_GRASS_TILES[posmod(mixed_cell_hash, BASE_GRASS_TILES.size())]

@@ -143,30 +143,12 @@ func _add_solid_rect(rect: Rect2) -> void:
 
 
 func _draw() -> void:
-	_draw_ground()
 	_draw_wetlands()
-	_draw_grassy_islands()
 	_draw_path_network()
 	_draw_landmarks()
 	_draw_reeds_and_flowers()
 	_draw_path_details()
 	_draw_entry_and_rest_point()
-
-
-func _draw_ground() -> void:
-	for y in range(20, int(MAP_SIZE.y) - 20, TILE_SIZE):
-		for x in range(20, int(MAP_SIZE.x) - 20, TILE_SIZE):
-			var pattern := posmod(x * 17 + y * 11 + posmod(x * y, 19), 47)
-			var detail := Vector2(x + posmod(pattern, 7), y + posmod(pattern * 3, 6))
-			if pattern < 7:
-				draw_rect(Rect2(detail, Vector2(5, 2)), Color("a2a56b"))
-				draw_rect(Rect2(detail + Vector2(1, 2), Vector2(3, 1)), Color("727e50"))
-			elif pattern < 12:
-				draw_rect(Rect2(detail, Vector2(4, 2)), Color("64744d"))
-			elif pattern == 15:
-				draw_rect(Rect2(detail, Vector2(2, 2)), Color("d0b96f"))
-			elif pattern == 24:
-				draw_rect(Rect2(detail, Vector2(3, 1)), Color("596c4d"))
 
 
 func _draw_wetlands() -> void:
@@ -197,36 +179,6 @@ func _pool_polygon(rect: Rect2, variation: int) -> PackedVector2Array:
 		points.append(rect.position + Vector2(point.x * rect.size.x, point.y * rect.size.y))
 	return points
 
-
-func _draw_grassy_islands() -> void:
-	for island in [
-		PackedVector2Array([Vector2(330, 244), Vector2(422, 228), Vector2(472, 260), Vector2(438, 300), Vector2(354, 302), Vector2(316, 276)]),
-		PackedVector2Array([Vector2(842, 210), Vector2(925, 222), Vector2(956, 260), Vector2(910, 286), Vector2(844, 266), Vector2(816, 238)]),
-		PackedVector2Array([Vector2(1302, 190), Vector2(1396, 184), Vector2(1450, 218), Vector2(1410, 257), Vector2(1336, 254), Vector2(1284, 220)]),
-		PackedVector2Array([Vector2(1776, 208), Vector2(1860, 224), Vector2(1882, 270), Vector2(1826, 292), Vector2(1762, 264)]),
-		PackedVector2Array([Vector2(245, 520), Vector2(324, 510), Vector2(366, 544), Vector2(344, 584), Vector2(266, 590), Vector2(218, 558)]),
-		PackedVector2Array([Vector2(535, 574), Vector2(600, 560), Vector2(640, 590), Vector2(618, 636), Vector2(554, 638), Vector2(516, 610)]),
-		PackedVector2Array([Vector2(905, 520), Vector2(982, 512), Vector2(1022, 546), Vector2(998, 584), Vector2(930, 592), Vector2(882, 556)]),
-		PackedVector2Array([Vector2(1310, 534), Vector2(1390, 520), Vector2(1438, 552), Vector2(1414, 594), Vector2(1340, 600), Vector2(1290, 564)]),
-		PackedVector2Array([Vector2(1900, 516), Vector2(1982, 528), Vector2(2016, 568), Vector2(1970, 600), Vector2(1900, 588), Vector2(1868, 552)]),
-		PackedVector2Array([Vector2(350, 812), Vector2(424, 804), Vector2(466, 838), Vector2(438, 878), Vector2(366, 882), Vector2(326, 846)]),
-		PackedVector2Array([Vector2(790, 826), Vector2(868, 812), Vector2(914, 844), Vector2(890, 884), Vector2(818, 894), Vector2(766, 856)]),
-		PackedVector2Array([Vector2(1430, 820), Vector2(1516, 810), Vector2(1560, 844), Vector2(1530, 884), Vector2(1450, 890), Vector2(1404, 854)]),
-		PackedVector2Array([Vector2(1870, 790), Vector2(1950, 804), Vector2(1988, 846), Vector2(1940, 876), Vector2(1868, 864), Vector2(1838, 826)]),
-		PackedVector2Array([Vector2(236, 1010), Vector2(322, 996), Vector2(372, 1026), Vector2(342, 1060), Vector2(260, 1064), Vector2(214, 1038)]),
-		PackedVector2Array([Vector2(842, 1010), Vector2(914, 1000), Vector2(956, 1032), Vector2(928, 1068), Vector2(858, 1070), Vector2(814, 1038)]),
-		PackedVector2Array([Vector2(1330, 1000), Vector2(1410, 990), Vector2(1454, 1024), Vector2(1422, 1060), Vector2(1350, 1068), Vector2(1304, 1032)]),
-		PackedVector2Array([Vector2(1940, 1020), Vector2(2020, 1000), Vector2(2076, 1030), Vector2(2040, 1068), Vector2(1968, 1070), Vector2(1912, 1046)]),
-	]:
-		draw_colored_polygon(island, Color("858e58"))
-		draw_colored_polygon(_inset_polygon(island, Vector2(3, 3)), Color("9ca268"))
-
-
-func _inset_polygon(points: PackedVector2Array, offset: Vector2) -> PackedVector2Array:
-	var inner := PackedVector2Array()
-	for point in points:
-		inner.append(point + offset)
-	return inner
 
 
 func _draw_path_network() -> void:
@@ -259,6 +211,27 @@ func _draw_track(points: PackedVector2Array, width: float) -> void:
 		draw_circle(point, width / 2.0, Color("b1a172"))
 		draw_circle(point, (width - 10.0) / 2.0, Color("786c4c"))
 		draw_circle(point, (width - 22.0) / 2.0, Color("978761"))
+	_draw_track_surface_details(points, width)
+
+
+func _draw_track_surface_details(points: PackedVector2Array, width: float) -> void:
+	for index in range(points.size() - 1):
+		var start: Vector2 = points[index]
+		var finish: Vector2 = points[index + 1]
+		var segment := finish - start
+		var sample_count: int = maxi(1, int(segment.length() / 22.0))
+		var across := segment.orthogonal().normalized()
+		for sample_index in range(sample_count):
+			var center := start.lerp(finish, float(sample_index) / float(sample_count))
+			var sample_hash := int(center.x) * 17 + int(center.y) * 31 + index * 13
+			var lane := float(posmod(sample_hash, 7) - 3) / 3.0
+			var detail := center + across * lane * width * 0.22
+			var pattern := posmod(sample_hash, 13)
+			if pattern < 2:
+				draw_rect(Rect2(detail, Vector2(4, 2)), Color("806e4f"))
+				draw_rect(Rect2(detail + Vector2(1, 0), Vector2(2, 1)), Color("a0875b"))
+			elif pattern == 5:
+				draw_rect(Rect2(detail, Vector2(2, 1)), Color("c0a675"))
 
 
 func _draw_boardwalk_bridge(center: Vector2) -> void:

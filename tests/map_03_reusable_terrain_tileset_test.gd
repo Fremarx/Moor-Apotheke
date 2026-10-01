@@ -58,6 +58,12 @@ func _check_map(map_case: Dictionary) -> void:
 		_expect(terrain.get_used_cells().size() == map_case.map_size.x * map_case.map_size.y, "%s has no empty ground cells" % map_case.path)
 		_expect(terrain.get_cell_source_id(Vector2i(0, 0)) == 0, "%s uses atlas source 0 at the origin" % map_case.path)
 		_expect(terrain.get_cell_source_id(Vector2i(map_case.map_size.x - 1, map_case.map_size.y - 1)) == 0, "%s covers the bottom-right map cell" % map_case.path)
+		var grass_variants: Dictionary = {}
+		for cell: Vector2i in terrain.get_used_cells():
+			var tile_coords := terrain.get_cell_atlas_coords(cell)
+			grass_variants[tile_coords] = true
+			_expect(tile_coords.y <= 1, "%s uses only the moss-and-grass rows for its walkable base" % map_case.path)
+		_expect(grass_variants.size() >= 12, "%s distributes at least twelve moss-and-grass variants across the ground" % map_case.path)
 		_expect(not terrain.collision_enabled, "%s ground does not add blocking collision" % map_case.path)
 		_expect(not terrain.navigation_enabled, "%s decorative ground does not add navigation data" % map_case.path)
 		var adjacent_center_delta := terrain.map_to_local(Vector2i(1, 0)) - terrain.map_to_local(Vector2i(0, 0))

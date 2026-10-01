@@ -8,13 +8,15 @@ Stand: 01.10.2026
 Phase 7 – Gebietsausbau nach dem überarbeiteten Weltentwurf
 
 ### Zuletzt bearbeiteter Task
-REG-01 – Schilfufer als großes Startgebiet umgesetzt.
+VIS-005 – Bodenstruktur und Umgebungsflächen an den Pixelstil anpassen.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; VIS-004 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE; PLAYTEST-001 DONE; CONTENT-001 DONE; RESOURCE-001 DONE; AREA-001 DONE; MAP-01 DONE; MAP-02 DONE; MAP-03 DONE; SCALE-01 DONE; REG-01 IMPLEMENTED (blind playtest pending).
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; VIS-004 DONE; VIS-005 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE; PLAYTEST-001 DONE; CONTENT-001 DONE; RESOURCE-001 DONE; AREA-001 DONE; MAP-01 DONE; MAP-02 DONE; MAP-03 DONE; SCALE-01 DONE; REG-01 IMPLEMENTED (blind playtest pending).
 
 ### Fortschritt
 Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOURCE-001 ergänzt je eine zweite einmalig sammelbare Sumpfminze- und Schilfwurzelstelle. Alle drei Aufträge lassen sich aus einem frischen Spielstand nacheinander abschließen. Drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. INV-001 verlagert die Bestandsübersicht in ein kategorisiertes Fenster mit Taste I. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen. VIS-004 ersetzt die flach gezeichnete Apotheke durch ein reich schattiertes Hausmotiv und ergänzt passende Schilf- und Moosgruppen im Dorfplatz und Schilfufer. AREA-001 ergänzt das begehbare Schilfufer rechts neben der bisherigen Karte mit Torfplanken, Wasserflächen und drei zusätzlichen, dauerhaft speicherbaren Kräuterstellen. Beide Gebiete teilen Inventar und Spielstand; Übergänge laufen über eine kleine Area2D-Signal-Schnittstelle. MAP-01 übernimmt die neuen Entwurfsdateien unter `design/` als maßgebliche Weltplanung und gestaltet den bestehenden kompakten Startbereich als Dorfplatz mit gut erkennbarer Apotheke, Platzmitte, Auftragsbrett und sichtbaren Nord- und Ostwegen. Das Szenenobjekt `TestMap` behält seinen Knotennamen, seine logische Gebiets-ID lautet `Dorfplatz`. MAP-02 ergänzt fünf beschilderte Wege, öffnet Schilfufer im Nordwesten und sperrt vier spätere Übergänge sichtbar und physisch. MAP-03 ergänzt einen wiederverwendbaren 16×16-Mooratlas mit einem ruhigen Grundtile in beiden Startkarten; vorhandene Wege und Ufer bleiben lückenlos gezeichnet, der Atlas enthält passende manuell nutzbare Kachelmotive. Der Rückweg aus Schilfufer führt zum Startpunkt am Nordwestpfad; Rast- und Rückkehrpunkte weiterer Regionen entstehen mit ihren REG-Aufgaben. SCALE-01 legt für alle fünf Gebiete ein gemeinsames 5×4-Sektorraster mit 4×3-Mindestkern, Routen, Landmarken, Ressourcenstellen, optionalen Begegnungen und Geheimnissen fest. REG-01 baut das Schilfufer als 5×4-Karte mit mindestens 6.120 passierbaren Kacheln; REG-02 baut danach den Alten Torfstich.
+
+VIS-005 ergänzt eine neue 8×8-Bodentextur im Stil der Figuren, Kräuter und Natur-Sprites. Beide Karten verteilen 16 ruhige Moos- und Grasvarianten reproduzierbar über die Laufwege; alte flache Bodenkleckse entfallen, Torfwege erhalten kleine Abriebcluster.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -41,6 +43,7 @@ Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOUR
 - **VIS-002:** Den abgestimmten Spielerentwurf als vier Richtungsansichten integrieren und die anatomisch feste Taschen- und Minzplatzierung bewahren.
 - **VIS-003:** Trockengestell, Braukessel, Auftragsbrett, Fenja, Marten, Lene sowie Sumpfminze, Schilfwurzel und Nachtmoos als konsistente Sprite-Atlanten integrieren.
 - **VIS-004:** Haus und Moorvegetation mit warmen Lichtkanten, kräftigen Konturen und dichten Pixelclustern an Spieler und Kräuter angleichen.
+- **VIS-005:** Eintönige Grundfläche durch 16 abgestimmte Moos- und Grasvarianten ersetzen, alte Flachflecken entfernen und Wege mit zurückhaltenden Pixelclustern strukturieren.
 - **REL-001:** Windows-x86_64-Exportprofil und Release-Checkliste einrichten; passende Vorlagen lokal installiert; Release-EXE exportiert und gestartet.
 - **PLAY-001:** HUD-Hintergründe ergänzen; Richtungsbewegung und Karten-/Hinderniskollisionen prüfen; Spielansicht bei 480 × 270 gerendert.
 - **INV-001:** Kategorisiertes Inventarfenster mit Taste I, live aktualisierten Beständen, Escape-/Schließen-Option und pausierter Welt.
@@ -102,6 +105,7 @@ Kein technischer Blocker für die vollständige Questkette. Das Spiel liegt als 
 - MAP-02: alle 25 Headless-Testskripte, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden; die Dorfkarte wurde mit normalem Renderer als 480 × 270-Viewport gerendert und visuell geprüft.
 - MAP-03: alle 26 Headless-Testskripte, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden. Dorfplatz und Schilfufer wurden im normalen Renderer bei 480 × 270 geprüft; Atlasraster, gemeinsame TileSet-Nutzung, Kachelabstände und Pickup-Lesbarkeit bestehen.
 - VIS-004: alle 27 Headless-Testskripte, Godot-4.7.2-Editorimport, 60-Frame-Hauptszene und beide 480 × 270-Kartenrenders bestanden. Haus und neue Naturgruppen wurden neben den Spieler- und Kräutersprites visuell verglichen.
+- VIS-005: alle 27 Headless-Testskripte, Godot-4.7.2-Editorimport, 60-Frame-Hauptszene und beide 480 × 270-Kartenrenders bestanden. Die variierte Bodentextur wurde neben Figur, Kräutern, Wegen und Ufer geprüft.
 - Noch offen: physische Tastatureingabe und subjektives Steuerungsgefühl im sichtbaren Fenster selbst erleben; simulierte InputMap-Aktionen bestätigen die Logik, nicht das Gefühl.
 
 ### Sicherheitsstatus
@@ -185,6 +189,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | MAP-02 | Fünf sichtbare Gebietspfade samt Start- und Sperrübergängen anlegen | P0 | MAP-01 | DONE |
 | MAP-03 | Wiederverwendbares Moor-Kachelset für Boden, Ufer, Wege und Brücken festlegen | P0 | MAP-02 | DONE |
 | VIS-004 | Hausarchitektur und Moorvegetation an den Spieler- und Kräuterstil angleichen | P0 | VIS-003, MAP-03 | DONE |
+| VIS-005 | Bodenstruktur und Torfwege an die abgestimmte Moor-Pixelart anpassen | P0 | VIS-004, MAP-03 | DONE |
 | SCALE-01 | Fünf Gebietsraster, Mindestkerne und Inhalte konkret planen | P0 | MAP-03 | DONE |
 | REG-01 | Schilfufer als großes Startgebiet mit Ressourcenroute bauen | P0 | SCALE-01 | IMPLEMENTED (blind playtest pending) |
 
@@ -438,6 +443,13 @@ Der erweiterte End-to-End-Test startet ohne Spielstand, bewegt die Figur über P
 - Der Umgebungsatlas ist transparent, jede verwendete Quellregion liegt innerhalb der Bildgrenzen und beide Karten zeichnen ihn über die dokumentierte `CanvasItem.draw_texture_rect_region()`-API.
 - Kartenwege, Kollisionsrechtecke und Übergänge bleiben unverändert; Herkunft, Prompts und Lizenzstatus des neuen Assets sind dokumentiert.
 - Der VIS-004-Test, alle Headless-Tests, Godot-4.7.2-Editorimport, 60-Frame-Hauptszene und beide normal gerenderten 480 × 270-Kartenbilder bestehen.
+
+### VIS-005 Abnahmekriterien – erledigt
+- Ein handgefertigter 8×8-Terrainatlas ergänzt 16 gemäßigte Moos- und Grasbodenvarianten, passend zu den vorhandenen Spieler-, Kräuter- und Umweltgrafiken.
+- Dorfplatz und Schilfufer verwenden das neue Atlasbild über das gemeinsame 16×16-TileSet; ein zellpositionsbasierter Hash verteilt die Varianten reproduzierbar und kollisionsfrei.
+- Die vorherigen flachen Streifen und Moosflecken übermalen den Boden nicht mehr. Torfwege erhalten sparsame Abrieb- und Kieselpixel, ohne Laufwege und Orientierung zu verdecken.
+- Der MAP-03-Test prüft auf beiden Karten mindestens zwölf verwendete Basisvarianten und die vollständige TileSet-Nutzung. Alle 27 Headless-Tests, Godot-4.7.2-Editorimport, 60-Frame-Hauptszene und beide normal gerenderten 480 × 270-Kartenbilder bestehen.
+- Herkunft, Dateipfade, Verkleinerungsschritte und finaler Bildprompt sind in `docs/ART_ASSETS.md` dokumentiert.
 ### Definition of Done pro Backlogpunkt
 - Taskziel und Abnahmekriterien sind erfüllt.
 - Projekt lädt; relevante Editor- oder Laufzeitprüfung ist erfolgreich.
@@ -510,5 +522,6 @@ Der erweiterte End-to-End-Test startet ohne Spielstand, bewegt die Figur über P
 | 01.10.2026 | MAP-02: Fünf Dorfwege samt NW-Schilfuferübergang, NE-Holzsteg und vier beschilderten, physisch gesperrten Zukunftswegen umgesetzt. AREA-001-Rückweg und Questkette bestehen; MAP-02 prüft Route und Sperren. |
 | 01.10.2026 | MAP-03: Gemeinsamen 16×16-Mooratlas und kollisionsfreie Grundkachelebene für Dorfplatz und Schilfufer ergänzt; 26 Headless-Tests, Import, Start-Smoke und beide gerenderten Kartenansichten bestanden. |
 | 01.10.2026 | VIS-004: Reich schattiertes Apothekenhaus und passende Schilf-/Moosgruppen integriert; Headless-MainLoop der 27 Testskripte repariert, alle 27 Tests, Editorimport, Start-Smoke und zwei Rendererbilder geprüft. Haus, Kräuter und Figuren bei 480 × 270 verglichen. |
+| 01.10.2026 | VIS-005: Einheitlichen 8×8-Moorbodentexturatlas erstellt, 16 ruhige Moos-/Grasvarianten deterministisch auf beiden Gebieten verteilt und alte flache Bodenkleckse entfernt; Wege mit dezenten Torf- und Kieseldetails ergänzt. Alle 27 Tests, Editorimport, Start-Smoke und Dorfplatz-/Schilfufer-Viewport bei 480 × 270 geprüft. |
 | 01.10.2026 | SCALE-01: Fünf 5×4-Gebietsraster mit 4×3-Mindestkernen, Routen, Ressourcenpatches, Landmarken, optionalen Begegnungen und Geheimnissen geplant; Flächenmessung und Blindtestkriterien für REG-01 bis REG-05 festgelegt. Keine Runtime-Änderung; Godot-Tests nicht ausgeführt. |
 | 01.10.2026 | REG-01: Schilfufer auf 150×68 Kacheln mit mindestens 6.120 begehbaren Kacheln ausgebaut; sechs Kräutergruppen, sicherer Umweg, dauerhaft senkbarer Fährensteg, dreistufiges Marksteinrätsel, verborgene Mooslichtung und verlustfrei vertreibbarer Schnapper. Alle 27 Headless-Tests, Import und Start-Smoke bestehen; blinder Ersterkundungstest bleibt vor Veröffentlichung offen. |

@@ -52,7 +52,6 @@ func _add_solid_rect(rect: Rect2) -> void:
 
 
 func _draw() -> void:
-	_draw_ground()
 	_draw_pond()
 	_draw_water_lilies()
 	_draw_village_paths()
@@ -66,73 +65,6 @@ func _draw() -> void:
 	_draw_scattered_details()
 	_draw_interaction_probe()
 
-
-func _draw_ground() -> void:
-	# TerrainBase supplies the reusable grass and peat texture beneath these accents.
-	for y in range(20, 352, 16):
-		for x in range(16, 624, 16):
-			var pattern := posmod(x * 17 + y * 31, 23)
-			var detail_position := Vector2(x + 3 + pattern % 4, y + 4 + pattern % 3)
-			if pattern < 6:
-				draw_rect(Rect2(detail_position, Vector2(4, 2)), Color("7f8a58"))
-			elif pattern < 12:
-				draw_rect(Rect2(detail_position, Vector2(4, 2)), Color("5c704f"))
-			elif pattern == 14:
-				draw_rect(Rect2(detail_position, Vector2(2, 2)), Color("998b5d"))
-	draw_colored_polygon(
-		PackedVector2Array([
-			Vector2(28, 38), Vector2(73, 31), Vector2(111, 40),
-			Vector2(119, 62), Vector2(88, 76), Vector2(44, 67)
-		]),
-		Color("7f8a58")
-	)
-	draw_colored_polygon(
-		PackedVector2Array([
-			Vector2(25, 99), Vector2(46, 88), Vector2(69, 94),
-			Vector2(82, 111), Vector2(74, 132), Vector2(53, 138),
-			Vector2(40, 126), Vector2(24, 128)
-		]),
-		Color("506a54")
-	)
-	draw_colored_polygon(
-		PackedVector2Array([
-			Vector2(344, 40), Vector2(371, 31), Vector2(396, 39),
-			Vector2(416, 52), Vector2(397, 76), Vector2(374, 72),
-			Vector2(357, 70)
-		]),
-		Color("4f684f")
-	)
-	draw_colored_polygon(
-		PackedVector2Array([
-			Vector2(147, 132), Vector2(169, 123), Vector2(193, 130),
-			Vector2(211, 143), Vector2(207, 163), Vector2(187, 174),
-			Vector2(164, 168), Vector2(151, 154)
-		]),
-		Color("7d8452")
-	)
-	draw_colored_polygon(
-		PackedVector2Array([
-			Vector2(274, 140), Vector2(293, 134), Vector2(315, 139),
-			Vector2(327, 148), Vector2(346, 146), Vector2(358, 157),
-			Vector2(355, 177), Vector2(334, 186), Vector2(315, 180),
-			Vector2(292, 188), Vector2(280, 174), Vector2(269, 164)
-		]),
-		Color("526b57")
-	)
-	draw_colored_polygon(
-		PackedVector2Array([
-			Vector2(372, 177), Vector2(392, 169), Vector2(411, 178),
-			Vector2(419, 195), Vector2(403, 207), Vector2(380, 202)
-		]),
-		Color("85784e")
-	)
-	draw_colored_polygon(
-		PackedVector2Array([
-			Vector2(36, 306), Vector2(77, 293), Vector2(112, 302),
-			Vector2(104, 328), Vector2(58, 336)
-		]),
-		Color("7d8250")
-	)
 
 func _draw_pond() -> void:
 	draw_colored_polygon(
@@ -232,11 +164,24 @@ func _draw_bridge() -> void:
 
 func _draw_road(points: PackedVector2Array) -> void:
 	var shadow_points := PackedVector2Array()
+	var bounds := Rect2(points[0], Vector2.ZERO)
 	for point in points:
 		shadow_points.append(point + Vector2(0, 5))
+		bounds = bounds.expand(point)
 	draw_colored_polygon(shadow_points, Color("514938"))
 	draw_colored_polygon(points, Color("a18158"))
 	draw_polyline(points, Color("c4a574"), 2.0)
+	for y in range(int(bounds.position.y) + 6, int(bounds.end.y) - 4, 14):
+		for x in range(int(bounds.position.x) + 6, int(bounds.end.x) - 4, 14):
+			var detail := Vector2(x + posmod(x * 5 + y * 3, 5), y + posmod(x * 2 + y * 7, 4))
+			if not Geometry2D.is_point_in_polygon(detail, points):
+				continue
+			var detail_pattern := posmod(x * 17 + y * 31, 19)
+			if detail_pattern < 2:
+				draw_rect(Rect2(detail, Vector2(3, 2)), Color("8d7553"))
+				draw_rect(Rect2(detail + Vector2(1, 0), Vector2(1, 1)), Color("c5a574"))
+			elif detail_pattern == 7:
+				draw_rect(Rect2(detail, Vector2(2, 1)), Color("d1b783"))
 
 
 func _draw_village_square() -> void:

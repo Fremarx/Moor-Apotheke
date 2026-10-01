@@ -268,6 +268,13 @@ Die 27 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, d
 - Kollisionsrechtecke, Übergänge und Weggeometrie sind unverändert.
 - Abschlussprüfung: alle 27 Godot-Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden.
 
+## VIS-005 – Bodenstruktur und Umgebungsflächen
+
+- `tests/map_03_reusable_terrain_tileset_test.gd` prüft beide `TerrainBase`-Layer weiter auf das gemeinsame 16×16-TileSet, vollständige Rasterbelegung und fehlende Kollision; zusätzlich müssen auf jeder Karte mindestens zwölf der 16 Moos- und Grasvarianten vorkommen.
+- Die alte gleichförmige Basiskachel und die einfachen, darüber gezeichneten Grasflecken sind durch eine gedämpfte, detailreiche 8×8-Bodentextur ersetzt. Kleine Abrieb- und Kieselpixel strukturieren die Torfwege, ohne die Hauptwege zu verändern.
+- Dorfplatz mit Spieler/HUD und ein Schilfufer-Ausschnitt wurden mit dem normalen Godot-Renderer bei 480×270 aufgenommen und visuell auf Bodenruhe, Stil, Pflanzenerkennbarkeit und Weglesbarkeit geprüft.
+- Alle 27 Headless-Testskripte, der Godot-4.7.2-Editorimport und ein 60-Frame-Start der Hauptszene bestanden.
+
 ## SCALE-01 – Gebietsraster und spätere Gebietsabnahme
 
 SCALE-01 ist ein Designpunkt; es wurden keine Karten-Szenen geändert und keine Godot-Tests ausgeführt. Bei jedem folgenden REG-Punkt wird die Karte bei 480×270 im Spielmaßstab geprüft:

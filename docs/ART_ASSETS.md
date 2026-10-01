@@ -86,6 +86,35 @@ Simplify the repeated ground texture so the upper-left cell is a uniform muted o
 
 Das Atlasbild wurde anschließend zellenweise auf exakt 16 × 16 Pixel pro Motiv zugeschnitten und mit Nearest-Neighbor auf 128 × 128 gebracht. Die Prüfung im Spielmaßstab zeigte ruhige Grundflächen, lesbare Sammelpflanzen und durchgehende gezeichnete Wege.
 
+## VIS-005 – Abgestimmte Boden- und Wegtexturen
+
+- Aktive Datei: `assets/tilesets/moor_terrain_atlas_ai_20261001_v3.png` (128 × 128 Pixel, 8 × 8 Zellen zu 16 × 16 Pixeln).
+- Hochauflösende Imagegen-Quelle: `assets/tilesets/moor_terrain_atlas_ai_20261001_v3_source.png` (1254 × 1254 Pixel). Die 64 Zellen wurden mit einem 2-Pixel-Inset je Kante sauber aus dem Quellraster ausgeschnitten und mit Nearest Neighbor auf je 16 × 16 Pixel verkleinert. Die erste und zweite Atlasreihe liefern 16 natürliche Basisvarianten; die übrigen Reihen behalten Torf, Wege, Wasser, Ufer, Stege und nasse Moorflächen.
+- `assets/tilesets/moor_terrain_tileset.tres` verwendet den aktiven Atlas. `TerrainBase` verteilt die 16 Moos- und Grasflächen reproduzierbar per Rasterkoordinaten auf Dorfplatz und Schilfufer. Die bisherigen flachen Bodenübermalungen wurden entfernt; gezeichnete Torfwege erhielten sparsame Abriebpixel.
+- Herkunft: mit dem integrierten OpenAI Imagegen in Codex am 01.10.2026 nach den vorhandenen Figuren-, Kräuter- und Umgebungsatlanten gestaltet. Es wurden keine Fremdassets verwendet; eine externe Lizenz ist nicht betroffen.
+
+### Finaler Prompt zur Generierung
+
+<pre>
+Use case: stylized-concept
+Asset type: subtle, hand-crafted pixel-art tile atlas for a top-down cozy marsh game.
+
+Use the supplied player, herb and reed sprites as style references only. Match their warm evening palette, clean dark mossy outlines, intentional pixel clusters, soft warm edge-lighting and deep green/teal shadows. The tile art must sit quietly under the detailed sprites and never compete with the character or collectible herbs.
+
+Make one exact square atlas of 8 columns by 8 rows, equal square cells, no gutters and no drawn grid. Every cell is a seamless top-down ground tile. It will be reduced to 128x128 and then displayed as 16x16 pixels in the actual game: create only a few bold, legible clusters per tile. At that final 16x16 scale, each tile should show a calm main surface with just 2–5 small material clusters; broad calm areas must remain visible. Keep the contrast moderate. No dense foliage carpet, no tiny noise, no large decorative clumps, no miniature bouquets, no leafy canopy filling cells. Small accents should occupy no more than about 20 percent of a tile. Some cells may have no grass or leaves at all and should simply show softly shaded damp moss or peat.
+
+Rows 0–1: 16 distinctly varied walkable base tiles. Mix shaded olive moss, sage grass, dark moist earth, little peat patches, occasional tiny flattened leaf pieces or 2–3 grass blades. These are environmental floor textures, not plant sprites.
+Row 2: eight dark peat and soft mud surface variations with a few pebbles.
+Row 3: eight simple worn-path sections and moss-edge blends, connected, softly textured, no large stones.
+Row 4: quiet dark teal water surface tiles with only a few thin warm glints and faint reflections.
+Row 5: restrained organic water-edge transitions, short moss tufts and dark wet soil.
+Row 6: readable honey-brown wooden boardwalk tiles with sparse plank grain and fine dark seams.
+Row 7: muted root, damp bank and reed-shadow ground patterns, still walkable and low contrast.
+
+Palette: deep moss green, subdued olive, sage, warm peat umber and dark teal. Bright yellow, white flowers, large leaves and tall reeds should be very rare in this ground atlas.
+Strong constraints: exactly 8 by 8 equal tiles, muted ground texture with restrained contrast, no cell dividers, no labels, text, icons, characters, buildings, UI, oversized plants, external shadows, blur, antialiasing, perspective, photorealism or watermark.
+</pre>
+
 ## VIS-004 – Hausarchitektur und Moorvegetation
 
 - Datei: `assets/sprites/moor_environment_atlas_ai_20261001.png`
