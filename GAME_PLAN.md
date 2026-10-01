@@ -116,14 +116,14 @@ Die Rezeptmengen sind Startwerte und werden beim Spielen angepasst. Eine Sumpfmi
 | Marten, der Torfstecher | 1 stärkender Aufguss | Nutzt zwei Pflanzenarten und führt die Bewohner-Auftragskette fort |
 | Lene, die Dorfheilerin | 1 Nachttrank | Führt zum seltenen Fund am alten Steg und schließt den Ausschnitt ab |
 
-Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenja nimmt den Tee direkt entgegen. Nach der Annahme zeigt das HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss sichtbar und Fenja zahlt fünf Münzen. Marten zahlt zehn und Lene fünfzehn Münzen. Das Inventar führt Münzen unter coins und zeigt den Bestand im HUD. SAVE-001 erhält Inventar, Münzen und Auftragsstatus über Spielsitzungen hinweg.
+Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenja nimmt den Tee direkt entgegen. Nach der Annahme zeigt das HUD das aktive Ziel; bei erfolgreicher Abgabe bleibt der Abschluss sichtbar und Fenja zahlt fünf Münzen. Marten zahlt zehn und Lene fünfzehn Münzen. Das Inventar führt Münzen unter coins; Bestände erscheinen im Inventarfenster, Münzen zusätzlich in der HUD-Leiste. SAVE-001 erhält Inventar, Münzen und Auftragsstatus über Spielsitzungen hinweg.
 
 ### Eingaben und Anzeigen
 
 - **WASD oder Pfeiltasten:** laufen.
 - **E:** mit Pflanze, Station, Bewohner oder Brett interagieren.
 - **F5:** Spielstand speichern; **F9:** Spielstand laden. Ein gültiger Spielstand wird außerdem beim Start automatisch geladen.
-- **I:** Inventar öffnen und schließen (geplant in INV-001).
+- **I:** Inventarfenster öffnen und schließen. Es zeigt frische und getrocknete Kräuter, Heilmittel und Münzen.
 - Die HUD zeigt aktuelle Aufgabe, Interaktionshinweis und Münzen.
 - Stationsfenster zeigen Zutatenplätze, verfügbares Rezept und Herstellungsfortschritt.
 
@@ -211,8 +211,8 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - **Schwerpunkt:** Für den Anfang ist eine Mischung aus Erkunden, Aufträgen und einfacher Verarbeitung vorgesehen; Automatisierung kommt später.
 - **Spieltempo:** Der erste Ausschnitt bleibt ohne Zeitdruck. Jahreszeiten können später die Fundorte und Rezepte verändern.
 - **Geschichte und Ton:** Noch offen; Vorschlag ist märchenhaft und gemütlich, mit etwas geheimnisvoller Moorstimmung.
-- **Nächster Ausbau:** VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen an den warmen Moor-Pixelstil angepasst. REL-001 richtet den Windows-x86_64-Testexport ein. PLAY-001 hat HUD, Bewegungsrichtungen und Kollisionen geprüft. Als Nächstes folgt INV-001: ein Inventarfenster für die Mengenübersicht; danach werden weitere Moorgebiete, Jahreszeiten und Automatisierung priorisiert.
+- **Nächster Ausbau:** VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen an den warmen Moor-Pixelstil angepasst. REL-001 richtet den Windows-x86_64-Testexport ein. PLAY-001 hat HUD, Bewegungsrichtungen und Kollisionen geprüft. Als Nächstes wird der Kernablauf samt Inventar im sichtbaren Godot-Fenster durchgespielt und der weitere Ausbau anhand des Spielgefühls priorisiert.
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen mit transparenten Pixelart-Atlanten gestaltet. Die Hauptszene wurde bei 480 × 270 geprüft; Spiellogik, Positionen und Kollisionsflächen blieben unverändert. REL-001 hat Windows Desktop x86_64 als erstes Exportziel eingerichtet. PLAY-001 hat die HUD-Lesbarkeit verbessert und Bewegungsrichtungen sowie Kollisionen im Godot-Viewport geprüft. Als Nächstes folgt INV-001: ein Inventarfenster mit Taste I, in dem frische und verarbeitete Zutaten sowie Münzen übersichtlich stehen.
+VIS-001 bis VIS-003 haben Karte, Spieler, Arbeitsstationen, Bewohner und Sammelpflanzen mit transparenten Pixelart-Atlanten gestaltet. Die Hauptszene wurde bei 480 × 270 geprüft; Spiellogik, Positionen und Kollisionsflächen blieben unverändert. REL-001 hat Windows Desktop x86_64 als erstes Exportziel eingerichtet. PLAY-001 hat die HUD-Lesbarkeit verbessert und Bewegungsrichtungen sowie Kollisionen im Godot-Viewport geprüft. INV-001 ergänzt das kategorisierte Inventarfenster mit I und pausiert die Spielfigur; die sichtbare Prüfung mit echter Tastatur folgt im manuellen Spieltest.

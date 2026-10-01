@@ -8,13 +8,13 @@ Stand: 01.10.2026
 Phase 8 – Release-Vorbereitung
 
 ### Zuletzt bearbeiteter Task
-PLAY-001 – HUD-Lesbarkeit, Bewegungsrichtungen und Kollisionen prüfen.
+INV-001 – Kategorisiertes Inventarfenster mit Taste I.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; REL-001 DONE; PLAY-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE.
 
 ### Fortschritt
-Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen.
+Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. INV-001 verlagert die Bestandsübersicht in ein kategorisiertes Fenster mit Taste I. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -42,9 +42,10 @@ Die Herstellungskette von Fenja über Marten bis Lene ist spielbar; drei Pflanze
 - **VIS-003:** Trockengestell, Braukessel, Auftragsbrett, Fenja, Marten, Lene sowie Sumpfminze, Schilfwurzel und Nachtmoos als konsistente Sprite-Atlanten integrieren.
 - **REL-001:** Windows-x86_64-Exportprofil und Release-Checkliste einrichten; passende Vorlagen lokal installiert; Release-EXE exportiert und gestartet.
 - **PLAY-001:** HUD-Hintergründe ergänzen; Richtungsbewegung und Karten-/Hinderniskollisionen prüfen; Spielansicht bei 480 × 270 gerendert.
+- **INV-001:** Kategorisiertes Inventarfenster mit Taste I, live aktualisierten Beständen, Escape-/Schließen-Option und pausierter Welt.
 
 ### Als Nächstes
-INV-001 – Ein eigenes Inventarfenster mit Taste I öffnen und schließen.
+PLAYTEST-001 – Kernablauf samt Inventar im sichtbaren Godot-Fenster durchspielen und Ausbau anhand des Spielgefühls priorisieren.
 
 ### Blocker
 Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo Fremarx/Moor-Apotheke; abgeschlossene Backlogitems werden auf codex/moor-apotheke gepusht. Physische Tastatureingabe und subjektives Steuerungsgefühl bleiben als Spieltest offen.
@@ -86,6 +87,7 @@ Keine technischen Blocker. Das Spiel liegt als eigenes öffentliches Repo Fremar
 - SAVE-001-Test zuerst rot, danach grün; prüft F5/F9, automatische Startladung, Wiederherstellung aller gespeicherten Daten und unveränderten Laufzeitzustand bei fehlendem, beschädigtem oder nicht unterstütztem Save. Alle 17 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - REL-001: Godot 4.7.2 Windows-Exportvorlagen installiert; Release-Export nach build/windows/Moor-Apotheke.exe und 60-Frame-Start der EXE mit Exitcode 0 bestanden. Keine Codesignatur; kein öffentlicher Upload.
 - PLAY-001: neuer Headless-Test prüft HUD-Hintergründe/-Ränder/-Zeichenreihenfolge, WASD- und Pfeiltastenbindungen, alle vier InputMap-Bewegungsrichtungen, aktive Kamera sowie Fels-, Teich- und Kartenrandkollisionen. Alle 20 Tests, Editorimport und 60-Frame-Lauf bestanden; Hauptszene bei 480 × 270 mit Godot Movie Maker gerendert und auf HUD-Lesbarkeit geprüft.
+- INV-001: Test prüft I-Belegung, Modalsteuerung, Fokus, Fenstergrenzen, zehn live aktualisierte Inventarbestände, Escape/Schließen und die Konfliktvermeidung mit dem Auftragsbrett. Alle 21 Tests, Editorimport und 60-Frame-Startlauf bestanden; echte Tastatureingabe bleibt manuell offen.
 - Noch offen: physische Tastatureingabe und subjektives Steuerungsgefühl im sichtbaren Fenster selbst erleben; simulierte InputMap-Aktionen bestätigen die Logik, nicht das Gefühl.
 
 ### Sicherheitsstatus
@@ -161,7 +163,8 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | VIS-003 | Arbeitsstationen, Bewohner und Sammelstellen visuell an die neue Moor-Pixelart anpassen | P1 | VIS-002 | DONE |
 | REL-001 | Windows-x86_64-Exportprofil und Release-Checkliste einrichten | P3 | stabile Kernschleife | DONE |
 | PLAY-001 | HUD-Lesbarkeit, Bewegungsrichtungen und Kollisionen im Godot-Viewport prüfen | P1 | VIS-003 | DONE |
-| INV-001 | Ein eigenes Inventarfenster mit Taste I öffnen und schließen | P1 | PLAY-001 | PLANNED |
+| INV-001 | Ein eigenes Inventarfenster mit Taste I öffnen und schließen | P1 | PLAY-001 | DONE |
+| PLAYTEST-001 | Kernablauf samt Inventar im sichtbaren Godot-Fenster durchspielen und Ausbau priorisieren | P1 | INV-001 | PLANNED |
 
 ### CORE-002 Abnahmekriterien
 - Die Interaktion nutzt die benannte Aktion interact auf E.
@@ -407,3 +410,4 @@ Die 17 Headless-Tests bestätigen die vorhandenen Spielregeln; sie bewerten wede
 | 01.10.2026 | VIS-003: Stationen, Bewohner und Sammelpflanzen als drei transparente 3-Zellen-Atlanten integriert; 19 Tests, Godot-Import, 60-Frame-Start und Hauptszene bei 480 × 270 geprüft. |
 | 01.10.2026 | REL-001: Windows-x86_64-Exportprofil, passende lokale Vorlagen, Exportdokumentation und Release-Checkliste ergänzt. |
 | 01.10.2026 | PLAY-001: HUD-Kontrast im Moor-Stil verbessert; vier Bewegungsrichtungen, Fels-/Teich-/Randkollisionen und 480 × 270-Spielansicht geprüft. |
+| 01.10.2026 | INV-001: Kräuter- und Heilmittelbestände in ein kategorisiertes Modal mit I/Escape und Live-Zählern verlagert; Spielersteuerung pausiert; Regressionen, Editorimport und Startlauf geprüft. |

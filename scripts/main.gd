@@ -1,5 +1,40 @@
 extends Node2D
 
+const INVENTORY_COLUMNS: Array = [
+	[
+		{
+			"title": "FRISCHE KRÄUTER",
+			"items": [
+				["sump_mint", "Sumpfminze", "fresh"],
+				["reed_root", "Schilfwurzel", "fresh"],
+				["night_moss", "Nachtmoos", "fresh"],
+			],
+		},
+		{
+			"title": "GETROCKNET",
+			"items": [
+				["dried_sump_mint", "Getr. Sumpfminze", "dried"],
+				["dried_reed_root", "Getr. Schilfwurzel", "dried"],
+				["dried_night_moss", "Getr. Nachtmoos", "dried"],
+			],
+		},
+	],
+	[
+		{
+			"title": "HEILMITTEL",
+			"items": [
+				["calming_tea", "Beruhigungstee", "remedy"],
+				["strengthening_infusion", "Stärkender Aufguss", "remedy"],
+				["night_potion", "Nachttrank", "remedy"],
+			],
+		},
+		{
+			"title": "MÜNZEN",
+			"items": [["coins", "Münzen", "coin"]],
+		},
+	],
+]
+
 @onready var _player: Node = $World/Player
 @onready var _inventory: Node = $Inventory
 @onready var _save_manager: Node = $SaveManager
@@ -8,6 +43,11 @@ extends Node2D
 @onready var _lene_quest: Node = $Quest/LeneQuest
 @onready var _quest_board: Area2D = $World/TestMap/QuestBoard
 @onready var _quest_board_panel: PanelContainer = $HUD/QuestBoardPanel
+@onready var _inventory_dim: ColorRect = $HUD/InventoryDim
+@onready var _inventory_window_panel: PanelContainer = $HUD/InventoryWindowPanel
+@onready var _inventory_left_column: VBoxContainer = $HUD/InventoryWindowPanel/Content/Columns/LeftColumn
+@onready var _inventory_right_column: VBoxContainer = $HUD/InventoryWindowPanel/Content/Columns/RightColumn
+@onready var _inventory_window_close_button: Button = $HUD/InventoryWindowPanel/Content/Header/CloseButton
 @onready var _fenja_accept_button: Button = $HUD/QuestBoardPanel/Content/FenjaRow/AcceptButton
 @onready var _marten_accept_button: Button = $HUD/QuestBoardPanel/Content/MartenRow/AcceptButton
 @onready var _lene_accept_button: Button = $HUD/QuestBoardPanel/Content/LeneRow/AcceptButton
@@ -27,6 +67,8 @@ extends Node2D
 @onready var _interaction_feedback: Label = $HUD/InteractionFeedback
 @onready var _feedback_timer: Timer = $HUD/FeedbackTimer
 
+var _inventory_window_counts: Dictionary = {}
+
 
 func _ready() -> void:
 	_player.connect("interaction_hint_changed", _on_interaction_hint_changed)
@@ -36,6 +78,8 @@ func _ready() -> void:
 	_marten_quest.state_changed.connect(_on_marten_quest_state_changed)
 	_lene_quest.state_changed.connect(_on_lene_quest_state_changed)
 	_quest_board.connect("open_requested", _on_quest_board_open_requested)
+	_inventory_window_close_button.pressed.connect(_close_inventory_window)
+	_build_inventory_window()
 	_fenja_accept_button.pressed.connect(_on_fenja_accept_pressed)
 	_marten_accept_button.pressed.connect(_on_marten_accept_pressed)
 	_lene_accept_button.pressed.connect(_on_lene_accept_pressed)
@@ -66,14 +110,29 @@ func _ready() -> void:
 				quest_npc.set_quest(quests_by_id[quest_id])
 
 	_load_save_on_startup()
+	_refresh_inventory_window()
 	_update_quest_status()
 	_refresh_quest_board()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _quest_board_panel.visible and event.is_action_pressed("ui_cancel"):
-		_close_quest_board()
+	if event.is_action_pressed("ui_cancel"):
+		if _inventory_window_panel.visible:
+			_close_inventory_window()
+		elif _quest_board_panel.visible:
+			_close_quest_board()
+		else:
+			return
 		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("toggle_inventory"):
+		if not _quest_board_panel.visible:
+			if _inventory_window_panel.visible:
+				_close_inventory_window()
+			else:
+				_open_inventory_window()
+		get_viewport().set_input_as_handled()
+	elif _quest_board_panel.visible or _inventory_window_panel.visible:
+		return
 	elif event.is_action_pressed("save_game"):
 		save_game()
 		get_viewport().set_input_as_handled()
@@ -222,8 +281,12 @@ func _apply_save_data(save_data: Dictionary) -> void:
 
 
 func _on_quest_board_open_requested() -> void:
+	if _inventory_window_panel.visible:
+		return
+
 	_refresh_quest_board()
 	_quest_board_panel.show()
+	_interaction_prompt.hide()
 	_player.set_physics_process(false)
 	_player.set_process_unhandled_input(false)
 	if not _fenja_accept_button.disabled:
@@ -242,9 +305,33 @@ func _close_quest_board() -> void:
 	_marten_accept_button.release_focus()
 	_lene_accept_button.release_focus()
 	_quest_board_close_button.release_focus()
-	_player.set_physics_process(true)
-	_player.set_process_unhandled_input(true)
-	_player.call_deferred("refresh_interactable_prompt")
+	if not _inventory_window_panel.visible:
+		_player.set_physics_process(true)
+		_player.set_process_unhandled_input(true)
+		_player.call_deferred("refresh_interactable_prompt")
+
+
+func _open_inventory_window() -> void:
+	if _quest_board_panel.visible:
+		return
+
+	_refresh_inventory_window()
+	_inventory_dim.show()
+	_inventory_window_panel.show()
+	_interaction_prompt.hide()
+	_player.set_physics_process(false)
+	_player.set_process_unhandled_input(false)
+	_inventory_window_close_button.grab_focus()
+
+
+func _close_inventory_window() -> void:
+	_inventory_window_panel.hide()
+	_inventory_dim.hide()
+	_inventory_window_close_button.release_focus()
+	if not _quest_board_panel.visible:
+		_player.set_physics_process(true)
+		_player.set_process_unhandled_input(true)
+		_player.call_deferred("refresh_interactable_prompt")
 
 
 func _on_fenja_accept_pressed() -> void:
@@ -339,7 +426,71 @@ func _on_item_count_changed(item_id: String, amount: int) -> void:
 	elif item_id == "night_potion":
 		_night_potion_count.text = "Nachttrank: %d" % amount
 
+	var window_count_label := _inventory_window_counts.get(item_id) as Label
+	if window_count_label != null:
+		window_count_label.text = str(amount)
+
 	_update_quest_status()
+
+
+func _build_inventory_window() -> void:
+	for category_data: Dictionary in INVENTORY_COLUMNS[0]:
+		_add_inventory_category(_inventory_left_column, category_data)
+	for category_data: Dictionary in INVENTORY_COLUMNS[1]:
+		_add_inventory_category(_inventory_right_column, category_data)
+
+
+func _add_inventory_category(parent: VBoxContainer, category_data: Dictionary) -> void:
+	var category := VBoxContainer.new()
+	category.add_theme_constant_override("separation", 2)
+	parent.add_child(category)
+
+	var heading := Label.new()
+	heading.text = str(category_data["title"])
+	heading.add_theme_color_override("font_color", Color(0.82, 0.72, 0.48, 1))
+	heading.add_theme_font_size_override("font_size", 9)
+	category.add_child(heading)
+
+	for item_data: Array in category_data["items"]:
+		var item_id := str(item_data[0])
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 5)
+		category.add_child(row)
+
+		var item_name := Label.new()
+		item_name.text = str(item_data[1])
+		item_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		item_name.add_theme_color_override("font_color", Color(0.88, 0.83, 0.68, 1))
+		item_name.add_theme_font_size_override("font_size", 9)
+		row.add_child(item_name)
+
+		var count_label := Label.new()
+		count_label.name = "Count_%s" % item_id
+		count_label.custom_minimum_size = Vector2(22, 0)
+		count_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		count_label.text = str(_inventory.call("get_count", item_id))
+		count_label.add_theme_color_override("font_color", _inventory_count_color(str(item_data[2])))
+		count_label.add_theme_font_size_override("font_size", 9)
+		row.add_child(count_label)
+		_inventory_window_counts[item_id] = count_label
+
+
+func _inventory_count_color(tone: String) -> Color:
+	match tone:
+		"fresh":
+			return Color(0.78, 0.87, 0.57, 1)
+		"dried":
+			return Color(0.87, 0.79, 0.59, 1)
+		"coin":
+			return Color(0.93, 0.8, 0.42, 1)
+		_:
+			return Color(0.92, 0.78, 0.55, 1)
+
+
+func _refresh_inventory_window() -> void:
+	for item_id in _inventory_window_counts:
+		var count_label := _inventory_window_counts[item_id] as Label
+		count_label.text = str(_inventory.call("get_count", str(item_id)))
 
 
 func _on_quest_state_changed(state: String) -> void:

@@ -202,3 +202,9 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Die Hauptszene wurde bei 480 × 270 als Godot-Movie-Frame gerendert und auf Lesbarkeit von Steuerleiste und Inventarzählern geprüft.
 - Der PLAY-001-Test und alle 19 vorherigen Tests, Godot-Editorimport sowie 60-Frame-Lauf bestanden.
 - Offen: subjektives Gefühl physischer Tastatursteuerung wurde nicht manuell bewertet.
+
+## INV-001 – Inventarfenster
+- tests/inv_001_inventory_window_test.gd prüft I-Belegung, Öffnen und Schließen mit I/Escape/Schaltfläche, Fokus, aktuelle Bestände aller zehn Einträge, Münzen und Fenstergrenzen bei 480 × 270.
+- Der Test prüft außerdem die Verlagerung der detaillierten Bestände aus dem permanenten HUD, die Pause von Bewegung und Weltinteraktionen sowie den Schutz vor Überschneidung mit dem Auftragsbrett.
+- Alle 21 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
+- Offen: echte Tastatureingabe und Lesbarkeit im sichtbaren Spielfenster manuell prüfen.

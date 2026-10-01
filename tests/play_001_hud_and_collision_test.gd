@@ -47,12 +47,10 @@ func _run() -> void:
 
 	_check(top_bar.get_index() < controls.get_index(), "the top bar is drawn behind its text")
 	_check(top_bar.get_index() < coin_count.get_index(), "the top bar is drawn behind the coin count")
-	_check(inventory_panel.get_index() < inventory_count.get_index(), "the inventory panel is drawn behind its counters")
-	_check(inventory_panel.get_index() < quest_status.get_index(), "the inventory panel extends behind quest guidance")
+	_check(not inventory_panel.visible and not inventory_count.visible, "detailed item counts stay out of the persistent HUD")
 	_check(top_bar.mouse_filter == Control.MOUSE_FILTER_IGNORE, "the top bar does not intercept input")
 	_check(inventory_panel.mouse_filter == Control.MOUSE_FILTER_IGNORE, "the inventory panel does not intercept input")
 	_check(_is_readable_surface(top_bar.get_theme_stylebox("panel")), "the top bar has a dark translucent surface and one-pixel outline")
-	_check(_is_readable_surface(inventory_panel.get_theme_stylebox("panel")), "the inventory has a dark translucent surface and one-pixel outline")
 	_check(_is_readable_surface(feedback.get_theme_stylebox("normal")), "interaction feedback has a contrast surface")
 	_check(_is_readable_surface(prompt.get_theme_stylebox("normal")), "interaction prompts have a contrast surface")
 
