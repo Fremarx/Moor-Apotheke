@@ -21,6 +21,7 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 | [Godot Windows Downloads](https://godotengine.org/download/windows/) | 4.7.2 Stable, 30.09.2026 | Editor-Version und portable Distribution | Primärquelle; bei Versionswechsel prüfen |
 | [Project Organization](https://docs.godotengine.org/en/4.7/tutorials/best_practices/project_organization.html) | 4.7, 30.09.2026 | Dateiorganisation | Offizielle Engine-Doku; bei Strukturänderung prüfen |
 | [Scene Organization](https://docs.godotengine.org/en/4.7/tutorials/best_practices/scene_organization.html) | 4.7, 30.09.2026 | Szenengrenzen, Signale, Kopplung | Offizielle Engine-Doku; bei Architekturfragen abrufen |
+| [MainLoop class reference](https://docs.godotengine.org/en/4.7/classes/class_mainloop.html) | 4.7, 01.10.2026 | `_process()` steuert Fortsetzung eines per `--script` gestarteten SceneTree-Tests | Offizielle Engine-Doku; Headless-Testläufe |
 | [2D Movement Overview](https://docs.godotengine.org/en/4.7/tutorials/2d/2d_movement.html) | 4.7, 30.09.2026 | CharacterBody2D-Bewegung | Offizielle Engine-Doku; CORE-001 |
 | [Using CharacterBody2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_character_body_2d.html) | 4.7, 30.09.2026 | Kollisionen und Bewegung | Offizielle Engine-Doku; CORE-001 |
 | [Using TileSets](https://docs.godotengine.org/en/4.7/tutorials/2d/using_tilesets.html) | 4.7, 30.09.2026 | Raster, Tilesheets, Kollision/Metadaten | Offizielle Engine-Doku; Karten-/Assettasks |
@@ -86,6 +87,13 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 - **01.10.2026 – AREA-001:** Area2D-Überlappungen liefern `body_entered` bei aktivierter Überwachung am Physikschritt; Main vermittelt das Übergangssignal zu einer Zielkarte über deren lokale Spawnkoordinate. Camera2D-Begrenzungen halten den Bildausschnitt innerhalb der 1280 × 360-Welt. Quellen: [Using Area2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) und [Camera2D class reference](https://docs.godotengine.org/en/4.7/classes/class_camera2d.html).
 
 - **01.10.2026 – RESOURCE-001:** Die beiden neuen Pflanzenstellen sind zusätzliche Instanzen des vorhandenen `Area2D`-Pickup-Musters und verwenden passende Zellen des bestehenden Pflanzen-`Sprite2D`-Atlas. Der SaveManager speichert eindeutige Pickup-IDs wie die bereits dokumentierten geernteten Pflanzen; es kam keine neue Godot-API hinzu. Die vorhandenen Quellen zu [Area2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html), [Sprite2D](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html) und [Spielständen](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html) decken die Änderung ab.
+
+## Headless-Tests mit SceneTree
+
+Godots MainLoop-Referenz beschreibt `_process(delta)` als wiederkehrenden Loop-Callback; `true` beendet die Schleife. Alle Testskripte behalten sie mit `return false` aktiv, damit `call_deferred()` und asynchrone Prüfschritte unter `--script` ausgeführt werden. Quelle: [MainLoop class reference](https://docs.godotengine.org/en/4.7/classes/class_mainloop.html), geprüft am 01.10.2026.
+
+## VIS-004 – Texturausschnitte für Haus und Moorpflanzen
+`CanvasItem.draw_texture_rect_region()` zeichnet ein Quellrechteck einer Textur in ein Zielrechteck im lokalen Raum. Dorfplatz und Schilfufer verwenden die Methode für ausgewählte Motive aus demselben transparenten Umgebungsatlas; Kollision und Weggeometrie bleiben separat definiert. Quelle: [CanvasItem class reference](https://docs.godotengine.org/en/4.7/classes/class_canvasitem.html), geprüft am 01.10.2026.
 
 ## VIS-003 – Sprite-Atlanten für Weltobjekte
 Stationen, Bewohner und Sammelpflanzen liegen jeweils in einem horizontalen 3-Zellen-Atlas. Godots Sprite2D nutzt hframes = 3 und frame = 0, 1 oder 2 zur Zellwahl. Die Grafik bleibt ein Sprite2D-Kind ihrer Interaktionsobjekte; Sichtbarkeit und Kollision der Sammelstelle bleiben in der vorhandenen Gameplay-Logik. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).

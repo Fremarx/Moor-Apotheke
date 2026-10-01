@@ -5,6 +5,7 @@ const WALL_THICKNESS := 16.0
 const ATLAS_COLUMNS := 4.0
 const ATLAS_ROWS := 4.0
 const DECORATION_ATLAS: Texture2D = preload("res://assets/tilesets/moor_vegetation_atlas_ai_20261001.png")
+const ENVIRONMENT_ATLAS: Texture2D = preload("res://assets/sprites/moor_environment_atlas_ai_20261001.png")
 
 @export var area_id: StringName = &"Dorfplatz"
 
@@ -288,46 +289,19 @@ func _draw_village_square() -> void:
 
 
 func _draw_apothecary() -> void:
-	draw_set_transform(Vector2(0, 22))
-	draw_rect(Rect2(Vector2(91, 79), Vector2(145, 80)), Color(0.12, 0.17, 0.14, 0.35))
-	draw_rect(Rect2(Vector2(101, 90), Vector2(119, 62)), Color("53473a"))
-	draw_rect(Rect2(Vector2(105, 93), Vector2(111, 55)), Color("c7ad7d"))
-	draw_rect(Rect2(Vector2(110, 97), Vector2(101, 48)), Color("dcc79a"))
-	draw_rect(Rect2(Vector2(116, 108), Vector2(17, 19)), Color("6e6550"))
-	draw_rect(Rect2(Vector2(118, 110), Vector2(13, 15)), Color("91aa8a"))
-	draw_rect(Rect2(Vector2(190, 108), Vector2(17, 19)), Color("6e6550"))
-	draw_rect(Rect2(Vector2(192, 110), Vector2(13, 15)), Color("91aa8a"))
-	draw_rect(Rect2(Vector2(143, 129), Vector2(34, 22)), Color("5e4637"))
-	draw_rect(Rect2(Vector2(146, 131), Vector2(28, 19)), Color("754f3b"))
-	draw_rect(Rect2(Vector2(166, 136), Vector2(3, 3)), Color("dfbb69"))
-
-	draw_colored_polygon(PackedVector2Array([
-		Vector2(89, 93), Vector2(118, 61), Vector2(201, 61),
-		Vector2(232, 93), Vector2(222, 103), Vector2(99, 103)
-	]), Color("493b32"))
-	draw_colored_polygon(PackedVector2Array([
-		Vector2(96, 91), Vector2(121, 66), Vector2(199, 66),
-		Vector2(225, 91), Vector2(216, 98), Vector2(104, 98)
-	]), Color("85523c"))
-	for row in range(3):
-		var shingle_y := 73 + row * 7
-		for column in range(6):
-			var shingle_x := 111 + column * 17 + (row % 2) * 4
-			draw_rect(Rect2(Vector2(shingle_x, shingle_y), Vector2(11, 3)), Color("a36b4b"))
-			draw_rect(Rect2(Vector2(shingle_x + 1, shingle_y), Vector2(7, 1)), Color("bd8057"))
-	draw_line(Vector2(119, 65), Vector2(200, 65), Color("d19a68"), 2.0)
-	draw_rect(Rect2(Vector2(193, 51), Vector2(14, 23)), Color("55483b"))
-	draw_rect(Rect2(Vector2(196, 54), Vector2(8, 17)), Color("9a7651"))
-	draw_rect(Rect2(Vector2(191, 50), Vector2(18, 4)), Color("d0b184"))
-
-	draw_rect(Rect2(Vector2(130, 118), Vector2(63, 13)), Color("47392e"))
-	draw_rect(Rect2(Vector2(133, 120), Vector2(57, 9)), Color("936942"))
-	draw_rect(Rect2(Vector2(125, 115), Vector2(4, 18)), Color("594331"))
-	draw_rect(Rect2(Vector2(194, 115), Vector2(4, 18)), Color("594331"))
-	draw_string(ThemeDB.fallback_font, Vector2(138, 127), "APOTHEKE", HORIZONTAL_ALIGNMENT_LEFT, 60.0, 7, Color("f0d9a5"))
-	draw_rect(Rect2(Vector2(141, 132), Vector2(9, 4)), Color("5b774e"))
-	draw_rect(Rect2(Vector2(144, 129), Vector2(4, 5)), Color("88a65a"))
-	draw_set_transform(Vector2.ZERO)
+	_draw_environment_sprite(
+		Rect2(230.0, 20.0, 640.0, 500.0),
+		Rect2(Vector2(70, 24), Vector2(180, 141))
+	)
+	draw_string(
+		ThemeDB.fallback_font,
+		Vector2(224, 112),
+		"APO",
+		HORIZONTAL_ALIGNMENT_LEFT,
+		14.0,
+		5,
+		Color("3b2b20")
+	)
 
 
 func _draw_village_signs() -> void:
@@ -376,6 +350,10 @@ func _draw_reeds() -> void:
 	]:
 		_draw_atlas_sprite(reed, Vector2i(0, 0), Vector2(32, 36))
 	_draw_atlas_sprite(Vector2(58, 188), Vector2i(1, 0), Vector2(28, 30))
+	_draw_environment_sprite(
+		Rect2(300.0, 530.0, 520.0, 350.0),
+		Rect2(Vector2(423, 45), Vector2(48, 33))
+	)
 
 
 func _draw_scattered_details() -> void:
@@ -385,6 +363,14 @@ func _draw_scattered_details() -> void:
 	_draw_atlas_sprite(Vector2(367, 307), Vector2i(1, 3), Vector2(29, 29))
 	_draw_atlas_sprite(Vector2(390, 301), Vector2i(3, 2), Vector2(30, 30))
 	_draw_atlas_sprite(Vector2(601, 298), Vector2i(3, 3), Vector2(30, 34))
+	_draw_environment_sprite(
+		Rect2(1030.0, 530.0, 550.0, 350.0),
+		Rect2(Vector2(500, 245), Vector2(52, 33))
+	)
+	_draw_environment_sprite(
+		Rect2(1030.0, 530.0, 550.0, 350.0),
+		Rect2(Vector2(285, 250), Vector2(48, 30))
+	)
 
 
 func _draw_interaction_probe() -> void:
@@ -414,3 +400,7 @@ func _draw_atlas_sprite(center: Vector2, cell: Vector2i, target_size: Vector2) -
 	var destination := Rect2(center - target_size / 2.0, target_size)
 	var source := Rect2(source_position, cell_size)
 	draw_texture_rect_region(DECORATION_ATLAS, destination, source, Color.WHITE, false, true)
+
+
+func _draw_environment_sprite(source: Rect2, destination: Rect2) -> void:
+	draw_texture_rect_region(ENVIRONMENT_ATLAS, destination, source, Color.WHITE, false, true)

@@ -5,6 +5,7 @@ const WALL_THICKNESS := 16.0
 const ATLAS_COLUMNS := 4.0
 const ATLAS_ROWS := 4.0
 const DECORATION_ATLAS: Texture2D = preload("res://assets/tilesets/moor_vegetation_atlas_ai_20261001.png")
+const ENVIRONMENT_ATLAS: Texture2D = preload("res://assets/sprites/moor_environment_atlas_ai_20261001.png")
 
 @export var area_id: StringName = &"Schilfufer"
 
@@ -142,12 +143,28 @@ func _draw_reeds() -> void:
 		_draw_atlas_sprite(reed, Vector2i(0, 0), Vector2(30, 34))
 	_draw_atlas_sprite(Vector2(332, 188), Vector2i(1, 0), Vector2(30, 31))
 	_draw_atlas_sprite(Vector2(98, 101), Vector2i(1, 0), Vector2(28, 29))
+	_draw_environment_sprite(
+		Rect2(300.0, 530.0, 520.0, 350.0),
+		Rect2(Vector2(186, 83), Vector2(48, 33))
+	)
+	_draw_environment_sprite(
+		Rect2(300.0, 530.0, 520.0, 350.0),
+		Rect2(Vector2(500, 158), Vector2(48, 33))
+	)
 
 
 func _draw_details() -> void:
 	_draw_atlas_sprite(Vector2(185, 274), Vector2i(1, 3), Vector2(29, 29))
 	_draw_atlas_sprite(Vector2(298, 199), Vector2i(0, 1), Vector2(31, 32))
 	_draw_atlas_sprite(Vector2(371, 131), Vector2i(2, 1), Vector2(35, 34))
+	_draw_environment_sprite(
+		Rect2(1030.0, 530.0, 550.0, 350.0),
+		Rect2(Vector2(120, 177), Vector2(52, 33))
+	)
+	_draw_environment_sprite(
+		Rect2(1030.0, 530.0, 550.0, 350.0),
+		Rect2(Vector2(500, 186), Vector2(52, 33))
+	)
 	_draw_atlas_sprite(Vector2(603, 302), Vector2i(3, 3), Vector2(30, 33))
 	for pebble in [Vector2(83, 287), Vector2(229, 222), Vector2(361, 286), Vector2(479, 291), Vector2(587, 186)]:
 		draw_rect(Rect2(pebble, Vector2(5, 2)), Color("6b6047"))
@@ -173,3 +190,7 @@ func _draw_atlas_sprite(center: Vector2, cell: Vector2i, target_size: Vector2) -
 		false,
 		true
 	)
+
+
+func _draw_environment_sprite(source: Rect2, destination: Rect2) -> void:
+	draw_texture_rect_region(ENVIRONMENT_ATLAS, destination, source, Color.WHITE, false, true)

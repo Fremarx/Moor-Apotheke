@@ -127,3 +127,6 @@ func _finish() -> void:
 	for failure in _failures:
 		push_error("QUEST-001 check failed: " + failure)
 	quit(1)
+
+func _process(_delta: float) -> bool:
+	return false

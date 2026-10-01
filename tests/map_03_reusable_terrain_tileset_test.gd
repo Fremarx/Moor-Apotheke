@@ -77,3 +77,6 @@ func _check_map(map_case: Dictionary) -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		_failures.append(message)
+
+func _process(_delta: float) -> bool:
+	return false

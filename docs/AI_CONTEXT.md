@@ -24,13 +24,14 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - CONTENT-001b, LOOP-005/006 und QUEST-003 ergänzen Nachtmoos, Nachttrank und Lenes Auftrag.
 - BOARD-001 und ECON-001 ergänzen das Auftragsbrett sowie Münzbelohnungen.
 - SAVE-001 speichert und lädt Position, Inventar, Auftragsstatus und abgeerntete Pflanzen in user://.
-- VIS-001 bis VIS-003 integrieren die warme Moor-Pixelart für Karte, Spieler, Stationen, Bewohner und Sammelpflanzen.
+- VIS-001 bis VIS-004 integrieren die warme Moor-Pixelart für Karte, Spieler, Stationen, Bewohner, Sammelpflanzen, Apotheke und Moorvegetation.
 - REL-001 ist abgeschlossen: Windows Desktop x86_64 ist das erste Exportziel; Profil und Release-Checkliste sind versioniert, passende Vorlagen sind lokal installiert.
 - PLAY-001 ist abgeschlossen: HUD-Kontrast wurde verbessert; Richtungsbewegung und Kollisionen sind automatisiert geprüft, die Hauptszene wurde bei 480 × 270 gerendert. Subjektives Gefühl echter Hardwareeingaben ist nicht bewertet.
 - INV-001 ist abgeschlossen: Das Inventarfenster zeigt zehn Bestände in Kategorien; I und Escape schließen es, während das Spiel pausiert. Detaillierte Bestände sind aus dem permanenten HUD entfernt.
 - PLAYTEST-001 zeigte die Ressourcenknappheit; RESOURCE-001 ist abgeschlossen: Fenja, Marten und Lene lassen sich frisch nacheinander erfüllen und bringen zusammen 30 Münzen.
 - AREA-001 ist abgeschlossen: Schilfufer ist über Hin- und Rückweg erreichbar und ergänzt je eine Sumpfminz-, Schilfwurzel- und Nachtmoosstelle.
 - MAP-01 ist abgeschlossen: Der bestehende TestMap-Knoten stellt logisch den Dorfplatz dar; Apotheke, Brett und Brunnen sind sichtbar. MAP-02 ergänzt fünf Richtungswege mit offenem NW-Übergang zum Schilfufer sowie vier sichtbar und physisch gesperrten Zukunftswegen. MAP-03 stellt einen gemeinsamen 16×16-Terrainatlas und ruhige Grundkacheln in beiden Karten bereit. Alle 26 Headless-Tests, Editorimport und 60-Frame-Start bestehen.
+- VIS-004 ersetzt das flach gezeichnete Apothekenmotiv und ergänzt passende größere Schilf- und Moosgruppen in beiden Startkarten; die Wege und Kollisionsflächen blieben unverändert.
 - Maßgebliche Entwurfsquellen: `design/world_design_plan.md`, `design/world_backlog.md`, `design/progression_roadmap.md`, `design/resource_economy.md`, `design/enemy_roster.md`, `design/agent_workflow.md` und `design/world_map_mockup.png`.
 - Nächster Schritt: SCALE-01 gemäß `design/world_backlog.md`; danach REG-01/REG-02. Jahreszeiten und Automatisierung bleiben nachrangig.
 - Nach jedem Backlogpunkt eigener Commit und Push.

@@ -3,6 +3,8 @@
 ## Aktueller Stand
 Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Startszene im Headless-Editor importiert und 60 Laufzeitframes ohne Fehler ausgeführt. Ein sichtbarer Godot-Fenstertest mit echter Tastatur steht noch aus.
 
+Die 27 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, damit Godot beim Start per `--script` die verzögerten und asynchronen Prüfschritte tatsächlich ausführt. Ohne diesen MainLoop-Hook endete der Prozess nach dem Laden des Skripts, bevor die Tests liefen.
+
 ## Pro Backlogpunkt
 1. Godot-Editor-/Parserfehlerstand prüfen.
 2. Eigenständige Regeln wie Inventar, Rezeptverbrauch und Auftragsstatus automatisiert prüfen, sobald die Logik diese Trennung rechtfertigt.
@@ -258,3 +260,10 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Beide Karten wurden mit normalem Godot-Renderer als 480×270-Viewport aufgenommen. Pfade und Ufer sind ohne sichtbare Lücken; Sammelpflanzen bleiben gegenüber dem ruhigen Grundtile erkennbar.
 - Abschlussprüfung: alle 26 Godot-Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden.
 - Das TileSet ist manuell bemalbar; automatische Terrainmasken sind noch nicht eingerichtet. Die vorhandene Grundkarte behält ihre durchgehenden gezeichneten Wege und Ufer.
+
+## VIS-004 – Haus und Moorvegetation
+
+- `tests/vis_004_environment_style_test.gd` prüft den transparenten 1774×887-Umgebungsatlas, gültige Quellrechtecke und die Verwendung des gemeinsamen Atlas durch beide Karten.
+- Dorfplatz und Schilfufer wurden mit normalem Godot-Renderer bei 480×270 aufgenommen. Die neue Apotheke sowie Schilf- und Moosgruppen wurden neben Spieler und Kräutern im Spielmaßstab geprüft; die Laufwege bleiben frei.
+- Kollisionsrechtecke, Übergänge und Weggeometrie sind unverändert.
+- Abschlussprüfung: alle 27 Godot-Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden.

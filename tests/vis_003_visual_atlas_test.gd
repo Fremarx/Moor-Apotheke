@@ -70,3 +70,6 @@ func _finish() -> void:
 	else:
 		push_error("VIS-003 had " + str(_failures.size()) + " failure(s).")
 	quit(1 if not _failures.is_empty() else 0)
+
+func _process(_delta: float) -> bool:
+	return false

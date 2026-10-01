@@ -86,6 +86,28 @@ Simplify the repeated ground texture so the upper-left cell is a uniform muted o
 
 Das Atlasbild wurde anschließend zellenweise auf exakt 16 × 16 Pixel pro Motiv zugeschnitten und mit Nearest-Neighbor auf 128 × 128 gebracht. Die Prüfung im Spielmaßstab zeigte ruhige Grundflächen, lesbare Sammelpflanzen und durchgehende gezeichnete Wege.
 
+## VIS-004 – Hausarchitektur und Moorvegetation
+
+- Datei: `assets/sprites/moor_environment_atlas_ai_20261001.png`
+- Format: PNG mit transparentem Hintergrund, 1774 × 887 Pixel. Das Blatt enthält eine Apotheke, ein kleineres Torfhaus, ein üppiges Schilfbüschel und einen bemoosten Steinhaufen.
+- Verwendung: Dorfplatz zeichnet das Apothekenmotiv aus dem Quellrechteck `(230, 20, 640, 500)` in 180 × 141 Spielpixel. Schilf- und Moosgruppen werden in beiden Karten als transparente Sprites verwendet. Das kleinere Torfhaus bleibt als passende Architektur für spätere Dorfbereiche verfügbar. Kollisionsrechtecke und Wege bleiben bestehen.
+- Stil: dunkle Torfkonturen, warme obere Lichtkante, abgestufte Materialfarben und dichte Pixelcluster wie bei Spieler und Kräutern. Die Naturmotive sind bei 480 × 270 größer und klarer platziert, ohne die Wege zuzudecken.
+- Herkunft: am 01.10.2026 mit OpenAI Imagegen in Codex erzeugt und mit einer gezielten Layoutkorrektur weitergeführt. Es wurden keine Fremdassets eingebunden; eine externe Lizenz ist nicht betroffen.
+
+### Prompt zur Erstgenerierung
+
+<pre>
+Create a production-ready transparent pixel-art environment sprite atlas for the cozy 2D top-down game Moor-Apotheke. Arrange exactly four equal square cells in a clean 2-by-2 grid with generous transparent padding and no dividers. Cell 1: the village apothecary cottage, compact and welcoming, cream plaster over dark peat-brown timber framing, steep mossy terracotta shingle roof, two softly amber-lit windows, small chimney, attached tiny herb planter, blank wooden signboard with no writing; frontal facade from the same slightly elevated game viewpoint as the characters. Cell 2: a smaller peat-cutter cottage in the same architecture and scale, dark weathered boards, green moss roof, warm shuttered window. Cell 3: a lush irregular tuft of marsh reeds with cattails, broad layered leaves, small roots and a few amber seed heads. Cell 4: a rich moss bank with two rounded stones, fern fronds, a few tiny cream flowers and fallen ochre leaves. Each object is isolated, fully contained in its cell, with no ground plane or backdrop. Match the approved game characters and medicinal herb sprites: crisp hand-crafted 16-bit pixel art, intentional chunky pixel clusters, visible discrete highlight and shadow bands, strong deep peat-brown outlines, warm upper-left highlights, dimensional wood, roof shingles, leaves and moss; a few bright details but a restrained moss, sage, peat, honey and cream palette. Designed to remain readable when each cell is displayed around 64 by 64 game pixels, with the main cottage about 56 pixels tall and nature props 28 to 42 pixels tall. Transparent alpha, hard pixel edges, no blur, anti-aliasing, smooth gradients, glow, 3D, text, labels, watermark, border, UI, overlapping cells, or shadows reaching another cell.
+</pre>
+
+### Prompt zur Layoutkorrektur
+
+<pre>
+Make a precise layout correction to the provided transparent 2-by-2 pixel-art environment atlas. Preserve the four exact objects and their current rich, polished hand-crafted 16-bit pixel art style, palette, shading, material detail, outlines, and warm lighting. Keep the canvas and four equal quadrants. The quadrant boundaries are exactly the vertical centerline and horizontal centerline. Scale each object down just enough and center it so every opaque pixel, including the apothecary's hanging blank sign, roof, chimney, planter, all reed tips, shadows, and moss leaves, stays completely inside its own quadrant with at least 6 percent transparent padding from every quadrant edge. Top-left: apothecary only, entirely within the top-left quadrant. Top-right: peat cottage only, entirely within the top-right quadrant. Bottom-left: reed tuft only, entirely within bottom-left quadrant. Bottom-right: moss and stone cluster only, entirely within bottom-right quadrant. Leave a visibly transparent gutter along both centerlines. Preserve true transparent alpha outside the art. Do not add, remove, or redesign objects. No background, no tile cell colors, no lines, no text, no labels, no glow, no blur.
+</pre>
+
+Godot nutzt explizite Quellrechtecke, damit die Motive aus dem transparenten Atlas ohne Zelltrennlinien ausgeschnitten werden. Der kleine Schriftzug `APO` im Holzschild hält das Ladenmotiv bei nativer Pixelgröße erkennbar.
+
 ## VIS-003 – Stationen, Bewohner und Sammelpflanzen
 
 Alle drei PNG-Dateien sind transparente Atlanten mit 2172 × 724 Pixeln und drei Zellen à 724 × 724 Pixel. Sie wurden mit dem integrierten OpenAI Imagegen in Codex erstellt; es wurden keine Fremdassets eingebunden. Die Mockups dienten nur als Stil- und Farbhinweis.
