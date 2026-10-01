@@ -25,7 +25,9 @@ func _run() -> void:
 	var marten_quest := main.get_node_or_null("Quest/MartenQuest")
 	var lene_quest := main.get_node_or_null("Quest/LeneQuest")
 	var mint_pickup := main.get_node_or_null("World/TestMap/Sumpfminze")
+	var southern_mint_pickup := main.get_node_or_null("World/TestMap/SumpfminzeSued")
 	var reed_root_pickup := main.get_node_or_null("World/TestMap/Schilfwurzel")
+	var southeastern_reed_root_pickup := main.get_node_or_null("World/TestMap/SchilfwurzelSuedost")
 	var night_moss_pickup := main.get_node_or_null("World/TestMap/Nachtmoos")
 
 	_check(save_manager != null, "the save manager exists")
@@ -33,8 +35,8 @@ func _run() -> void:
 	_check(inventory != null, "the inventory exists")
 	_check(fenja != null and marten != null and lene != null, "all quest residents exist")
 	_check(fenja_quest != null and marten_quest != null and lene_quest != null, "all quest states exist")
-	_check(mint_pickup != null and reed_root_pickup != null and night_moss_pickup != null, "persistent herb pickups exist")
-	if save_manager == null or player == null or inventory == null or fenja == null or marten == null or lene == null or fenja_quest == null or marten_quest == null or lene_quest == null or mint_pickup == null or reed_root_pickup == null or night_moss_pickup == null:
+	_check(mint_pickup != null and southern_mint_pickup != null and reed_root_pickup != null and southeastern_reed_root_pickup != null and night_moss_pickup != null, "all five persistent herb pickups exist")
+	if save_manager == null or player == null or inventory == null or fenja == null or marten == null or lene == null or fenja_quest == null or marten_quest == null or lene_quest == null or mint_pickup == null or southern_mint_pickup == null or reed_root_pickup == null or southeastern_reed_root_pickup == null or night_moss_pickup == null:
 		main.queue_free()
 		await process_frame
 		_remove_test_save()
@@ -71,12 +73,15 @@ func _run() -> void:
 
 	player.position = SAVED_PLAYER_POSITION
 	mint_pickup.call("interact")
+	southern_mint_pickup.call("interact")
 	reed_root_pickup.call("interact")
+	southeastern_reed_root_pickup.call("interact")
 	inventory.call("add_item", "sump_mint", 2)
 	inventory.call("add_item", "dried_night_moss", 3)
 	_check(int(inventory.call("get_count", "coins")) == 15, "the completed requests have awarded fifteen coins")
 	_check(not mint_pickup.visible, "the collected mint is hidden before saving")
 	_check(not reed_root_pickup.visible, "the collected reed root is hidden before saving")
+	_check(not southern_mint_pickup.visible and not southeastern_reed_root_pickup.visible, "both added herb patches are hidden before saving")
 
 	var save_action := _action_event("save_game")
 	main.call("_unhandled_input", save_action)
@@ -98,8 +103,8 @@ func _run() -> void:
 	await physics_frame
 	_check(player.position.is_equal_approx(SAVED_PLAYER_POSITION), "F9 restores the saved player position")
 	_check(int(inventory.call("get_count", "coins")) == 15, "F9 discards unsaved wallet changes")
-	_check(int(inventory.call("get_count", "sump_mint")) == 3, "F9 restores saved inventory amounts")
-	_check(int(inventory.call("get_count", "reed_root")) == 1, "F9 restores another plant's inventory amount")
+	_check(int(inventory.call("get_count", "sump_mint")) == 4, "F9 restores both collected mint patches and saved inventory amounts")
+	_check(int(inventory.call("get_count", "reed_root")) == 2, "F9 restores both collected reed-root patches")
 	_check(int(inventory.call("get_count", "dried_night_moss")) == 3, "F9 restores processed ingredients")
 	_check(int(inventory.call("get_count", "night_moss")) == 0, "F9 discards unsaved pickup inventory")
 	_check(str(fenja_quest.get("state")) == "completed", "F9 restores Fenja's completed request")
@@ -107,6 +112,7 @@ func _run() -> void:
 	_check(str(lene_quest.get("state")) == "active", "F9 restores Lene's active request")
 	_check(not mint_pickup.visible, "F9 keeps a saved collected plant hidden")
 	_check(not reed_root_pickup.visible, "F9 keeps a second saved plant hidden")
+	_check(not southern_mint_pickup.visible and not southeastern_reed_root_pickup.visible, "F9 keeps both added herb patches hidden")
 	_check(night_moss_pickup.visible, "F9 restores an unsaved plant to the world")
 	_check(feedback != null and feedback.text.contains("geladen"), "loading gives visible confirmation")
 	_check(main.get_node("HUD/CoinCount").text == "Münzen: 15", "loading refreshes the coin HUD")
@@ -117,7 +123,9 @@ func _run() -> void:
 	player = reloaded_main.get_node_or_null("World/Player") as CharacterBody2D
 	inventory = reloaded_main.get_node_or_null("Inventory")
 	mint_pickup = reloaded_main.get_node_or_null("World/TestMap/Sumpfminze")
+	southern_mint_pickup = reloaded_main.get_node_or_null("World/TestMap/SumpfminzeSued")
 	reed_root_pickup = reloaded_main.get_node_or_null("World/TestMap/Schilfwurzel")
+	southeastern_reed_root_pickup = reloaded_main.get_node_or_null("World/TestMap/SchilfwurzelSuedost")
 	night_moss_pickup = reloaded_main.get_node_or_null("World/TestMap/Nachtmoos")
 	fenja_quest = reloaded_main.get_node_or_null("Quest/FenjaQuest")
 	marten_quest = reloaded_main.get_node_or_null("Quest/MartenQuest")
@@ -126,7 +134,9 @@ func _run() -> void:
 	_check(player != null and player.position.is_equal_approx(SAVED_PLAYER_POSITION), "the last save loads automatically on startup")
 	_check(inventory != null and int(inventory.call("get_count", "coins")) == 15, "startup loading restores currency")
 	_check(mint_pickup != null and not mint_pickup.visible, "startup loading restores collected plants")
-	_check(reed_root_pickup != null and not reed_root_pickup.visible, "startup loading restores a second collected plant")
+	_check(reed_root_pickup != null and not reed_root_pickup.visible, "startup loading restores a collected reed root")
+	_check(southern_mint_pickup != null and not southern_mint_pickup.visible, "startup loading restores the added mint patch")
+	_check(southeastern_reed_root_pickup != null and not southeastern_reed_root_pickup.visible, "startup loading restores the added reed-root patch")
 	_check(night_moss_pickup != null and night_moss_pickup.visible, "startup loading leaves uncollected plants visible")
 	_check(fenja_quest != null and str(fenja_quest.get("state")) == "completed", "startup loading restores Fenja")
 	_check(marten_quest != null and str(marten_quest.get("state")) == "completed", "startup loading restores Marten")

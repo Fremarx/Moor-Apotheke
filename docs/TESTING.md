@@ -216,3 +216,12 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Godot 4.7.2-Headless-Test und normaler GL-Viewportlauf bestanden. Alle 22 Headless-Tests, Editorimport und 60-Frame-Startlauf bestanden.
 - Ressourcen-Audit: Je eine einmalig sammelbare Stelle für Sumpfminze, Schilfwurzel und Nachtmoos. Die Questrezepte benötigen zwei Sumpfminzen, zwei Schilfwurzeln und ein Nachtmoos. Damit ist die Folgequestkette aus einem frischen Spielstand aktuell nicht vollständig spielbar.
 - Offen: echte Tastatur und subjektives Spielgefühl manuell prüfen.
+
+## RESOURCE-001 – Kräutervorräte für die komplette Questkette
+- `tests/playtest_001_core_loop_test.gd` prüft zwei Sumpfminz-, zwei Schilfwurzel- und eine Nachtmoosstelle samt fünf eindeutigen persistenten IDs.
+- Die Figur läuft über echte Physikframes vom Auftragsbrett zu den Sammel- und Verarbeitungsstellen. Der Test nimmt Fenjas, Martens und Lenes Bitte am Brett an, verarbeitet und übergibt alle Heilmittel und prüft die drei abgeschlossenen Questzustände, Zutatenverbrauch, Inventar und 30 Münzen.
+- RED: Der erweiterte Test scheiterte vor Kartenänderung an den fehlenden zusätzlichen Minz- und Wurzel-Pickups.
+- GREEN: `RESOURCE-001 full quest-chain checks passed.`
+- SAVE-001 sammelt auch die beiden neuen Fundstellen ein und prüft deren IDs und unsichtbaren Zustand nach F9 und automatischem Laden beim Neustart.
+- Alle 22 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
+- Offen: echte Tastatureingabe und subjektives Spielgefühl manuell prüfen.

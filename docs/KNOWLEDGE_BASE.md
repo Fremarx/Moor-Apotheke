@@ -80,6 +80,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 
 - **01.10.2026 – VIS-002:** Die Godot-4.7-Sprite2D-Referenz beschreibt hframes und vframes als Spalten- und Zeilenanzahl eines Sprite-Sheets; frame_coords wählt eine Zelle, sobald mindestens eine Frame-Achse größer als eins ist. Der Spieler verwendet diese eingebaute Zellauswahl für vier getrennte Ansichten und behält im Skript die letzte Richtung im Leerlauf. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).
 
+- **01.10.2026 – RESOURCE-001:** Die beiden neuen Pflanzenstellen sind zusätzliche Instanzen des vorhandenen `Area2D`-Pickup-Musters und verwenden passende Zellen des bestehenden Pflanzen-`Sprite2D`-Atlas. Der SaveManager speichert eindeutige Pickup-IDs wie die bereits dokumentierten geernteten Pflanzen; es kam keine neue Godot-API hinzu. Die vorhandenen Quellen zu [Area2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html), [Sprite2D](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html) und [Spielständen](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html) decken die Änderung ab.
+
 ## VIS-003 – Sprite-Atlanten für Weltobjekte
 Stationen, Bewohner und Sammelpflanzen liegen jeweils in einem horizontalen 3-Zellen-Atlas. Godots Sprite2D nutzt hframes = 3 und frame = 0, 1 oder 2 zur Zellwahl. Die Grafik bleibt ein Sprite2D-Kind ihrer Interaktionsobjekte; Sichtbarkeit und Kollision der Sammelstelle bleiben in der vorhandenen Gameplay-Logik. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).
 
