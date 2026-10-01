@@ -74,9 +74,9 @@ func _run() -> void:
 	var mint_patch_count := _pickup_count(main, "sump_mint")
 	var reed_root_patch_count := _pickup_count(main, "reed_root")
 	var night_moss_patch_count := _pickup_count(main, "night_moss")
-	_check(mint_patch_count == 2, "two separate mint patches are available in a new game")
-	_check(reed_root_patch_count == 2, "two separate reed-root patches are available in a new game")
-	_check(night_moss_patch_count == 1, "one night-moss patch is available in a new game")
+	_check(mint_patch_count == 3, "three mint patches are available across both areas")
+	_check(reed_root_patch_count == 3, "three reed-root patches are available across both areas")
+	_check(night_moss_patch_count == 2, "two night-moss patches are available across both areas")
 	var pickup_ids: Dictionary = {}
 	var total_pickups := 0
 	for pickup in main.get_tree().get_nodes_in_group("item_pickups"):

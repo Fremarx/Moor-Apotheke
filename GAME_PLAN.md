@@ -213,8 +213,8 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - **Schwerpunkt:** Für den Anfang ist eine Mischung aus Erkunden, Aufträgen und einfacher Verarbeitung vorgesehen; Automatisierung kommt später.
 - **Spieltempo:** Der erste Ausschnitt bleibt ohne Zeitdruck. Jahreszeiten können später die Fundorte und Rezepte verändern.
 - **Geschichte und Ton:** Noch offen; Vorschlag ist märchenhaft und gemütlich, mit etwas geheimnisvoller Moorstimmung.
-- **Nächster Ausbau:** RESOURCE-001 ist abgeschlossen; als Nächstes folgt AREA-001 mit einem zweiten Moorgebiet und zusätzlichen Fundorten. Jahreszeiten und Automatisierung werden später anhand deines Spieltests neu bewertet.
+- **Nächster Ausbau:** AREA-001 ergänzt das Schilfufer als zweites Moorgebiet mit drei zusätzlichen Kräuterstellen. Jahreszeiten und Automatisierung werden nach deinem manuellen Test der Gebiete und Kernschleife neu bewertet.
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-RESOURCE-001 hat die vollständige Questkette aus einem frischen Spielstand geprüft: Zwei Sumpfminzen, zwei Schilfwurzeln und Nachtmoos reichen für Fenja, Marten und Lene; alle drei Aufträge zahlen zusammen 30 Münzen. Als Nächstes folgt AREA-001 mit einem zweiten Moorgebiet und zusätzlichen Fundorten. Echte Tastatur und subjektives Spielgefühl bleiben für den manuellen Spieltest offen.
+RESOURCE-001 hat die vollständige Questkette aus einem frischen Spielstand geprüft; alle drei Aufträge zahlen zusammen 30 Münzen. AREA-001 ergänzt das Schilfufer als begehbares zweites Gebiet mit Rückweg und zusätzlichen Stellen für Sumpfminze, Schilfwurzel und Nachtmoos. Als Nächstes folgt dein manueller Test der Wege, Übergänge, Pixelgrafik und Steuerung. Jahreszeiten und Automatisierung werden danach anhand deines Feedbacks neu priorisiert.

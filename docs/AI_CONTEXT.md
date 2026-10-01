@@ -27,8 +27,9 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - REL-001 ist abgeschlossen: Windows Desktop x86_64 ist das erste Exportziel; Profil und Release-Checkliste sind versioniert, passende Vorlagen sind lokal installiert.
 - PLAY-001 ist abgeschlossen: HUD-Kontrast wurde verbessert; Richtungsbewegung und Kollisionen sind automatisiert geprüft, die Hauptszene wurde bei 480 × 270 gerendert. Subjektives Gefühl echter Hardwareeingaben ist nicht bewertet.
 - INV-001 ist abgeschlossen: Das Inventarfenster zeigt zehn Bestände in Kategorien; I und Escape schließen es, während das Spiel pausiert. Detaillierte Bestände sind aus dem permanenten HUD entfernt.
-- PLAYTEST-001 zeigte die Ressourcenknappheit; RESOURCE-001 ist abgeschlossen: zwei Sumpfminz- und zwei Schilfwurzelstellen haben eindeutige Save-IDs. Fenja, Marten und Lene wurden aus einem frischen Spielstand abgeschlossen und bringen zusammen 30 Münzen.
-- Nächster Backlogpunkt: AREA-001 – zweites Moorgebiet mit zusätzlichen Fundorten planen und ergänzen. Deine physische Tastatur und Bewertung des Spielgefühls bleiben offen.
+- PLAYTEST-001 zeigte die Ressourcenknappheit; RESOURCE-001 ist abgeschlossen: Fenja, Marten und Lene lassen sich frisch nacheinander erfüllen und bringen zusammen 30 Münzen.
+- AREA-001 ist abgeschlossen: Schilfufer ist über Hin- und Rückweg erreichbar und ergänzt je eine Sumpfminz-, Schilfwurzel- und Nachtmoosstelle. Alle 23 Headless-Tests, Editorimport und 60-Frame-Start bestehen.
+- Nächster Schritt: manueller Test der Gebiete und Steuerung; Jahreszeiten und Automatisierung werden danach neu bewertet.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
 ## Wissens- und Skillhinweise

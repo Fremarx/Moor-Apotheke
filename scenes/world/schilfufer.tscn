@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/schilfufer.gd" id="1_map"]
+[ext_resource type="Script" path="res://scripts/herb_pickup.gd" id="2_herb"]
+[ext_resource type="Texture2D" path="res://assets/sprites/herb_pickups_ai_20261001.png" id="3_herbs"]
+[ext_resource type="Script" path="res://scripts/map_transition.gd" id="4_transition"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_herb"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_transition"]
+radius = 18.0
+
+[node name="Schilfufer" type="Node2D"]
+script = ExtResource("1_map")
+
+[node name="SumpfminzeSchilfufer" type="Area2D" parent="."]
+position = Vector2(136, 178)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Sumpfminze"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst eine Sumpfminze am Schilfufer."
+item_id = "sump_mint"
+pickup_id = "schilfufer_sump_mint"
+
+[node name="Visual" type="Sprite2D" parent="SumpfminzeSchilfufer"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 0
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SumpfminzeSchilfufer"]
+shape = SubResource("CircleShape2D_herb")
+
+[node name="SchilfwurzelSchilfufer" type="Area2D" parent="."]
+position = Vector2(322, 298)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Schilfwurzel"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst eine Schilfwurzel am Schilfufer."
+item_id = "reed_root"
+pickup_id = "schilfufer_reed_root"
+
+[node name="Visual" type="Sprite2D" parent="SchilfwurzelSchilfufer"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 1
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SchilfwurzelSchilfufer"]
+shape = SubResource("CircleShape2D_herb")
+
+[node name="NachtmoosSchilfufer" type="Area2D" parent="."]
+position = Vector2(520, 190)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_herb")
+display_name = "Nachtmoos"
+action_verb = "Sammeln"
+feedback_text = "Du sammelst Nachtmoos zwischen den Schilfinseln."
+item_id = "night_moss"
+pickup_id = "schilfufer_night_moss"
+
+[node name="Visual" type="Sprite2D" parent="NachtmoosSchilfufer"]
+texture = ExtResource("3_herbs")
+hframes = 3
+frame = 2
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NachtmoosSchilfufer"]
+shape = SubResource("CircleShape2D_herb")
+
+[node name="ReturnToTestMap" type="Area2D" parent="."]
+position = Vector2(30, 230)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_transition")
+destination_area = &"TestMap"
+destination_position = Vector2(570, 230)
+feedback_text = "Du kehrst zum alten Torfsteg zurück."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnToTestMap"]
+shape = SubResource("CircleShape2D_transition")

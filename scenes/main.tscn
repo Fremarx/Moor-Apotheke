@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/world/test_map.tscn" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/world/schilfufer.tscn" id="9_area"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="3_main"]
 [ext_resource type="Script" path="res://scripts/inventory.gd" id="4_inventory"]
@@ -55,6 +56,9 @@ script = ExtResource("3_main")
 [node name="World" type="Node2D" parent="."]
 
 [node name="TestMap" parent="World" instance=ExtResource("1_map")]
+
+[node name="Schilfufer" parent="World" instance=ExtResource("9_area")]
+position = Vector2(640, 0)
 
 [node name="Player" parent="World" instance=ExtResource("2_player")]
 position = Vector2(320, 180)

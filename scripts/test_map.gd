@@ -6,8 +6,11 @@ const ATLAS_COLUMNS := 4.0
 const ATLAS_ROWS := 4.0
 const DECORATION_ATLAS: Texture2D = preload("res://assets/tilesets/moor_vegetation_atlas_ai_20261001.png")
 
+@export var area_id: StringName = &"TestMap"
+
 
 func _ready() -> void:
+	add_to_group("world_areas")
 	_add_solid_rect(Rect2(Vector2.ZERO, Vector2(MAP_SIZE.x, WALL_THICKNESS)))
 	_add_solid_rect(Rect2(Vector2(0, MAP_SIZE.y - WALL_THICKNESS), Vector2(MAP_SIZE.x, WALL_THICKNESS)))
 	_add_solid_rect(Rect2(Vector2.ZERO, Vector2(WALL_THICKNESS, MAP_SIZE.y)))

@@ -95,6 +95,10 @@ func _ready() -> void:
 		if pickup.has_signal("item_collected"):
 			pickup.item_collected.connect(_inventory.add_item)
 
+	for transition in get_tree().get_nodes_in_group("map_transitions"):
+		if transition.has_signal("transition_requested"):
+			transition.transition_requested.connect(_on_map_transition_requested)
+
 	for station in get_tree().get_nodes_in_group("processing_stations"):
 		if station.has_method("set_inventory"):
 			station.set_inventory(_inventory)
@@ -208,7 +212,7 @@ func _is_valid_save_data(save_data: Variant) -> bool:
 	if not _is_save_number(saved_player["x"]) or not _is_save_number(saved_player["y"]):
 		return false
 	var saved_position := Vector2(float(saved_player["x"]), float(saved_player["y"]))
-	if saved_position.x < 0.0 or saved_position.x > 640.0 or saved_position.y < 0.0 or saved_position.y > 360.0:
+	if saved_position.x < 0.0 or saved_position.x > 1280.0 or saved_position.y < 0.0 or saved_position.y > 360.0:
 		return false
 
 	if not bool(_inventory.call("validate_save_data", save_data.get("inventory"))):
@@ -574,6 +578,16 @@ func _update_quest_status() -> void:
 		_quest_status.show()
 	else:
 		_quest_status.hide()
+
+
+func _on_map_transition_requested(destination_id: StringName, destination_position: Vector2, feedback_text: String) -> void:
+	for area in get_tree().get_nodes_in_group("world_areas"):
+		if StringName(area.get("area_id")) != destination_id:
+			continue
+		_player.velocity = Vector2.ZERO
+		_player.global_position = area.to_global(destination_position)
+		_on_interaction_completed(feedback_text)
+		return
 
 
 func _on_feedback_timer_timeout() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3]
+[gd_scene load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://scripts/test_map.gd" id="1_map"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="2_interactable"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/workstations_ai_20261001.png" id="10_workstations"]
 [ext_resource type="Texture2D" path="res://assets/sprites/villagers_ai_20261001.png" id="11_villagers"]
 [ext_resource type="Texture2D" path="res://assets/sprites/herb_pickups_ai_20261001.png" id="12_herbs"]
+[ext_resource type="Script" path="res://scripts/map_transition.gd" id="13_transition"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_interaction_probe"]
 radius = 6.0
@@ -24,6 +25,9 @@ radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nachtmoos"]
 radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_map_transition"]
+radius = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_drying_rack"]
 radius = 8.0
@@ -271,3 +275,15 @@ scale = Vector2(0.06, 0.06)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trockengestell"]
 shape = SubResource("CircleShape2D_drying_rack")
+
+[node name="EnterSchilfufer" type="Area2D" parent="."]
+position = Vector2(602, 230)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("13_transition")
+destination_area = &"Schilfufer"
+destination_position = Vector2(70, 230)
+feedback_text = "Du betrittst das Schilfufer."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterSchilfufer"]
+shape = SubResource("CircleShape2D_map_transition")

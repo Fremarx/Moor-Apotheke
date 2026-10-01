@@ -1,6 +1,6 @@
 # Wissensbasis und RAG-Strategie
 
-Stand: 30.09.2026
+Stand: 01.10.2026
 
 ## Retrieval-Verfahren
 Für diesen kleinen Projektumfang reicht eine nachvollziehbare Quellenliste mit gezieltem Retrieval. In der aktuellen Toolausstattung ist kein Context7- oder Vektor-RAG-MCP verfügbar. Projektdokumente werden lokal durchsucht; technische Fragen werden in der passenden offiziellen Godot-4.7-Dokumentation nachgeschlagen. Es wird kein komplettes Engine-Handbuch kopiert und vorerst kein Vektorspeicher aufgebaut.
@@ -29,7 +29,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 | [InputEvent class reference](https://docs.godotengine.org/en/4.7/classes/class_inputevent.html) | 4.7, 01.10.2026 | Benannte Eingabeaktionen, Tastendruck und Key-Echo | Offizielle Engine-Doku; INV-001 |
 | [Input class reference](https://docs.godotengine.org/en/4.7/classes/class_input.html) | 4.7, 01.10.2026 | Simulierte InputMap-Aktionen und Abgrenzung zu Event-Callbacks | Offizielle Engine-Doku; PLAY-001 |
 | [Command line tutorial](https://docs.godotengine.org/en/4.7/tutorials/editor/command_line_tutorial.html) | 4.7, 01.10.2026 | Movie-Frame-Viewportprüfung und Headless-Lauf | Offizielle Engine-Doku; PLAY-001 |
-| [Using Area2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) | 4.7, 30.09.2026 | Überlappung und Reichweitenerkennung mit Area2D | Offizielle Engine-Doku; CORE-002 |
+| [Using Area2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) | 4.7, 30.09.2026 | Überlappung und Reichweitenerkennung mit Area2D | Offizielle Engine-Doku; CORE-002, AREA-001 |
+| [Camera2D class reference](https://docs.godotengine.org/en/4.7/classes/class_camera2d.html) | 4.7, 01.10.2026 | Kameraansicht und Kartenlimits in der größeren Welt | Offizielle Engine-Doku; AREA-001 |
 | [Node class reference](https://docs.godotengine.org/en/4.7/classes/class_node.html) | 4.7, 30.09.2026 | Weitergabe von Gameplay-Eingaben über _unhandled_input() | Offizielle Engine-Doku; CORE-002 |
 | [Signal class reference](https://docs.godotengine.org/en/4.7/classes/class_signal.html) | 4.7, 30.09.2026 | Lose gekoppelte Benachrichtigung über Inventar- und Queständerungen | Offizielle Engine-Doku; ITEM-001, QUEST-001, UX-001 |
 | [Label class reference](https://docs.godotengine.org/en/4.7/classes/class_label.html) | 4.7, 30.09.2026 | Kurze Textanzeige in einem begrenzten HUD-Bereich | Offizielle Engine-Doku; UX-001 |
@@ -79,6 +80,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 - **01.10.2026 – VIS-001:** Die Godot-4.7-CanvasItem-Referenz bestätigt, dass draw_texture_rect_region ein Quellrechteck einer Textur in ein Zielrechteck im lokalen Raum zeichnet. Das bestehende Node2D-Kartenskript nutzt es für transparente Atlaszellen; Quellrechtecke teilen die tatsächliche Texturgröße durch vier, damit auch der 1261 × 1247 Pixel große Atlas korrekt zugeschnitten wird. Die Pixelgrafik erbt die im Projekt gesetzte Nearest-Filterung. Quelle: [CanvasItem class reference](https://docs.godotengine.org/en/4.7/classes/class_canvasitem.html).
 
 - **01.10.2026 – VIS-002:** Die Godot-4.7-Sprite2D-Referenz beschreibt hframes und vframes als Spalten- und Zeilenanzahl eines Sprite-Sheets; frame_coords wählt eine Zelle, sobald mindestens eine Frame-Achse größer als eins ist. Der Spieler verwendet diese eingebaute Zellauswahl für vier getrennte Ansichten und behält im Skript die letzte Richtung im Leerlauf. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).
+
+- **01.10.2026 – AREA-001:** Area2D-Überlappungen liefern `body_entered` bei aktivierter Überwachung am Physikschritt; Main vermittelt das Übergangssignal zu einer Zielkarte über deren lokale Spawnkoordinate. Camera2D-Begrenzungen halten den Bildausschnitt innerhalb der 1280 × 360-Welt. Quellen: [Using Area2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) und [Camera2D class reference](https://docs.godotengine.org/en/4.7/classes/class_camera2d.html).
 
 - **01.10.2026 – RESOURCE-001:** Die beiden neuen Pflanzenstellen sind zusätzliche Instanzen des vorhandenen `Area2D`-Pickup-Musters und verwenden passende Zellen des bestehenden Pflanzen-`Sprite2D`-Atlas. Der SaveManager speichert eindeutige Pickup-IDs wie die bereits dokumentierten geernteten Pflanzen; es kam keine neue Godot-API hinzu. Die vorhandenen Quellen zu [Area2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html), [Sprite2D](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html) und [Spielständen](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html) decken die Änderung ab.
 

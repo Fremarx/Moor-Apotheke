@@ -225,3 +225,12 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - SAVE-001 sammelt auch die beiden neuen Fundstellen ein und prüft deren IDs und unsichtbaren Zustand nach F9 und automatischem Laden beim Neustart.
 - Alle 22 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Startlauf bestanden.
 - Offen: echte Tastatureingabe und subjektives Spielgefühl manuell prüfen.
+
+
+## AREA-001 – Zweites Moorgebiet
+- `tests/area_001_connected_moor_area_test.gd` prüft beide Übergänge und läuft per InputMap-Physikframes zu allen drei neuen Fundorten. Es sammelt Sumpfminze, Schilfwurzel und Nachtmoos, prüft acht global eindeutige IDs und das gemeinsame Inventar.
+- Ein isolierter Spielstand prüft Position und alle drei geernteten Pflanzen beim Laden und beim automatischen Wiederherstellen nach Szenenneustart.
+- RED: Vor der Implementierung schlug der Test fehl, weil Schilfufer noch nicht in `World` vorhanden war. GREEN: `AREA-001 connected moor area checks passed.`
+- Nach einer durch die neue Karte überholten RESOURCE-001-Bestandsannahme wurde der Ressourcen-Audit auf 3 Sumpfminzen, 3 Schilfwurzeln und 2 Nachtmoose über beide Gebiete angepasst.
+- Alle 23 Godot-4.7.2-Headless-Tests, Editorimport und 60-Frame-Hauptszene bestanden.
+- Ein sichtbarer manueller Test von Bildausschnitt, echter Tastatur und subjektivem Steuerungsgefühl bleibt offen.

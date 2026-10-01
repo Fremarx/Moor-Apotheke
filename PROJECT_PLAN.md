@@ -8,13 +8,13 @@ Stand: 01.10.2026
 Phase 8 – Release-Vorbereitung
 
 ### Zuletzt bearbeiteter Task
-RESOURCE-001 – Kräutervorräte ergänzt; komplette Questkette verifiziert.
+AREA-001 – Schilfufer als zweites Moorgebiet ergänzt und Erkundungswege geprüft.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE; PLAYTEST-001 DONE; CONTENT-001 DONE; RESOURCE-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE; PLAYTEST-001 DONE; CONTENT-001 DONE; RESOURCE-001 DONE; AREA-001 DONE.
 
 ### Fortschritt
-Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOURCE-001 ergänzt je eine zweite einmalig sammelbare Sumpfminze- und Schilfwurzelstelle. Alle drei Aufträge lassen sich aus einem frischen Spielstand nacheinander abschließen. Drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. INV-001 verlagert die Bestandsübersicht in ein kategorisiertes Fenster mit Taste I. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen.
+Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOURCE-001 ergänzt je eine zweite einmalig sammelbare Sumpfminze- und Schilfwurzelstelle. Alle drei Aufträge lassen sich aus einem frischen Spielstand nacheinander abschließen. Drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. INV-001 verlagert die Bestandsübersicht in ein kategorisiertes Fenster mit Taste I. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen. AREA-001 ergänzt das begehbare Schilfufer rechts neben der bisherigen Karte mit Torfplanken, Wasserflächen und drei zusätzlichen, dauerhaft speicherbaren Kräuterstellen. Beide Gebiete teilen Inventar und Spielstand; Übergänge laufen über eine kleine Area2D-Signal-Schnittstelle.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -45,9 +45,10 @@ Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOUR
 - **INV-001:** Kategorisiertes Inventarfenster mit Taste I, live aktualisierten Beständen, Escape-/Schließen-Option und pausierter Welt.
 - **PLAYTEST-001:** Fenjas Kernschleife mit Bewegung, Sammeln, Trocknen, Brauen, Abgabe und Inventar im Godot-Viewport durchgespielt; Ressourcenknappheit der Folgeaufträge ermittelt.
 - **RESOURCE-001:** Zwei Minz- und zwei Schilfwurzelstellen mit eindeutigen Save-IDs ergänzt; Fenja, Marten und Lene aus einem frischen Spielstand end-to-end abgeschlossen.
+- **AREA-001:** Schilfufer als zweite 640 × 360-Karte ergänzt, beidseitige Wegübergänge eingerichtet und je eine weitere Sumpfminz-, Schilfwurzel- und Nachtmoosstelle eingebaut.
 
 ### Als Nächstes
-AREA-001 – Ein zweites Moorgebiet als neue Erkundungsfläche mit zusätzlichen Fundorten planen und umsetzen.
+Als Nächstes: manueller Spieltest der zwei Gebiete, Übergänge und Steuerung; Jahreszeiten und Automatisierung werden erst anhand dieses Feedbacks neu priorisiert.
 
 ### Blocker
 Kein technischer Blocker für die vollständige Questkette. Das Spiel liegt als eigenes öffentliches Repo Fremarx/Moor-Apotheke; abgeschlossene Backlogitems werden auf codex/moor-apotheke gepusht. Physische Tastatur und subjektives Spielgefühl bleiben für deinen manuellen Test offen.
@@ -58,7 +59,7 @@ Kein technischer Blocker für die vollständige Questkette. Das Spiel liegt als 
 - Der erste visuelle Ausschnitt orientiert sich am warmen Abendmoor; Dämmerungs- und Frühlingsstimmung bleiben Optionen für spätere Gebiete.
 
 ### Technische Schulden
-- Bewegung und Testkarte sind provisorisch gezeichnet; weitere Pflanzen, Rezepte und Aufträge fehlen noch.
+- Bewegung, Kartenillustrationen und Kollisionen bleiben ein einfacher Pixel-Prototyp und sollen im sichtbaren Godot-Fenster beurteilt werden.
 - Physische Tastatureingabe und subjektives Steuerungsgefühl wurden nicht manuell bewertet; simulierte InputMap-Aktionen, Kollisionen und ein gerenderter Spielviewport bestehen.
 - Der erste Windows-x86_64-Testbuild ist noch unsigniert; App-Metadaten, Lizenzhinweise und öffentlicher Vertriebsweg sind offen.
 
@@ -87,6 +88,7 @@ Kein technischer Blocker für die vollständige Questkette. Das Spiel liegt als 
 - QUEST-003-Headless-Test zuerst rot, danach grün; alle dreizehn früheren Tests (insgesamt vierzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - BOARD-001-Headless-Test zuerst rot, danach grün; alle vierzehn vorherigen Tests (insgesamt fünfzehn), Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
 - SAVE-001-Test zuerst rot, danach grün; prüft F5/F9, automatische Startladung, Wiederherstellung aller gespeicherten Daten und unveränderten Laufzeitzustand bei fehlendem, beschädigtem oder nicht unterstütztem Save. Alle 17 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Laufzeit-Smoke-Check bestanden.
+- AREA-001-Test zuerst rot, nach Karten- und Übergangsumsetzung grün; läuft über echte Physikframes zu allen drei neuen Pflanzen, prüft Hin- und Rückweg sowie Speichern, Laden und automatisches Wiederherstellen des zweiten Gebiets. Alle 23 Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden.
 - REL-001: Godot 4.7.2 Windows-Exportvorlagen installiert; Release-Export nach build/windows/Moor-Apotheke.exe und 60-Frame-Start der EXE mit Exitcode 0 bestanden. Keine Codesignatur; kein öffentlicher Upload.
 - PLAY-001: neuer Headless-Test prüft HUD-Hintergründe/-Ränder/-Zeichenreihenfolge, WASD- und Pfeiltastenbindungen, alle vier InputMap-Bewegungsrichtungen, aktive Kamera sowie Fels-, Teich- und Kartenrandkollisionen. Alle 20 Tests, Editorimport und 60-Frame-Lauf bestanden; Hauptszene bei 480 × 270 mit Godot Movie Maker gerendert und auf HUD-Lesbarkeit geprüft.
 - INV-001: Test prüft I-Belegung, Modalsteuerung, Fokus, Fenstergrenzen, zehn live aktualisierte Inventarbestände, Escape/Schließen und die Konfliktvermeidung mit dem Auftragsbrett. Alle 21 Tests, Editorimport und 60-Frame-Startlauf bestanden; echte Tastatureingabe bleibt manuell offen.
@@ -168,7 +170,7 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | INV-001 | Ein eigenes Inventarfenster mit Taste I öffnen und schließen | P1 | PLAY-001 | DONE |
 | PLAYTEST-001 | Fenjas Kernschleife, Viewport und nächste Ausbauschritte prüfen | P1 | INV-001 | DONE |
 | RESOURCE-001 | Genügend Kräuter für Fenja, Marten und Lene bereitstellen und Questkette end-to-end verifizieren | P1 | PLAYTEST-001 | DONE |
-| AREA-001 | Zweites Moorgebiet als neue Erkundungsfläche mit zusätzlichen Fundorten ergänzen | P2 | RESOURCE-001 | PLANNED |
+| AREA-001 | Zweites Moorgebiet als neue Erkundungsfläche mit zusätzlichen Fundorten ergänzen | P2 | RESOURCE-001 | DONE |
 
 ### CORE-002 Abnahmekriterien
 - Die Interaktion nutzt die benannte Aktion interact auf E.
@@ -352,6 +354,13 @@ Der erweiterte End-to-End-Test startet ohne Spielstand, bewegt die Figur über P
 - Alle 22 Headless-Tests, Godot-4.7.2-Editorimport und der 60-Frame-Startlauf bestanden.
 - Echte Tastatureingabe und subjektives Spielgefühl bleiben für deinen manuellen Test offen.
 
+### AREA-001 Abnahmekriterien – erledigt
+- Das Schilfufer ist eine begehbare, 640 × 360 große zweite Karte neben TestMap; ein Auslöser führt hin und ein weiterer zurück.
+- Die neue Karte zeigt eine eigene Moorpalette, Torfplanken, Wasserflächen und Schilf und nutzt vorhandene Pixelart-Atlanten.
+- Je eine neue Sumpfminz-, Schilfwurzel- und Nachtmoosstelle sind über echte Laufwege erreichbar und verwenden eindeutige Pickup-IDs im gemeinsamen Inventar.
+- Die 1280 × 360-Welt ist innerhalb der Kamera- und Save-Grenzen; Fundstellen und Position werden beim Laden im zweiten Gebiet wiederhergestellt.
+- AREA-001-Test zuerst rot und danach grün; alle 23 Headless-Tests, Godot-Editorimport und 60-Frame-Startlauf bestehen. Sichtbare Kontrolle auf dem eigenen Bildschirm bleibt offen.
+
 ### VIS-001 Abnahmekriterien – erledigt
 - Die 640 × 360-Testkarte zeigt bei 480 × 270 eine abgestimmte warme Moorpalette mit abwechslungsreichem Boden, lesbarem Teichufer und Torfweg.
 - Ein transparenter 4 × 4-Dekorationsatlas ergänzt Schilf, Farne, Blüten, Steine und Wasserlilien; die genaue Herkunft und die finalen Prompts stehen in docs/ART_ASSETS.md.
@@ -443,3 +452,4 @@ Der erweiterte End-to-End-Test startet ohne Spielstand, bewegt die Figur über P
 | 01.10.2026 | INV-001: Kräuter- und Heilmittelbestände in ein kategorisiertes Modal mit I/Escape und Live-Zählern verlagert; Spielersteuerung pausiert; Regressionen, Editorimport und Startlauf geprüft. |
 | 01.10.2026 | PLAYTEST-001: Fenjas komplette Kernschleife und Inventar im 480 × 270 Godot-Viewport geprüft; Ressourcen-Audit zeigt zu wenig Sumpfminze und Schilfwurzel für die Folgeaufträge. |
 | 01.10.2026 | RESOURCE-001: Je eine zweite Minz- und Wurzelstelle ergänzt; komplette Questkette mit 30 Münzen, fünf eindeutigen Pickup-IDs, Save-/Load-Prüfung, 22 Headless-Tests, Import und Startcheck abgeschlossen. |
+| 01.10.2026 | AREA-001: Begehbares Schilfufer mit Hin- und Rückweg sowie drei erreichbaren Sammelstellen ergänzt; zweite Kartenhälfte und geerntete Pflanzen werden gespeichert. AREA-Test rot/grün, alle 23 Headless-Tests, Editorimport und 60-Frame-Start bestanden. |
