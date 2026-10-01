@@ -61,7 +61,7 @@ script = ExtResource("3_main")
 position = Vector2(640, 0)
 
 [node name="Player" parent="World" instance=ExtResource("2_player")]
-position = Vector2(320, 180)
+position = Vector2(320, 190)
 z_index = 10
 
 [node name="Inventory" type="Node" parent="."]

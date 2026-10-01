@@ -43,6 +43,8 @@ Main (Node2D, main.gd)
         └── Content (VBoxContainer: Bewohneraufträge, Status und Aktionen)
 ~~~
 
+`TestMap` behält seinen Szenenknotennamen für bestehende Szenenpfade, meldet sich aber mit `area_id = Dorfplatz` als zentraler Hub an. Der Hub ist derzeit ein kompakter 640 × 360-Prototyp: `scripts/test_map.gd` zeichnet Apotheke, Platz, Brunnen und Wegweiser mit CanvasItem-Zeichenfunktionen; Kollisionen für Gebäude, Brunnen und Hindernisse werden als statische Rechtecke gesetzt. MAP-01 ist damit erfüllt, nicht jedoch SCALE-01.
+
 TestMap und Schilfufer sind eigenständige 640 × 360-Karten und liegen in `World` nebeneinander; Schilfufer beginnt bei Weltkoordinate x = 640. Jede Karte meldet sich mit `area_id` in `world_areas` an. Übergangs-Area2Ds gehören zu `map_transitions` und senden `transition_requested`; Main sucht die Zielkarte anhand ihrer ID und setzt den Player auf deren lokalen Spawnpunkt. Beide Szenen bleiben geladen, sodass Pickup-Gruppen und eindeutige Save-IDs gebietsübergreifend gemeinsam ausgewertet werden. Kamera und Speicher-Validator erlauben Positionen bis x = 1280. Player liest die benannten Richtungsaktionen aus der Input Map und bewegt sich als CharacterBody2D entlang der Kartenbegrenzungen. Karte, Spieler, Stationen, Bewohner und Sammelpflanzen verwenden ihre Pixelart-Grafiken als getrennte Atlaszellen; VIS-003 ergänzt die neun Weltobjekte über Sprite2D-Kinder, während Interaktions- und Save-Skripte weiterhin die Spiellogik verwalten.
 
 CORE-002 ergänzt eine wiederverwendbare Area2D-Interaktionsfläche am Player. Interaktive Ziele tragen die Gruppe `interactables` und stellen Hinweistext sowie `interact()` bereit. Der Player wählt das räumlich nächste Ziel und meldet Hinweis bzw. Ergebnis über Signale. Main verbindet diese Signale mit dem HUD; das Objekt führt seine eigene Aktion aus. Ein Autoload ist dafür nicht erforderlich.
@@ -87,6 +89,8 @@ Spätere eigenständige Szenen:
 - HUD-Komponenten bleiben von der Karte getrennt.
 
 Szenen sollen möglichst wenig über feste Pfade auf Geschwister zugreifen. Eltern verbinden Abhängigkeiten; Ereignisse wie item_collected melden Ergebnisse über Signale. Ein Autoload kommt erst hinzu, wenn ein konkret global benötigter Zustand mehrere Szenen überlebt und die lokale Elternstruktur nicht ausreicht.
+
+MAP-02 folgt separat: aktuell ist nur der Ostweg mit aktivem Übergang ins Schilfufer verbunden; der sichtbare Nordweg ist ein Wegweiser für den nächsten Weltkarten-Ausbau. Die fünf Gebiete und ihre Mindestflächen aus `design/world_backlog.md` sind nicht Teil der 640 × 360-Hubkarte.
 
 ## Zuständigkeiten
 - Main/World: Spielabschnitt zusammenstellen und Zustand vermitteln.

@@ -12,6 +12,7 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - docs/TESTING.md: Prüfstrategie
 - docs/RELEASE_CHECKLIST.md: Windows-Build und offene Release-Schritte
 - docs/adr/: nummerierte Architekturentscheidungen
+- design/: maßgeblicher neuer Weltentwurf, Gebietsmaßstab, Ressourcen-, Gegner- und Fortschrittsplanung
 
 ## Stand
 - Eigenständiges öffentliches Repository Fremarx/Moor-Apotheke; Entwicklungsbranch codex/moor-apotheke.
@@ -28,8 +29,10 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - PLAY-001 ist abgeschlossen: HUD-Kontrast wurde verbessert; Richtungsbewegung und Kollisionen sind automatisiert geprüft, die Hauptszene wurde bei 480 × 270 gerendert. Subjektives Gefühl echter Hardwareeingaben ist nicht bewertet.
 - INV-001 ist abgeschlossen: Das Inventarfenster zeigt zehn Bestände in Kategorien; I und Escape schließen es, während das Spiel pausiert. Detaillierte Bestände sind aus dem permanenten HUD entfernt.
 - PLAYTEST-001 zeigte die Ressourcenknappheit; RESOURCE-001 ist abgeschlossen: Fenja, Marten und Lene lassen sich frisch nacheinander erfüllen und bringen zusammen 30 Münzen.
-- AREA-001 ist abgeschlossen: Schilfufer ist über Hin- und Rückweg erreichbar und ergänzt je eine Sumpfminz-, Schilfwurzel- und Nachtmoosstelle. Alle 23 Headless-Tests, Editorimport und 60-Frame-Start bestehen.
-- Nächster Schritt: manueller Test der Gebiete und Steuerung; Jahreszeiten und Automatisierung werden danach neu bewertet.
+- AREA-001 ist abgeschlossen: Schilfufer ist über Hin- und Rückweg erreichbar und ergänzt je eine Sumpfminz-, Schilfwurzel- und Nachtmoosstelle.
+- MAP-01 ist abgeschlossen: Der bestehende TestMap-Knoten stellt logisch den Dorfplatz dar; Apotheke, Brett, Brunnen und Nord-/Ostwege sind sichtbar und erreichbar. Alle 24 Headless-Tests, Editorimport und 60-Frame-Start bestehen. Die fünf Gebietspfade (MAP-02) und Großmaßstäbe (SCALE-01) bleiben offen.
+- Maßgebliche Entwurfsquellen: `design/world_design_plan.md`, `design/world_backlog.md`, `design/progression_roadmap.md`, `design/resource_economy.md`, `design/enemy_roster.md` und `design/world_map_mockup.png`.
+- Nächster Schritt: MAP-02 gemäß `design/world_backlog.md`; danach MAP-03 und SCALE-01. Jahreszeiten und Automatisierung bleiben nachrangig.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
 ## Wissens- und Skillhinweise

@@ -213,8 +213,8 @@ Fenjas Bitte hat keine Ablaufzeit. Sie wird am Auftragsbrett angenommen und Fenj
 - **Schwerpunkt:** Für den Anfang ist eine Mischung aus Erkunden, Aufträgen und einfacher Verarbeitung vorgesehen; Automatisierung kommt später.
 - **Spieltempo:** Der erste Ausschnitt bleibt ohne Zeitdruck. Jahreszeiten können später die Fundorte und Rezepte verändern.
 - **Geschichte und Ton:** Noch offen; Vorschlag ist märchenhaft und gemütlich, mit etwas geheimnisvoller Moorstimmung.
-- **Nächster Ausbau:** AREA-001 ergänzt das Schilfufer als zweites Moorgebiet mit drei zusätzlichen Kräuterstellen. Jahreszeiten und Automatisierung werden nach deinem manuellen Test der Gebiete und Kernschleife neu bewertet.
+- **Nächster Ausbau:** Der neue Weltentwurf unter `design/` ist jetzt maßgeblich. MAP-01 gestaltet den kompakten Dorfhub. MAP-02 ist der nächste Backlogpunkt und verbindet ihn sichtbar mit den fünf Gebieten samt klaren Start- und Sperrwegen. SCALE-01 bleibt ein eigener späterer Maßstabsaufbau; Jahreszeiten und Automatisierung sind nachrangig.
 
 ## 10. Nächster konkreter Arbeitsschritt
 
-RESOURCE-001 hat die vollständige Questkette aus einem frischen Spielstand geprüft; alle drei Aufträge zahlen zusammen 30 Münzen. AREA-001 ergänzt das Schilfufer als begehbares zweites Gebiet mit Rückweg und zusätzlichen Stellen für Sumpfminze, Schilfwurzel und Nachtmoos. Als Nächstes folgt dein manueller Test der Wege, Übergänge, Pixelgrafik und Steuerung. Jahreszeiten und Automatisierung werden danach anhand deines Feedbacks neu priorisiert.
+RESOURCE-001 hat die vollständige Questkette aus einem frischen Spielstand geprüft; alle drei Aufträge zahlen zusammen 30 Münzen. AREA-001 ergänzt das begehbare Schilfufer. MAP-01 setzt Apotheke und Auftragsbrett gut sichtbar auf den Dorfplatz; die Figur sieht von dort den Nordweg und den aktiven Ostweg ins Schilfufer. Der neue Weltentwurf und seine Ressourcen-, Gegner- und Fortschrittspläne sind unter `design/` versioniert. Als Nächstes folgt MAP-02 mit den fünf sichtbaren Pfaden und verständlichen Sperren. SCALE-01 bleibt offen und wird nicht durch die kompakte Hubkarte vorweggenommen.

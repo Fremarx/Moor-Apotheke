@@ -5,16 +5,16 @@ Stand: 01.10.2026
 ## Project Status
 
 ### Aktuelle Phase
-Phase 8 – Release-Vorbereitung
+Phase 7 – Gebietsausbau nach dem überarbeiteten Weltentwurf
 
 ### Zuletzt bearbeiteter Task
-AREA-001 – Schilfufer als zweites Moorgebiet ergänzt und Erkundungswege geprüft.
+MAP-01 – Dorfplatz als zentralen Hub mit Apotheke, Auftragsbrett und sichtbaren Nord-/Ostwegen gestaltet.
 
 ### Status
-CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE; PLAYTEST-001 DONE; CONTENT-001 DONE; RESOURCE-001 DONE; AREA-001 DONE.
+CORE-002 DONE; ITEM-001 DONE; LOOP-001 DONE; LOOP-002 DONE; QUEST-001 DONE; UX-001 DONE; CONTENT-001a DONE; LOOP-003 DONE; LOOP-004 DONE; QUEST-002 DONE; CONTENT-001b DONE; LOOP-005 DONE; LOOP-006 DONE; QUEST-003 DONE; BOARD-001 DONE; ECON-001 DONE; SAVE-001 DONE; EXP-001 DONE; VIS-001 DONE; VIS-002 DONE; VIS-003 DONE; REL-001 DONE; PLAY-001 DONE; INV-001 DONE; PLAYTEST-001 DONE; CONTENT-001 DONE; RESOURCE-001 DONE; AREA-001 DONE; MAP-01 DONE.
 
 ### Fortschritt
-Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOURCE-001 ergänzt je eine zweite einmalig sammelbare Sumpfminze- und Schilfwurzelstelle. Alle drei Aufträge lassen sich aus einem frischen Spielstand nacheinander abschließen. Drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. INV-001 verlagert die Bestandsübersicht in ein kategorisiertes Fenster mit Taste I. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen. AREA-001 ergänzt das begehbare Schilfufer rechts neben der bisherigen Karte mit Torfplanken, Wasserflächen und drei zusätzlichen, dauerhaft speicherbaren Kräuterstellen. Beide Gebiete teilen Inventar und Spielstand; Übergänge laufen über eine kleine Area2D-Signal-Schnittstelle.
+Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOURCE-001 ergänzt je eine zweite einmalig sammelbare Sumpfminze- und Schilfwurzelstelle. Alle drei Aufträge lassen sich aus einem frischen Spielstand nacheinander abschließen. Drei Pflanzen werden gesammelt und verarbeitet. Das Auftragsbrett zeigt die Bewohnerbitten und ihre Freischaltung. Erfolgreiche Abgaben zahlen 5, 10 oder 15 Münzen, die direkt im HUD erscheinen. F5 speichert und F9 lädt Position, Inventar, Aufträge und bereits geerntete Pflanzen; vorhandene gültige Spielstände werden beim Start geladen. INV-001 verlagert die Bestandsübersicht in ein kategorisiertes Fenster mit Taste I. VIS-001 gestaltet die 640 × 360-Testkarte mit warmen Moosflächen, Torfweg, Teichufer und 4 × 4 Dekorationsatlas sichtbar farbiger. VIS-002 integriert den Spielerentwurf als Front-, Rücken- und beide Profilansichten; Tasche und Minzblatt folgen der Perspektive. VIS-003 überträgt den Moor-Pixelstil auf neun Weltobjekte: drei Stationen, drei Bewohner und drei Sammelpflanzen. AREA-001 ergänzt das begehbare Schilfufer rechts neben der bisherigen Karte mit Torfplanken, Wasserflächen und drei zusätzlichen, dauerhaft speicherbaren Kräuterstellen. Beide Gebiete teilen Inventar und Spielstand; Übergänge laufen über eine kleine Area2D-Signal-Schnittstelle. MAP-01 übernimmt die neuen Entwurfsdateien unter `design/` als maßgebliche Weltplanung und gestaltet den bestehenden kompakten Startbereich als Dorfplatz mit gut erkennbarer Apotheke, Platzmitte, Auftragsbrett und sichtbaren Nord- und Ostwegen. Das Szenenobjekt `TestMap` behält seinen Knotennamen, seine logische Gebiets-ID lautet `Dorfplatz`. MAP-02 und SCALE-01 bleiben offen; die geplanten fünf Großgebiete sind mit dieser Hub-Änderung noch nicht umgesetzt.
 
 ### Zuletzt abgeschlossen
 - **BOOT-001:** Projektanalyse, Anforderungen, Architekturrahmen, RAG-Quellenliste und Entwicklungsablauf dokumentiert.
@@ -46,9 +46,10 @@ Die Aufträge und Rezepte für Fenja, Marten und Lene sind implementiert; RESOUR
 - **PLAYTEST-001:** Fenjas Kernschleife mit Bewegung, Sammeln, Trocknen, Brauen, Abgabe und Inventar im Godot-Viewport durchgespielt; Ressourcenknappheit der Folgeaufträge ermittelt.
 - **RESOURCE-001:** Zwei Minz- und zwei Schilfwurzelstellen mit eindeutigen Save-IDs ergänzt; Fenja, Marten und Lene aus einem frischen Spielstand end-to-end abgeschlossen.
 - **AREA-001:** Schilfufer als zweite 640 × 360-Karte ergänzt, beidseitige Wegübergänge eingerichtet und je eine weitere Sumpfminz-, Schilfwurzel- und Nachtmoosstelle eingebaut.
+- **MAP-01:** Dorfplatz mit Apotheke, zugänglichem Eingang, Auftragsbrett und klar sichtbaren Nord- und Ostwegen umgesetzt; die neue Weltplanung liegt versioniert unter `design/`.
 
 ### Als Nächstes
-Als Nächstes: manueller Spieltest der zwei Gebiete, Übergänge und Steuerung; Jahreszeiten und Automatisierung werden erst anhand dieses Feedbacks neu priorisiert.
+Als Nächstes: MAP-02 – die fünf sichtbaren Gebietspfade und ihre Start-/Sperrübergänge gemäß `design/world_backlog.md` planen und umsetzen. Danach MAP-03 und der Maßstabsaufbau SCALE-01; Jahreszeiten und Automatisierung bleiben nachrangig.
 
 ### Blocker
 Kein technischer Blocker für die vollständige Questkette. Das Spiel liegt als eigenes öffentliches Repo Fremarx/Moor-Apotheke; abgeschlossene Backlogitems werden auf codex/moor-apotheke gepusht. Physische Tastatur und subjektives Spielgefühl bleiben für deinen manuellen Test offen.
@@ -171,6 +172,9 @@ Ein gemütliches Top-down-Pixelart-Spiel über eine Apotheke am Moor. Der Spiele
 | PLAYTEST-001 | Fenjas Kernschleife, Viewport und nächste Ausbauschritte prüfen | P1 | INV-001 | DONE |
 | RESOURCE-001 | Genügend Kräuter für Fenja, Marten und Lene bereitstellen und Questkette end-to-end verifizieren | P1 | PLAYTEST-001 | DONE |
 | AREA-001 | Zweites Moorgebiet als neue Erkundungsfläche mit zusätzlichen Fundorten ergänzen | P2 | RESOURCE-001 | DONE |
+| MAP-01 | Dorfplatz als zentralen Orientierungspunkt mit Apotheke, Brett und sichtbaren Wegen bauen | P0 | AREA-001 | DONE |
+| MAP-02 | Fünf sichtbare Gebietspfade samt Start- und Sperrübergängen anlegen | P0 | MAP-01 | TODO |
+| SCALE-01 | Fünf Gebiete auf den geplanten Erkundungsmaßstab und Inhaltsumfang bringen | P0 | MAP-02, REG-01–REG-05 | TODO |
 
 ### CORE-002 Abnahmekriterien
 - Die Interaktion nutzt die benannte Aktion interact auf E.
@@ -361,6 +365,13 @@ Der erweiterte End-to-End-Test startet ohne Spielstand, bewegt die Figur über P
 - Die 1280 × 360-Welt ist innerhalb der Kamera- und Save-Grenzen; Fundstellen und Position werden beim Laden im zweiten Gebiet wiederhergestellt.
 - AREA-001-Test zuerst rot und danach grün; alle 23 Headless-Tests, Godot-Editorimport und 60-Frame-Startlauf bestehen. Sichtbare Kontrolle auf dem eigenen Bildschirm bleibt offen.
 
+### MAP-01 Abnahmekriterien – erledigt
+- Die Dorfplatz-Karte wird logisch als `Dorfplatz` identifiziert; der bestehende Szenenknoten `TestMap` bleibt für vorhandene Szenenpfade stabil.
+- Startpunkt und Dorfplatzmitte liegen bei `(320, 190)`; von der Startansicht sind Nord- und Ostweg erkennbar.
+- Die Apotheke, ihr Eingang und das Auftragsbrett sind auffindbar; Brett und Eingang lassen sich zu Fuß erreichen, ohne den Ostweg zu blockieren.
+- MAP-01-Test und vollständiger RESOURCE-001-Questlauf bestehen; alle 24 Godot-Headless-Tests, Editorimport, 60-Frame-Startlauf und sichtbare 480 × 270-Rendererprüfung sind grün.
+- Die sichtbare Spielansicht wurde im Godot-Renderer bei 480 × 270 aufgenommen. SCALE-01 und die übrigen vier Gebietspfade bleiben ausdrücklich offen.
+
 ### VIS-001 Abnahmekriterien – erledigt
 - Die 640 × 360-Testkarte zeigt bei 480 × 270 eine abgestimmte warme Moorpalette mit abwechslungsreichem Boden, lesbarem Teichufer und Torfweg.
 - Ein transparenter 4 × 4-Dekorationsatlas ergänzt Schilf, Farne, Blüten, Steine und Wasserlilien; die genaue Herkunft und die finalen Prompts stehen in docs/ART_ASSETS.md.
@@ -453,3 +464,4 @@ Der erweiterte End-to-End-Test startet ohne Spielstand, bewegt die Figur über P
 | 01.10.2026 | PLAYTEST-001: Fenjas komplette Kernschleife und Inventar im 480 × 270 Godot-Viewport geprüft; Ressourcen-Audit zeigt zu wenig Sumpfminze und Schilfwurzel für die Folgeaufträge. |
 | 01.10.2026 | RESOURCE-001: Je eine zweite Minz- und Wurzelstelle ergänzt; komplette Questkette mit 30 Münzen, fünf eindeutigen Pickup-IDs, Save-/Load-Prüfung, 22 Headless-Tests, Import und Startcheck abgeschlossen. |
 | 01.10.2026 | AREA-001: Begehbares Schilfufer mit Hin- und Rückweg sowie drei erreichbaren Sammelstellen ergänzt; zweite Kartenhälfte und geerntete Pflanzen werden gespeichert. AREA-Test rot/grün, alle 23 Headless-Tests, Editorimport und 60-Frame-Start bestanden. |
+| 01.10.2026 | MAP-01: Neue Weltentwurfsdateien übernommen; Dorfplatz mit Apotheke, Auftragsbrett, Brunnen und sichtbaren Nord-/Ostwegen gestaltet. Trockengestell unterhalb der Brunnenkollision platziert. MAP-01- und vollständiger Drei-Aufträge-Test bestanden; Rendererbild bei 480 × 270 geprüft. |

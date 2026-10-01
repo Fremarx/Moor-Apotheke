@@ -234,3 +234,11 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Nach einer durch die neue Karte überholten RESOURCE-001-Bestandsannahme wurde der Ressourcen-Audit auf 3 Sumpfminzen, 3 Schilfwurzeln und 2 Nachtmoose über beide Gebiete angepasst.
 - Alle 23 Godot-4.7.2-Headless-Tests, Editorimport und 60-Frame-Hauptszene bestanden.
 - Ein sichtbarer manueller Test von Bildausschnitt, echter Tastatur und subjektivem Steuerungsgefühl bleibt offen.
+
+## MAP-01 – Dorfplatz
+- `tests/map_01_village_plaza_test.gd` prüft die logische Gebiets-ID `Dorfplatz`, Spielerstart und Platzmitte, Apotheke/Eingang, sichtbare Nord- und Ostwege sowie das Auftragsbrett im Fußweg und seine Bedienbarkeit.
+- Der Test läuft im Headless-Modus; zusätzlich wurde der Viewport mit normalem Godot-Renderer bei 480 × 270 aufgenommen und visuell geprüft.
+- Der vollständige `playtest_001_core_loop_test.gd`-Lauf nach der Umgestaltung bestätigt die drei Aufträge, Verarbeitungsstationen und 30 Münzen. Eine Brunnenkollision blockierte zunächst den Querweg vom Ostbereich zum Trockengestell; das Gestell liegt nun unterhalb des Brunnens und der komplette Lauf besteht.
+- MAP-01-Test: `MAP-01 village plaza checks passed.` End-to-End-Test: `RESOURCE-001 full quest-chain checks passed.`
+- Alle 24 Godot-Headless-Testskripte, Godot-Editorimport und der 60-Frame-Startlauf bestehen; die gerenderte Ansicht wurde bei 480 × 270 geprüft.
+- SCALE-01 und die physischen Eingaben im sichtbaren Fenster bleiben offen.
