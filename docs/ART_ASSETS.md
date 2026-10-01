@@ -115,6 +115,12 @@ Palette: deep moss green, subdued olive, sage, warm peat umber and dark teal. Br
 Strong constraints: exactly 8 by 8 equal tiles, muted ground texture with restrained contrast, no cell dividers, no labels, text, icons, characters, buildings, UI, oversized plants, external shadows, blur, antialiasing, perspective, photorealism or watermark.
 </pre>
 
+## MAP-04 – Dorfcottages
+
+- `assets/sprites/village_cottages_ai_20261001.png` ist ein neuer transparenter PNG-Atlas mit 2.172 × 724 Pixeln und drei gleich großen Cottage-Feldern. Er enthält ein warmes Fachwerkhaus, ein dunkles Moosdachhaus und ein Steinhaus mit Holzschuppen.
+- Der Hausstil folgt dem bestehenden `moor_environment_atlas_ai_20261001.png`: kräftige dunkle Holzkonturen, warme Fenster, moosige Dachkanten und dichte, lesbare Pixelcluster.
+- `scripts/test_map.gd` verwendet je ein 724 × 724-Quellfeld und setzt die Häuser südlich des alten Platzes ein. Die Hausmarker und statischen Fundamentkollisionen liegen getrennt von den gezeichneten Sprites.
+
 ## VIS-004 – Hausarchitektur und Moorvegetation
 - Datei: `assets/sprites/moor_environment_atlas_ai_20261001.png`
 - Format: PNG mit transparentem Hintergrund, 1774 × 887 Pixel. Das Blatt enthält eine Apotheke, ein kleineres Torfhaus, ein üppiges Schilfbüschel und einen bemoosten Steinhaufen.

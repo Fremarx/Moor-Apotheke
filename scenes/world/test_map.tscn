@@ -386,3 +386,12 @@ feedback_text = "Du betrittst den Alten Torfstich."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterTorfstich"]
 shape = SubResource("CircleShape2D_map_transition")
+
+[node name="DorfhausWest" type="Marker2D" parent="."]
+position = Vector2(105, 438)
+
+[node name="DorfhausMitte" type="Marker2D" parent="."]
+position = Vector2(239, 420)
+
+[node name="DorfhausOst" type="Marker2D" parent="."]
+position = Vector2(508, 438)

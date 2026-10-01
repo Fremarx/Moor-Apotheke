@@ -197,6 +197,18 @@ Umgesetzt mit einem gemeinsamen 16×16-TileSet und einem 8×8-Atlas für beide S
 
 ## Epic B — Gebiete einzeln gestalten
 
+### MAP-04: Dorfplatz, Straßen und Wohnviertel ausbauen — P1
+
+**Status: DONE**
+
+- Den bestehenden 640 × 360-Hub auf 640 × 544 Pixel beziehungsweise 40 × 34 Kacheln vergrößern. Die Erweiterung liegt südlich, damit Weltkoordinaten, Gebietsübergänge und vorhandene Spielstände an ihrer Stelle bleiben.
+- Den Dorfplatz mit unregelmäßigen Pflastersteinen, dunklen Einfassungen, Fugen und einzelnen Moosstellen lesbarer machen.
+- Einen befestigten Südzugang und eine Querstraße als zusammenhängendes Wegenetz ergänzen; Wegkanten, Torfabrieb und Kiesel an den Moorstil anpassen.
+- Drei unterschiedliche, beleuchtete Wohnhäuser mit passenden Fundamentkollisionen, kleinen Gärten und Hofdetails einsetzen.
+- TileMap-Fläche und Kamera bis zur neuen Südgrenze führen; vorhandene Kräuter, Bewohner, Aufträge und Gebietsanschlüsse behalten ihre Koordinaten.
+
+**Fertig, wenn:** Die neue Karte ohne leere Bodenstreifen bis zur Grenze gefüllt ist, die drei Häuser vom Wohnviertel aus erkennbar und durch passende Wegstücke verbunden sind, der Platz und alle Übergänge erreichbar bleiben und die Volltests sowie der 480 × 270-Renderercheck bestehen.
+
 ### REG-01: Schilfufer als Startgebiet — P0
 
 **Status: TECHNISCH UMGESETZT; Blindtest vor Veröffentlichung offen.** Das 5×4-Gebiet hat Einstieg, Rückweg, Mindestfläche, sechs Kräutergruppen, eine dauerhaft freischaltbare Fährenabkürzung, ein dreistufiges Marksteinrätsel und den optionalen, verlustfrei vertreibbaren Schilfschnapper.
@@ -435,7 +447,7 @@ Die Reihenfolge verhindert, dass ein Auftrag eine noch gesperrte Ressource verla
 
 ## Empfohlene Reihenfolge für den ersten Ausbau
 
-1. SCALE-01 und MAP-01 bis MAP-03: Maßstab, Dorf, Wege und Grundkacheln.
+1. SCALE-01 und MAP-01 bis MAP-04: Maßstab, Dorf, Wege, Wohnviertel und Grundkacheln.
 2. REG-01 und REG-02: Schilfufer und Torfstich mit den bereits geplanten Ressourcen.
 3. SYS-01 und SYS-02 sowie ENE-01: Fundstellen und zwei Startgegner.
 4. COM-01 und ENE-03: Grundkampf sowie Drops und Trankrezepte der Startgegner.

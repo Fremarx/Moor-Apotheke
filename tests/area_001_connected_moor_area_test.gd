@@ -32,7 +32,7 @@ func _run() -> void:
 	_check(second_area.position.is_equal_approx(Vector2(640, 0)), "the second map follows the first map in world space")
 	_check(terrain != null and terrain.map_size == Vector2i(150, 68), "the expanded Schilfufer uses the full five-by-four sector layout")
 	_check(int(second_area.call("get_traversable_tile_count")) >= 6120, "the region keeps at least 6,120 traversable tiles")
-	_check(camera != null and camera.limit_right == 640 and camera.limit_bottom == 360, "the village camera starts inside the village bounds")
+	_check(camera != null and camera.limit_right == 640 and camera.limit_bottom == 544, "the village camera starts inside the village bounds")
 
 	var pickups: Dictionary = main.call("_get_pickups_by_id")
 	_check(pickups.size() == 18, "all eighteen world pickups have unique persistent IDs")
@@ -129,7 +129,7 @@ func _run() -> void:
 	await physics_frame
 	_check(player.global_position.is_equal_approx(FIRST_AREA_RETURN_SPAWN), "the region return transition reaches the northwest village path")
 	if camera != null:
-		_check(camera.limit_right == 640 and camera.limit_bottom == 360, "returning restores the village camera bounds")
+		_check(camera.limit_right == 640 and camera.limit_bottom == 544, "returning restores the village camera bounds")
 
 	var region_pickups: Array[Area2D] = [mint_e4, root_d4, mint_c3, mint_b2, root_c2, root_b3]
 	for pickup in region_pickups:

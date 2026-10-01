@@ -1,11 +1,12 @@
 extends Node2D
 
-const MAP_SIZE := Vector2(640, 360)
+const MAP_SIZE := Vector2(640, 544)
 const WALL_THICKNESS := 16.0
 const ATLAS_COLUMNS := 4.0
 const ATLAS_ROWS := 4.0
 const DECORATION_ATLAS: Texture2D = preload("res://assets/tilesets/moor_vegetation_atlas_ai_20261001.png")
 const ENVIRONMENT_ATLAS: Texture2D = preload("res://assets/sprites/moor_environment_atlas_ai_20261001.png")
+const COTTAGE_ATLAS: Texture2D = preload("res://assets/sprites/village_cottages_ai_20261001.png")
 
 @export var area_id: StringName = &"Dorfplatz"
 
@@ -41,6 +42,10 @@ func _ready() -> void:
 	_add_solid_rect(Rect2(Vector2(384, 119), Vector2(30, 22)))
 	_add_solid_rect(Rect2(Vector2(470, 139), Vector2(26, 34)))
 	_add_solid_rect(Rect2(Vector2(402, 267), Vector2(32, 24)))
+	# Cottage foundations keep the widened south street walkable around each home.
+	_add_solid_rect(Rect2(Vector2(76, 402), Vector2(55, 25)), "DorfhausWestBlocker")
+	_add_solid_rect(Rect2(Vector2(196, 379), Vector2(74, 27)), "DorfhausMitteBlocker")
+	_add_solid_rect(Rect2(Vector2(481, 402), Vector2(58, 25)), "DorfhausOstBlocker")
 
 
 func get_map_bounds() -> Rect2:
@@ -75,8 +80,10 @@ func _add_torfstich_gate(rect: Rect2) -> void:
 	add_child(body)
 	_torfstich_gate_shape = collision
 
-func _add_solid_rect(rect: Rect2) -> void:
+func _add_solid_rect(rect: Rect2, body_name: String = "") -> void:
 	var body := StaticBody2D.new()
+	if not body_name.is_empty():
+		body.name = body_name
 	body.position = rect.position + rect.size / 2.0
 	var collision := CollisionShape2D.new()
 	var shape := RectangleShape2D.new()
@@ -90,6 +97,7 @@ func _draw() -> void:
 	_draw_pond()
 	_draw_water_lilies()
 	_draw_village_paths()
+	_draw_residential_roads()
 	_draw_bridge()
 	_draw_village_square()
 	_draw_apothecary()
@@ -98,6 +106,8 @@ func _draw() -> void:
 	_draw_obstacles()
 	_draw_reeds()
 	_draw_scattered_details()
+	_draw_residential_yards()
+	_draw_residential_houses()
 	_draw_interaction_probe()
 
 
@@ -187,6 +197,70 @@ func _draw_village_paths() -> void:
 	]))
 
 
+func _draw_residential_roads() -> void:
+	# A southbound lane and cross-street turn the old hub into a small village.
+	_draw_road(PackedVector2Array([
+		Vector2(300, 239), Vector2(317, 243), Vector2(320, 278),
+		Vector2(325, 315), Vector2(333, 350), Vector2(343, 386),
+		Vector2(340, 407), Vector2(321, 412), Vector2(310, 389),
+		Vector2(304, 355), Vector2(298, 320), Vector2(293, 282)
+	]))
+	_draw_road(PackedVector2Array([
+		Vector2(91, 405), Vector2(116, 397), Vector2(166, 395),
+		Vector2(218, 397), Vector2(271, 400), Vector2(320, 399),
+		Vector2(373, 397), Vector2(427, 396), Vector2(485, 399),
+		Vector2(545, 405), Vector2(560, 416), Vector2(550, 430),
+		Vector2(505, 437), Vector2(453, 435), Vector2(397, 433),
+		Vector2(344, 432), Vector2(291, 433), Vector2(238, 436),
+		Vector2(184, 435), Vector2(133, 431), Vector2(98, 423)
+	]))
+	_draw_road(PackedVector2Array([
+		Vector2(308, 421), Vector2(329, 420), Vector2(339, 451),
+		Vector2(342, 484), Vector2(339, 520), Vector2(319, 526),
+		Vector2(307, 495), Vector2(302, 460)
+	]))
+
+
+func _draw_residential_yards() -> void:
+	_draw_fenced_garden(Rect2(Vector2(54, 475), Vector2(62, 34)))
+	_draw_fenced_garden(Rect2(Vector2(500, 474), Vector2(68, 36)))
+	# A woodpile, water barrel and herb baskets make the new lane feel lived in.
+	draw_rect(Rect2(Vector2(183, 471), Vector2(27, 12)), Color("523b2c"))
+	for log_index in range(3):
+		draw_rect(Rect2(Vector2(185 + log_index * 2, 468 + log_index * 3), Vector2(23, 4)), Color("9a7047"))
+		draw_rect(Rect2(Vector2(186 + log_index * 2, 469 + log_index * 3), Vector2(3, 2)), Color("d0a36a"))
+	draw_rect(Rect2(Vector2(430, 478), Vector2(10, 17)), Color("664a32"))
+	draw_rect(Rect2(Vector2(429, 476), Vector2(12, 3)), Color("bd9460"))
+	draw_rect(Rect2(Vector2(432, 480), Vector2(6, 2)), Color("93a49a"))
+	_draw_atlas_sprite(Vector2(245, 482), Vector2i(1, 1), Vector2(26, 28))
+	_draw_atlas_sprite(Vector2(386, 485), Vector2i(0, 1), Vector2(26, 28))
+
+
+func _draw_fenced_garden(area: Rect2) -> void:
+	draw_rect(area.grow(2), Color("554330"))
+	draw_rect(area, Color("725237"))
+	draw_rect(area.grow(-3), Color("493c2b"))
+	for post_x in range(int(area.position.x) + 3, int(area.end.x) - 2, 10):
+		draw_rect(Rect2(Vector2(post_x, area.position.y), Vector2(3, 3)), Color("d0a16a"))
+		draw_rect(Rect2(Vector2(post_x, area.end.y - 3), Vector2(3, 3)), Color("bd8e5c"))
+	for row in range(2):
+		for column in range(5):
+			var sprout := area.position + Vector2(8 + column * 10, 9 + row * 12)
+			var leaf_color := Color("71805a") if (row + column) % 2 == 0 else Color("8c955e")
+			draw_rect(Rect2(sprout, Vector2(4, 2)), leaf_color)
+			draw_rect(Rect2(sprout + Vector2(1, -1), Vector2(2, 1)), Color("b1ad6b"))
+
+
+func _draw_residential_houses() -> void:
+	_draw_cottage(Rect2(0.0, 0.0, 724.0, 724.0), Rect2(Vector2(42, 316), Vector2(128, 128)))
+	_draw_cottage(Rect2(724.0, 0.0, 724.0, 724.0), Rect2(Vector2(176, 300), Vector2(126, 126)))
+	_draw_cottage(Rect2(1448.0, 0.0, 724.0, 724.0), Rect2(Vector2(444, 316), Vector2(128, 128)))
+
+
+func _draw_cottage(source: Rect2, destination: Rect2) -> void:
+	draw_texture_rect_region(COTTAGE_ATLAS, destination, source, Color.WHITE, false, true)
+
+
 func _draw_bridge() -> void:
 	draw_rect(Rect2(Vector2(426, 76), Vector2(185, 45)), Color("493c31"))
 	draw_rect(Rect2(Vector2(428, 79), Vector2(181, 39)), Color("8a6445"))
@@ -203,20 +277,46 @@ func _draw_road(points: PackedVector2Array) -> void:
 	for point in points:
 		shadow_points.append(point + Vector2(0, 5))
 		bounds = bounds.expand(point)
+
+	var packed_fill := _inset_polygon(points, 5.0)
+	var outline := points.duplicate()
+	outline.append(points[0])
 	draw_colored_polygon(shadow_points, Color("514938"))
-	draw_colored_polygon(points, Color("a18158"))
-	draw_polyline(points, Color("c4a574"), 2.0)
-	for y in range(int(bounds.position.y) + 6, int(bounds.end.y) - 4, 14):
-		for x in range(int(bounds.position.x) + 6, int(bounds.end.x) - 4, 14):
-			var detail := Vector2(x + posmod(x * 5 + y * 3, 5), y + posmod(x * 2 + y * 7, 4))
-			if not Geometry2D.is_point_in_polygon(detail, points):
+	draw_colored_polygon(points, Color("675640"))
+	draw_colored_polygon(packed_fill, Color("a18158"))
+	draw_polyline(outline, Color("d0b17b"), 1.0)
+
+	# Small worn stones, damp peat flecks and pale grit break up the broad path fill.
+	for y in range(int(bounds.position.y) + 6, int(bounds.end.y) - 4, 9):
+		for x in range(int(bounds.position.x) + 5, int(bounds.end.x) - 4, 10):
+			var detail := Vector2(
+				x + posmod(x * 5 + y * 3, 5),
+				y + posmod(x * 2 + y * 7, 4)
+			)
+			if not Geometry2D.is_point_in_polygon(detail, packed_fill):
 				continue
-			var detail_pattern := posmod(x * 17 + y * 31, 19)
-			if detail_pattern < 2:
-				draw_rect(Rect2(detail, Vector2(3, 2)), Color("8d7553"))
-				draw_rect(Rect2(detail + Vector2(1, 0), Vector2(1, 1)), Color("c5a574"))
-			elif detail_pattern == 7:
-				draw_rect(Rect2(detail, Vector2(2, 1)), Color("d1b783"))
+			var detail_pattern := posmod(x * 17 + y * 31, 23)
+			if detail_pattern < 3:
+				draw_rect(Rect2(detail + Vector2(1, 1), Vector2(4, 2)), Color("786448"))
+				draw_rect(Rect2(detail, Vector2(3, 1)), Color("c8a876"))
+			elif detail_pattern < 8:
+				draw_rect(Rect2(detail, Vector2(3, 2)), Color("b39466"))
+				draw_rect(Rect2(detail + Vector2(1, 0), Vector2(1, 1)), Color("dfc18b"))
+			elif detail_pattern == 11:
+				draw_rect(Rect2(detail, Vector2(5, 1)), Color("8c7654"))
+
+
+func _inset_polygon(points: PackedVector2Array, amount: float) -> PackedVector2Array:
+	var center := Vector2.ZERO
+	for point in points:
+		center += point
+	center /= float(points.size())
+
+	var inset_points := PackedVector2Array()
+	for point in points:
+		var inset_amount: float = minf(amount, point.distance_to(center) * 0.12)
+		inset_points.append(point.move_toward(center, inset_amount))
+	return inset_points
 
 
 func _draw_village_square() -> void:
@@ -231,16 +331,32 @@ func _draw_village_square() -> void:
 	for point in plaza:
 		shadow.append(point + Vector2(0, 5))
 	draw_colored_polygon(shadow, Color("574c3e"))
-	draw_colored_polygon(plaza, Color("b5a37d"))
-	draw_polyline(plaza, Color("d6c59a"), 2.0)
+	draw_colored_polygon(plaza, Color("76674e"))
+	var paved_area := _inset_polygon(plaza, 4.0)
+	draw_colored_polygon(paved_area, Color("b5a37d"))
+	var paving_border := _inset_polygon(plaza, 8.0)
+	var closed_border := paving_border.duplicate()
+	closed_border.append(paving_border[0])
+	draw_polyline(closed_border, Color("d6c59a"), 1.0)
 
-	for row in range(7):
-		for column in range(9):
-			var tile := Vector2(255 + column * 15 + (row % 2) * 6, 154 + row * 13)
-			var tint := Color("c2b28b") if (row + column) % 3 == 0 else Color("a99a74")
-			draw_rect(Rect2(tile, Vector2(8, 4)), tint)
-			draw_rect(Rect2(tile + Vector2(1, 1), Vector2(4, 1)), Color("d3c397"))
-
+	# Staggered, uneven flagstones replace the repeated little rectangles.
+	for row in range(9):
+		for column in range(12):
+			var variation := posmod(row * 13 + column * 7, 5)
+			var tile := Vector2(
+				238 + column * 12 + (row % 2) * 6 + posmod(row + column * 3, 3),
+				145 + row * 10 + posmod(column * 2 + row, 2)
+			)
+			var tile_center := tile + Vector2(5, 3)
+			if not Geometry2D.is_point_in_polygon(tile_center, paved_area):
+				continue
+			var tile_size := Vector2(7 + posmod(variation * 3, 5), 4 + posmod(variation, 2))
+			var tint := Color("c2b28b") if variation == 0 or variation == 3 else Color("a99a74")
+			draw_rect(Rect2(tile + Vector2(1, 1), tile_size), Color("817354"))
+			draw_rect(Rect2(tile, tile_size), tint)
+			draw_rect(Rect2(tile + Vector2(1, 1), Vector2(maxf(2.0, tile_size.x - 4.0), 1)), Color("d3c397"))
+			if variation == 2:
+				draw_rect(Rect2(tile + Vector2(2, 4), Vector2(2, 1)), Color("778060"))
 	# The well is a central landmark and stays clear of the main walking lines.
 	draw_colored_polygon(PackedVector2Array([
 		Vector2(352, 146), Vector2(367, 146), Vector2(378, 157),

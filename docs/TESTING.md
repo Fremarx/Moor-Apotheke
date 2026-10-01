@@ -255,7 +255,7 @@ Die 28 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, d
 
 ## MAP-03 – Wiederverwendbares Moor-Kachelset
 
-- `tests/map_03_reusable_terrain_tileset_test.gd` prüft die gemeinsame TileSet-Ressource, das 16×16-Raster, alle 64 registrierten Zellen des 128×128-Atlas, beide `TerrainBase`-Layer, ihre Profile und vollständige 40×23-Abdeckung ohne Kollision oder Navigation.
+- `tests/map_03_reusable_terrain_tileset_test.gd` prüft die gemeinsame TileSet-Ressource, das 16×16-Raster, alle 64 registrierten Zellen des 128×128-Atlas, beide `TerrainBase`-Layer, ihre Profile und vollständige 40×34-Abdeckung für den Dorfplatz und 150×68 für das Schilfufer ohne Kollision oder Navigation.
 - Der Test prüft außerdem den 16-Pixel-Zellabstand sowie die Sichtbarkeit und Spielmaßstabbreite der Sammelpflanzen auf beiden Karten.
 - Beide Karten wurden mit normalem Godot-Renderer als 480×270-Viewport aufgenommen. Pfade und Ufer sind ohne sichtbare Lücken; Sammelpflanzen bleiben gegenüber dem ruhigen Grundtile erkennbar.
 - Abschlussprüfung: alle 26 Godot-Headless-Tests, Godot-4.7.2-Editorimport und 60-Frame-Hauptszene bestanden.
@@ -274,6 +274,13 @@ Die 28 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, d
 - Die alte gleichförmige Basiskachel und die einfachen, darüber gezeichneten Grasflecken sind durch eine gedämpfte, detailreiche 8×8-Bodentextur ersetzt. Kleine Abrieb- und Kieselpixel strukturieren die Torfwege, ohne die Hauptwege zu verändern.
 - Dorfplatz mit Spieler/HUD und ein Schilfufer-Ausschnitt wurden mit dem normalen Godot-Renderer bei 480×270 aufgenommen und visuell auf Bodenruhe, Stil, Pflanzenerkennbarkeit und Weglesbarkeit geprüft.
 - Alle 27 Headless-Testskripte, der Godot-4.7.2-Editorimport und ein 60-Frame-Start der Hauptszene bestanden.
+
+## MAP-04 – Größerer Dorfplatz und Wohnviertel
+
+- `tests/map_04_village_expansion_test.gd` prüft Kartengröße, ausgefülltes 40 × 34-Grundraster, neue Kameragrenze, drei Wohnhausmarker, Fundamentkollisionen und transparenten 2.172 × 724-Hausatlas.
+- `tests/map_03_reusable_terrain_tileset_test.gd` prüft zusätzlich die neue Dorfplatzfläche und letzte Kachel.
+- Die bestehende AREA-001- und REG-02-Prüfung stellt sicher, dass Eintritt, Rückweg und Kamerarückstellung weiter passen.
+- Der südliche Wohnbereich wurde bei 480 × 270 mit normalem Renderer aufgenommen; Dorfstart und Wohnviertel sind getrennt im Spielmaßstab prüfbar. Abgeschlossen: alle 30 Headless-Tests, Editorimport und 60-Frame-Start bestanden.
 
 ## SCALE-01 – Gebietsraster und spätere Gebietsabnahme
 
@@ -303,4 +310,4 @@ SCALE-01 ist ein Designpunkt; es wurden keine Karten-Szenen geändert und keine 
 - Der Test entdeckt eine Fundstelle, prüft Gebiet, Ort und Pflanze im Basis-Kräuterbuch, simuliert H und kontrolliert die Einträge.
 - Version-1-Spielstände ohne separates Entdeckungsfeld bleiben gültig; Erstentdeckungen werden getrennt vom Erntestatus gespeichert und nach dem Startladen wiederhergestellt.
 - Beim Rückweg von Schilfufer nach Dorfplatz wachsen alle Pflanzen nach und vertriebene optionale Begegnungen kehren zurück. Das Rätselgeheimnis am Ufer bleibt verborgen.
-- Alle 29 Godot-4.7.2-Testskripte, der Editorimport und der 60-Frame-Startlauf bestanden.
+- Alle 30 Godot-4.7.2-Testskripte, der Editorimport und der 60-Frame-Startlauf bestanden.

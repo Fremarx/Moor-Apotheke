@@ -2,7 +2,7 @@ extends SceneTree
 
 const TERRAIN_TILESET: TileSet = preload("res://assets/tilesets/moor_terrain_tileset.tres")
 const MAP_CASES := [
-	{"path": "res://scenes/world/test_map.tscn", "profile": 0, "pickup": "Sumpfminze/Visual", "map_size": Vector2i(40, 23)},
+	{"path": "res://scenes/world/test_map.tscn", "profile": 0, "pickup": "Sumpfminze/Visual", "map_size": Vector2i(40, 34)},
 	{"path": "res://scenes/world/schilfufer.tscn", "profile": 1, "pickup": "SumpfminzeSchilfufer/Visual", "map_size": Vector2i(150, 68)},
 ]
 var _failures: Array[String] = []

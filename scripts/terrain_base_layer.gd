@@ -17,7 +17,7 @@ const BASE_GRASS_TILES := [
 ]
 
 @export_enum("Dorfplatz", "Schilfufer", "Alter Torfstich") var terrain_profile: int = TerrainProfile.VILLAGE
-@export var map_size: Vector2i = Vector2i(40, 23)
+@export var map_size: Vector2i = Vector2i(40, 34)
 
 
 func _ready() -> void:

@@ -146,7 +146,7 @@ func _run() -> void:
 	await physics_frame
 	_check(player.global_position.is_equal_approx(Vector2(560, 184)), "the safe entrance route returns to the village east path")
 	if camera != null:
-		_check(camera.limit_right == 640 and camera.limit_bottom == 360, "returning restores the village camera bounds")
+		_check(camera.limit_right == 640 and camera.limit_bottom == 544, "returning restores the village camera bounds")
 
 	main.queue_free()
 	await process_frame
