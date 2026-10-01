@@ -39,6 +39,12 @@ const INVENTORY_COLUMNS: Array = [
 	],
 ]
 
+const AREA_DISPLAY_NAMES := {
+	"Dorfplatz": "Dorfplatz",
+	"Schilfufer": "Schilfufer",
+	"AlterTorfstich": "Alter Torfstich",
+}
+
 @onready var _player: Node = $World/Player
 @onready var _camera: Camera2D = $World/Player/Camera2D
 @onready var _schilfufer: Node = $World/Schilfufer
@@ -54,6 +60,12 @@ const INVENTORY_COLUMNS: Array = [
 @onready var _inventory_window_panel: PanelContainer = $HUD/InventoryWindowPanel
 @onready var _inventory_left_column: VBoxContainer = $HUD/InventoryWindowPanel/Content/Columns/LeftColumn
 @onready var _inventory_right_column: VBoxContainer = $HUD/InventoryWindowPanel/Content/Columns/RightColumn
+@onready var _inventory_columns: HBoxContainer = $HUD/InventoryWindowPanel/Content/Columns
+@onready var _inventory_title: Label = $HUD/InventoryWindowPanel/Content/Header/Title
+@onready var _inventory_help: Label = $HUD/InventoryWindowPanel/Content/HelpText
+@onready var _inventory_page_button: Button = $HUD/InventoryWindowPanel/Content/Header/PageButton
+@onready var _herb_book_page: ScrollContainer = $HUD/InventoryWindowPanel/Content/HerbBookPage
+@onready var _herb_book_entries: VBoxContainer = $HUD/InventoryWindowPanel/Content/HerbBookPage/Entries
 @onready var _inventory_window_close_button: Button = $HUD/InventoryWindowPanel/Content/Header/CloseButton
 @onready var _fenja_accept_button: Button = $HUD/QuestBoardPanel/Content/FenjaRow/AcceptButton
 @onready var _marten_accept_button: Button = $HUD/QuestBoardPanel/Content/MartenRow/AcceptButton
@@ -75,6 +87,7 @@ const INVENTORY_COLUMNS: Array = [
 @onready var _feedback_timer: Timer = $HUD/FeedbackTimer
 
 var _inventory_window_counts: Dictionary = {}
+var _discovered_pickups: Dictionary = {}
 
 
 func _ready() -> void:
@@ -86,6 +99,7 @@ func _ready() -> void:
 	_lene_quest.state_changed.connect(_on_lene_quest_state_changed)
 	_quest_board.connect("open_requested", _on_quest_board_open_requested)
 	_inventory_window_close_button.pressed.connect(_close_inventory_window)
+	_inventory_page_button.pressed.connect(_toggle_inventory_page)
 	_build_inventory_window()
 	_fenja_accept_button.pressed.connect(_on_fenja_accept_pressed)
 	_marten_accept_button.pressed.connect(_on_marten_accept_pressed)
@@ -99,6 +113,8 @@ func _ready() -> void:
 	_lene_quest.set_marten_quest(_marten_quest)
 
 	for pickup in get_tree().get_nodes_in_group("item_pickups"):
+		if pickup.has_signal("resource_discovered"):
+			pickup.resource_discovered.connect(_on_resource_discovered)
 		if pickup.has_signal("item_collected"):
 			pickup.item_collected.connect(_inventory.add_item)
 
@@ -143,6 +159,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				_open_inventory_window()
 		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("toggle_herb_book"):
+		if not _quest_board_panel.visible:
+			_toggle_herb_book()
+		get_viewport().set_input_as_handled()
 	elif _quest_board_panel.visible or _inventory_window_panel.visible:
 		return
 	elif event.is_action_pressed("save_game"):
@@ -164,6 +184,10 @@ func save_game() -> bool:
 		if bool(pickups[pickup_id].call("is_collected")):
 			collected_pickups.append(pickup_id)
 	collected_pickups.sort()
+	var discovered_pickups: Array[String] = []
+	for pickup_id in _discovered_pickups:
+		discovered_pickups.append(str(pickup_id))
+	discovered_pickups.sort()
 
 	var save_data := {
 		"version": 1,
@@ -175,6 +199,7 @@ func save_game() -> bool:
 			"lene": str(_lene_quest.get("state")),
 		},
 		"collected_pickups": collected_pickups,
+		"discovered_pickups": discovered_pickups,
 		"schilfufer": _schilfufer.call("get_save_data"),
 		"alter_torfstich": _alter_torfstich.call("get_save_data"),
 	}
@@ -262,6 +287,15 @@ func _is_valid_save_data(save_data: Variant) -> bool:
 		if typeof(pickup_id) != TYPE_STRING or not pickups.has(pickup_id) or seen_pickups.has(pickup_id):
 			return false
 		seen_pickups[pickup_id] = true
+
+	var saved_discoveries: Variant = save_data.get("discovered_pickups", saved_pickups)
+	if typeof(saved_discoveries) != TYPE_ARRAY:
+		return false
+	var seen_discoveries: Dictionary = {}
+	for pickup_id in saved_discoveries:
+		if typeof(pickup_id) != TYPE_STRING or not pickups.has(pickup_id) or seen_discoveries.has(pickup_id):
+			return false
+		seen_discoveries[pickup_id] = true
 	return true
 
 
@@ -276,8 +310,16 @@ func _get_pickups_by_id() -> Dictionary:
 	for pickup in get_tree().get_nodes_in_group("item_pickups"):
 		if not pickup.has_method("get_pickup_id") or not pickup.has_method("is_collected"):
 			return {}
+		if not pickup.has_method("get_area_id") or not pickup.has_method("get_location_name") or not pickup.has_method("get_resource_id") or not pickup.has_method("get_resource_rarity"):
+			return {}
 		var pickup_id: Variant = pickup.call("get_pickup_id")
+		var area_id := StringName(pickup.call("get_area_id"))
+		var location_name := str(pickup.call("get_location_name"))
+		var resource_id := str(pickup.call("get_resource_id"))
+		var rarity := StringName(pickup.call("get_resource_rarity"))
 		if typeof(pickup_id) != TYPE_STRING or str(pickup_id).is_empty() or pickups.has(pickup_id):
+			return {}
+		if area_id.is_empty() or location_name.is_empty() or resource_id.is_empty() or (rarity != &"common" and rarity != &"rare"):
 			return {}
 		pickups[pickup_id] = pickup
 	return pickups
@@ -296,6 +338,18 @@ func _apply_save_data(save_data: Dictionary) -> void:
 	var pickups := _get_pickups_by_id()
 	for pickup_id in pickups:
 		pickups[pickup_id].call("set_collected", collected_pickups.has(pickup_id))
+	_discovered_pickups.clear()
+	var discovered_ids: Array = save_data.get("discovered_pickups", collected_pickups)
+	for pickup_id in discovered_ids:
+		var pickup: Node = pickups[pickup_id]
+		_on_resource_discovered(
+			str(pickup.call("get_pickup_id")),
+			StringName(pickup.call("get_area_id")),
+			str(pickup.call("get_resource_id")),
+			str(pickup.get("display_name")),
+			str(pickup.call("get_location_name")),
+			StringName(pickup.call("get_resource_rarity"))
+		)
 	_schilfufer.call("restore_save_data", save_data.get("schilfufer", {}))
 	_alter_torfstich.call("restore_save_data", save_data.get("alter_torfstich", {}))
 	_sync_torfstich_access()
@@ -340,6 +394,7 @@ func _open_inventory_window() -> void:
 	if _quest_board_panel.visible:
 		return
 
+	_show_inventory_page()
 	_refresh_inventory_window()
 	_inventory_dim.show()
 	_inventory_window_panel.show()
@@ -350,6 +405,7 @@ func _open_inventory_window() -> void:
 
 
 func _close_inventory_window() -> void:
+	_show_inventory_page()
 	_inventory_window_panel.hide()
 	_inventory_dim.hide()
 	_inventory_window_close_button.release_focus()
@@ -357,6 +413,39 @@ func _close_inventory_window() -> void:
 		_player.set_physics_process(true)
 		_player.set_process_unhandled_input(true)
 		_player.call_deferred("refresh_interactable_prompt")
+
+
+func _toggle_herb_book() -> void:
+	if _inventory_window_panel.visible and _herb_book_page.visible:
+		_close_inventory_window()
+		return
+	if not _inventory_window_panel.visible:
+		_open_inventory_window()
+	_show_herb_book_page()
+
+
+func _toggle_inventory_page() -> void:
+	if _herb_book_page.visible:
+		_show_inventory_page()
+	else:
+		_show_herb_book_page()
+
+
+func _show_inventory_page() -> void:
+	_inventory_title.text = "Inventar"
+	_inventory_help.text = "Frische Zutaten, Vorräte und fertige Mittel"
+	_inventory_page_button.text = "Kräuterbuch"
+	_inventory_columns.show()
+	_herb_book_page.hide()
+
+
+func _show_herb_book_page() -> void:
+	_inventory_title.text = "Kräuterbuch"
+	_inventory_help.text = "Entdeckte Sammelstellen aus den Moorgebieten"
+	_inventory_page_button.text = "Vorräte"
+	_inventory_columns.hide()
+	_herb_book_page.show()
+	_refresh_herb_book_page()
 
 
 func _on_fenja_accept_pressed() -> void:
@@ -458,6 +547,76 @@ func _on_item_count_changed(item_id: String, amount: int) -> void:
 	_update_quest_status()
 
 
+func _on_resource_discovered(
+	pickup_id: String,
+	area_id: StringName,
+	resource_id: String,
+	resource_name: String,
+	location_name: String,
+	rarity: StringName
+) -> void:
+	if pickup_id.is_empty() or area_id.is_empty() or location_name.is_empty() or resource_id.is_empty():
+		return
+	if rarity != &"common" and rarity != &"rare":
+		return
+	_discovered_pickups[pickup_id] = {
+		"pickup_id": pickup_id,
+		"area_id": str(area_id),
+		"resource_id": resource_id,
+		"display_name": resource_name,
+		"location_name": location_name,
+		"rarity": str(rarity),
+	}
+	_refresh_herb_book_page()
+
+
+func get_discovered_resources() -> Array[Dictionary]:
+	var entries: Array[Dictionary] = []
+	for pickup_id in _discovered_pickups:
+		var entry: Dictionary = _discovered_pickups[pickup_id]
+		entries.append(entry.duplicate(true))
+	entries.sort_custom(func(left: Dictionary, right: Dictionary) -> bool:
+		var left_area := str(left.get("area_id", ""))
+		var right_area := str(right.get("area_id", ""))
+		if left_area != right_area:
+			return left_area < right_area
+		var left_name := str(left.get("display_name", ""))
+		var right_name := str(right.get("display_name", ""))
+		if left_name != right_name:
+			return left_name < right_name
+		return str(left.get("pickup_id", "")) < str(right.get("pickup_id", ""))
+	)
+	return entries
+
+
+func _refresh_herb_book_page() -> void:
+	if _herb_book_entries == null:
+		return
+	for child in _herb_book_entries.get_children():
+		_herb_book_entries.remove_child(child)
+		child.queue_free()
+
+	var entries := get_discovered_resources()
+	if entries.is_empty():
+		var empty_label := Label.new()
+		empty_label.text = "Noch keine Fundstelle entdeckt. Sammle eine Pflanze, um sie hier zu notieren."
+		empty_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		empty_label.add_theme_color_override("font_color", Color(0.72, 0.78, 0.68, 1))
+		empty_label.add_theme_font_size_override("font_size", 9)
+		_herb_book_entries.add_child(empty_label)
+		return
+
+	for entry in entries:
+		var row := Label.new()
+		var area_name := str(AREA_DISPLAY_NAMES.get(str(entry["area_id"]), entry["area_id"]))
+		var rarity_label := "Selten" if str(entry["rarity"]) == "rare" else "Häufig"
+		row.text = "%s — %s — %s · %s" % [area_name, str(entry["location_name"]), str(entry["display_name"]), rarity_label]
+		row.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		row.add_theme_color_override("font_color", Color(0.88, 0.83, 0.68, 1))
+		row.add_theme_font_size_override("font_size", 9)
+		_herb_book_entries.add_child(row)
+
+
 func _build_inventory_window() -> void:
 	for category_data: Dictionary in INVENTORY_COLUMNS[0]:
 		_add_inventory_category(_inventory_left_column, category_data)
@@ -516,6 +675,7 @@ func _refresh_inventory_window() -> void:
 	for item_id in _inventory_window_counts:
 		var count_label := _inventory_window_counts[item_id] as Label
 		count_label.text = str(_inventory.call("get_count", str(item_id)))
+	_refresh_herb_book_page()
 
 
 func _on_quest_state_changed(state: String) -> void:
@@ -645,15 +805,42 @@ func _configure_camera_for_area(destination_id: StringName) -> void:
 		_camera.force_update_scroll()
 		return
 
+func _get_area_id_at_position(position: Vector2) -> StringName:
+	for area in get_tree().get_nodes_in_group("world_areas"):
+		if not area is Node2D or not area.has_method("get_map_bounds"):
+			continue
+		var local_bounds: Rect2 = area.call("get_map_bounds")
+		var world_bounds := Rect2(area.to_global(local_bounds.position), local_bounds.size)
+		if world_bounds.has_point(position):
+			return StringName(area.get("area_id"))
+	return &""
+
+
+func _respawn_resources_and_encounters() -> void:
+	for pickup in get_tree().get_nodes_in_group("item_pickups"):
+		if pickup.has_method("set_collected"):
+			pickup.call("set_collected", false)
+	for encounter in get_tree().get_nodes_in_group("optional_encounters"):
+		if encounter.has_method("reset_encounter"):
+			encounter.call("reset_encounter")
+	for area in get_tree().get_nodes_in_group("world_areas"):
+		if area.has_method("refresh_resource_visibility"):
+			area.call("refresh_resource_visibility")
+
+
 func _on_map_transition_requested(destination_id: StringName, destination_position: Vector2, feedback_text: String) -> void:
 	for area in get_tree().get_nodes_in_group("world_areas"):
 		if StringName(area.get("area_id")) != destination_id:
 			continue
+		var source_area_id := _get_area_id_at_position(_player.global_position)
+		if destination_id == &"Dorfplatz" and source_area_id != &"Dorfplatz":
+			_respawn_resources_and_encounters()
 		_player.velocity = Vector2.ZERO
 		_player.global_position = area.to_global(destination_position)
 		_configure_camera_for_area(destination_id)
 		_on_interaction_completed(feedback_text)
 		return
+
 
 func _on_feedback_timer_timeout() -> void:
 	_interaction_feedback.hide()

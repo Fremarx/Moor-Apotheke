@@ -411,6 +411,13 @@ theme_override_colors/font_color = Color(0.88, 0.83, 0.68, 1)
 theme_override_font_sizes/font_size = 13
 text = "Inventar"
 
+[node name="PageButton" type="Button" parent="HUD/InventoryWindowPanel/Content/Header"]
+custom_minimum_size = Vector2(82, 24)
+layout_mode = 2
+focus_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Kräuterbuch"
+
 [node name="CloseButton" type="Button" parent="HUD/InventoryWindowPanel/Content/Header"]
 custom_minimum_size = Vector2(76, 24)
 layout_mode = 2
@@ -437,6 +444,18 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
+
+[node name="HerbBookPage" type="ScrollContainer" parent="HUD/InventoryWindowPanel/Content"]
+visible = false
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Entries" type="VBoxContainer" parent="HUD/InventoryWindowPanel/Content/HerbBookPage"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
 
 [node name="FeedbackTimer" type="Timer" parent="HUD"]
 wait_time = 2.0

@@ -132,6 +132,10 @@ func _run() -> void:
 		_check(camera.limit_right == 640 and camera.limit_bottom == 360, "returning restores the village camera bounds")
 
 	var region_pickups: Array[Area2D] = [mint_e4, root_d4, mint_c3, mint_b2, root_c2, root_b3]
+	for pickup in region_pickups:
+		_check(not bool(pickup.call("is_collected")), "returning to the village regrows %s" % pickup.get("pickup_id"))
+		_check(pickup.visible, "the regrown %s is visible again" % pickup.get("pickup_id"))
+		pickup.call("interact")
 	player.global_position = SAVED_SECOND_AREA_POSITION
 	_check(bool(main.call("save_game")), "the expanded-region position, shortcut, puzzle, and collected plants can be saved")
 	second_area.call("restore_save_data", {})

@@ -267,6 +267,8 @@ Umgesetzt mit einem gemeinsamen 16×16-TileSet und einem 8×8-Atlas für beide S
 
 **Fertig, wenn:** Jede Ressource eindeutig einem Gebiet zugeordnet ist, gesammelt werden kann und nach einer Rückkehr ins Dorf erneut verfügbar ist.
 
+**Prototyp-Abgrenzung:** Das kostenlose Basis-Kräuterbuch aus SYS-01 protokolliert entdeckte Fundstellen. Die kostenpflichtige UPG-02-Erweiterung ergänzt später Hinweise auf fehlende Zutaten bekannter Rezepte.
+
 ### RES-01: Ressourcen sinnvoll in Rezepten und Ausbauten verwenden — P0/P1/P2
 
 - Ressourcenorte, Verarbeitungszustand und Verwendungen nach [Ressourcenplan](resource_economy.md) abbilden.
@@ -376,7 +378,7 @@ Umgesetzt mit einem gemeinsamen 16×16-TileSet und einem 8×8-Atlas für beide S
 
 - Laterne zeigt seltene Sammelstellen im Umkreis von etwa 6 Kacheln und vertreibt einfache Gegner etwa 3 Sekunden lang.
 - Sumpfstiefel senken die Schlamm-Verlangsamung als Startwert von 30 % auf 10 % und öffnen ausgewiesene Flachwasserwege.
-- Kräuterbuch notiert entdeckte Ressourcen, bekannte Fundorte und fehlende Rezeptzutaten.
+- Die kostenpflichtige Kräuterbuch-Erweiterung ergänzt das kostenlose Basis-Fundbuch um fehlende Zutaten bekannter Rezepte.
 - Erstfunde von Quellperle und Irrlichtstaub bleiben im Aufgabenfortschritt gespeichert, unabhängig davon, ob das optionale Kräuterbuch gekauft wurde oder die Zutaten später verbraucht werden.
 
 **Fertig, wenn:** Jede Verbesserung mindestens einen vorher sichtbaren oder bekannten Spielort sinnvoll verändert.

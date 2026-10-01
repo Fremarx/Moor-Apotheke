@@ -172,6 +172,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Sumpfminze."
 item_id = "sump_mint"
 pickup_id = "sump_mint_patch"
+area_id = &"Dorfplatz"
+location_name = "Südwestlicher Dorfweg"
 
 [node name="Visual" type="Sprite2D" parent="Sumpfminze"]
 texture = ExtResource("12_herbs")
@@ -193,6 +195,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Schilfwurzel."
 item_id = "reed_root"
 pickup_id = "reed_root_patch"
+area_id = &"Dorfplatz"
+location_name = "Teichsteg"
 
 [node name="Visual" type="Sprite2D" parent="Schilfwurzel"]
 texture = ExtResource("12_herbs")
@@ -214,6 +218,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Sumpfminze."
 item_id = "sump_mint"
 pickup_id = "sump_mint_patch_02"
+area_id = &"Dorfplatz"
+location_name = "Südlicher Moosweg"
 
 [node name="Visual" type="Sprite2D" parent="SumpfminzeSued"]
 texture = ExtResource("12_herbs")
@@ -235,6 +241,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Schilfwurzel."
 item_id = "reed_root"
 pickup_id = "reed_root_patch_02"
+area_id = &"Dorfplatz"
+location_name = "Trockengestell-Umfeld"
 
 [node name="Visual" type="Sprite2D" parent="SchilfwurzelSuedost"]
 texture = ExtResource("12_herbs")
@@ -256,6 +264,9 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst Nachtmoos am schattigen Torfsteg."
 item_id = "night_moss"
 pickup_id = "night_moss_patch"
+area_id = &"Dorfplatz"
+is_rare = true
+location_name = "Schattiger Torfsteg"
 
 [node name="Visual" type="Sprite2D" parent="Nachtmoos"]
 texture = ExtResource("12_herbs")

@@ -52,6 +52,9 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst Nachtmoos aus einer schattigen Nische am alten Torfsteg."
 item_id = "night_moss"
 pickup_id = "torfstich_night_moss_d2"
+area_id = &"AlterTorfstich"
+is_rare = true
+location_name = "Schattige Stegnische"
 
 [node name="Visual" type="Sprite2D" parent="NachtmoosD2"]
 texture = ExtResource("3_herbs")
@@ -74,6 +77,9 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst Nachtmoos am dunklen Grubensteg."
 item_id = "night_moss"
 pickup_id = "torfstich_night_moss_c3"
+area_id = &"AlterTorfstich"
+is_rare = true
+location_name = "Dunkler Grubensteg"
 
 [node name="Visual" type="Sprite2D" parent="NachtmoosC3"]
 texture = ExtResource("3_herbs")
@@ -96,6 +102,9 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst Nachtmoos neben dem verwitterten Torftor."
 item_id = "night_moss"
 pickup_id = "torfstich_night_moss_d4"
+area_id = &"AlterTorfstich"
+is_rare = true
+location_name = "Verwittertes Torftor"
 
 [node name="Visual" type="Sprite2D" parent="NachtmoosD4"]
 texture = ExtResource("3_herbs")
@@ -118,6 +127,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst ein Torfherz vom sicheren Rand der Grube."
 item_id = "peat_heart"
 pickup_id = "torfstich_peat_heart_a3"
+area_id = &"AlterTorfstich"
+location_name = "Sicherer Grubenrand"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TorfherzA3"]
 shape = SubResource("CircleShape2D_pickup")
@@ -133,6 +144,8 @@ action_verb = "Sammeln"
 feedback_text = "Du hebst ein Torfherz vom trockenen Grubensteg auf."
 item_id = "peat_heart"
 pickup_id = "torfstich_peat_heart_b3"
+area_id = &"AlterTorfstich"
+location_name = "Trockener Torfsteg"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TorfherzB3"]
 shape = SubResource("CircleShape2D_pickup")
@@ -148,6 +161,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst ein Torfherz am trockenen Rand des alten Torfwegs."
 item_id = "peat_heart"
 pickup_id = "torfstich_peat_heart_c4"
+area_id = &"AlterTorfstich"
+location_name = "Alter Torfweg"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TorfherzC4"]
 shape = SubResource("CircleShape2D_pickup")

@@ -99,6 +99,10 @@ Godots MainLoop-Referenz beschreibt `_process(delta)` als wiederkehrenden Loop-C
 ## VIS-005 – Gemeinsamer Moorboden
 Godot empfiehlt mehrere `TileMapLayer` für getrennte Ebenen und ein extern gespeichertes `TileSet`, wenn mehrere Karten dieselben Kacheln verwenden. `TerrainBase` behält diese geteilte TileSet-Ressource; `set_cell()` legt pro Rasterzelle eine reproduzierbare Variante aus den ersten zwei Atlasreihen. Der dekorative Boden bleibt kollisionsfrei; Wege werden weiter separat gezeichnet. Quellen: [Using TileMaps](https://docs.godotengine.org/en/4.7/tutorials/2d/using_tilemaps.html), [TileMapLayer class reference](https://docs.godotengine.org/en/4.7/classes/class_tilemaplayer.html) und [TileSetAtlasSource class reference](https://docs.godotengine.org/en/4.7/classes/class_tilesetatlassource.html), geprüft am 01.10.2026.
 
+## SYS-01 – Fundstellen, Gruppenzuordnung und Save-Kompatibilität
+
+Node-Gruppen und SceneTree.get_nodes_in_group() liefern eine schlanke Möglichkeit, alle Sammelstellen und optionalen Begegnungen über mehrere Kartenszenen hinweg zurückzusetzen. Pickup-Signale melden die erste Entdeckung an Main; der Spielstand speichert stabile Fundstellen-IDs getrennt von aktuell geernteten Pflanzen. Ein fehlendes Entdeckungsfeld wird bei Version-1-Spielständen aus den zuvor gespeicherten Ernten abgeleitet. Quellen: [Node class reference](https://docs.godotengine.org/en/4.7/classes/class_node.html), [Signal class reference](https://docs.godotengine.org/en/4.7/classes/class_signal.html) und [Saving Games](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html), geprüft am 01.10.2026.
+
 ## VIS-003 – Sprite-Atlanten für Weltobjekte
 Stationen, Bewohner und Sammelpflanzen liegen jeweils in einem horizontalen 3-Zellen-Atlas. Godots Sprite2D nutzt hframes = 3 und frame = 0, 1 oder 2 zur Zellwahl. Die Grafik bleibt ein Sprite2D-Kind ihrer Interaktionsobjekte; Sichtbarkeit und Kollision der Sammelstelle bleiben in der vorhandenen Gameplay-Logik. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).
 

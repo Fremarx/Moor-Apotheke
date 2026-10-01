@@ -22,6 +22,13 @@ func interact() -> String:
 	return "Du folgst dem echten Weglicht; das Irrlicht zieht von der sicheren Weggabelung weiter."
 
 
+func reset_encounter() -> void:
+	_driven_off = false
+	visible = true
+	set_deferred("monitoring", true)
+	set_deferred("monitorable", true)
+
+
 func _draw() -> void:
 	if encounter_kind == 0:
 		_draw_moorwuehler()

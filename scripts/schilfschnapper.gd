@@ -16,3 +16,9 @@ func interact() -> String:
 	set_deferred("monitoring", false)
 	set_deferred("monitorable", false)
 	return "Du scheuchst den Schilfschnapper ins Wasser. Deine Kräuter bleiben bei dir."
+
+func reset_encounter() -> void:
+	_driven_off = false
+	visible = true
+	set_deferred("monitoring", true)
+	set_deferred("monitorable", true)

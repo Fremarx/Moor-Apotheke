@@ -87,6 +87,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Sumpfminze am Schilfufer."
 item_id = "sump_mint"
 pickup_id = "schilfufer_sump_mint"
+area_id = &"Schilfufer"
+location_name = "Uferwiesen"
 
 [node name="Visual" type="Sprite2D" parent="SumpfminzeSchilfufer"]
 texture = ExtResource("3_herbs")
@@ -108,6 +110,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Schilfwurzel am Schilfufer."
 item_id = "reed_root"
 pickup_id = "schilfufer_reed_root"
+area_id = &"Schilfufer"
+location_name = "Südliche Uferbucht"
 
 [node name="Visual" type="Sprite2D" parent="SchilfwurzelSchilfufer"]
 texture = ExtResource("3_herbs")
@@ -130,6 +134,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Sumpfminze am dreifachen Schilfring."
 item_id = "sump_mint"
 pickup_id = "schilfufer_sump_mint_c3"
+area_id = &"Schilfufer"
+location_name = "Dreifacher Schilfring"
 
 [node name="Visual" type="Sprite2D" parent="SumpfminzeC3"]
 texture = ExtResource("3_herbs")
@@ -151,6 +157,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Sumpfminze an der alten Fähre."
 item_id = "sump_mint"
 pickup_id = "schilfufer_sump_mint_b2"
+area_id = &"Schilfufer"
+location_name = "Alte Fähre"
 
 [node name="Visual" type="Sprite2D" parent="SumpfminzeB2"]
 texture = ExtResource("3_herbs")
@@ -172,6 +180,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Schilfwurzel am Rand des Labyrinths."
 item_id = "reed_root"
 pickup_id = "schilfufer_reed_root_c2"
+area_id = &"Schilfufer"
+location_name = "Rand des Schilflabyrinths"
 
 [node name="Visual" type="Sprite2D" parent="SchilfwurzelC2"]
 texture = ExtResource("3_herbs")
@@ -193,6 +203,8 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst eine Schilfwurzel in der Uferbucht."
 item_id = "reed_root"
 pickup_id = "schilfufer_reed_root_b3"
+area_id = &"Schilfufer"
+location_name = "Nördliche Uferbucht"
 
 [node name="Visual" type="Sprite2D" parent="SchilfwurzelB3"]
 texture = ExtResource("3_herbs")
@@ -214,6 +226,9 @@ action_verb = "Sammeln"
 feedback_text = "Du sammelst Nachtmoos zwischen den Schilfinseln."
 item_id = "night_moss"
 pickup_id = "schilfufer_night_moss"
+area_id = &"Schilfufer"
+is_rare = true
+location_name = "Verborgene Mooslichtung"
 
 [node name="Visual" type="Sprite2D" parent="NachtmoosSchilfufer"]
 texture = ExtResource("3_herbs")

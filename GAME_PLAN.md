@@ -128,15 +128,18 @@ Aufträge haben im ersten Ausschnitt keine Ablaufzeit. Die Erfüllung wird durch
 - **1/2, danach Q:** Schnelltrank auswählen und anwenden oder werfen.
 - **E:** mit Pflanze, Station, Bewohner oder Brett interagieren. Gegner werden mit dem Kräuterstab angegriffen.
 - **I:** Inventar öffnen und schließen.
+- **H:** Entdeckte Fundstellen im Basis-Kräuterbuch ansehen.
 - Die HUD zeigt aktuelle Aufgabe, Interaktionshinweis, Münzen, drei Herzen und den gewählten Schnelltrank.
 - Stationsfenster zeigen Zutatenplätze, verfügbares Rezept und Herstellungsfortschritt.
+
+Das Basis-Kräuterbuch ist kostenlos und notiert entdeckte Fundstellen mit Gebiet, Ort und Pflanze. Die optionale UPG-02-Erweiterung kann später fehlende Zutaten bekannter Rezepte ergänzen.
 
 Das geplante Kampfsystem mit Trefferregeln, Ausweichschritt und Trankeffekten steht im [Gegnerkatalog](design/enemy_roster.md).
 
 ### Nicht Teil des ersten Ausschnitts
 
 - Automatische Förder- oder Verarbeitungsmaschinen.
-- Mehrere Jahreszeiten, Wettereffekte und dynamisches Nachwachsen.
+- Mehrere Jahreszeiten, Wettereffekte und zeitgesteuertes Nachwachsen; Fundstellen erneuern sich bereits bei der Rückkehr ins Dorf.
 - Vollständige spielbare Weltübersicht mit allen fünf Gebieten, umfangreiche Dialoge oder komplexe Beziehungen. Das Karten-Mockup dient zunächst nur als Entwurfsübersicht; die beiden Startgebiete bleiben trotzdem groß und vollständig begehbar.
 - Hunger, Energie, Zeitdruck oder verderbliche Waren.
 - Eigene finale Pixelart-Assets: Erst Platzhalter verwenden und den Ablauf spielbar machen.

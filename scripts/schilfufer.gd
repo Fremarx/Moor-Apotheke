@@ -102,6 +102,10 @@ func activate_reed_marker(sequence_number: int) -> String:
 	return "Die drei Marksteine öffnen eine verborgene Kräuterlichtung."
 
 
+func refresh_resource_visibility() -> void:
+	_sync_region_state()
+
+
 func _sync_region_state() -> void:
 	if _ferry_gate_shape != null:
 		_ferry_gate_shape.set_deferred("disabled", _ferry_plank_lowered)

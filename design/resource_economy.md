@@ -8,7 +8,7 @@
 2. **Spezialzutaten sammeln:** Mineralische Fundstücke, Gebietsmaterialien und Gegnerdrops werden direkt im Braukessel verwendet. Sie benötigen keinen zusätzlichen Verarbeitungsschritt.
 3. **Brauen:** Ein Rezept verbraucht die angegebenen Zutaten und ergibt eine Portion. Kesselwasser bleibt wie im bisherigen Plan kostenlos und wird nicht im Inventar gelagert.
 4. **Nachsammeln:** Alle Pflanzen und seltenen Fundstellen stehen nach einer Rückkehr ins Dorf wieder bereit. Vertriebene Gegner kehren dann ebenfalls an ihre Plätze zurück. Es gibt keinen Verderb und keine Frist für Aufträge.
-5. **Verkaufen:** Verkauft werden fertige Tränke, Salben und Mixturen. Rohzutaten können nicht versehentlich am Tresen verkauft werden; wichtige Erstfunde bleiben zusätzlich als Fortschrittsmarken im Aufgabenfortschritt erhalten. Das optionale Kräuterbuch zeigt diese Marken ebenfalls an.
+5. **Verkaufen:** Verkauft werden fertige Tränke, Salben und Mixturen. Rohzutaten können nicht versehentlich am Tresen verkauft werden; wichtige Erstfunde bleiben zusätzlich als Fortschrittsmarken im Aufgabenfortschritt erhalten. Das kostenlose Basis-Fundbuch zeigt entdeckte Stellen; das spätere Kräuterbuch-Upgrade ergänzt Rezept-Hinweise.
 
 ## Ressourcen nach Gebiet
 
@@ -83,7 +83,7 @@ Jeder einzigartige Story- oder Gebietsauftrag gibt einmalig einen Vertrauenspunk
 | Kräuterstab-Griff | 30 Münzen | 1 getrocknete Wurzelrinde + 1 Quellsteinsplitter | Nach Öffnung des Wurzelhains |
 | Apothekendekor | 15–30 Münzen | keine | Nach der Hauptgeschichte |
 
-Die genannten Preise und Wirkungen sind Startwerte zur Balance. Die erste Verbesserung ist eine kostenlose Wahl nach Fenjas Auftrag; nur die nicht gewählte Option kostet später Münzen. Keine Hauptgeschichte verlangt einen Kauf oder eine bestimmte Münzsumme. Alle Zutaten erneuern sich; Questmarken im Aufgabenfortschritt bleiben auch nach dem Verbrauch eines Gegenstands erhalten. Das optionale Kräuterbuch zeigt diese Marken an.
+Die genannten Preise und Wirkungen sind Startwerte zur Balance. Die erste Verbesserung ist eine kostenlose Wahl nach Fenjas Auftrag; nur die nicht gewählte Option kostet später Münzen. Keine Hauptgeschichte verlangt einen Kauf oder eine bestimmte Münzsumme. Alle Zutaten erneuern sich; Questmarken im Aufgabenfortschritt bleiben auch nach dem Verbrauch eines Gegenstands erhalten. Das Basis-Fundbuch zeigt Entdeckungen; das spätere Kräuterbuch-Upgrade ergänzt fehlende Rezeptzutaten.
 
 ### Wirkung der Verbesserungen (Balance-Startwerte)
 
@@ -91,7 +91,7 @@ Die genannten Preise und Wirkungen sind Startwerte zur Balance. Die erste Verbes
 | --- | --- |
 | Wanderbeutel | Erhöht die Inventarkapazität von 24 auf 32 Stapelplätze. |
 | Trockengestell I / II / III | Verarbeitet 2 / 4 / 6 Pflanzen pro Arbeitsgang; der Ablauf bleibt sofort und ohne Wartezeit. |
-| Kräuterbuch | Zeigt entdeckte Ressourcen, bekannte Fundgebiete und fehlende Zutaten für bekannte Rezepte. Wichtige Erstfunde bleiben als Fortschrittsmarken erhalten. |
+| Kräuterbuch | Das Upgrade ergänzt das kostenlose Basis-Fundbuch um fehlende Zutaten bekannter Rezepte; Erstfunde bleiben als Fortschrittsmarken erhalten. |
 | Sumpfstiefel | Senken die Verlangsamung im Schlamm von 30 % auf 10 % und erlauben markierte Flachwasserwege. |
 | Laterne | Zeigt seltene Fundstellen im Umkreis von etwa 6 Kacheln und vertreibt einfache Gegner für etwa 3 Sekunden. |
 | Braukessel II | Braut zwei gleiche Portionen in einem Arbeitsgang statt einer. |

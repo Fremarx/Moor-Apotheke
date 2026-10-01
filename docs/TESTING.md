@@ -231,7 +231,7 @@ Die 28 `SceneTree`-Testskripte überschreiben `_process()` mit `return false`, d
 
 ## AREA-001 – Zweites Moorgebiet
 - Beim ersten AREA-001-Ausschnitt prüfte `tests/area_001_connected_moor_area_test.gd` die Dorfübergänge und drei neue Pflanzenziele. REG-01 hat dieselbe Abnahme anschließend auf die Großkarte, zwölf eindeutige Pickup-IDs und den größeren Laufweg erweitert; der aktuelle Testumfang steht unten unter REG-01.
-- Der ursprüngliche AREA-001-Speichercheck sicherte Spielerposition und geerntete Pflanzen beim Laden und beim automatischen Wiederherstellen nach Szenenneustart.
+- Der ursprüngliche AREA-001-Speichercheck sicherte Spielerposition und geerntete Pflanzen beim Laden und beim automatischen Wiederherstellen nach Szenenneustart. Seit SYS-01 prüft derselbe Routentest außerdem das Nachwachsen bei der Dorf-Rückkehr und sammelt Pflanzen vor dem anschließenden Save erneut ein.
 - RED: Vor AREA-001 schlug der Test fehl, weil Schilfufer noch nicht in `World` vorhanden war. Der Übergang und Rückweg wurden danach mit `AREA-001 connected moor area checks passed.` bestätigt.
 - Der aktuelle Ressourcen-Audit zählt 5 Sumpfminzen, 5 Schilfwurzeln und 5 Nachtmoose über alle drei Gebiete; `playtest_001_core_loop_test.gd` prüft diese Bestände, 18 eindeutige Pickup-IDs und die vollständige Auftragskette.
 - REG-01 hat alle 27 Godot-4.7.2-Headless-Tests, den Editorimport und den 60-Frame-Startlauf bestanden.
@@ -297,3 +297,10 @@ SCALE-01 ist ein Designpunkt; es wurden keine Karten-Szenen geändert und keine 
 - Regionszustand und Fundstellen bleiben nach F5/F9 sowie automatischem Laden erhalten; ältere Version-1-Spielstände ohne REG-02-Daten bleiben gültig. Der Test deckt außerdem 18 eindeutige Pickup-IDs und fünf Nachtmoosstellen über drei Gebiete ab.
 - Alle 28 Godot-4.7.2-Tests, Editorimport und 60-Frame-Startlauf bestanden. Der normale OpenGL-Renderer zeigt den Torfhof im 480×270-Maßstab in `build/reg02-torfstich-480x270.png`.
 - Vor Veröffentlichung bleibt der blinde Erstbesuch mit mindestens drei neuen Personen und Messung der Erkundungsdauer offen.
+
+## SYS-01 – Gebietseigene Fundstellen und Nachwachsen
+- sys_01_resource_regrowth_test.gd prüft 18 stabile Fundstellen-IDs, feste Gebiet-/Ressourcen-/Ortsdaten, Seltenheit und mindestens zwei gewöhnliche plus eine seltene Fundstelle pro Gebiet.
+- Der Test entdeckt eine Fundstelle, prüft Gebiet, Ort und Pflanze im Basis-Kräuterbuch, simuliert H und kontrolliert die Einträge.
+- Version-1-Spielstände ohne separates Entdeckungsfeld bleiben gültig; Erstentdeckungen werden getrennt vom Erntestatus gespeichert und nach dem Startladen wiederhergestellt.
+- Beim Rückweg von Schilfufer nach Dorfplatz wachsen alle Pflanzen nach und vertriebene optionale Begegnungen kehren zurück. Das Rätselgeheimnis am Ufer bleibt verborgen.
+- Alle 29 Godot-4.7.2-Testskripte, der Editorimport und der 60-Frame-Startlauf bestanden.
