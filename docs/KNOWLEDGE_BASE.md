@@ -26,6 +26,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 | [Using TileSets](https://docs.godotengine.org/en/4.7/tutorials/2d/using_tilesets.html) | 4.7, 30.09.2026 | Raster, Tilesheets, Kollision/Metadaten | Offizielle Engine-Doku; Karten-/Assettasks |
 | [Using TileMaps](https://docs.godotengine.org/en/4.7/tutorials/2d/using_tilemaps.html) | 4.7, 30.09.2026 | TileMapLayer und Kartenaufbau | Offizielle Engine-Doku; Karten-/Assettasks |
 | [Input Examples](https://docs.godotengine.org/en/4.7/tutorials/inputs/input_examples.html) | 4.7, 30.09.2026 | Input Map und Aktionen | Offizielle Engine-Doku; CORE-001/CORE-002 |
+| [Input class reference](https://docs.godotengine.org/en/4.7/classes/class_input.html) | 4.7, 01.10.2026 | Simulierte InputMap-Aktionen und Abgrenzung zu Event-Callbacks | Offizielle Engine-Doku; PLAY-001 |
+| [Command line tutorial](https://docs.godotengine.org/en/4.7/tutorials/editor/command_line_tutorial.html) | 4.7, 01.10.2026 | Movie-Frame-Viewportprüfung und Headless-Lauf | Offizielle Engine-Doku; PLAY-001 |
 | [Using Area2D](https://docs.godotengine.org/en/4.7/tutorials/physics/using_area_2d.html) | 4.7, 30.09.2026 | Überlappung und Reichweitenerkennung mit Area2D | Offizielle Engine-Doku; CORE-002 |
 | [Node class reference](https://docs.godotengine.org/en/4.7/classes/class_node.html) | 4.7, 30.09.2026 | Weitergabe von Gameplay-Eingaben über _unhandled_input() | Offizielle Engine-Doku; CORE-002 |
 | [Signal class reference](https://docs.godotengine.org/en/4.7/classes/class_signal.html) | 4.7, 30.09.2026 | Lose gekoppelte Benachrichtigung über Inventar- und Queständerungen | Offizielle Engine-Doku; ITEM-001, QUEST-001, UX-001 |
@@ -76,6 +78,8 @@ Ein Vektorspeicher wird erst dann sinnvoll, wenn lokale Regeln und Quellen so wa
 Stationen, Bewohner und Sammelpflanzen liegen jeweils in einem horizontalen 3-Zellen-Atlas. Godots Sprite2D nutzt hframes = 3 und frame = 0, 1 oder 2 zur Zellwahl. Die Grafik bleibt ein Sprite2D-Kind ihrer Interaktionsobjekte; Sichtbarkeit und Kollision der Sammelstelle bleiben in der vorhandenen Gameplay-Logik. Quelle: [Sprite2D class reference](https://docs.godotengine.org/en/4.7/classes/class_sprite2d.html).
 
 - **01.10.2026 – REL-001:** Exportprofile werden als export_presets.cfg versioniert. Exportvorlagen müssen lokal zur identischen Godot-Version installiert sein. Zugangsdaten bleiben in .godot/export_credentials.cfg und damit außerhalb der Versionsverwaltung. Für den ersten Testbuild ist Windows Desktop x86_64 gewählt; der Release-Export wird mit --export-release erstellt. Quellen: [Exporting projects](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_projects.html) und [Exporting for Windows](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_for_windows.html).
+
+- **01.10.2026 – PLAY-001:** Input.action_press simuliert einen benannten Bewegungszustand und liest die Spiellogik über Input.get_vector; es löst keine _input()-Callbacks aus. Die Richtungs-/Kollisionsprüfung wird daher als InputMap-/Physik-Regression ausgewiesen, nicht als echte Tastatureingabe. Godots Kommandozeilenoption --write-movie rendert den tatsächlichen Szenen-Viewport frameweise für die sichtbare Pixelprüfung. Quellen: [Input class reference](https://docs.godotengine.org/en/4.7/classes/class_input.html) und [Command line tutorial](https://docs.godotengine.org/en/4.7/tutorials/editor/command_line_tutorial.html).
 
 ## Grenzen
 - Dies ist ein Quellenindex, keine Kopie der Dokumentation.

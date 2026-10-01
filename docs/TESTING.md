@@ -195,3 +195,10 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Das versionierte Profil Windows Desktop exportiert Godot 4.7.2 als x86_64-EXE nach build/windows/Moor-Apotheke.exe; build/ bleibt ignoriert.
 - Die passenden Godot-4.7.2-Windows-Vorlagen wurden lokal installiert. Das Release-Preset exportierte erfolgreich; die erzeugte EXE beendete --headless --quit-after 60 mit Exitcode 0.
 - Der Testbuild ist nicht signiert. Sichtprüfung und Freigabe einer öffentlichen Veröffentlichung bleiben offen.
+
+## PLAY-001 – HUD, Bewegung und Kollisionen
+- tests/play_001_hud_and_collision_test.gd prüft die dunklen HUD-Flächen mit pixeliger Ein-Pixel-Kontur, den Zeichenaufbau hinter Texten, nicht blockierende Panels, WASD- und Pfeiltastenbindungen, alle vier Bewegungsrichtungen sowie Kollisionen mit Fels, Teichbegrenzung und äußerem Kartenrand.
+- Godots Input.action_press simuliert die benannten InputMap-Aktionen für die Bewegungsprüfung. Die Godot-4.7-Dokumentation weist darauf hin, dass diese Methode keine _input()-Callbacks erzeugt.
+- Die Hauptszene wurde bei 480 × 270 als Godot-Movie-Frame gerendert und auf Lesbarkeit von Steuerleiste und Inventarzählern geprüft.
+- Der PLAY-001-Test und alle 19 vorherigen Tests, Godot-Editorimport sowie 60-Frame-Lauf bestanden.
+- Offen: subjektives Gefühl physischer Tastatursteuerung wurde nicht manuell bewertet.

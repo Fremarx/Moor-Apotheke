@@ -24,8 +24,9 @@ Die Moor-Apotheke: ruhiges 2D-Top-down-Pixelartspiel in Godot 4.7.2 Standard mit
 - BOARD-001 und ECON-001 ergänzen das Auftragsbrett sowie Münzbelohnungen.
 - SAVE-001 speichert und lädt Position, Inventar, Auftragsstatus und abgeerntete Pflanzen in user://.
 - VIS-001 bis VIS-003 integrieren die warme Moor-Pixelart für Karte, Spieler, Stationen, Bewohner und Sammelpflanzen.
-- REL-001 ist abgeschlossen: Windows Desktop x86_64 ist das erste Exportziel. export_presets.cfg ist versioniert, Godot-4.7.2-Exportvorlagen sind lokal installiert und der exportierte Build startete im Headless-Smoke-Test erfolgreich.
-- Nächster Backlogpunkt: PLAY-001 – Kernablauf, Eingaben, Kollisionen, HUD-Führung und Speichern im sichtbaren Godot-Fenster manuell prüfen.
+- REL-001 ist abgeschlossen: Windows Desktop x86_64 ist das erste Exportziel; Profil und Release-Checkliste sind versioniert, passende Vorlagen sind lokal installiert.
+- PLAY-001 ist abgeschlossen: HUD-Kontrast wurde verbessert; Richtungsbewegung und Kollisionen sind automatisiert geprüft, die Hauptszene wurde bei 480 × 270 gerendert. Subjektives Gefühl echter Hardwareeingaben ist nicht bewertet.
+- Nächster Backlogpunkt: INV-001 – ein Inventarfenster mit Taste I öffnen und schließen.
 - Nach jedem Backlogpunkt eigener Commit und Push.
 
 ## Wissens- und Skillhinweise

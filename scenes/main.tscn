@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/world/test_map.tscn" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
@@ -20,6 +20,34 @@ content_margin_left = 10.0
 content_margin_top = 8.0
 content_margin_right = 10.0
 content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="HUDTopBarStyle"]
+bg_color = Color(0.12, 0.17, 0.14, 0.9)
+border_color = Color(0.66, 0.57, 0.38, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="HUDInventoryStyle"]
+bg_color = Color(0.12, 0.17, 0.14, 0.88)
+border_color = Color(0.66, 0.57, 0.38, 0.82)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="HUDMessageStyle"]
+bg_color = Color(0.12, 0.17, 0.14, 0.9)
+border_color = Color(0.66, 0.57, 0.38, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+content_margin_left = 4.0
+content_margin_top = 1.0
+content_margin_right = 4.0
+content_margin_bottom = 1.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("3_main")
@@ -50,6 +78,22 @@ script = ExtResource("6_marten_quest")
 script = ExtResource("7_lene_quest")
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TopBarBackground" type="Panel" parent="HUD"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 476.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("HUDTopBarStyle")
+
+[node name="InventoryPanelBackground" type="Panel" parent="HUD"]
+offset_left = 4.0
+offset_top = 24.0
+offset_right = 194.0
+offset_bottom = 179.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("HUDInventoryStyle")
 
 [node name="CoinCount" type="Label" parent="HUD"]
 offset_left = 385.0
@@ -207,6 +251,7 @@ theme_override_colors/font_shadow_color = Color(0.12, 0.16, 0.13, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("HUDMessageStyle")
 
 [node name="InteractionPrompt" type="Label" parent="HUD"]
 visible = false
@@ -219,6 +264,7 @@ theme_override_colors/font_shadow_color = Color(0.12, 0.16, 0.13, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("HUDMessageStyle")
 
 [node name="QuestBoardPanel" type="PanelContainer" parent="HUD"]
 visible = false
