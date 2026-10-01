@@ -3,7 +3,7 @@ extends SceneTree
 const MAIN_SCENE: PackedScene = preload("res://scenes/main.tscn")
 const TEST_SAVE_PATH := "user://area_001_test.json"
 const SECOND_AREA_SPAWN := Vector2(710, 230)
-const FIRST_AREA_RETURN_SPAWN := Vector2(570, 230)
+const FIRST_AREA_RETURN_SPAWN := Vector2(80, 90)
 const SAVED_SECOND_AREA_POSITION := Vector2(724, 246)
 
 var _failures: Array[String] = []
@@ -35,9 +35,10 @@ func _run() -> void:
 	var moss := main.get_node_or_null("World/Schilfufer/NachtmoosSchilfufer") as Area2D
 	_check(mint != null and root_herb != null and moss != null, "the new area has mint, reed root, and night moss")
 
-	await _press_action("move_down", 36)
-	await _press_until_x(player, "move_right", 640.0, true, 230)
-	_check(player.global_position.is_equal_approx(SECOND_AREA_SPAWN), "walking east on the trail carries the player into Schilfufer")
+	await _press_action("move_left", 165)
+	await _press_action("move_up", 90)
+	await _press_until_area_transition(player, "move_left", 60)
+	_check(player.global_position.is_equal_approx(SECOND_AREA_SPAWN), "walking northwest on the trail carries the player into Schilfufer")
 	await _press_action("move_right", 48)
 	await _press_action("move_up", 38)
 	_check(mint != null and player.try_interact(), "the mint patch is reachable by walking from the entrance")
@@ -107,6 +108,16 @@ func _press_until_x(player: CharacterBody2D, action_name: StringName, threshold:
 	for _frame in range(max_frames):
 		await physics_frame
 		if (player.global_position.x > threshold) == greater:
+			break
+	Input.action_release(action_name)
+	await physics_frame
+
+
+func _press_until_area_transition(player: CharacterBody2D, action_name: StringName, max_frames: int) -> void:
+	Input.action_press(action_name)
+	for _frame in range(max_frames):
+		await physics_frame
+		if player.global_position.x >= 640.0:
 			break
 	Input.action_release(action_name)
 	await physics_frame

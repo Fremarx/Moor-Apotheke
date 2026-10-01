@@ -33,21 +33,23 @@ func _run() -> void:
 	var center := main.get_node_or_null("World/TestMap/DorfplatzMitte") as Marker2D
 	var apothecary := main.get_node_or_null("World/TestMap/Apotheke") as Marker2D
 	var entrance := main.get_node_or_null("World/TestMap/ApothekenEingang") as Marker2D
-	var north_exit := main.get_node_or_null("World/TestMap/Nordausgang") as Marker2D
+	var northeast_exit := main.get_node_or_null("World/TestMap/Nordausgang") as Marker2D
+	var east_exit := main.get_node_or_null("World/TestMap/Ostausgang") as Marker2D
 	var board := main.get_node_or_null("World/TestMap/QuestBoard") as Area2D
 	var board_panel := main.get_node_or_null("HUD/QuestBoardPanel") as PanelContainer
-	var east_exit := main.get_node_or_null("World/TestMap/EnterSchilfufer") as Area2D
+	var schilfufer_exit := main.get_node_or_null("World/TestMap/EnterSchilfufer") as Area2D
 
 	_check(village != null and StringName(village.get("area_id")) == &"Dorfplatz", "the central map is identified as Dorfplatz")
 	_check(player != null and player.position.is_equal_approx(PLAYER_START), "the player starts in the village square")
 	_check(center != null and center.position.is_equal_approx(PLAYER_START), "the central marker matches the player arrival point")
 	_check(apothecary != null and entrance != null, "the apothecary and its approach are marked")
 	_check(board != null and board_panel != null, "the quest board remains in the village")
-	_check(north_exit != null and east_exit != null, "two outward routes are visible from the hub")
-	if north_exit != null:
-		_check(VIEWPORT_RECT.has_point(north_exit.global_position), "the northern route is visible from the starting view")
+	_check(northeast_exit != null and east_exit != null, "two outward routes are visible from the hub")
+	if northeast_exit != null:
+		_check(VIEWPORT_RECT.has_point(northeast_exit.global_position), "the northeast route is visible from the starting view")
 	if east_exit != null:
-		_check(VIEWPORT_RECT.has_point(Vector2(520, 228)), "the Schilfufer sign and eastern route are visible from the starting view")
+		_check(VIEWPORT_RECT.has_point(east_exit.global_position), "the eastern route is visible from the starting view")
+	_check(schilfufer_exit != null and schilfufer_exit.position == Vector2(36, 64), "the open Schilfufer transition sits northwest of the village")
 
 	if player != null and board != null and board_panel != null:
 		_check(player.position.distance_to(board.position) < 70.0, "the quest board is within a short walk from the start")

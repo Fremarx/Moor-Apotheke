@@ -90,7 +90,7 @@ Spätere eigenständige Szenen:
 
 Szenen sollen möglichst wenig über feste Pfade auf Geschwister zugreifen. Eltern verbinden Abhängigkeiten; Ereignisse wie item_collected melden Ergebnisse über Signale. Ein Autoload kommt erst hinzu, wenn ein konkret global benötigter Zustand mehrere Szenen überlebt und die lokale Elternstruktur nicht ausreicht.
 
-MAP-02 folgt separat: aktuell ist nur der Ostweg mit aktivem Übergang ins Schilfufer verbunden; der sichtbare Nordweg ist ein Wegweiser für den nächsten Weltkarten-Ausbau. Die fünf Gebiete und ihre Mindestflächen aus `design/world_backlog.md` sind nicht Teil der 640 × 360-Hubkarte.
+MAP-02 ergänzt fünf gezeichnete Wege. Der aktive Nordwestweg führt ins Schilfufer und kehrt zum NW-Startpunkt zurück; vier spätere Wege sind mit statischen Kollisionsbarrieren und interaktiven Hinweisen versehen. Diese Hinweise erklären die vorgesehene Freischaltung, aber PROG-01 implementiert die dynamische Zustandslogik erst später. Die vier fehlenden Gebietszenen sowie ihre Rast- und Rückkehrpunkte gehören zu REG-01 bis REG-05. Die fünf Gebiete und ihre Mindestflächen aus `design/world_backlog.md` sind nicht Teil der 640 × 360-Hubkarte.
 
 ## Zuständigkeiten
 - Main/World: Spielabschnitt zusammenstellen und Zustand vermitteln.

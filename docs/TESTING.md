@@ -236,9 +236,17 @@ Es gibt noch kein Testframework. Godot 4.7.2 hat nach CORE-001 die Graybox-Start
 - Ein sichtbarer manueller Test von Bildausschnitt, echter Tastatur und subjektivem Steuerungsgefühl bleibt offen.
 
 ## MAP-01 – Dorfplatz
-- `tests/map_01_village_plaza_test.gd` prüft die logische Gebiets-ID `Dorfplatz`, Spielerstart und Platzmitte, Apotheke/Eingang, sichtbare Nord- und Ostwege sowie das Auftragsbrett im Fußweg und seine Bedienbarkeit.
+- `tests/map_01_village_plaza_test.gd` prüft die logische Gebiets-ID `Dorfplatz`, Spielerstart und Platzmitte, Apotheke/Eingang, die Wege in fünf Richtungen sowie das Auftragsbrett im Fußweg und seine Bedienbarkeit.
 - Der Test läuft im Headless-Modus; zusätzlich wurde der Viewport mit normalem Godot-Renderer bei 480 × 270 aufgenommen und visuell geprüft.
 - Der vollständige `playtest_001_core_loop_test.gd`-Lauf nach der Umgestaltung bestätigt die drei Aufträge, Verarbeitungsstationen und 30 Münzen. Eine Brunnenkollision blockierte zunächst den Querweg vom Ostbereich zum Trockengestell; das Gestell liegt nun unterhalb des Brunnens und der komplette Lauf besteht.
 - MAP-01-Test: `MAP-01 village plaza checks passed.` End-to-End-Test: `RESOURCE-001 full quest-chain checks passed.`
 - Alle 24 Godot-Headless-Testskripte, Godot-Editorimport und der 60-Frame-Startlauf bestehen; die gerenderte Ansicht wurde bei 480 × 270 geprüft.
-- SCALE-01 und die physischen Eingaben im sichtbaren Fenster bleiben offen.
+- MAP-03, SCALE-01 und die physischen Eingaben im sichtbaren Fenster bleiben offen.
+
+## MAP-02 – Fünf Dorfwege
+
+- `tests/map_02_routes_and_locks_test.gd` prüft fünf Richtungen, die logische Dorfplatz-ID, den offenen NW-Übergang, vier sichtbare Interaktionssperren und deren physische Kollisionsbarrieren.
+- `tests/area_001_connected_moor_area_test.gd` läuft den NW-Weg zum Schilfufer, sammelt dort alle drei Kräuter und prüft den Rückweg zum Dorfplatz sowie Speichern/Laden.
+- Die Torhinweise geben die geplanten Voraussetzungen wieder. Die tatsächliche questabhängige Freischaltung wird erst im späteren PROG-01 umgesetzt.
+- MAP-02-Routentest, AREA-001-Rückweg, vollständige Questkette, 25 Headless-Testskripte, Editorimport, 60-Frame-Start und sichtbarer 480 × 270-Renderer bestehen.
+- REG-01 bis REG-05 ergänzen sichere Rückwege und Rastpunkte für ihre Gebiete, sobald die Szenen entstehen.

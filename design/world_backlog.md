@@ -34,7 +34,7 @@ Prioritäten: **P0** = erster spielbarer Ausbau, **P1** = nächste Erweiterung, 
 - Dorfplatz in die Kartenmitte setzen, Apotheke und Auftragsbrett gut sichtbar machen.
 - Startpunkt so platzieren, dass die Figur direkt einen Blick auf mindestens zwei Ausgänge hat.
 - Gebäude und Figuren dürfen die Wege zu den Ausgängen nicht verdecken.
-- Umgesetzt: Apotheke mit lesbarem Schild und freiem Eingang, gepflasterte Platzmitte mit Brunnen, Auftragsbrett sowie markierte Nord- und Ostwege. Der Ostweg führt ins Schilfufer; die weiteren Pfade und Freischaltungen gehören zu MAP-02.
+- Umgesetzt: Apotheke mit lesbarem Schild und freiem Eingang, gepflasterte Platzmitte mit Brunnen, Auftragsbrett sowie fünf markierte Wegverläufe. MAP-02 setzt Schilfufer an den offenen Nordwestweg; die übrigen vier Richtungen bleiben bis zu ihren Fortschrittsschritten gesperrt.
 - Das bestehende Szenenobjekt `TestMap` behält seinen stabilen Knotennamen und meldet sich in der Welt als `Dorfplatz`.
 - SCALE-01 bleibt offen: MAP-01 gestaltet den kompakten Hub und behauptet noch nicht, dass die fünf Gebiete den geplanten Großmaßstab erfüllen.
 
@@ -42,12 +42,15 @@ Prioritäten: **P0** = erster spielbarer Ausbau, **P1** = nächste Erweiterung, 
 
 ### MAP-02: Fünf Pfade und Übergänge anlegen — P0
 
-- Sichtbare Pfade vom Dorf zu Schilfufer, Quellsenke, Torfstich, Nebelhain und Wurzelhain bauen.
-- Stege und Brücken dort einsetzen, wo Wasser oder tiefer Schlamm Wege unterbrechen.
-- Zunächst nur die vorgesehenen Startgebiete öffnen; spätere Wege bleiben sichtbar und zeigen ihren gesperrten Übergang.
-- Einen sicheren Rückweg und gut erkennbare Rastpunkte pro Gebiet vorsehen.
+**Status: DONE (01.10.2026)**
 
-**Fertig, wenn:** Jeder Gebietsweg visuell bis zum Ziel verfolgbar ist und gesperrte Wege eindeutig als noch nicht offen erkennbar sind.
+- Fünf sichtbare Pfade führen vom Dorfplatz in die vorgesehenen Richtungen: Schilfufer (NW), Quellsenke (NE), Alter Torfstich (O), Nebelhain (SW) und Versunkener Wurzelhain (SE).
+- Ein begehbarer Holzsteg führt über den Teich zum NE-Ausgang.
+- Nur der offene Startweg zum bestehenden Schilfufer hat einen funktionierenden Übergang. Die übrigen vier Wege zeigen physische Holzbarrieren und untersuchbare Hinweise auf ihre geplanten Freischaltungen.
+- Der Schilfufer-Rückweg setzt den Spieler am NW-Startpunkt des Dorfplatzes ab. Sichere Rückwege und Rastpunkte für weitere Gebiete werden von REG-01 bis REG-05 ergänzt, wenn ihre Karten gebaut werden.
+- Die auftragsbasierten Freischaltungen sind aktuell Erklärtexte; ihre dynamische Zustandslogik gehört zu PROG-01.
+
+**Fertig, wenn:** Alle fünf Wege visuell bis zu ihrem Ausgang verfolgbar sind, der aktive Startübergang hin und zurück funktioniert und jeder künftige Weg sichtbar, physisch sowie mit seiner geplanten Voraussetzung gesperrt ist.
 
 ### MAP-03: Wiederverwendbares Moor-Kachelset festlegen — P0
 

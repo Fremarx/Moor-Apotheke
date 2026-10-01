@@ -77,7 +77,7 @@ func _run() -> void:
 	_check(feedback.text == _feedback_message, "the HUD shows the selected target response")
 	_check(not feedback_timer.is_stopped(), "the feedback timer starts after interaction")
 
-	player.global_position = Vector2(560, 320)
+	player.global_position = Vector2(320, 320)
 	await physics_frame
 	await physics_frame
 	_check(not prompt.visible, "the prompt disappears after leaving range")
@@ -89,7 +89,7 @@ func _run() -> void:
 	feedback_timer.emit_signal("timeout")
 	_check(not feedback.visible, "feedback hides when its timer expires")
 
-	player.global_position = Vector2(500, 320)
+	player.global_position = Vector2(320, 320)
 	var position_before_moving: Vector2 = player.global_position
 	Input.action_press("move_right")
 	await physics_frame

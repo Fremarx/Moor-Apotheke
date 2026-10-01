@@ -83,8 +83,8 @@ collision_layer = 0
 collision_mask = 1
 script = ExtResource("4_transition")
 destination_area = &"Dorfplatz"
-destination_position = Vector2(570, 230)
-feedback_text = "Du kehrst zum alten Torfsteg zurück."
+destination_position = Vector2(80, 90)
+feedback_text = "Du kehrst zum Dorfplatz zurück."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnToTestMap"]
 shape = SubResource("CircleShape2D_transition")

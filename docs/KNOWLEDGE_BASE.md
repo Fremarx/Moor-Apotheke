@@ -100,3 +100,7 @@ Stationen, Bewohner und Sammelpflanzen liegen jeweils in einem horizontalen 3-Ze
 - API-Details vor der Implementierung gegen die passende 4.7-Seite prüfen.
 - Fremde Forenbeiträge oder Assets sind keine verbindliche technische oder Lizenzquelle.
 - Vertrauliche Projektinhalte werden nicht an externe Wissensdienste gesendet.
+
+## MAP-02 – Fünf Dorfwege
+
+- **01.10.2026:** Die Pfadillustration, Beschilderung und Holzbrücke nutzen die vorhandenen CanvasItem-Zeichenfunktionen. Interaktive Wegweiser bleiben Area2D-Ziele; gesperrte Abschnitte verwenden die bestehenden statischen Kollisionskörper. Es kommt keine neue Godot-API hinzu; die für MAP-01 und AREA-001 gelisteten CanvasItem-, Area2D- und CharacterBody2D-Referenzen decken die Umsetzung ab.

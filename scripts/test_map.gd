@@ -15,7 +15,14 @@ func _ready() -> void:
 	_add_solid_rect(Rect2(Vector2(0, MAP_SIZE.y - WALL_THICKNESS), Vector2(MAP_SIZE.x, WALL_THICKNESS)))
 	_add_solid_rect(Rect2(Vector2.ZERO, Vector2(WALL_THICKNESS, MAP_SIZE.y)))
 	_add_solid_rect(Rect2(Vector2(MAP_SIZE.x - WALL_THICKNESS, 0), Vector2(WALL_THICKNESS, MAP_SIZE.y)))
-	_add_solid_rect(Rect2(Vector2(429, 16), Vector2(181, 91)))
+	# The northern pond keeps a walkable corridor for the Quellsenke bridge.
+	_add_solid_rect(Rect2(Vector2(429, 16), Vector2(181, 58)))
+	_add_solid_rect(Rect2(Vector2(429, 120), Vector2(181, 14)))
+	# Locked route barriers stop the player at each unbuilt region entrance.
+	_add_solid_rect(Rect2(Vector2(574, 76), Vector2(18, 44)))
+	_add_solid_rect(Rect2(Vector2(576, 166), Vector2(18, 36)))
+	_add_solid_rect(Rect2(Vector2(42, 280), Vector2(18, 38)))
+	_add_solid_rect(Rect2(Vector2(574, 290), Vector2(18, 38)))
 	# The apothecary walls leave a clear approach to the front door.
 	_add_solid_rect(Rect2(Vector2(104, 114), Vector2(112, 18)))
 	_add_solid_rect(Rect2(Vector2(104, 132), Vector2(18, 40)))
@@ -48,10 +55,11 @@ func _draw() -> void:
 	_draw_pond()
 	_draw_water_lilies()
 	_draw_village_paths()
-	_draw_path()
+	_draw_bridge()
 	_draw_village_square()
 	_draw_apothecary()
 	_draw_village_signs()
+	_draw_locked_route_gates()
 	_draw_obstacles()
 	_draw_reeds()
 	_draw_scattered_details()
@@ -173,18 +181,56 @@ func _draw_water_lilies() -> void:
 
 
 func _draw_village_paths() -> void:
+	# Paths match the five directions in the world overview.
+	# NW Schilfufer (open).
 	_draw_road(PackedVector2Array([
-		Vector2(257, 16), Vector2(296, 16), Vector2(300, 70),
-		Vector2(304, 111), Vector2(330, 142), Vector2(319, 171),
-		Vector2(284, 170), Vector2(267, 144), Vector2(269, 108),
-		Vector2(262, 70)
+		Vector2(278, 178), Vector2(250, 188), Vector2(220, 198),
+		Vector2(180, 202), Vector2(145, 194), Vector2(114, 178),
+		Vector2(88, 152), Vector2(67, 122), Vector2(40, 89),
+		Vector2(16, 73), Vector2(16, 108), Vector2(47, 135),
+		Vector2(77, 169), Vector2(104, 197), Vector2(141, 219),
+		Vector2(184, 226), Vector2(224, 220), Vector2(260, 204)
 	]))
+	# NE Quellsenke (locked until its later progression step).
 	_draw_road(PackedVector2Array([
-		Vector2(137, 139), Vector2(174, 139), Vector2(198, 153),
-		Vector2(223, 163), Vector2(253, 174), Vector2(278, 185),
-		Vector2(260, 209), Vector2(235, 194), Vector2(207, 178),
-		Vector2(178, 165), Vector2(145, 163)
+		Vector2(306, 140), Vector2(324, 145), Vector2(365, 129),
+		Vector2(407, 110), Vector2(428, 85), Vector2(610, 82),
+		Vector2(610, 119), Vector2(448, 123), Vector2(438, 142),
+		Vector2(395, 163), Vector2(355, 177), Vector2(333, 190)
 	]))
+	# E Alter Torfstich.
+	_draw_road(PackedVector2Array([
+		Vector2(386, 166), Vector2(430, 157), Vector2(480, 159),
+		Vector2(530, 168), Vector2(610, 174), Vector2(610, 208),
+		Vector2(528, 202), Vector2(478, 194), Vector2(432, 193),
+		Vector2(388, 213)
+	]))
+	# SW Nebelhain.
+	_draw_road(PackedVector2Array([
+		Vector2(269, 214), Vector2(249, 237), Vector2(212, 257),
+		Vector2(169, 278), Vector2(121, 295), Vector2(70, 308),
+		Vector2(16, 307), Vector2(16, 274), Vector2(70, 273),
+		Vector2(113, 261), Vector2(157, 242), Vector2(205, 223),
+		Vector2(258, 194)
+	]))
+	# SE Versunkener Wurzelhain.
+	_draw_road(PackedVector2Array([
+		Vector2(366, 231), Vector2(394, 244), Vector2(434, 260),
+		Vector2(477, 277), Vector2(522, 296), Vector2(569, 314),
+		Vector2(624, 315), Vector2(624, 280), Vector2(571, 279),
+		Vector2(534, 266), Vector2(493, 248), Vector2(451, 230),
+		Vector2(399, 210)
+	]))
+
+
+func _draw_bridge() -> void:
+	draw_rect(Rect2(Vector2(426, 76), Vector2(185, 45)), Color("493c31"))
+	draw_rect(Rect2(Vector2(428, 79), Vector2(181, 39)), Color("8a6445"))
+	for plank_x in range(432, 607, 12):
+		draw_rect(Rect2(Vector2(plank_x, 80), Vector2(3, 37)), Color("c09a67"))
+		draw_line(Vector2(plank_x + 1, 81), Vector2(plank_x + 1, 116), Color("574432"), 1.0)
+	draw_line(Vector2(429, 78), Vector2(608, 78), Color("d0ad77"), 2.0)
+	draw_line(Vector2(429, 119), Vector2(608, 119), Color("d0ad77"), 2.0)
 
 
 func _draw_road(points: PackedVector2Array) -> void:
@@ -241,6 +287,8 @@ func _draw_village_square() -> void:
 	draw_rect(Rect2(Vector2(278, 180), Vector2(23, 4)), Color("a77b4d"))
 	_draw_atlas_sprite(Vector2(256, 218), Vector2i(1, 3), Vector2(20, 20))
 	_draw_atlas_sprite(Vector2(378, 207), Vector2i(1, 3), Vector2(20, 20))
+	_draw_atlas_sprite(Vector2(244, 190), Vector2i(3, 3), Vector2(16, 18))
+	_draw_atlas_sprite(Vector2(399, 201), Vector2i(3, 3), Vector2(16, 18))
 
 
 func _draw_apothecary() -> void:
@@ -287,38 +335,32 @@ func _draw_apothecary() -> void:
 
 
 func _draw_village_signs() -> void:
-	draw_rect(Rect2(Vector2(313, 92), Vector2(4, 24)), Color("594331"))
-	draw_rect(Rect2(Vector2(305, 89), Vector2(42, 14)), Color("493a2f"))
-	draw_rect(Rect2(Vector2(308, 91), Vector2(36, 10)), Color("a27a4f"))
-	draw_string(ThemeDB.fallback_font, Vector2(311, 98), "NORD", HORIZONTAL_ALIGNMENT_LEFT, 30.0, 6, Color("f0d9a5"))
-	draw_rect(Rect2(Vector2(455, 177), Vector2(4, 24)), Color("594331"))
-	draw_rect(Rect2(Vector2(418, 171), Vector2(81, 14)), Color("493a2f"))
-	draw_rect(Rect2(Vector2(421, 173), Vector2(75, 10)), Color("a27a4f"))
-	draw_string(ThemeDB.fallback_font, Vector2(424, 180), "SCHILFUFER", HORIZONTAL_ALIGNMENT_LEFT, 70.0, 6, Color("f0d9a5"))
+	_draw_route_sign(Vector2(23, 91), "SCHILFUFER", 68.0)
+	_draw_route_sign(Vector2(493, 127), "QUELLSENKE", 76.0)
+	_draw_route_sign(Vector2(502, 210), "TORFSTICH", 69.0)
+	_draw_route_sign(Vector2(20, 256), "NEBELHAIN", 68.0)
+	_draw_route_sign(Vector2(506, 254), "WURZELHAIN", 80.0)
+	draw_rect(Rect2(Vector2(509, 73), Vector2(4, 24)), Color("594331"))
+	draw_rect(Rect2(Vector2(500, 70), Vector2(54, 14)), Color("493a2f"))
+	draw_rect(Rect2(Vector2(503, 72), Vector2(48, 10)), Color("a27a4f"))
+	draw_string(ThemeDB.fallback_font, Vector2(506, 79), "NORDOST", HORIZONTAL_ALIGNMENT_LEFT, 43.0, 6, Color("f0d9a5"))
 
 
-func _draw_path() -> void:
-	var path := PackedVector2Array([
-		Vector2(16, 229), Vector2(132, 222), Vector2(238, 230),
-		Vector2(342, 220), Vector2(462, 228), Vector2(624, 219),
-		Vector2(624, 276), Vector2(475, 283), Vector2(347, 275),
-		Vector2(234, 287), Vector2(129, 276), Vector2(16, 285)
-	])
-	var path_shadow := PackedVector2Array([
-		Vector2(16, 234), Vector2(132, 227), Vector2(238, 235),
-		Vector2(342, 225), Vector2(462, 233), Vector2(624, 224),
-		Vector2(624, 280), Vector2(475, 288), Vector2(347, 280),
-		Vector2(234, 292), Vector2(129, 281), Vector2(16, 290)
-	])
-	draw_colored_polygon(path_shadow, Color("4c493b"))
-	draw_colored_polygon(path, Color("a07b52"))
-	draw_line(Vector2(28, 234), Vector2(135, 228), Color("d2ad73"), 2.0)
-	draw_line(Vector2(249, 236), Vector2(343, 227), Color("d2ad73"), 2.0)
-	draw_line(Vector2(479, 234), Vector2(609, 227), Color("d2ad73"), 2.0)
-	for pebble in [Vector2(82, 260), Vector2(183, 246), Vector2(380, 262), Vector2(536, 253)]:
-		draw_rect(Rect2(pebble + Vector2(1, 2), Vector2(5, 3)), Color("6a553e"))
-		draw_rect(Rect2(pebble, Vector2(4, 2)), Color("c0a071"))
-		draw_rect(Rect2(pebble + Vector2(1, 1), Vector2(2, 1)), Color("dbc18a"))
+func _draw_route_sign(origin: Vector2, label: String, width: float) -> void:
+	draw_rect(Rect2(origin + Vector2(3, 10), Vector2(3, 12)), Color("594331"))
+	draw_rect(Rect2(origin, Vector2(width, 11)), Color("493a2f"))
+	draw_rect(Rect2(origin + Vector2(2, 2), Vector2(width - 4, 7)), Color("a27a4f"))
+	draw_string(ThemeDB.fallback_font, origin + Vector2(4, 8), label, HORIZONTAL_ALIGNMENT_LEFT, width - 8, 6, Color("f0d9a5"))
+
+
+func _draw_locked_route_gates() -> void:
+	for gate_center in [Vector2(583, 98), Vector2(585, 184), Vector2(51, 299), Vector2(583, 309)]:
+		var gate := Rect2(gate_center - Vector2(8, 20), Vector2(16, 40))
+		draw_rect(gate.grow(2), Color("493a2f"))
+		draw_rect(gate, Color("956746"))
+		draw_rect(Rect2(gate.position + Vector2(1, 7), Vector2(14, 4)), Color("c09a67"))
+		draw_rect(Rect2(gate.position + Vector2(1, 28), Vector2(14, 4)), Color("c09a67"))
+		draw_line(gate.position + Vector2(3, 34), gate.position + Vector2(13, 5), Color("d68b63"), 2.0)
 
 
 func _draw_obstacles() -> void:
@@ -326,15 +368,15 @@ func _draw_obstacles() -> void:
 	_draw_atlas_sprite(Vector2(399, 128), Vector2i(2, 1), Vector2(36, 34))
 	_draw_sprite_shadow(Vector2(483, 156), Vector2(25, 8))
 	_draw_atlas_sprite(Vector2(483, 154), Vector2i(0, 0), Vector2(36, 40))
-	_draw_sprite_shadow(Vector2(418, 279), Vector2(30, 8))
-	_draw_atlas_sprite(Vector2(418, 277), Vector2i(2, 1), Vector2(34, 32))
+	_draw_sprite_shadow(Vector2(350, 329), Vector2(30, 8))
+	_draw_atlas_sprite(Vector2(350, 327), Vector2i(2, 1), Vector2(34, 32))
 
 
 func _draw_reeds() -> void:
 	for reed in [
-		Vector2(61, 146), Vector2(75, 161), Vector2(81, 290),
-		Vector2(103, 310), Vector2(236, 316), Vector2(263, 329),
-		Vector2(424, 304), Vector2(447, 315), Vector2(594, 300)
+		Vector2(61, 146), Vector2(75, 161), Vector2(68, 246),
+		Vector2(93, 337), Vector2(236, 316), Vector2(263, 329),
+		Vector2(424, 304), Vector2(447, 315), Vector2(605, 341)
 	]:
 		_draw_atlas_sprite(reed, Vector2i(0, 0), Vector2(32, 36))
 	_draw_atlas_sprite(Vector2(58, 188), Vector2i(1, 0), Vector2(28, 30))
